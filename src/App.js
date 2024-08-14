@@ -55,7 +55,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route index element={<MyComponent />} />
+        {/* <Route index element={<MyComponent />} /> */}
         <Route path="/home" element={<MyComponent />} />
         <Route path="/resume" element={<Resume />} />
         {/* 其他路由... */}
