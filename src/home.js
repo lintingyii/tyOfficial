@@ -136,7 +136,7 @@ function MyComponent(props) {
     </Div6>
     
       {/* <Div19>&quot;Create infinite value in a limited lifetime.&quot;</Div19> */}
-      <RecentWorksContainer>
+      {/* <RecentWorksContainer>
       <RecentWorksTitle>Recent Works</RecentWorksTitle>
     <Divider />
       <WorkSection>
@@ -161,7 +161,7 @@ function MyComponent(props) {
           </LectureDetails>
         </RightColumn>
       </WorkSection>
-    </RecentWorksContainer>
+    </RecentWorksContainer> */}
       
     {/* <Footerwraper>
        © Tingyi Lin  |  All rights reserved 2024 
