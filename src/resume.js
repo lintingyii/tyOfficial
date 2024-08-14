@@ -149,10 +149,10 @@ export const Resume = () => {
             <Div29>
               <Div30>國立政治大學（National Chengchi University）</Div30>
               <Div31>Bachelor of Arts - BA,  Advertising</Div31>
-              {/* <Div33>2020 - 2024</Div33> */}
+              <Div33>2020 - 2024</Div33>
             </Div29>
           </Div28>
-          <Div33>2020 - 2024</Div33>
+          {/* <Div33>2020 - 2024</Div33> */}
         </Div27>
         
         <Div34>
@@ -277,7 +277,7 @@ const Div = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    padding-bottom: 3vh;
+    // padding-bottom: 3vh;
     margin: 0; /* 清除 margin */
 `;
 
@@ -336,7 +336,7 @@ const Div5 = styled.div`
 
 const Div6 = styled.div`
   color: #333;
-  font: 500 27px/150% Noto Sans TC, sans-serif;
+  font: 700 27px/150% Noto Sans TC, sans-serif;
 `;
 
 const Div7 = styled.div`
@@ -711,6 +711,7 @@ const Div31 = styled.div`
   color: #2e406f;
   margin-top: 9px;
   font: 18px/100% Noto Sans TC, sans-serif;
+  font-weight: 700;
   @media (max-width: 991px) {
     max-width: 100%;
   }
@@ -729,6 +730,7 @@ const Div33 = styled.div`
   color: #888;
   text-align: right;
   align-self: start;
+  margin-top:12px;
   font: 400 17px/150% Assistant, sans-serif;
 `;
 
@@ -904,5 +906,5 @@ const Footerwraper = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #333333;
   text-align: center;
-  padding: 20px; /* 可以根據需要調整底部 padding */
+  padding: 30px; /* 可以根據需要調整底部 padding */
 `;
