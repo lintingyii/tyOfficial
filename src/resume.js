@@ -36,15 +36,15 @@ export const Resume = () => {
                   />
                   <Div9> New Taipei City, Taiwan  </Div9>
                 </Div8>
-                <Div10 href="https://linktr.ee/Tingyi.lin">https://linktr.ee/Tingyi.lin</Div10>
+                <Div10 href="https://linktr.ee/Tingyi.lin" target="_blank">https://linktr.ee/Tingyi.lin</Div10>
                 <Div11>
-                  <Linkedin href="https://www.linkedin.com/in/tingyi-lin2024/">
+                  <Linkedin href="https://www.linkedin.com/in/tingyi-lin2024/" target="_blank">
                     <Img2
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/59a560ce30c64a1a9db96991f55dbc71e4009b6542be4dc8d8dedef947aec9b0?apiKey=fe9890881c354019b717422c47a9cee2&"
                     />
                   </Linkedin>
-                  <Linkedin href="https://github.com/lintingyii">
+                  <Linkedin href="https://github.com/lintingyii" target="_blank">
                     <Img3
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/ff5fa04b927851ea2f7eae5517c8de7f43c68fc4da958624d06d74473647b6de?apiKey=fe9890881c354019b717422c47a9cee2&"
@@ -68,35 +68,42 @@ export const Resume = () => {
               <Div16>UIUX Designer</Div16>
               <Div17>  •  KOL Tech CO.</Div17>
             </Div15>
-            <Div18>一月 2024 - Present</Div18>
+            <Div18>Jan 2024 - Present / Taipei</Div18>
             <Div19>
-              •  Led the design and development of three digital software
-              products.
+              •  Led the experience and interface design of three KOL-related digital SaaS products and one on-premises software product, and increased user engagement by 20% in 3 months.
               <br />
-              •  Created the end-to-end product design process from inception to
-              implementation for the company.
+              •  Conducted user research including interviews, user flows, user journeys, and information architecture.
               <br />
-              •  User research like interview, user flow, user journey and IA
-              <br />
-              •  User interface design
+              •  Developed design systems and responsive user interface designs.
             </Div19>
 
             <Div15>
               <Div16>UIUX & Front-end Internship</Div16>
               <Div17>  •  Futurenest Inc.</Div17>
             </Div15>
-            {/* <Div20>UIUX & Front-end Internship</Div20> */}
-            <Div21>五月 2023 - Present</Div21>
-            <Div22>
-              UIUX Internship
-              <br />• Design User interface and prototyping
-              <br />• Official website design
-              <br />• User research, User flow and Information architecture
+            <Div18>Jun 2023 - May 2024 / Taipei</Div18>
+            <Div19>
+              •  Designed user interfaces and conducted A/B prototyping and usability testing for the financial BI system.
               <br />
-              Front-end Internship
-              <br />• Front-end development
-              <br />• React.js / bootstrap
-            </Div22>
+              •  Worked on official website design and information architecture.
+              <br />
+              •  Developed front-end frameworks using React.js and performed markup slicing.
+            </Div19>
+
+            <Div15>
+              <Div16>Freelancer</Div16>
+              <Div17>  •  Ting-yi studio</Div17>
+            </Div15>
+            <Div18>Feb 2021 - Present / Taipei</Div18>
+            <Div19>
+              •  Designed visual identity systems.
+              <br />
+              •  Created graphic designs.
+              <br />
+              •  Developed packaging designs.
+              <br />
+              •  Produced illustrations.
+            </Div19>
           </Div14>
           <Div23>
             <Img5
@@ -107,9 +114,14 @@ export const Resume = () => {
               loading="lazy"
               srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/3449a2698234fc0be2427d6726be1c608648657501c0d211db21ded9ee108fb6?apiKey=fe9890881c354019b717422c47a9cee2&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/3449a2698234fc0be2427d6726be1c608648657501c0d211db21ded9ee108fb6?apiKey=fe9890881c354019b717422c47a9cee2&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/3449a2698234fc0be2427d6726be1c608648657501c0d211db21ded9ee108fb6?apiKey=fe9890881c354019b717422c47a9cee2&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/3449a2698234fc0be2427d6726be1c608648657501c0d211db21ded9ee108fb6?apiKey=fe9890881c354019b717422c47a9cee2&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/3449a2698234fc0be2427d6726be1c608648657501c0d211db21ded9ee108fb6?apiKey=fe9890881c354019b717422c47a9cee2&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/3449a2698234fc0be2427d6726be1c608648657501c0d211db21ded9ee108fb6?apiKey=fe9890881c354019b717422c47a9cee2&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/3449a2698234fc0be2427d6726be1c608648657501c0d211db21ded9ee108fb6?apiKey=fe9890881c354019b717422c47a9cee2&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/3449a2698234fc0be2427d6726be1c608648657501c0d211db21ded9ee108fb6?apiKey=fe9890881c354019b717422c47a9cee2&"
             />
+            <Img6
+              style={{marginTop:'140px'}}
+              loading="lazy"
+              src="/M-logo.png"
+            />
           </Div23>
         </Div13>
-        <Div24>
+        {/* <Div24>
           <Div25>
             <Column3>
               <Img7
@@ -125,20 +137,8 @@ export const Resume = () => {
                 srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&"
               />
             </Column3>
-            {/* <Column4>
-              <Img8
-                loading="lazy"
-                srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&"
-              />
-            </Column4>
-            <Column5>
-              <Img9
-                loading="lazy"
-                srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&"
-              />
-            </Column5> */}
           </Div25>
-        </Div24>
+        </Div24> */}
         <Div26>學歷</Div26>
         <Div27>
           <Div28>
@@ -148,8 +148,8 @@ export const Resume = () => {
             />
             <Div29>
               <Div30>國立政治大學（National Chengchi University）</Div30>
-              <Div31>傳播學院, 廣告學系傳播設計組</Div31>
-              <Div32>Bachelor of Arts - BA,  Advertising</Div32>
+              <Div31>Bachelor of Arts - BA,  Advertising</Div31>
+              {/* <Div33>2020 - 2024</Div33> */}
             </Div29>
           </Div28>
           <Div33>2020 - 2024</Div33>
@@ -160,52 +160,57 @@ export const Resume = () => {
           <Div35>
             <Column6>
               <Div36>
-                <Div38>Skills</Div38>
+                <Div38>Research Skills</Div38>
                 <Div39 />
                 <Div40>
                   <Div41>
-                    ⊛  User Experience research
+                    ⊛  Contextual inquiry
                     <br />
-                    ⊛  User Interface design
+                    ⊛  Usability testing
                     <br />
-                    ⊛  Front-end coding
-                  </Div41>
-                  <Div42>
-                    • html / css 
+                    ⊛  Cognitive walkthrough 
                     <br />
-                    • React.js
-                  </Div42>
-                </Div40>
-              </Div36>
-            </Column6>
-            <Column6>
-              <Div36>
-                <Div38>Tools</Div38>
-                <Div39 />
-                <Div40>
-                  <Div41>
-                    ⊛  Figma
+                    ⊛  Design insight translation
                     <br />
-                    ⊛  Adobe Illustrator
-                    <br />
-                    ⊛  Adobe Photoshop
+                    ⊛  Prospective competitor analysis
                   </Div41>
                 </Div40>
               </Div36>
             </Column6>
             <Column6>
               <Div36>
-                <Div38>Language</Div38>
+                <Div38>Design Skills</Div38>
                 <Div39 />
                 <Div40>
                   <Div41>
-                    ⊛  English
+                    ⊛  Information architecture
                     <br />
-                    Full professional proficiency
+                    ⊛  Wireframe and workflow
                     <br />
-                    ⊛  Mandarin
+                    ⊛  Persona development
                     <br />
-                    Native or bilingual proficiency
+                    ⊛  User journey mapping
+                    <br />
+                    ⊛  Design system development
+                    <br />
+                    ⊛  Visual communication design
+                    <br />
+                    ⊛  Digital prototyping
+                  </Div41>
+                </Div40>
+              </Div36>
+            </Column6>
+            <Column6>
+              <Div36>
+                <Div38>Coding Skills</Div38>
+                <Div39 />
+                <Div40>
+                  <Div41>
+                    ⊛  HTML / CSS
+                    <br />
+                    ⊛  React.js
+                    <br />
+                    ⊛  Bootstrap / Ant Design
                   </Div41>
                 </Div40>
               </Div36>
@@ -214,7 +219,7 @@ export const Resume = () => {
         </Div34>
       </Div2>
       <DownloadButton onClick={downloadPdf}>
-        Download Resume PDF
+        Download CV PDF
       </DownloadButton>
 
       <Footerwraper>
@@ -233,7 +238,7 @@ const DownloadButton = styled.button`
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  margin-top: 72px;
+  margin-top: 90px;
 
   transition: background-color 0.8s;
 
@@ -245,7 +250,7 @@ const DownloadButton = styled.button`
 
 const downloadPdf = () => {
   // 將 PDF 文件的路徑替換為實際的文件路徑
-  const pdfUrl = '/resume.pdf';
+  const pdfUrl = '/CV.pdf';
 
   // 創建一個隱藏的 <a> 元素
   const link = document.createElement('a');
@@ -272,9 +277,8 @@ const Div = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    padding-bottom: 5vh;
+    padding-bottom: 3vh;
     margin: 0; /* 清除 margin */
-    // padding-right: 40px;
 `;
 
 const Div2 = styled.div`
@@ -463,16 +467,17 @@ const Div13 = styled.div`
 //   margin-top: 31px;
   align-items: start;
   justify-content: space-between;
-  gap: 20px;
+  gap: 40px;
   @media (max-width: 991px) {
     max-width: 100%;
-    flex-wrap: wrap;
+    flex-wrap: wrap;  
+    gap: 0px;
   }
 `;
 
 const Div14 = styled.div`
   display: flex;
-  margin-top: 9px;
+  // margin-top: 9px;
   flex-grow: 1;
   flex-basis: 0%;
   flex-direction: column;
@@ -525,17 +530,8 @@ const Div18 = styled.div`
 
 const Div19 = styled.div`
   color: #555;
-  margin-top: 29px;
+  margin-top: 16px;
   font: 16px/25px Assistant, sans-serif;
-  @media (max-width: 991px) {
-    max-width: 100%;
-  }
-`;
-
-const Div21 = styled.div`
-  color: #888;
-  margin-top: 17px;
-  font: 17px/150% Assistant, sans-serif;
   @media (max-width: 991px) {
     max-width: 100%;
   }
@@ -573,7 +569,7 @@ const Img6 = styled.img`
   object-fit: auto;
   object-position: center;
   width: 82px;
-  margin-top: 200px;
+  margin-top: 170px;
   @media (max-width: 550px) {
     display: none;
   }
@@ -661,7 +657,7 @@ const Div26 = styled.div`
 
 const Div27 = styled.div`
   display: flex;
-  margin-top: 31px;
+  margin-top: 32px;
   width: 100%;
   justify-content: space-between;
   gap: 20px;
@@ -804,7 +800,7 @@ const Div40 = styled.div`
   color: #555;
   font-weight: 400;
   line-height: 25px;
-  padding: 0 77px 0 25px;
+  padding: 0 77px 0 16px;
   @media (max-width: 991px) {
     padding: 0 20px;
   }
