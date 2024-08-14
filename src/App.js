@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Navigate, Route, Link, useLocation } from 'react-router-dom';
 import Resume from './resume';
 import MyComponent from './home';
 import styled from 'styled-components';
@@ -55,7 +55,7 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<MyComponent />} />
+        <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<MyComponent />} />
         <Route path="/resume" element={<Resume />} />
         {/* 其他路由... */}
