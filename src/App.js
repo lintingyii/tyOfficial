@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Navigate, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes,Navigate, Route, Link, useLocation } from 'react-router-dom';
 import Resume from './resume';
 import MyComponent from './home';
 import styled from 'styled-components';
