@@ -281,7 +281,7 @@ const Div = styled.div`
     margin: 0; /* 清除 margin */
 
     @media (max-width: 440px) {
-      // padding-top: 6vh;
+      padding-top: 6vh;
     }
 `;
 
