@@ -709,6 +709,7 @@ const Div6 = styled.div`
   margin-top: 24px;
   gap: 24px;
   font-size: 24px;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
   @media (max-width: 991px) {
     display: flex;
@@ -1049,6 +1050,7 @@ function FlipCard({ title, content, bgColor }) {
 }
 
 const ContentMob = styled.div`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 12px;
   line-height: 1.6;
   padding: 16px;

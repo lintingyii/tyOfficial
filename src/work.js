@@ -5,20 +5,21 @@ import styled, { keyframes } from 'styled-components';
 export const Work = () => {
     return(
         <Div>
-    <BallContainer>
-      <Ball size={50} color="#ff5733" duration={2} delay={0} />
-      <Ball size={70} color="#33c1ff" duration={2.5} delay={0.5} />
-      <Ball size={40} color="#8d33ff" duration={1.8} delay={1} />
-      <Ball size={60} color="#33ff57" duration={2.2} delay={0.2} />
-      <Ball size={30} color="#ffd633" duration={1.5} delay={0.7} />
-    </BallContainer>
+            <h4>Coming sooon ✨</h4>
+            <BallContainer>
+                <Ball size={50} color="#F7883D" duration={2} delay={0} />
+                <Ball size={70} color="#D58CFE" duration={2.5} delay={0.5} />
+                <Ball size={40} color="#7D8991" duration={1.8} delay={1} />
+                <Ball size={60} color="#000fff" duration={2.2} delay={0.2} />
+                <Ball size={30} color="#A06E29" duration={1.5} delay={0.7} />
+            </BallContainer>
         </Div>
     );
 }
 export default Work
 
 const Div = styled.div`
-    height: 90vh;
+    height: 87vh;
     background-color: #f2f2f2;
     display: flex;
     flex-direction: column;
@@ -29,6 +30,7 @@ const Div = styled.div`
     left: 0;
     padding-top: 13vh;
     margin: 0; /* 清除 margin */
+    overflow: hidden; 
 
     @media (max-width: 440px) {
       padding-top: 6vh;
@@ -62,5 +64,5 @@ const BallContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  background-color: #f0f0f0;
+//   background-color: #f0f0f0;
 `;
