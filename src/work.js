@@ -40,6 +40,7 @@ const Div = styled.div`
 
 const H4 =styled.div`
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    margin-top: 5vh;
 `;
 
 const bounce = keyframes`
