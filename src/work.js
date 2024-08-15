@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 export const Work = () => {
     return(
         <Div>
-            <h4>Coming sooon ✨</h4>
+            <H4>Coming sooon ✨</H4>
             <BallContainer>
                 <Ball size={50} color="#F7883D" duration={2} delay={0} />
                 <Ball size={70} color="#D58CFE" duration={2.5} delay={0.5} />
@@ -34,7 +34,12 @@ const Div = styled.div`
 
     @media (max-width: 440px) {
       padding-top: 6vh;
+      height: 94vh;
     }
+`;
+
+const H4 =styled.div`
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 `;
 
 const bounce = keyframes`
