@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes,Navigate, Route, Link, useLocation } from 'react-router-dom';
 import Resume from './resume';
 import MyComponent from './home';
+import Work from './work';
 import styled from 'styled-components';
 
 const Div2 = styled.div`
@@ -33,7 +34,6 @@ const Div2 = styled.div`
 
 const Div3 = styled(Link)`
   text-decoration: none;
-  margin-right: 20px;
   color: ${({ isActive }) => (isActive ? '#0000FF' : '#333333')};
 `;
 
@@ -46,9 +46,9 @@ const Div4 = styled(Link)`
   margin-right: 20px;
 `;
 
-const Div5 = styled.div`
-  text-align: right;
-  color: #333333;
+const Div5 = styled(Link)`
+  text-decoration: none;
+  color: ${({ isActive }) => (isActive ? '#0000FF' : '#333333')};
 `;
 
 function App() {
@@ -58,6 +58,7 @@ function App() {
         <Route path="/" element={<Navigate to="/home" />} />
         <Route path="/home" element={<MyComponent />} />
         <Route path="/resume" element={<Resume />} />
+        <Route path="/work" element={<Work />} />
         {/* 其他路由... */}
       </Routes>
       <NavigationBar />
@@ -76,7 +77,9 @@ function NavigationBar() {
       <Div4 to="/resume" isActive={location.pathname === '/resume'}>
         Resume
       </Div4>
-      <Div5>Work</Div5>
+      <Div5  to="/work" isActive={location.pathname === '/work'}>
+        Work
+      </Div5>
     </Div2>
   );
 }

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -19,7 +19,7 @@ function MyComponent(props) {
           style={{
             width: '95%',
             display: 'flex',
-            marginTop: '10vh',
+            // marginTop: '10vh',
             borderStyle: 'solid',
             borderWidth: '1.5px',
             borderColor: '#333333',
@@ -127,15 +127,52 @@ function MyComponent(props) {
       </OverlapGroupWrapper2>
     </IndexContainer>
 
-    <Div6>
-      <Div7>Coding Project</Div7>
-      <Div8>
-        Graphic Design Project
-      </Div8>
-      <Div9>UI / UX Project</Div9>
-    </Div6>
+    {/* <Div6>
+        <Div7>
+          UI / UX Design
+          <ContentMob>
+              As a UI/UX designer, I harmonize form and function to create visually captivating interfaces that guide users through purposeful journeys. 
+              <br />
+              With extensive cross-industry research, I tailor solutions to diverse user needs. 
+              <br />
+              Collaborating with cross-functional teams, I prioritize user-centric design, informed by thorough research, seamlessly integrating experiences into users' lives.
+          </ContentMob>
+        </Div7>
+        <Div8>Graphic Design
+          <ContentMob>
+              My journey in graphic design is driven by the belief that each pixel matters. 
+              <br />
+              From conceptualization to execution, I strive for a harmonious balance between form and function. Every color, typeface, and image is carefully chosen to convey a message, evoke emotions, and create a lasting impression.
+          </ContentMob>
+        </Div8>
+        <Div9>Frontend Coding
+          <ContentMob>
+              I find joy in translating creative visions into seamless, interactive digital experiences. 
+              My coding journey is a continuous exploration of the ever-evolving web technologies. 
+              <br />
+              Proficient in HTML, CSS, and React.js , I thrive on the challenge of bringing design concepts to life while ensuring a user-friendly and visually appealing interface.
+          </ContentMob>
+        </Div9>
+    </Div6> */}
     
-      {/* <Div19>&quot;Create infinite value in a limited lifetime.&quot;</Div19> */}
+    <Div6>
+      <FlipCard
+        title="UI / UX Design"
+        content="As a UI/UX designer, I harmonize form and function to create visually captivating interfaces that guide users through purposeful journeys. With extensive cross-industry research, I tailor solutions to diverse user needs. Collaborating with cross-functional teams, I prioritize user-centric design, informed by thorough research, seamlessly integrating experiences into users' lives."
+        bgColor="#7D8991"
+      />
+      <FlipCard
+        title="Graphic Design"
+        content="My journey in graphic design is driven by the belief that each pixel matters. From conceptualization to execution, I strive for a harmonious balance between form and function. Every color, typeface, and image is carefully chosen to convey a message, evoke emotions, and create a lasting impression."
+        bgColor="#D58CFE"    
+      />
+      <FlipCard
+        title="Frontend Coding"
+        content="I find joy in translating creative visions into seamless, interactive digital experiences. My coding journey is a continuous exploration of the ever-evolving web technologies. Proficient in HTML, CSS, and React.js, I thrive on the challenge of bringing design concepts to life while ensuring a user-friendly and visually appealing interface."
+        bgColor="#F7883D"
+      />
+    </Div6>
+
       {/* <RecentWorksContainer>
       <RecentWorksTitle>Recent Works</RecentWorksTitle>
     <Divider />
@@ -174,7 +211,7 @@ export default MyComponent
 const Div = styled.div`
   background-color: #f2f2f2;
   display: flex;
-  // padding-bottom: 5vh;
+  padding-top: 10vh;
   flex-direction: column;
   align-items: center;
   width:100%;
@@ -182,21 +219,13 @@ const Div = styled.div`
   position: absolute;
   top: 0;
   right: 0;
+
+  @media (max-width: 440px) {
+    padding-top: 8vh;
+    margin: 0;
+  }
 `;
 
-const Img2 = styled.img`
-  width: 70%;
-  position: fixed;
-  top: 50px;
-  left: -16vw;
-  z-index: 997;
-  @media (max-width: 990px) {
-    width: 90%;
-  }
-  @media (max-width: 440px) {
-    width: 90%;
-  }
-`;
 
 const Div2 = styled.div`
   align-items: center;
@@ -671,20 +700,21 @@ const Div6 = styled.div`
   // background-color: #fff;
   width: 90%;
   flex-direction: column;
-  font-size: 40px;
+  justify-content: center;
   color: #fff;
   font-weight: 700;
   line-height: 46px;
   display:none;
+  margin-bottom: 24px;
+  margin-top: 24px;
+  gap: 24px;
+  font-size: 24px;
 
   @media (max-width: 991px) {
     display: flex;
-    margin-bottom: 24px;
   }
   @media (max-width: 430px) {
     display: flex;
-    margin-bottom: 24px;
-    font-size: 24px;
   }
 `;
 
@@ -966,4 +996,60 @@ const SpeakerImage = styled.img`
   margin-top: 22px;
 `;
 
+const DivFlipCard = styled.div`
+  perspective: 1000px;
+  max-width: 100%;
+  // margin: 20px;
+`;
 
+const FlipCardInner = styled.div`
+  // position: relative;
+  height: 200px;
+  text-align: left;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  ${(props) => props.flipped && 'transform: rotateY(180deg);'}
+`;
+
+const FlipCardFront = styled.div`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: ${(props) => props.bgColor};
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 16px;
+`;
+
+const FlipCardBack = styled(FlipCardFront)`
+  background-color: ${(props) => props.bgColor};
+  color: #fff;
+  transform: rotateY(180deg);
+  font-weight: normal;
+  max-width: 100%;
+  text-align: left;
+`;
+
+function FlipCard({ title, content, bgColor }) {
+  const [flipped, setFlipped] = useState(false);
+
+  return (
+    <DivFlipCard onClick={() => setFlipped(!flipped)}>
+      <FlipCardInner flipped={flipped}>
+        <FlipCardFront bgColor={bgColor}>{title}</FlipCardFront>
+        <FlipCardBack bgColor={bgColor}><ContentMob>{content}</ContentMob></FlipCardBack>
+      </FlipCardInner>
+    </DivFlipCard>
+  );
+}
+
+const ContentMob = styled.div`
+  font-size: 12px;
+  line-height: 1.6;
+  padding: 16px;
+`;

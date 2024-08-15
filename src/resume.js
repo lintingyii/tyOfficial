@@ -277,8 +277,12 @@ const Div = styled.div`
     position: absolute;
     top: 0;
     left: 0;
-    // padding-bottom: 3vh;
+    padding-top: 13vh;
     margin: 0; /* 清除 margin */
+
+    @media (max-width: 440px) {
+      padding-top: 6vh;
+    }
 `;
 
 const Div2 = styled.div`
@@ -286,11 +290,9 @@ const Div2 = styled.div`
   width: 859px;
   max-width: 100%;
   flex-direction: column;
-  margin-top: 12vh;
   margin-left: 24px;
 
   @media (max-width: 991px) {
-    margin-top: 8vh;
     max-width: 90%;
     margin-left: 0px;
   }
