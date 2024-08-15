@@ -221,8 +221,7 @@ const Div = styled.div`
   right: 0;
 
   @media (max-width: 440px) {
-    padding-top: 8vh;
-    margin: 0;
+    padding-top: 9vh;
   }
 `;
 
