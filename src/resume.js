@@ -1,6 +1,6 @@
 import React from "react";
 import "./style.css";
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 export const Resume = () => {
   return (
@@ -280,6 +280,9 @@ const Div = styled.div`
     padding-top: 13vh;
     margin: 0; /* 清除 margin */
 
+    @media (max-width: 1020px) {
+      padding-top: 6vh;
+    }
     @media (max-width: 440px) {
       padding-top: 6vh;
     }
@@ -308,6 +311,7 @@ const Div3 = styled.div`
 const Div4 = styled.div`
   gap: 20px;
   display: flex;
+  
   @media (max-width: 991px) {
     flex-direction: column;
     align-items: stretch;
@@ -336,9 +340,23 @@ const Div5 = styled.div`
   }
 `;
 
+const load = keyframes`
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+`;
+
 const Div6 = styled.div`
   color: #333;
-  font: 700 27px/150% Noto Sans TC, sans-serif;
+  font: 700 27px/150% "Noto Sans TC", sans-serif;
+  animation: ${load} 400ms ease-in forwards;
+  animation-delay: 20ms;
+  opacity: 0;
 `;
 
 const Div7 = styled.div`
@@ -346,6 +364,10 @@ const Div7 = styled.div`
   margin-top: 20px;
   white-space: nowrap;
   font: 400 15px/150% Assistant, sans-serif;
+  animation: ${load} 400ms ease-in forwards;
+  animation-delay: 300ms;
+  opacity: 0;
+
   @media (max-width: 991px) {
     white-space: initial;
   }
@@ -361,6 +383,9 @@ const Div8 = styled.div`
   color: #555;
   font-weight: 400;
   line-height: 150%;
+  animation: ${load} 400ms ease-in forwards;
+  animation-delay: 600ms;
+  opacity: 0;
 `;
 
 const Img = styled.img`
@@ -382,6 +407,9 @@ const Div10 = styled.a`
   text-decoration-line: underline;
   margin-top: 8px;
   font: 400 17px/150% Assistant, sans-serif;
+  animation: ${load} 400ms ease-in forwards;
+  animation-delay: 600ms;
+  opacity: 0;
 `;
 
 const Div11 = styled.div`
@@ -389,6 +417,9 @@ const Div11 = styled.div`
   margin-top: 19px;
   width: 61px;
   gap: 10px;
+  animation: ${load} 400ms ease-in forwards;
+  animation-delay: 600ms;
+  opacity: 0;
 `;
 
 const Img2 = styled.img`
@@ -442,6 +473,9 @@ const Img4 = styled.img`
   align-items: center;
   width: 100%;
   margin: 0 auto;
+  animation: ${load} 400ms ease-in forwards;
+  animation-delay: 900ms;
+  opacity: 0;
 
   @media (max-width: 991px) {
     max-width: 100%;

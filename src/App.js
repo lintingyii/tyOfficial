@@ -13,21 +13,18 @@ const Div2 = styled.div`
   left: 50%;
   transform: translateX(-50%);
   z-index: 1000;  
-  justify-content: center;
+  justify-content: space-between;
   border-radius: 50px;
   border: 1.5px solid #333333;
   background-color: #fff;
-  align-self: stretch;
   display: flex;
-  width: 97%;
+  width: 100%;
   font-size: 30px;
   font-weight: 700;
   padding: 8px 9px;
-  @media (max-width: 820px) {
-    max-width: 95%;
-  }
+  box-sizing: border-box;
+
   @media (max-width: 440px) {
-    max-width: 95%;
     font-size: 24px;
   }
 `;
@@ -40,10 +37,8 @@ const Div3 = styled(Link)`
 const Div4 = styled(Link)`
   text-decoration: none;
   text-align: center;
-  flex-grow: 1;
   flex-basis: auto;
   color: ${({ isActive }) => (isActive ? '#0000FF' : '#333333')};
-  margin-right: 20px;
 `;
 
 const Div5 = styled(Link)`

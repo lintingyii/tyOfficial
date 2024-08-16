@@ -30,13 +30,7 @@ function MyComponent(props) {
       </picture>
 
       <OverlapGroupWrapper>
-        <OverlapGroup>
-          {/* <VectorImage
-            className="vector"
-            alt="Vector"
-            src="./me.webp"
-          /> */}
-          
+        <OverlapGroup> 
           <HeadingIAm>
             HI 👋🏻<br />I am Ting-yi, Lin
             <Div11>
@@ -331,15 +325,15 @@ const OverlapGroupWrapper = styled.div`
   max-width: 1440px; /* 設定最大寬度 */
   width: 100%;
   margin: 0 auto; /* 左右居中 */
-  display: flex;
+  display: flex-box;
   flex-direction: column;
   margin-top: 20vh;
   margin-bottom: 12vh;
 
   @media (max-width: 1024px) {
-    height: 40vh;
-    margin-top: 15vh;
-    margin-bottom: 12vh;
+    max-height: 25vh;
+    margin-top: 10vh;
+    margin-bottom: 5vh;
 
   @media (max-width: 648px) {
     height: 35vh;
@@ -387,6 +381,7 @@ const HeadingIAm = styled.div`
   position: absolute;
   top: 16px;
   z-index: 999;
+  
   @media (max-width: 1024px) {
     font-size: 96px;
     top: 0px;
@@ -783,11 +778,10 @@ const TextWrapper3 = styled.div`
   line-height: 2rem;
   
   @media (max-width: 1024px) {
-    // max-width: 720px;
     font-size: 1rem;
-    max-width: 90%;
+    width: 90%;
     text-align: left;
-    line-height: 1.5rem;
+      padding-bottom: 5vh;
   }
   @media (max-width: 480px) {
     display: flex;
@@ -796,7 +790,7 @@ const TextWrapper3 = styled.div`
     padding: 24px;
     // margin-left: 24px;
     text-align: left;
-    line-height: 1.25rem;
+    line-height: 1.5rem;
   }
 `;
 
