@@ -58,6 +58,10 @@ const CustomCursorDiv = styled.div`
       transform: translate(0%, 0%) scale(2.8);
     }
   }
+
+    @media (max-width: 1280px) {
+        opacity:0;
+    }
 `;
 
 

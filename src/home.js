@@ -6,18 +6,13 @@ function MyComponent(props) {
   
   return (
     <Div>
-      {/* <Div2>
-        <Div3>Home</Div3>
-        <Div4>About me</Div4>
-        <Div5>Work</Div5>
-      </Div2> */}
       <picture style={{ display: 'flex',justifyContent:'center', zIndex:'998' }}>
         <source media="(max-width: 1024px)" srcSet="./main-page-phone.png" />
         <img
           src="./main-page.png"
           alt="Main Page"
           style={{
-            width: '95%',
+            width: '90%',
             display: 'flex',
             // marginTop: '10vh',
             borderStyle: 'solid',
@@ -330,17 +325,34 @@ const OverlapGroupWrapper = styled.div`
   margin-top: 20vh;
   margin-bottom: 12vh;
 
-  @media (max-width: 1024px) {
+  @media (max-width: 1440px) {
     max-height: 25vh;
     margin-top: 10vh;
-    margin-bottom: 5vh;
+    margin-bottom: 12vh;
+  }
+  
+  @media (max-width: 1020px) {
+    max-height: 18vh;
+    margin-top: 10vh;
+    margin-bottom: 15vh;
+  }
 
   @media (max-width: 648px) {
-    height: 35vh;
+    height: 10vh;
+    margin-top: 20vh;
+    // margin-bottom: 10vh;
   }
 
   @media (max-width: 480px) {
     height: 12vh;
+    margin-top: 15vh;
+    margin-bottom: 10vh;
+  }
+
+  @media (max-width: 375px) {
+    height: 16vh;
+    margin-top: 15vh;
+    margin-bottom: 10vh;
   }
 `;
 
@@ -353,7 +365,7 @@ const OverlapGroup = styled.div`
   // align-items: center;
   justify-content: center;
   // align-self: center;
-  margin: 0 auto; /* 左右居中 */
+  margin: 0 auto;
   // margin-bottom: 20vh;
 `;
 
@@ -382,7 +394,7 @@ const HeadingIAm = styled.div`
   top: 16px;
   z-index: 999;
   
-  @media (max-width: 1024px) {
+  @media (max-width: 1440px) {
     font-size: 96px;
     top: 0px;
   }
@@ -572,10 +584,7 @@ const IndexContainer = styled.div`
   justify-content: center;
   width: 100%;
 
-  @media (max-width: 991px) {
-    display:none;
-  }
-  @media (max-height: 640px) {
+  @media (max-width: 1280px) {
     display:none;
   }
 `;
@@ -705,10 +714,7 @@ const Div6 = styled.div`
   font-size: 24px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  @media (max-width: 991px) {
-    display: flex;
-  }
-  @media (max-width: 430px) {
+  @media (max-width: 1280px) {
     display: flex;
   }
 `;
@@ -768,7 +774,6 @@ const Div9 = styled.a`
 `;
 
 const TextWrapper3 = styled.div`
-  max-width: 90vw; /* 設定最大寬度 */
   width: 100%;
   font-size: 1.25rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -777,18 +782,21 @@ const TextWrapper3 = styled.div`
   padding-bottom: 8vh;
   line-height: 2rem;
   
-  @media (max-width: 1024px) {
-    font-size: 1rem;
+  @media (max-width: 1440px) {
+    // font-size: 1rem;
     width: 90%;
+    text-align: center;
+    padding-bottom: 5vh;
+  }
+  @media (max-width: 1024px) {
+    // font-size: 1rem;
     text-align: left;
-      padding-bottom: 5vh;
+    padding-bottom: 5vh;
   }
   @media (max-width: 480px) {
     display: flex;
-    max-width: 86%;
     font-size: 0.8rem;
     padding: 24px;
-    // margin-left: 24px;
     text-align: left;
     line-height: 1.5rem;
   }
@@ -1044,7 +1052,12 @@ function FlipCard({ title, content, bgColor }) {
 
 const ContentMob = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 12px;
+  font-size: 1rem;
   line-height: 1.6;
   padding: 16px;
+
+  @media (max-width: 991px) {
+    font-size: 0.9rem;
+    line-height: 1.4;
+  }
 `;

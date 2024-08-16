@@ -280,10 +280,10 @@ const Div = styled.div`
     padding-top: 13vh;
     margin: 0; /* 清除 margin */
 
-    @media (max-width: 1020px) {
-      padding-top: 6vh;
+    @media (max-width: 1024px) {
+      padding-top: 8vh;
     }
-    @media (max-width: 440px) {
+    @media (max-width: 912px) {
       padding-top: 6vh;
     }
 `;
