@@ -1,9 +1,19 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes,Navigate, Route, Link, useLocation } from 'react-router-dom';
 import Resume from './resume';
 import MyComponent from './home';
 import Work from './work';
 import styled from 'styled-components';
+import CustomCursor from './CustomCursor';
+import { createGlobalStyle } from 'styled-components';
+import './App.css'
+
+const GlobalStyle = createGlobalStyle`
+  body, * {
+  cursor: none;
+  user-select: none;
+ }
+`;
 
 const Div2 = styled.div`
  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -46,18 +56,24 @@ const Div5 = styled(Link)`
   color: ${({ isActive }) => (isActive ? '#0000FF' : '#333333')};
 `;
 
+
 function App() {
+
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<MyComponent />} />
-        <Route path="/resume" element={<Resume />} />
-        <Route path="/work" element={<Work />} />
-        {/* 其他路由... */}
-      </Routes>
-      <NavigationBar />
-    </Router>
+    <>
+      <CustomCursor />
+      <GlobalStyle />
+      <Router>
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/home" element={<MyComponent />} />
+            <Route path="/resume" element={<Resume />} />
+            <Route path="/work" element={<Work />} />
+            {/* 其他路由... */}
+          </Routes>
+          <NavigationBar />
+      </Router>
+    </>
   );
 }
 
