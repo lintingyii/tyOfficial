@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useRef  } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 function MyComponent(props) {
-  
+  const cardRef = useRef(null);
+
   return (
     <Div>
       <picture style={{ display: 'flex',justifyContent:'center', zIndex:'998' }}>
@@ -189,9 +190,9 @@ function MyComponent(props) {
       </WorkSection>
     </RecentWorksContainer> */}
       
-    {/* <Footerwraper>
-       © Tingyi Lin  |  All rights reserved 2024 
-      </Footerwraper> */}
+      <Footerwraper>
+        © Tingyi Lin  |  All rights reserved 2024 
+      </Footerwraper>
     </Div>
   );
 }
@@ -384,7 +385,7 @@ const VectorImage = styled.img`
 
 const HeadingIAm = styled.div`
   color: #333333;
-  font-family: "Roboto", Helvetica;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 8rem;
   font-weight: 700;
   height: 226px;
@@ -584,7 +585,7 @@ const IndexContainer = styled.div`
   justify-content: center;
   width: 100%;
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1040px) {
     display:none;
   }
 `;
@@ -714,7 +715,7 @@ const Div6 = styled.div`
   font-size: 24px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  @media (max-width: 1280px) {
+  @media (max-width: 1040px) {
     display: flex;
   }
 `;
@@ -796,16 +797,20 @@ const TextWrapper3 = styled.div`
   @media (max-width: 480px) {
     display: flex;
     font-size: 0.8rem;
-    padding: 24px;
+    padding-top: 1rem;
+    width: 90%;
     text-align: left;
     line-height: 1.5rem;
+  }
+  @media (max-height: 600px) {
+    display: none;
   }
 `;
 
 const Span = styled.span`
   background-color: #333333;
   border-radius: 50px;
-  padding: 2px 8px; /* 上下各4px，左右各8px的空間 */
+  padding: 2px 8px; 
   color: #ffffff;
   white-space: nowrap;
 `;
@@ -814,7 +819,12 @@ const Footerwraper = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #333333;
   text-align: center;
-  padding: 20px; /* 可以根據需要調整底部 padding */
+  padding: 30px; /* 可以根據需要調整底部 padding */
+  font-size: 1rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
 
 const RecentWorksContainer = styled.div`
@@ -1057,7 +1067,7 @@ const ContentMob = styled.div`
   padding: 16px;
 
   @media (max-width: 991px) {
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     line-height: 1.4;
   }
 `;

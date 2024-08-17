@@ -59,7 +59,7 @@ const CustomCursorDiv = styled.div`
     }
   }
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1040px) {
         opacity:0;
     }
 `;

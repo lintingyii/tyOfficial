@@ -943,4 +943,9 @@ const Footerwraper = styled.div`
   color: #333333;
   text-align: center;
   padding: 30px; /* 可以根據需要調整底部 padding */
+  font-size: 1rem;
+
+  @media (max-width: 480px) {
+    font-size: 0.8rem;
+  }
 `;
