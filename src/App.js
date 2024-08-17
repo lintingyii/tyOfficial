@@ -56,6 +56,15 @@ const Div5 = styled(Link)`
   color: ${({ isActive }) => (isActive ? '#0000FF' : '#333333')};
 `;
 
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 function App() {
 
@@ -64,6 +73,7 @@ function App() {
       <CustomCursor />
       <GlobalStyle />
       <Router>
+          <ScrollToTop />
           <Routes>
             <Route path="/" element={<Navigate to="/home" />} />
             <Route path="/home" element={<MyComponent />} />

@@ -45,7 +45,7 @@ export const Work = () => {
                         <TextWrapper>Frontend</TextWrapper>
                     </DivWrapper>
                     <DivWrapper2>
-                        <TextWrapper>Draphic design</TextWrapper>
+                        <TextWrapper>Graphic design</TextWrapper>
                     </DivWrapper2>
                 </OverlapGroup>
             </OverlapGroupWrapper>
