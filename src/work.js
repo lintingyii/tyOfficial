@@ -107,7 +107,6 @@ export const Work = () => {
                     description={project1.description}
                     tags={project1.tags}
                 /> */}
-                {/* 你可以在這裡添加更多 ProjectCard */}
             </CardsContainer>
             <H4>Coming sooon ✨</H4>
             <Footerwraper>
