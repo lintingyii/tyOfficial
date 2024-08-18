@@ -70,14 +70,14 @@ export const Work = () => {
                 zoomOut={false}
                 toggleAxis={false}
                 enableTransition={false}
-                cDistance={10}
+                cDistance={8}
                 color1='#809bd6'
                 color2='#F7883D'
                 color3='#D58CFE'
                 grain='on'
                 lightType='3d'
-                grainBlending={.1}
-                brightness={5}
+                grainBlending={.2}
+                brightness={1.5}
               />
               </ShaderGradientCanvas>
             </Header>
