@@ -2,6 +2,13 @@ import React from "react";
 import "./style.css";
 import styled, { keyframes } from 'styled-components';
 import ProjectCard from './ProjectCard';
+import {
+  ShaderGradientCanvas,
+  ShaderGradient,
+} from 'shadergradient'
+import * as reactSpring from '@react-spring/three'
+import * as drei from '@react-three/drei'
+import * as fiber from '@react-three/fiber'
 
 export const Work = () => {
     const project1 = {
@@ -20,35 +27,59 @@ export const Work = () => {
 
     return(
         <Div>
-            {/* <BallContainer>
-                <Ball size={50} color="#F7883D" duration={2} delay={0} />
-                <Ball size={70} color="#D58CFE" duration={2.5} delay={0.5} />
-                <Ball size={40} color="#7D8991" duration={1.8} delay={1} />
-                <Ball size={60} color="#000fff" duration={2.2} delay={0.2} />
-                <Ball size={30} color="#A06E29" duration={1.5} delay={0.7} />
-            </BallContainer> */}
-            {/* <HeadingIAm>
-             Works_
-            </HeadingIAm> */}
             <Header>
-            <OverlapGroupWrapper>
-                <OverlapGroup> 
-                    <HeadingIAm>
-                        <span style={{fontFamily:'serif', fontStyle:'italic', fontSize:'24px',lineHeight:'1'}}>Recent</span>
-                        <div>Work<span style={{fontFamily:'serif', fontStyle:'italic'}}>(s)</span></div>
-                    </HeadingIAm>
-                    
-                    <Frame>
-                        <TextWrapper>UI / UX</TextWrapper>
-                    </Frame>
-                    <DivWrapper>
-                        <TextWrapper>Frontend</TextWrapper>
-                    </DivWrapper>
-                    <DivWrapper2>
-                        <TextWrapper>Graphic design</TextWrapper>
-                    </DivWrapper2>
-                </OverlapGroup>
-            </OverlapGroupWrapper>
+              <OverlapGroupWrapper>
+                  <OverlapGroup> 
+                      <HeadingIAm>
+                          <span style={{fontFamily:'serif', fontStyle:'italic', fontSize:'24px',lineHeight:'1'}}>Recent</span>
+                          <div>Work<span style={{fontFamily:'serif', fontStyle:'italic'}}>(s)</span></div>
+                      </HeadingIAm>
+                      
+                      <Frame>
+                          <TextWrapper>UI / UX</TextWrapper>
+                      </Frame>
+                      <DivWrapper>
+                          <TextWrapper>Frontend</TextWrapper>
+                      </DivWrapper>
+                      <DivWrapper2>
+                          <TextWrapper>Graphic design</TextWrapper>
+                      </DivWrapper2>
+                  </OverlapGroup>
+              </OverlapGroupWrapper>
+              <ShaderGradientCanvas
+                importedFiber={{ ...fiber, ...drei, ...reactSpring }}
+                style={{
+                  position: 'absolute',
+                  top: 0,
+                  left: 0,
+                  width: '100%',
+                  height: '100%',
+                  overFlow:'hidden',
+                  zIndex: 1,
+                }}
+              >
+              <ShaderGradient
+                control='props'
+                type='plane'
+                animate="on"
+                uDensity={1}
+                uFrequency={.5}
+                uStrength={2}
+                uSpeed={.4}
+                cameraZoom={1}  // 固定缩放比例
+                zoomOut={false}
+                toggleAxis={false}
+                enableTransition={false}
+                cDistance={10}
+                color1='#809bd6'
+                color2='#F7883D'
+                color3='#D58CFE'
+                grain='on'
+                lightType='3d'
+                grainBlending={.1}
+                brightness={5}
+              />
+              </ShaderGradientCanvas>
             </Header>
             <CardsContainer>
                 <ProjectCard
@@ -101,7 +132,7 @@ const Div = styled.div`
     // overflow: hidden; 
 
     @media (max-width: 440px) {
-      padding-top: 6vh;
+      padding-top: 0vh;
     //   height: 94vh;
     }
 `;
@@ -111,18 +142,20 @@ const Header = styled.div`
    border-bottom: 1.5px solid;
    width: 100%;
    border-color: #333;
-   padding-top: 18vh;
-   padding-bottom: 15vh;
+  //  padding-top: 18vh;
+  //  padding-bottom: 15vh;
+   overflow: hidden;
+   position: relative;
 
-   @media (max-width: 480px) {
-     padding-top: 15vh;
-     padding-bottom: 15vh;
-   }
-   @media (max-width: 375px) {
-     padding-top: 12vh;
-     padding-bottom: 20vh;
-     height: 8vh;
-   }
+  //  @media (max-width: 480px) {
+  //    padding-top: 15vh;
+  //    padding-bottom: 15vh;
+  //  }
+  //  @media (max-width: 375px) {
+  //    padding-top: 12vh;
+  //    padding-bottom: 20vh;
+  //    height: 8vh;
+  //  }
 `;
 
 const HeadingIAm = styled.div`
@@ -158,29 +191,35 @@ const HeadingIAm = styled.div`
     white-space: pre-wrap;
     margin-left: 24px;
     font-size: 56px;
-
     margin-top: 0rem;
   }
 `;
 
 const OverlapGroupWrapper = styled.div`
-  background-color: #f2f2f2;
-  max-width: 1440px; /* 設定最大寬度 */
+  // background-color: #f2f2f2;
+  // max-width: 1440px; /* 設定最大寬度 */
   width: 100%;
   margin: 0 auto; /* 左右居中 */
   display: flex;
+  z-index: 3;
+  max-height: 100%;
+  padding-top: 18vh;
+  padding-bottom: 15vh;
 
-//   @media (max-width: 480px) {
-//     height: 0vh;
-//     margin-top: 0vh;
-//     margin-bottom: 5vh;
-//   }
-
-  @media (max-width: 375px) {
-    height: 0vh;
-    margin-top: 0vh;
-    margin-bottom: 5vh;
-  }
+  // @media (max-width: 375px) {
+  //   height: 0vh;
+  //   margin-top: 0vh;
+  //   margin-bottom: 5vh;
+  // }
+   @media (max-width: 480px) {
+     padding-top: 15vh;
+     padding-bottom: 15vh;
+   }
+   @media (max-width: 375px) {
+     padding-top: 15vh;
+     padding-bottom: 20vh;
+     height: 8vh;
+   }
 `;
 
 const Frame = styled.div`

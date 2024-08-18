@@ -10,7 +10,6 @@ import './App.css'
 
 const GlobalStyle = createGlobalStyle`
   body, * {
-  cursor: none;
   user-select: none;
  }
 `;
