@@ -1,4 +1,4 @@
-import React from "react";
+import react from 'react';
 import "./style.css";
 import styled, { keyframes } from 'styled-components';
 import ProjectCard from './ProjectCard';
@@ -24,6 +24,20 @@ export const Work = () => {
         ],
         link: 'https://mellifluous-brioche-700f0a.netlify.app/',
       };
+
+      const StyledShaderGradientCanvas = styled.div`
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        z-index: 1;
+
+        @media (max-width: 1040px) {
+          transform: scale(0.5);
+        }
+      `;
 
     return(
         <Div>
@@ -70,7 +84,8 @@ export const Work = () => {
                 zoomOut={false}
                 toggleAxis={false}
                 enableTransition={false}
-                cDistance={8}
+                cDistance={12}
+                // positionX={0}
                 color1='#809bd6'
                 color2='#F7883D'
                 color3='#D58CFE'
@@ -82,6 +97,7 @@ export const Work = () => {
               </ShaderGradientCanvas>
             </Header>
             <CardsContainer>
+              <CardsContainerWrapper>
                 <ProjectCard
                     date={project1.date}
                     image={project1.image}
@@ -107,6 +123,7 @@ export const Work = () => {
                     description={project1.description}
                     tags={project1.tags}
                 /> */}
+                </CardsContainerWrapper>
             </CardsContainer>
             <H4>Coming sooon ✨</H4>
             <Footerwraper>
@@ -137,14 +154,20 @@ const Div = styled.div`
 `;
 
 const Header = styled.div`
-   display: flex;
-   border-bottom: 1.5px solid;
-   width: 100%;
-   border-color: #333;
+  //  display: flex;
+  //  border-bottom: 1.5px solid;
+  //  width: 100%;
+  //  border-color: #333;
   //  padding-top: 18vh;
   //  padding-bottom: 15vh;
-   overflow: hidden;
-   position: relative;
+  //  overflow: hidden;
+  //  position: relative;
+  display: flex;
+  // border-bottom: 1.5px solid #333;
+  width: 100%;
+  overflow: hidden;
+  position: sticky; /* 使用 sticky */
+  top: 0; /* 固定在顶部 */
 
   //  @media (max-width: 480px) {
   //    padding-top: 15vh;
@@ -236,6 +259,7 @@ const Frame = styled.div`
   @media (max-width: 650px) {
    right: 5vw;
    top: -2rem;
+   padding: 10px 24px;
   }
 `;
 
@@ -252,7 +276,7 @@ const TextWrapper = styled.div`
   width: fit-content;
 
   @media (max-width: 650px) {
-    font-size: 24px;
+    font-size: 18px;
   }
 `;
 
@@ -273,7 +297,8 @@ const DivWrapper = styled.div`
   @media (max-width: 650px) {
    right: 5vw;
    top: 2.2rem;
-   filter: blur(1.5px);
+   filter: blur(1.2px);
+   padding: 10px 24px;
   }
 `;
 
@@ -294,6 +319,7 @@ const DivWrapper2 = styled.div`
   @media (max-width: 650px) {
    top: 100px;
    right: 5vw;
+   padding: 10px 24px;
   }
 `;
 
@@ -311,21 +337,37 @@ const OverlapGroup = styled.div`
 `;
 
 const CardsContainer = styled.div`
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 3rem;
+    z-index: 10;
+    background-color: #f2f2f2;
+    padding-top: 4rem;
+    left: 0;
     gap: 1.2rem;
-    max-width: 95%;
+    border-top: 1.5px solid #333;
+    width: 100%;
+    display: flex; /* 使用 Flexbox 布局 */
+    justify-content: center; /* 居中对齐子元素 */
+    align-items: center; /* 垂直居中对齐子元素 */
+
+    @media (max-width: 800px) {
+      flex-direction: column;
+      padding-top: 2rem;
+      justify-conter: center;
+    }
+`;
+
+const CardsContainerWrapper = styled.div`
+    width: 100%;
+    display: flex; /* 使用 Flexbox 布局 */
+    flex-direction: row; /* 水平布局 */
+    align-items: center; /* 垂直居中对齐 */
+    justify-content: center; /* 水平居中对齐 */
+    gap: 1.2rem;
 
     @media (max-width: 800px) {
       flex-direction: column;
       width: 90%;
-      gap: 1.2rem;
-      margin-top: 2rem;
     }
 `;
-
 const Footerwraper = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #333333;

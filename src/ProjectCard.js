@@ -77,6 +77,7 @@ const CardContainer = styled.div`
   border: 1.5px solid #333;
   position: relative;
   transition: background-color 0.3s ease-in;
+  background-color: #f2f2f2;
 
   &:hover {
     cursor: pointer; 
