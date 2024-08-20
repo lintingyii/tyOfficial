@@ -7,24 +7,16 @@ function MyComponent(props) {
 
   return (
     <Div>
-      <picture style={{ display: 'flex',justifyContent:'center', zIndex:'998' }}>
-        <source media="(max-width: 1024px)" srcSet="./main-page-phone.png" />
-        <img
-          src="./main-page.png"
-          alt="Main Page"
-          style={{
-            width: '90%',
-            display: 'flex',
-            // marginTop: '10vh',
-            borderStyle: 'solid',
-            borderWidth: '1.5px',
-            borderColor: '#333333',
-            borderRadius: '24px',
-            justifyContent:'center',
-          }}
-        />
-      </picture>
+      <Banner>
+      <source media="(max-width: 780px)" srcSet="./banner-2-mobile-1.png" />
+      <img
+        src="./banner-2.png"
+        alt="Main Page"
+      />
+      </Banner>
 
+      <div 
+      style={{display:'flex', width:'100%',alignItems:'center', justifyContent:'center',flexDirection:'column', backgroundColor:'#f2f2f2', zIndex:'999'}}>
       <OverlapGroupWrapper>
         <OverlapGroup> 
           <HeadingIAm>
@@ -49,16 +41,17 @@ function MyComponent(props) {
       <TextWrapper3>
         <p>
         Hello👋🏻, I'm Ting-yi Lin, you can call me Morgan, a creative design graduate from National Chengchi University. 
-        <br />
         Venturing into <Span>UI / UX</Span>, my understanding of <Span>front-end skills</Span> emphasizes a practical approach to design, 
-        <br />
         blending aesthetics and creativity with <Span>user-centric</Span> solutions.
         </p>
       </TextWrapper3>
+      </div>
 
+      <div style={{width:'100%', backgroundColor:'#f2f2f2',zIndex:'999'}}>
       <CircleContainer>
         <div className="circle"></div>
       </CircleContainer>
+      </div>
 
       <IndexContainer>
       <OverlapGroupWrapper2>
@@ -201,20 +194,44 @@ export default MyComponent
 const Div = styled.div`
   background-color: #f2f2f2;
   display: flex;
-  padding-top: 10vh;
+  padding-top: 8vh;
   flex-direction: column;
   align-items: center;
   width:100%;
-  // height: 100%;
   position: absolute;
   top: 0;
   right: 0;
 
   @media (max-width: 440px) {
-    padding-top: 9vh;
+    padding-top: 6vh;
   }
 `;
 
+const Banner = styled.picture`
+  display: flex;
+  justify-content: center;
+  // z-index: 998;
+  overflow: hidden;
+  position: sticky; /* 使用 sticky */
+  top: 0;
+  margin-bottom: 3vh;
+
+  img {
+    width: 100%;
+    display: flex;
+    // border-style: solid;
+    // border-width: 1.5px;
+    // border-bottom: 1.5px solid;
+    // border-color: #333333;
+    // border-radius: 24px;
+    justify-content: right;
+
+    @media (max-width: 780px) {
+      border: none; 
+      width: 100%;
+    }
+  }
+`;
 
 const Div2 = styled.div`
   align-items: center;
@@ -317,43 +334,47 @@ const Div11 = styled.div`
 
 const OverlapGroupWrapper = styled.div`
   background-color: #f2f2f2;
-  height: 50vh;
-  max-width: 1440px; /* 設定最大寬度 */
+  // max-width: 1440px; 
   width: 100%;
   margin: 0 auto; /* 左右居中 */
-  display: flex-box;
-  flex-direction: column;
-  margin-top: 20vh;
-  margin-bottom: 12vh;
+  // flex-direction: column;
+  // margin-top: 1vh;
+  position: relative;
+  margin-bottom: 15vh;
+  padding-top: 10vh;
+  border-top: 1.5px solid;
+  border-color: #333333;
 
   @media (max-width: 1440px) {
-    max-height: 25vh;
-    margin-top: 10vh;
+    // max-height: 25vh;
+    // margin-top: 10vh;
     margin-bottom: 12vh;
   }
   
   @media (max-width: 1020px) {
-    max-height: 18vh;
-    margin-top: 10vh;
+    // max-height: 18vh;
+    // margin-top: 10vh;
     margin-bottom: 15vh;
   }
 
   @media (max-width: 648px) {
-    height: 10vh;
-    margin-top: 20vh;
+    // height: 10vh;
+    // margin-top: 20vh;
     // margin-bottom: 10vh;
   }
 
   @media (max-width: 480px) {
-    height: 12vh;
-    margin-top: 15vh;
-    margin-bottom: 10vh;
+    // height: 12vh;
+    // margin-top: 15vh;
+    padding-top: 15vh;
+    margin-bottom: 0vh;
+    margin-top: 0vh;
   }
 
   @media (max-width: 375px) {
-    height: 16vh;
-    margin-top: 15vh;
-    margin-bottom: 10vh;
+    // height: 16vh;
+    // margin-top: 15vh;
+    margin-bottom: 0vh;
   }
 `;
 
@@ -368,19 +389,7 @@ const OverlapGroup = styled.div`
   // align-self: center;
   margin: 0 auto;
   // margin-bottom: 20vh;
-`;
 
-const VectorImage = styled.img`
-  left: -10vw;
-  position: absolute;
-  top: 30vh;
-  width: 60%;
-  position: fixed;
-  z-index: 997;
-  @media (max-width: 1024px) {
-    width: 80%;
-    left: -15vw;
-  }
 `;
 
 const HeadingIAm = styled.div`
@@ -388,12 +397,12 @@ const HeadingIAm = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 8rem;
   font-weight: 700;
-  height: 226px;
+  // height: 226px;
   margin: 0 auto;
   letter-spacing: 0;
-  position: absolute;
-  top: 16px;
+  position: relative;
   z-index: 999;
+  backgroung-color: #f2f2f2;
   
   @media (max-width: 1440px) {
     font-size: 96px;
@@ -488,6 +497,14 @@ const CircleContainer = styled.div`
   --spinSpeed: 5s;
   --color1: #0000ff; /* 陰影顏色 */
   --color2: #f2f2f2; /* 亮面顏色 */
+  
+  width: 100%; /* 覆盖整个屏幕宽度 */
+  height: 100%;
+  background-color: #f2f2f2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 5vh;
 
   .circle {
     height: var(--circleSize);
@@ -596,12 +613,13 @@ const OverlapGroupWrapper2 = styled.div`
   overflow: hidden;
   justify-content: center;
   width: 1450px;
+  // padding-top: 5vh;
 `;
 
 const OverlapGroup2 = styled.div`
+  background-color: #f2f2f2;
   height: 627px;
   position: relative;
-  top: 5vh;
   height: 100%;
   overflow-x: auto; /* 允許水平滾動 */
   overflow-y: hidden;
@@ -775,13 +793,15 @@ const Div9 = styled.a`
 `;
 
 const TextWrapper3 = styled.div`
-  width: 100%;
+  width: 70%;
+  max-width: 1040px;
   font-size: 1.25rem;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   color: #666666;
   text-align: center;
+
   padding-bottom: 8vh;
-  line-height: 2rem;
+  line-height: 2.5rem;
   
   @media (max-width: 1440px) {
     // font-size: 1rem;
