@@ -56,7 +56,7 @@ export const Resume = () => {
             <Column2>
               <Img4
                 loading="lazy"
-                srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/9d2e249fec19dbd42424f8f6001e81c6e2828c2c259a8a0d37be2d6b961a4ac6?apiKey=fe9890881c354019b717422c47a9cee2&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/9d2e249fec19dbd42424f8f6001e81c6e2828c2c259a8a0d37be2d6b961a4ac6?apiKey=fe9890881c354019b717422c47a9cee2&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/9d2e249fec19dbd42424f8f6001e81c6e2828c2c259a8a0d37be2d6b961a4ac6?apiKey=fe9890881c354019b717422c47a9cee2&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/9d2e249fec19dbd42424f8f6001e81c6e2828c2c259a8a0d37be2d6b961a4ac6?apiKey=fe9890881c354019b717422c47a9cee2&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/9d2e249fec19dbd42424f8f6001e81c6e2828c2c259a8a0d37be2d6b961a4ac6?apiKey=fe9890881c354019b717422c47a9cee2&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/9d2e249fec19dbd42424f8f6001e81c6e2828c2c259a8a0d37be2d6b961a4ac6?apiKey=fe9890881c354019b717422c47a9cee2&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/9d2e249fec19dbd42424f8f6001e81c6e2828c2c259a8a0d37be2d6b961a4ac6?apiKey=fe9890881c354019b717422c47a9cee2&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/9d2e249fec19dbd42424f8f6001e81c6e2828c2c259a8a0d37be2d6b961a4ac6?apiKey=fe9890881c354019b717422c47a9cee2&"
+                srcSet="./me.jpg"
               />
             </Column2>
           </Div4>

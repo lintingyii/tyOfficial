@@ -719,7 +719,8 @@ const GraphicDesign1 = styled(UIUXProject)`
 `;
 
 const Div6 = styled.div`
-  // background-color: #fff;
+  background-color: #f2f2f2;
+  z-index: 999;
   width: 90%;
   flex-direction: column;
   justify-content: center;
@@ -727,14 +728,14 @@ const Div6 = styled.div`
   font-weight: 700;
   line-height: 46px;
   display:none;
-  margin-bottom: 24px;
-  margin-top: 24px;
+  padding-bottom: 24px;
   gap: 24px;
   font-size: 24px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
   @media (max-width: 1040px) {
     display: flex;
+    background-color: #f2f2f2;
   }
 `;
 
@@ -1029,6 +1030,7 @@ const SpeakerImage = styled.img`
 `;
 
 const DivFlipCard = styled.div`
+  background-color: #f2f2f2;
   perspective: 1000px;
   max-width: 100%;
   // margin: 20px;
