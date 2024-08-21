@@ -24,11 +24,14 @@ const Footerwraper = styled.div`
   font-size: 1rem;
   z-index: 999;
   display: flex;
+  white-space: pre-wrap;
   justify-content: center;
   margin-top: auto; /* 将 Footer 推到页面的结尾 */
 
   @media (max-width: 480px) {
     font-size: 0.8rem;
+    flex-direction: column;
+    gap: 8px;
   }
 `;
 
@@ -39,6 +42,9 @@ const Span = styled.div`
 
   &:hover {
   color: #000fff;
+  }
+  @media (max-width: 480px) {
+    margin-left: 0px;
   }
 `;
 
