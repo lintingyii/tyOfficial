@@ -337,7 +337,7 @@ const OverlapGroup = styled.div`
 `;
 
 const CardsContainer = styled.div`
-    z-index: 10;
+    z-index: 100;
     background-color: #f2f2f2;
     padding-top: 4rem;
     left: 0;

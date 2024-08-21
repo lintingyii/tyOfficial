@@ -1,6 +1,7 @@
 import React, { useState, useRef  } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { Link } from 'react-router-dom';
+import Marquee from "react-fast-marquee";
 
 function MyComponent(props) {
   const cardRef = useRef(null);
@@ -8,7 +9,7 @@ function MyComponent(props) {
   return (
     <Div>
       <Banner>
-      <source media="(max-width: 780px)" srcSet="./banner-2-mobile-1.png" />
+      <source media="(max-width: 820px)" srcSet="./banner-2-mobile-1.png" />
       <img
         src="./banner-2.png"
         alt="Main Page"
@@ -156,33 +157,12 @@ function MyComponent(props) {
       />
     </Div6>
 
-      {/* <RecentWorksContainer>
-      <RecentWorksTitle>Recent Works</RecentWorksTitle>
-    <Divider />
-      <WorkSection>
-        <LeftColumn>
-          <WorkImage loading="lazy" src="./arron-nieh.png" />
-        </LeftColumn>
-        <RightColumn>
-          <YearAndCategories>
-            <YearLabel>2023</YearLabel>
-            <CategoriesContainer>
-              <CategoryLabel>Graphic design</CategoryLabel>
-              <CategoryLabel>Front-end coding</CategoryLabel>
-              <CategoryLabel>Website design</CategoryLabel>
-            </CategoriesContainer>
-          </YearAndCategories>
-          <LectureDetails>
-            <LectureInfoContainer>
-              <LectureTitle>Lecture Visual Identity</LectureTitle>
-              <SpeakerInfo>Aaron nieh : Behind the Covers</SpeakerInfo>
-            </LectureInfoContainer>
-            <SpeakerImage loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/5148bbfb173be6970d51b8b473f91e9efb3c1f9c80cf31a3e625693fe436ec7d?" />
-          </LectureDetails>
-        </RightColumn>
-      </WorkSection>
-    </RecentWorksContainer> */}
-      
+      <Marquee 
+       speed={60}>
+        <Marqueetext>
+        Let's make something <MarqueeSpan>cool</MarqueeSpan>· Let's make something  <MarqueeSpan>cool</MarqueeSpan> · Let's make something  <MarqueeSpan>cool</MarqueeSpan> · Let's make something  <MarqueeSpan>cool</MarqueeSpan> · Let's make something  <MarqueeSpan>cool</MarqueeSpan> ·
+        </Marqueetext>
+      </Marquee>
       <Footerwraper>
         © Tingyi Lin  |  All rights reserved 2024 
       </Footerwraper>
@@ -194,7 +174,7 @@ export default MyComponent
 const Div = styled.div`
   background-color: #f2f2f2;
   display: flex;
-  padding-top: 8vh;
+  // padding-top: 8vh;
   flex-direction: column;
   align-items: center;
   width:100%;
@@ -203,20 +183,21 @@ const Div = styled.div`
   right: 0;
 
   @media (max-width: 440px) {
-    padding-top: 6vh;
+    // padding-top: 6vh;
   }
 `;
 
 const Banner = styled.picture`
   display: flex;
   justify-content: center;
-  // z-index: 998;
+  z-index: 0;
   overflow: hidden;
   position: sticky; /* 使用 sticky */
   top: 0;
   margin-bottom: 3vh;
 
   img {
+    padding-top: 8vh;
     width: 100%;
     display: flex;
     // border-style: solid;
@@ -226,9 +207,10 @@ const Banner = styled.picture`
     // border-radius: 24px;
     justify-content: right;
 
-    @media (max-width: 780px) {
+    @media (max-width: 820px) {
       border: none; 
       width: 100%;
+      padding-top: 6vh;
     }
   }
 `;
@@ -602,7 +584,7 @@ const IndexContainer = styled.div`
   justify-content: center;
   width: 100%;
 
-  @media (max-width: 1040px) {
+  @media (max-width: 820px) {
     display:none;
   }
 `;
@@ -723,19 +705,18 @@ const Div6 = styled.div`
   z-index: 999;
   width: 90%;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   color: #fff;
   font-weight: 700;
   line-height: 46px;
   display:none;
-  padding-bottom: 24px;
+  padding-bottom: 32px;
   gap: 24px;
   font-size: 24px;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 
-  @media (max-width: 1040px) {
+  @media (max-width: 820px) {
     display: flex;
-    background-color: #f2f2f2;
   }
 `;
 
@@ -838,10 +819,13 @@ const Span = styled.span`
 
 const Footerwraper = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #333333;
+  color: #000fff;
+  width: 100%;
+  background-color: #f2f2f2;
   text-align: center;
-  padding: 30px; /* 可以根據需要調整底部 padding */
+  padding: 24px 0px; /* 可以根據需要調整底部 padding */
   font-size: 1rem;
+  z-index: 999;
 
   @media (max-width: 480px) {
     font-size: 0.8rem;
@@ -1032,6 +1016,7 @@ const SpeakerImage = styled.img`
 const DivFlipCard = styled.div`
   background-color: #f2f2f2;
   perspective: 1000px;
+  align-items: center;
   max-width: 100%;
   // margin: 20px;
 `;
@@ -1092,4 +1077,29 @@ const ContentMob = styled.div`
     font-size: 0.8rem;
     line-height: 1.4;
   }
+`;
+
+const Marqueetext = styled.div`
+  font-family: serif;
+  font-size: 2rem;
+  line-height: 1.6;
+  padding: 16px;
+  background-color: #000fff;
+  color: #fff;
+  width: 100%;
+  display: flex;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 12px;
+  }
+`;
+
+const MarqueeSpan = styled.div`
+  font-family: serif;
+  font-style: italic;
+  display: flex;
+  margin-left: 6px;
+  color: #F7883D;
 `;
