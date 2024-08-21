@@ -10,6 +10,7 @@ import * as reactSpring from '@react-spring/three'
 import * as drei from '@react-three/drei'
 import * as fiber from '@react-three/fiber'
 import Footer from './footer';
+import Marquee from "react-fast-marquee";
 
 export const Work = () => {
     const project1 = {
@@ -126,7 +127,20 @@ export const Work = () => {
                 /> */}
                 </CardsContainerWrapper>
             </CardsContainer>
-            <H4>Coming sooon ✨</H4>
+            <Marquee 
+            speed={80}
+            style={{marginTop: '5vh'}}>
+              <Marqueetext>
+               <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
+               <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
+               <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
+               <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
+               <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
+               <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
+               <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
+               <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
+              </Marqueetext>
+            </Marquee>
             <Footer />
         </Div>
     );
@@ -405,3 +419,31 @@ const H4 =styled.div`
 //   justify-content: center;
 //   align-items: flex-end;
 // `;
+
+const Marqueetext = styled.div`
+  font-family: serif;
+  font-size: 2rem;
+  line-height: 1.6;
+  padding: 16px;
+  background-color: #333;
+  color: #000fff;
+  width: 100%;
+  display: flex;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+    line-height: 1.4;
+    padding: 12px;
+  }
+`;
+
+const MarqueeSpan = styled.div`
+  font-family: serif;
+  display: flex;
+  margin-left: 32px;
+  color: #fff;
+
+  @media (max-width: 480px) {
+    margin-left: 16px;
+  }
+`;

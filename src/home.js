@@ -42,7 +42,7 @@ function MyComponent(props) {
 
       <TextWrapper3>
         <p>
-        Hello👋🏻, I'm Ting-yi Lin, you can call me Morgan, a creative design graduate from National Chengchi University. 
+        Hello👋🏻, I'm Ting-yi Lin, you can call me Morgan, a creative designer graduate from National Chengchi University. 
         Venturing into <Span>UI / UX</Span>, my understanding of <Span>front-end skills</Span> emphasizes a practical approach to design, 
         blending aesthetics and creativity with <Span>user-centric</Span> solutions.
         </p>
