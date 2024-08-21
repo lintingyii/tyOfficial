@@ -2,6 +2,7 @@ import React, { useState, useRef  } from 'react';
 import styled, { keyframes, css } from 'styled-components';
 import { Link } from 'react-router-dom';
 import Marquee from "react-fast-marquee";
+import Footer from './footer';
 
 function MyComponent(props) {
   const cardRef = useRef(null);
@@ -163,9 +164,7 @@ function MyComponent(props) {
         Let's make something <MarqueeSpan>cool</MarqueeSpan>· Let's make something  <MarqueeSpan>cool</MarqueeSpan> · Let's make something  <MarqueeSpan>cool</MarqueeSpan> · Let's make something  <MarqueeSpan>cool</MarqueeSpan> · Let's make something  <MarqueeSpan>cool</MarqueeSpan> ·
         </Marqueetext>
       </Marquee>
-      <Footerwraper>
-        © Tingyi Lin  |  All rights reserved 2024 
-      </Footerwraper>
+      <Footer />
     </Div>
   );
 }
@@ -815,21 +814,6 @@ const Span = styled.span`
   padding: 2px 8px; 
   color: #ffffff;
   white-space: nowrap;
-`;
-
-const Footerwraper = styled.div`
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #000fff;
-  width: 100%;
-  background-color: #f2f2f2;
-  text-align: center;
-  padding: 24px 0px; /* 可以根據需要調整底部 padding */
-  font-size: 1rem;
-  z-index: 999;
-
-  @media (max-width: 480px) {
-    font-size: 0.8rem;
-  }
 `;
 
 const RecentWorksContainer = styled.div`

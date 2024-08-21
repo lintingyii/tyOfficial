@@ -6,7 +6,8 @@ import Work from './work';
 import styled from 'styled-components';
 import CustomCursor from './CustomCursor';
 import { createGlobalStyle } from 'styled-components';
-import './App.css'
+import './App.css';
+
 
 const GlobalStyle = createGlobalStyle`
   body, * {

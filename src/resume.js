@@ -1,6 +1,7 @@
 import React from "react";
 import "./style.css";
 import styled, { keyframes } from 'styled-components';
+import Footer from './footer';
 
 export const Resume = () => {
   return (
@@ -222,9 +223,7 @@ export const Resume = () => {
         Download CV PDF
       </DownloadButton>
 
-      <Footerwraper>
-       © Tingyi Lin  |  All rights reserved 2024 
-      </Footerwraper>
+      <Footer />
     </Div>
   );
 };
@@ -938,14 +937,3 @@ const Div50 = styled.div`
   font: 400 17px/25px Assistant, sans-serif;
 `;
 
-const Footerwraper = styled.div`
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #333333;
-  text-align: center;
-  padding: 30px; /* 可以根據需要調整底部 padding */
-  font-size: 1rem;
-
-  @media (max-width: 480px) {
-    font-size: 0.8rem;
-  }
-`;

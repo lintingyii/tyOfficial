@@ -9,6 +9,7 @@ import {
 import * as reactSpring from '@react-spring/three'
 import * as drei from '@react-three/drei'
 import * as fiber from '@react-three/fiber'
+import Footer from './footer';
 
 export const Work = () => {
     const project1 = {
@@ -126,9 +127,7 @@ export const Work = () => {
                 </CardsContainerWrapper>
             </CardsContainer>
             <H4>Coming sooon ✨</H4>
-            <Footerwraper>
-                © Tingyi Lin  |  All rights reserved 2024 
-            </Footerwraper>
+            <Footer />
         </Div>
     );
 }
@@ -368,17 +367,7 @@ const CardsContainerWrapper = styled.div`
       width: 90%;
     }
 `;
-const Footerwraper = styled.div`
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #333333;
-  text-align: center;
-  padding: 30px; /* 可以根據需要調整底部 padding */
-  font-size: 1rem;
 
-  @media (max-width: 480px) {
-    font-size: 0.8rem;
-  }
-`;
 const H4 =styled.div`
     font-family: serif;
     font-style: italic;
