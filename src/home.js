@@ -158,7 +158,7 @@ function MyComponent(props) {
     </Div6>
 
       <Marquee 
-       speed={60}>
+       speed={80}>
         <Marqueetext>
         Let's make something <MarqueeSpan>cool</MarqueeSpan>· Let's make something  <MarqueeSpan>cool</MarqueeSpan> · Let's make something  <MarqueeSpan>cool</MarqueeSpan> · Let's make something  <MarqueeSpan>cool</MarqueeSpan> · Let's make something  <MarqueeSpan>cool</MarqueeSpan> ·
         </Marqueetext>
