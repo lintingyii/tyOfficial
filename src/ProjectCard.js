@@ -67,7 +67,7 @@ const Tag = styled.div`
   transition: background-color 0.3s ease-in;
 `;
 
-const CardContainer = styled.div`
+const CardContainer = styled.a`
   border-radius: 12px;
   max-width: 400px;
 //   margin: 20px auto;

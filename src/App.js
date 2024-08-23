@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react';
-import { BrowserRouter as Router, Routes,Navigate, Route, Link, useLocation } from 'react-router-dom';
-import Resume from './resume';
-import MyComponent from './home';
-import Work from './work';
-import styled from 'styled-components';
-import CustomCursor from './CustomCursor';
-import { createGlobalStyle } from 'styled-components';
-import './App.css';
-
+import React, { useEffect } from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Navigate,
+  Route,
+  Link,
+  useLocation,
+} from "react-router-dom";
+import Resume from "./resume";
+import MyComponent from "./home";
+import Work from "./work";
+import styled from "styled-components";
+import CustomCursor from "./CustomCursor";
+import { createGlobalStyle } from "styled-components";
+import "./App.css";
 
 const GlobalStyle = createGlobalStyle`
   body, * {
@@ -16,13 +22,14 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Div2 = styled.div`
- font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   align-items: center;
   position: fixed;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;  
+  z-index: 1000;
   justify-content: space-between;
   border-radius: 50px;
   border: 1.5px solid #333333;
@@ -41,19 +48,19 @@ const Div2 = styled.div`
 
 const Div3 = styled(Link)`
   text-decoration: none;
-  color: ${({ isActive }) => (isActive ? '#0000FF' : '#333333')};
+  color: ${({ isActive }) => (isActive ? "#0000FF" : "#333333")};
 `;
 
 const Div4 = styled(Link)`
   text-decoration: none;
   text-align: center;
   flex-basis: auto;
-  color: ${({ isActive }) => (isActive ? '#0000FF' : '#333333')};
+  color: ${({ isActive }) => (isActive ? "#0000FF" : "#333333")};
 `;
 
 const Div5 = styled(Link)`
   text-decoration: none;
-  color: ${({ isActive }) => (isActive ? '#0000FF' : '#333333')};
+  color: ${({ isActive }) => (isActive ? "#0000FF" : "#333333")};
 `;
 
 const ScrollToTop = () => {
@@ -67,21 +74,20 @@ const ScrollToTop = () => {
 };
 
 function App() {
-
   return (
     <>
       <CustomCursor />
       <GlobalStyle />
       <Router>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Navigate to="/home" />} />
-            <Route path="/home" element={<MyComponent />} />
-            <Route path="/resume" element={<Resume />} />
-            <Route path="/work" element={<Work />} />
-            {/* 其他路由... */}
-          </Routes>
-          <NavigationBar />
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<MyComponent />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/work" element={<Work />} />
+          {/* 其他路由... */}
+        </Routes>
+        <NavigationBar />
       </Router>
     </>
   );
@@ -92,13 +98,13 @@ function NavigationBar() {
 
   return (
     <Div2>
-      <Div3 to="/home" isActive={location.pathname === '/home'}>
+      <Div3 to="/home" isActive={location.pathname === "/home"}>
         Home
       </Div3>
-      <Div4 to="/resume" isActive={location.pathname === '/resume'}>
+      <Div4 to="/resume" isActive={location.pathname === "/resume"}>
         Resume
       </Div4>
-      <Div5  to="/work" isActive={location.pathname === '/work'}>
+      <Div5 to="/work" isActive={location.pathname === "/work"}>
         Work
       </Div5>
     </Div2>
@@ -106,5 +112,3 @@ function NavigationBar() {
 }
 
 export default App;
-
-

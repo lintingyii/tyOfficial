@@ -69,9 +69,9 @@ function MyComponent(props) {
           <Rectangle height={105} left={0} top={1} width={443} />
           <Rectangle height={105} left={497} top={530} width={495} />
           <Rectangle height={105} left={993} top={0} width={447} />
-          {/* <ColoredRectangle color="#ff6434" height={528} left={0} top={107} width={443} /> */}
-          {/* <ColoredRectangle color="#d58cfe" height={528} left={498} top={0} width={443} /> */}
-          {/* <ColoredRectangle color="#7d8991" height={528} left={993} top={107} width={447} /> */}
+          {/* <ColoredRectangle color="#ff6434" height={528} left={0} top={107} width={443} />
+          <ColoredRectangle color="#d58cfe" height={528} left={498} top={0} width={443} />
+          <ColoredRectangle color="#7d8991" height={528} left={993} top={107} width={447} /> */}
           <HoverableDiv>
             <ColoredRectangle color="#7d8991" height={528} left={993} top={107} width={447} />
             <UIUXProject>
@@ -594,7 +594,6 @@ const OverlapGroupWrapper2 = styled.div`
   overflow: hidden;
   justify-content: center;
   width: 1450px;
-  // padding-top: 5vh;
 `;
 
 const OverlapGroup2 = styled.div`
@@ -606,7 +605,7 @@ const OverlapGroup2 = styled.div`
   overflow-y: hidden;
 `;
 
-const Rectangle = styled.a`
+const Rectangle = styled.div`
   border: 1.5px solid;
   border-color: #333333;
   border-radius: 16px;
@@ -641,7 +640,7 @@ const UIUXProject1 = styled(UIUXProject)`
   font-weight: 400;
 `;
 
-const ColoredRectangle = styled.a`
+const ColoredRectangle = styled.div`
   border: 1.5px solid;
   border-color: #333333;
   border-radius: 16px;

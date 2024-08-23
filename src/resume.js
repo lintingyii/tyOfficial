@@ -409,6 +409,10 @@ const Div10 = styled.a`
   animation: ${load} 400ms ease-in forwards;
   animation-delay: 600ms;
   opacity: 0;
+
+  &:hover {
+    color: #000fff;
+  }
 `;
 
 const Div11 = styled.div`
