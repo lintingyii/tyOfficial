@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import Footer from "./footer";
 import { color } from "framer-motion";
+import ServiceCardComponent from "./ServiceCard";
 
 function MyComponent(props) {
   useEffect(() => {
@@ -25,23 +26,21 @@ function MyComponent(props) {
 
   const [embedWidth, setEmbedWidth] = useState("8rem");
 
-useEffect(() => {
-  const handleResize = () => {
-    if (window.innerWidth <= 480) {
-      setEmbedWidth("6rem");
-    } else {
-      setEmbedWidth("8rem");
-    }
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth <= 480) {
+        setEmbedWidth("6rem");
+      } else {
+        setEmbedWidth("8rem");
+      }
+    };
 
-  window.addEventListener("resize", handleResize);
+    window.addEventListener("resize", handleResize);
 
-  
-  handleResize();
+    handleResize();
 
-  return () => window.removeEventListener("resize", handleResize);
-}, []);
-
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   useEffect(() => {
     const script = document.createElement("script");
@@ -49,9 +48,7 @@ useEffect(() => {
     script.defer = true;
     script.id = "creattie-script";
 
-    script.onload = () => {
-      
-    };
+    script.onload = () => {};
 
     document.body.appendChild(script);
 
@@ -66,9 +63,7 @@ useEffect(() => {
     script.defer = true;
     script.id = "creattie-script";
 
-    script.onload = () => {
-     
-    };
+    script.onload = () => {};
 
     document.body.appendChild(script);
 
@@ -83,9 +78,7 @@ useEffect(() => {
     script.defer = true;
     script.id = "creattie-script";
 
-    script.onload = () => {
-      
-    };
+    script.onload = () => {};
 
     document.body.appendChild(script);
 
@@ -297,7 +290,7 @@ useEffect(() => {
           <span style={{ fontFamily: "serif", fontStyle: "italic" }}>(s)</span>
         </SectionTitle>
         <CardsContainer>
-          <ServiceCard hoverColor="#D58CFE">
+          <ServiceCardComponent hoverColor="#D58CFE">
             <creattie-embed
               src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/98509/YUwgGNKFpKppqKV4.json"
               delay="1"
@@ -315,8 +308,8 @@ useEffect(() => {
             <ServiceDes>
               Logo Design • Visual Identity Design • Brand Guidelines
             </ServiceDes>
-          </ServiceCard>
-          <ServiceCard hoverColor="#ff6434">
+          </ServiceCardComponent>
+          <ServiceCardComponent hoverColor="#ff6434">
             <creattie-embed
               src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/98509/Wj56MkmSXUliw7Th.json"
               delay="0"
@@ -334,10 +327,10 @@ useEffect(() => {
             <ServiceDes>
               Digital Experience Design • Web Development • Responsive Design
             </ServiceDes>
-          </ServiceCard>
+          </ServiceCardComponent>
         </CardsContainer>
         <CardsContainer>
-          <ServiceCard hoverColor="#7d8991">
+          <ServiceCardComponent hoverColor="#7d8991">
             <creattie-embed
               src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/98509/GiAN4lbwlxqpC71u.json"
               delay="0"
@@ -355,8 +348,8 @@ useEffect(() => {
             <ServiceDes>
               Digital Product • Design Systems • User Journeys • Prototyping
             </ServiceDes>
-          </ServiceCard>
-          <ServiceCard hoverColor="#000fff">
+          </ServiceCardComponent>
+          <ServiceCardComponent hoverColor="#000fff">
             <creattie-embed
               src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/98509/aftFSGuhoSA7pabt.json"
               delay="0"
@@ -375,7 +368,7 @@ useEffect(() => {
               Design for Print • Packaging • Marketing Design • Iconography •
               Illustration
             </ServiceDes>
-          </ServiceCard>
+          </ServiceCardComponent>
         </CardsContainer>
       </ServiceSection>
       <Footer />
@@ -1337,30 +1330,30 @@ const SectionTitle = styled.div`
   }
 `;
 
-const ServiceCard = styled.div`
-  background-color: #333333;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  width: 100%;
-  font-size: 48px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 24px;
-  border-radius: 16px;
-  transition: background-color 0.2s ease-in;
-  flex-grow: 1; /* 使 ServiceCard 在容器内均匀分配空间 */
+// const ServiceCard = styled.div`
+//   background-color: #333333;
+//   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+//     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+//   width: 100%;
+//   font-size: 48px;
+//   text-align: center;
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   padding: 24px;
+//   border-radius: 16px;
+//   transition: background-color 0.2s ease-in;
+//   flex-grow: 1; /* 使 ServiceCard 在容器内均匀分配空间 */
 
-  &:hover {
-    background-color: ${(props) => props.hoverColor || "#333"};
-  }
+//   &:hover {
+//     background-color: ${(props) => props.hoverColor || "#333"};
+//   }
 
-  @media (max-width: 480px) {
-    width: 100%;
-    box-sizing: border-box;
-  }
-`;
+//   @media (max-width: 480px) {
+//     width: 100%;
+//     box-sizing: border-box;
+//   }
+// `;
 
 const ServiceContent = styled.div`
   color: #fff;
@@ -1389,7 +1382,7 @@ const Marqueetext = styled.div`
   font-family: serif;
   font-size: 2rem;
   line-height: 1.6;
-  padding: 16px;
+  padding: 24px;
   background-color: #000fff;
   color: #fff;
   width: 100%;
