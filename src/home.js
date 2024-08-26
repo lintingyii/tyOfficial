@@ -1360,11 +1360,18 @@ const ServiceContent = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   width: 20%;
+  font-weight: 700;
   font-size: 2rem;
   text-align: center;
   display: flex;
   justify-content: center;
   white-space: nowrap;
+
+  @media (max-width: 480px) {
+    font-size: 24px;
+    line-height: 1.4;
+    padding: 12px;
+  }
 `;
 
 const ServiceDes = styled.div`
@@ -1389,9 +1396,9 @@ const Marqueetext = styled.div`
   display: flex;
 
   @media (max-width: 480px) {
-    font-size: 1rem;
+    font-size: 1.6rem;
     line-height: 1.4;
-    padding: 12px;
+    padding: 18px;
   }
 `;
 

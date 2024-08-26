@@ -31,25 +31,33 @@ const ServiceCardComponent = ({ children, hoverColor }) => {
   const cardRef = useRef(null);
 
   useEffect(() => {
+    // Ensure the observer is only created if cardRef.current is available
+    if (!cardRef.current) return;
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          cardRef.current.classList.add("hover");
-        } else {
-          cardRef.current.classList.remove("hover");
+        // Check if cardRef.current is still available before modifying classList
+        if (cardRef.current) {
+          if (entry.isIntersecting) {
+            cardRef.current.classList.add("hover");
+          } else {
+            cardRef.current.classList.remove("hover");
+          }
         }
       },
       {
         root: null,
         threshold: 0.5, // 50% visible in the viewport
-        rootMargin: "-25% 0px -25% 0px", //減少螢幕上觸發hover state的範圍
+        rootMargin: "-25% 0px -25% 0px", // Adjust the trigger area on the screen
       }
     );
 
+    // Observe the element if cardRef.current is available
     if (cardRef.current) {
       observer.observe(cardRef.current);
     }
 
+    // Clean up the observer on component unmount
     return () => {
       if (cardRef.current) {
         observer.unobserve(cardRef.current);
@@ -65,3 +73,5 @@ const ServiceCardComponent = ({ children, hoverColor }) => {
 };
 
 export default ServiceCardComponent;
+
+
