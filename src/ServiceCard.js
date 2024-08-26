@@ -31,18 +31,16 @@ const ServiceCardComponent = ({ children, hoverColor }) => {
   const cardRef = useRef(null);
 
   useEffect(() => {
-    // Ensure the observer is only created if cardRef.current is available
-    if (!cardRef.current) return;
+    const cardElement = cardRef.current;
+
+    if (!cardElement) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        // Check if cardRef.current is still available before modifying classList
-        if (cardRef.current) {
-          if (entry.isIntersecting) {
-            cardRef.current.classList.add("hover");
-          } else {
-            cardRef.current.classList.remove("hover");
-          }
+        if (entry.isIntersecting) {
+          cardElement.classList.add("hover");
+        } else {
+          cardElement.classList.remove("hover");
         }
       },
       {
@@ -52,16 +50,11 @@ const ServiceCardComponent = ({ children, hoverColor }) => {
       }
     );
 
-    // Observe the element if cardRef.current is available
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
+    observer.observe(cardElement);
 
     // Clean up the observer on component unmount
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
+      observer.unobserve(cardElement);
     };
   }, []);
 
@@ -73,5 +66,6 @@ const ServiceCardComponent = ({ children, hoverColor }) => {
 };
 
 export default ServiceCardComponent;
+
 
 
