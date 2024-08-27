@@ -286,8 +286,29 @@ function MyComponent(props) {
 
       <ServiceSection>
         <SectionTitle>
-          My Service
-          <span style={{ fontFamily: "serif", fontStyle: "italic" }}>(s)</span>
+          <div style={{ display: "flex" }}>
+            Service
+            <span
+              style={{
+                fontFamily: "serif",
+                fontStyle: "italic",
+              }}
+            >
+              (s)
+            </span>
+          </div>
+          <div style={{ display: "flex", gap: "16px" }}>
+            at
+            <span
+              style={{
+                fontFamily: "serif",
+                fontStyle: "italic",
+              }}
+            >
+              A
+            </span>
+            glance
+          </div>
         </SectionTitle>
         <CardsContainer>
           <ServiceCardComponent hoverColor="#D58CFE">
@@ -330,7 +351,7 @@ function MyComponent(props) {
           </ServiceCardComponent>
         </CardsContainer>
         <CardsContainer>
-          <ServiceCardComponent hoverColor="#7d8991">
+          <ServiceCardComponent hoverColor="#F4790D">
             <creattie-embed
               src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/98509/GiAN4lbwlxqpC71u.json"
               delay="0"
@@ -349,7 +370,7 @@ function MyComponent(props) {
               Digital Product • Design Systems • User Journeys • Prototyping
             </ServiceDes>
           </ServiceCardComponent>
-          <ServiceCardComponent hoverColor="#000fff">
+          <ServiceCardComponent hoverColor="#7d8991">
             <creattie-embed
               src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/98509/aftFSGuhoSA7pabt.json"
               delay="0"
@@ -371,6 +392,27 @@ function MyComponent(props) {
           </ServiceCardComponent>
         </CardsContainer>
       </ServiceSection>
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          backgroundColor: "#f2f2f2",
+          zIndex: "999",
+          justifyContent: "center",
+          padding: "2rem",
+          boxSizing: "border-box",
+        }}
+      >
+        <Flower stroke="#000fff" viewBox="0 0 24 24">
+          <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
+        </Flower>
+        <Flower fill="#000fff" stroke="#000fff" viewBox="0 0 24 24">
+          <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
+        </Flower>
+        <Flower stroke="#000fff" viewBox="0 0 24 24">
+          <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
+        </Flower>
+      </div>
       <Footer />
     </Div>
   );
@@ -1295,6 +1337,7 @@ const ServiceSection = styled.div`
 
   @media (max-width: 480px) {
     gap: 24px;
+    padding-top: 2.5rem;
   }
 `;
 
@@ -1322,11 +1365,19 @@ const SectionTitle = styled.div`
   font-size: 48px;
   text-align: center;
   display: flex;
-  flex-direcyion: row;
+  flex-direction: row;
   justify-content: center;
+  align-items: center;
+  gap: 16px;
 
   @media (max-width: 480px) {
     font-size: 2.5rem;
+    flex-direction: column;
+    justify-content: left;
+    align-items: left;
+    text-align: left;
+    gap: 0px;
+    line-height: 1.1;
   }
 `;
 
@@ -1368,9 +1419,9 @@ const ServiceContent = styled.div`
   white-space: nowrap;
 
   @media (max-width: 480px) {
-    font-size: 24px;
-    line-height: 1.4;
-    padding: 12px;
+    font-size: 32px;
+    line-height: 1.2;
+    padding: 0px;
   }
 `;
 
@@ -1383,6 +1434,10 @@ const ServiceDes = styled.div`
   display: flex;
   justify-content: center;
   white-space: wrap;
+
+  @media (max-width: 480px) {
+    font-size: 1rem;
+  }
 `;
 
 const Marqueetext = styled.div`
@@ -1408,4 +1463,22 @@ const MarqueeSpan = styled.div`
   display: flex;
   margin-left: 6px;
   color: #f7883d;
+`;
+
+const rotate = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const Flower = styled.svg`
+  width: 60px;
+  height: 60px;
+  fill: ${(props) => props.fill || "none"};
+  stroke: ${(props) => props.stroke || "#333"};
+  stroke-width: 0.6;
+  animation: ${rotate} 8s linear infinite;
 `;

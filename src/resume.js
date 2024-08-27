@@ -402,7 +402,7 @@ const Div9 = styled.div`
 `;
 
 const Div10 = styled.a`
-  color: #2e406f;
+  color: #000fff;
   text-decoration-line: underline;
   margin-top: 8px;
   font: 400 17px/150% Assistant, sans-serif;
@@ -492,7 +492,7 @@ const Img4 = styled.img`
 `;
 
 const Div12 = styled.div`
-  color: #2e406f;
+  color: #000fff;
   margin-top: 58px;
   font: 700 23px/150% Noto Sans TC, sans-serif;
   @media (max-width: 991px) {
@@ -550,7 +550,7 @@ const Div16 = styled.div`
 `;
 
 const Div17 = styled.div`
-  color: #2e406f;
+  color: #000fff;
   flex-grow: 1;
   font: 700 18px/150% Noto Sans TC, sans-serif;
   @media (max-width: 991px) {
@@ -685,7 +685,7 @@ const Img9 = styled.img`
 `;
 
 const Div26 = styled.div`
-  color: #2e406f;
+  color: #000fff;
   margin-top: 57px;
   font: 700 23px/150% Noto Sans TC, sans-serif;
   @media (max-width: 991px) {
@@ -747,7 +747,7 @@ const Div30 = styled.div`
 `;
 
 const Div31 = styled.div`
-  color: #2e406f;
+  color: #000fff;
   margin-top: 9px;
   font: 18px/100% Noto Sans TC, sans-serif;
   font-weight: 700;
@@ -814,21 +814,22 @@ const Div36 = styled.div`
 `;
 
 const Div37 = styled.div`
-  color: #2e406f;
+  color: #000fff;
   font: 700 23px/150% Noto Sans TC, sans-serif;
 `;
 
 const Div38 = styled.div`
   color: #333;
   margin-top: 36px;
-  font: 20px/150.3% Noto Sans TC, sans-serif;
+  // font-weight: 700;
+  font: 500 20px/150.3% Noto Sans TC, sans-serif;
   @media (max-width: 991px) {
     margin-top: 24px;
   }
 `;
 
 const Div39 = styled.div`
-  border-top: 1px solid #e1cdff;
+  border-top: 1.5px solid #e1cdff;
   margin-top: 12px;
   height: 1px;
 `;
