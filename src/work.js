@@ -22,6 +22,7 @@ export const Work = () => {
       { name: "Frontend coding", color: "#F7883D" },
     ],
     link: "https://mellifluous-brioche-700f0a.netlify.app/",
+    openInNewTab: true,
   };
 
   const project2 = {
@@ -30,11 +31,25 @@ export const Work = () => {
     title: "Mango 0n Tree - VIS Design",
     subtitle: "Branding",
     description:
-      'VIS design for a local mango smallholder farmer in Kaohsiung, Taiwan.',
+      "VIS design for a local mango smallholder farmer in Kaohsiung, Taiwan.",
+    tags: [{ name: "Graphic design", color: "#D58CFE" }],
+    link: "https://tome.app/tingyilin/brand-guidelines-copy-cm0xur3fw082h8d3gyahzjrak",
+    openInNewTab: true,
+  };
+
+  const project3 = {
+    date: "January - April 2023",
+    image: "/younglions.png",
+    title: "VC Kungfu",
+    subtitle: "Young Lions Competition, 4TH Prize",
+    description:
+      "The first-ever mobile game to play with your lung, not your thumb.",
     tags: [
       { name: "Graphic design", color: "#D58CFE" },
+      { name: "UI/UX design", color: "#7D8991" },
     ],
-    link: "https://tome.app/tingyilin/brand-guidelines-copy-cm0xur3fw082h8d3gyahzjrak",
+    link: "/work/youngLions",
+    openInNewTab: false,
   };
 
   const StyledShaderGradientCanvas = styled.div`
@@ -132,6 +147,7 @@ export const Work = () => {
             description={project1.description}
             tags={project1.tags}
             link={project1.link}
+            openInNewTab={project1.openInNewTab}
           />
           <ProjectCard
             date={project2.date}
@@ -141,15 +157,18 @@ export const Work = () => {
             description={project2.description}
             tags={project2.tags}
             link={project2.link}
+            openInNewTab={project2.openInNewTab}
           />
-          {/* <ProjectCard
-                    date={project1.date}
-                    image={project1.image}
-                    title={project1.title}
-                    subtitle={project1.subtitle}
-                    description={project1.description}
-                    tags={project1.tags}
-                /> */}
+          <ProjectCard
+            date={project3.date}
+            image={project3.image}
+            title={project3.title}
+            subtitle={project3.subtitle}
+            description={project3.description}
+            tags={project3.tags}
+            link={project3.link}
+            openInNewTab={project3.openInNewTab}
+          />
         </CardsContainerWrapper>
       </CardsContainer>
       <Marquee speed={80} style={{ marginTop: "5vh" }}>
@@ -373,6 +392,38 @@ const OverlapGroup = styled.div`
   // margin-bottom: 20vh;
 `;
 
+// const CardsContainer = styled.div`
+//   z-index: 100;
+//   background-color: #f2f2f2;
+//   padding-top: 4rem;
+//   left: 0;
+//   gap: 1.2rem;
+//   border-top: 1.5px solid #333;
+//   width: 100%;
+//   display: flex; 
+//   flex-direction: column;
+//   justify-content: center; 
+//   align-items: center; 
+
+//   @media (max-width: 800px) {
+//     flex-direction: column;
+//     padding-top: 2rem;
+//     justify-conter: center;
+//   }
+// `;
+
+// const CardsContainerWrapper = styled.div`
+//   width: 90%;
+//   display: flex; 
+//   align-items: center; 
+//   justify-content: center; 
+//   gap: 1.2rem;
+
+//   @media (max-width: 800px) {
+//     flex-direction: column;
+//     width: 90%;
+//   }
+// `;
 const CardsContainer = styled.div`
   z-index: 100;
   background-color: #f2f2f2;
@@ -381,30 +432,40 @@ const CardsContainer = styled.div`
   gap: 1.2rem;
   border-top: 1.5px solid #333;
   width: 100%;
-  display: flex; /* 使用 Flexbox 布局 */
-  justify-content: center; /* 居中对齐子元素 */
-  align-items: center; /* 垂直居中对齐子元素 */
+  display: flex; 
+  flex-wrap: wrap;
+  justify-content: center; 
+  align-items: center; 
 
-  @media (max-width: 800px) {
-    flex-direction: column;
+  @media (max-width: 1200px) { /* For tablets and smaller screens */
     padding-top: 2rem;
-    justify-conter: center;
   }
-`;
 
-const CardsContainerWrapper = styled.div`
-  width: 100%;
-  display: flex; /* 使用 Flexbox 布局 */
-  flex-direction: row; /* 水平布局 */
-  align-items: center; /* 垂直居中对齐 */
-  justify-content: center; /* 水平居中对齐 */
-  gap: 1.2rem;
-
-  @media (max-width: 800px) {
+  @media (max-width: 800px) { /* For mobile screens */
     flex-direction: column;
-    width: 90%;
   }
 `;
+
+// Wrapper for card groups
+const CardsContainerWrapper = styled.div`
+  width: 95%;
+  display: flex; 
+  align-items: center; 
+  justify-content: center; 
+  gap: 1.2rem;
+  flex-wrap: wrap; /* Allows wrapping to the next line */
+
+  @media (max-width: 1200px) { /* For tablets */
+    width: 100%;
+    justify-content: center;
+  }
+
+  @media (max-width: 800px) { /* For mobile screens */
+    width: 90%;
+    flex-direction: column;
+  }
+`;
+
 
 const H4 = styled.div`
   font-family: serif;

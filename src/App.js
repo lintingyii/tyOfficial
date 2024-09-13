@@ -10,6 +10,7 @@ import {
 import Resume from "./resume";
 import MyComponent from "./home";
 import Work from "./work";
+import YoungLions from "./youngLions";
 import styled from "styled-components";
 import CustomCursor from "./CustomCursor";
 import { createGlobalStyle } from "styled-components";
@@ -60,7 +61,7 @@ const Div4 = styled(Link)`
 
 const Div5 = styled(Link)`
   text-decoration: none;
-  color: ${({ isActive }) => (isActive ? "#0000FF" : "#333333")};
+  color: ${props => (props.isActive ?  "#0000FF" : "#333333")};
 `;
 
 const ScrollToTop = () => {
@@ -85,6 +86,7 @@ function App() {
           <Route path="/home" element={<MyComponent />} />
           <Route path="/resume" element={<Resume />} />
           <Route path="/work" element={<Work />} />
+          <Route path="/work/youngLions" element={<YoungLions />} />
           {/* 其他路由... */}
         </Routes>
         <NavigationBar />
@@ -94,7 +96,10 @@ function App() {
 }
 
 function NavigationBar() {
+
   const location = useLocation();
+
+  const isWorkActive = location.pathname.startsWith('/work');
 
   return (
     <Div2>
@@ -104,7 +109,7 @@ function NavigationBar() {
       <Div4 to="/resume" isActive={location.pathname === "/resume"}>
         Resume
       </Div4>
-      <Div5 to="/work" isActive={location.pathname === "/work"}>
+      <Div5 to="/work" isActive={isWorkActive}>
         Work
       </Div5>
     </Div2>

@@ -19,7 +19,7 @@ const ImageContainer = styled.div`
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover; 
+    object-fit: cover;
     border-radius: 8px;
 
     -webkit-filter: grayscale(0) blur(0);
@@ -34,6 +34,7 @@ const Title = styled.h3`
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 24px;
   margin: 8px 0;
+  height: 28px;
   color: #333333;
   transition: color 0.3s ease-in;
 `;
@@ -80,7 +81,7 @@ const Tag = styled.div`
 const CardContainer = styled.a`
   border-radius: 12px;
   max-width: 400px;
-  //   margin: 20px auto;
+  width:100%;
   padding: 20px;
   text-align: left;
   font-family: Arial, sans-serif;
@@ -107,6 +108,10 @@ const CardContainer = styled.a`
       filter: grayscale(100%);
     }
   }
+  
+  @media (max-width: 800px) {
+    width: 90%;
+  }
 `;
 
 function ProjectCard({
@@ -117,9 +122,14 @@ function ProjectCard({
   description,
   tags,
   link,
+  openInNewTab = false, // 默認值為false，表示在當前頁面開啟
 }) {
   const handleClick = () => {
-    window.open(link, "_blank"); // 打开链接
+    if (openInNewTab) {
+      window.open(link, "_blank"); // 在空白頁面開啟
+    } else {
+      window.location.href = link; // 在當前頁面開啟
+    }
   };
 
   return (
