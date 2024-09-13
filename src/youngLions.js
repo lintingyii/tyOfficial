@@ -26,12 +26,6 @@ const Header = styled.header`
   }
 `;
 
-const Title = styled.h1`
-  font-size: 2.5rem;
-  line-height: 1;
-  color: #333;
-`;
-
 const Title2 = styled.h2`
   font-size: 1.2rem;
   font-family: "Caveat", cursive;
@@ -155,10 +149,16 @@ const Text = styled.div`
   font-size: 1rem;
   margin: 30px auto;
   color: #444;
+  width: 70%;
+  text-align: left;
+
+  @media (max-width: 480px) {
+    width: 85%;
+  }
 `;
 
 const SpecialButton = styled.button`
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-family: "Caveat", cursive;
   background-color: #f5f5f5;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -181,7 +181,8 @@ const SpecialButton = styled.button`
     align-items: center;
     gap: 1rem;
     justify-content: space-evenly;
-    height: 100%;
+    // height: 100%;
+    width: 100%;
   }
 
   &:hover {
@@ -334,7 +335,7 @@ const YoungLions = () => {
 
         <section style={{ marginTop: "6rem" }}>
           <SectionTitle>Creative Insight</SectionTitle>
-          <Text>
+          <Text style={{ width: "85%", textAlign: "center" }}>
             How to change people's perception of health check-ups and raise
             awareness about lung health ？
           </Text>
@@ -413,7 +414,7 @@ const YoungLions = () => {
           </ImageWrapper>
         </section>
 
-        <Text style={{ width: "85%", textAlign: "left" }}>
+        <Text>
           以華人世界熟悉的功夫元素「氣」為基礎，透過『呼出一口氣來傳遞「真氣」給武林大師』的遊戲設定，
           並結合「肺活量」為肺部健康的一大指標這樣的觀念，VC
           Kungfu將肺部檢測平易化，
@@ -427,7 +428,7 @@ const YoungLions = () => {
           become “qi” ,to the kungfu master in game.
         </Text>
 
-        <Text style={{ width: "85%", textAlign: "left" }}>
+        <Text>
           為增添遊戲樂趣，VC
           Kungfu不只紀錄了玩家的音長，更搜集了他們的頻率及分貝，
           針對「音長」將玩家的肺活量區分成五個等級，每個等級都有其對應的武功招式，同時提供玩家客製化的養肺知識，
@@ -442,7 +443,7 @@ const YoungLions = () => {
           and decibel to enhance the fun of the game.
         </Text>
 
-        <Text style={{ width: "85%", textAlign: "left" }}>
+        <Text>
           遊戲結束時，玩家可獲得「獨一無二」的檢測成果圖，
           其中包含聲音偵測圖、肺活量等級及心理剖析結果，鑑於獨樹一格的風格及結果畫面，許多玩家樂於將遊戲成果分享至社交平台。
           <br />
@@ -517,9 +518,9 @@ const YoungLions = () => {
             <LinkButton
               imageSrc="/younglions/ig.svg"
               href="https://www.instagram.com/vckungfu"
-              imageWidth="70%"
+              imageWidth="30%"
             >
-              Instagram
+              Official IG Acount
             </LinkButton>
           </ButtonGroup>
 
