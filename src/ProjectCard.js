@@ -26,6 +26,15 @@ const ImageContainer = styled.div`
     filter: grayscale(0) blur(0);
     -webkit-transition: 0.3s ease-in-out;
     transition: 0.3s ease-in;
+
+    @media (max-width: 480px) {
+      height: 80%;
+      object-fit: cover;
+    }
+  }
+  
+  @media (max-width: 480px) {
+      height: 100%;
   }
 `;
 
@@ -34,7 +43,7 @@ const Title = styled.h3`
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 24px;
   margin: 8px 0;
-  height: 28px;
+  // height: 28px;
   color: #333333;
   transition: color 0.3s ease-in;
 `;

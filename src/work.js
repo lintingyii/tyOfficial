@@ -1,4 +1,4 @@
-import react from "react";
+import react, { useState } from "react";
 import "./style.css";
 import styled, { keyframes } from "styled-components";
 import ProjectCard from "./ProjectCard";
@@ -8,49 +8,69 @@ import * as drei from "@react-three/drei";
 import * as fiber from "@react-three/fiber";
 import Footer from "./footer";
 import Marquee from "react-fast-marquee";
+import ProjectFilter from "./ProjectFilter";
 
 export const Work = () => {
-  const project1 = {
-    date: "November, 2023",
-    image: "/arron-nieh.png",
-    title: "Aaron Nieh : Behind the Covers",
-    subtitle: "Lecture Visual Identity",
-    description:
-      'The key visual poster and event website for Aaron Nieh’s lecture, "Behind the Covers," at NCCU.',
-    tags: [
-      { name: "Graphic design", color: "#D58CFE" },
-      { name: "Frontend coding", color: "#F7883D" },
-    ],
-    link: "https://mellifluous-brioche-700f0a.netlify.app/",
-    openInNewTab: true,
-  };
 
-  const project2 = {
-    date: "October, 2023",
-    image: "/mango.png",
-    title: "Mango 0n Tree - VIS Design",
-    subtitle: "Branding",
-    description:
-      "VIS design for a local mango smallholder farmer in Kaohsiung, Taiwan.",
-    tags: [{ name: "Graphic design", color: "#D58CFE" }],
-    link: "https://tome.app/tingyilin/brand-guidelines-copy-cm0xur3fw082h8d3gyahzjrak",
-    openInNewTab: true,
-  };
+  const initialProjects = [
+    {
+      date: "November, 2023",
+      image: "/arron-nieh.png",
+      title: "Aaron Nieh : Behind the Covers",
+      subtitle: "Lecture Visual Identity",
+      description:
+        'The key visual poster and event website for Aaron Nieh’s lecture, "Behind the Covers," at NCCU.',
+      tags: [
+        { name: "Graphic design", color: "#D58CFE" },
+        { name: "Frontend coding", color: "#F7883D" },
+      ],
+      link: "https://mellifluous-brioche-700f0a.netlify.app/",
+      openInNewTab: true,
+    },
+    {
+      date: "October, 2023",
+      image: "/mango.png",
+      title: "Mango 0n Tree - VIS Design",
+      subtitle: "Branding",
+      description:
+        "VIS design for a local mango smallholder farmer in Kaohsiung, Taiwan.",
+      tags: [{ name: "Graphic design", color: "#D58CFE" }],
+      link: "https://tome.app/tingyilin/brand-guidelines-copy-cm0xur3fw082h8d3gyahzjrak",
+      openInNewTab: false,
+    },
+    {
+      date: "January - April 2023",
+      image: "/younglions.png",
+      title: "VC Kungfu",
+      subtitle: "Young Lions Competition, 4TH Prize",
+      description:
+        "The first-ever mobile game to play with your lung, not your thumb.",
+      tags: [
+        { name: "Graphic design", color: "#D58CFE" },
+        { name: "Creative Campaign", color: "#86C5CE" },
+      ],
+      link: "/work/youngLions",
+      openInNewTab: false,
+    },
+    {
+      date: "December, 2023",
+      image: "/puffer.jpg",
+      title: "羽NIQLO-羽你同在一起",
+      subtitle: "Digital Creative Campaign",
+      description:
+        "A digital creative campaign to encourage people to recycle down jackets.",
+      tags: [
+        { name: "Graphic design", color: "#D58CFE" },
+        { name: "UI/UX design", color: "#7D8991" },
+        { name: "Creative Campaign", color: "#86C5CE" },
+      ],
+      link: "https://tome.app/tingyilin/niqlo-pufferverse-cm0l048t70ob76j1jun5bx1iq",
+      openInNewTab: false,
+    },
+  ];
 
-  const project3 = {
-    date: "January - April 2023",
-    image: "/younglions.png",
-    title: "VC Kungfu",
-    subtitle: "Young Lions Competition, 4TH Prize",
-    description:
-      "The first-ever mobile game to play with your lung, not your thumb.",
-    tags: [
-      { name: "Graphic design", color: "#D58CFE" },
-      { name: "UI/UX design", color: "#7D8991" },
-    ],
-    link: "/work/youngLions",
-    openInNewTab: false,
-  };
+  const [projects, setProjects] = useState(initialProjects); // 初始專案資料
+  const [filteredProjects, setFilteredProjects] = useState(initialProjects); // 篩選後的專案資料
 
   const StyledShaderGradientCanvas = styled.div`
     position: absolute;
@@ -137,41 +157,29 @@ export const Work = () => {
           />
         </ShaderGradientCanvas>
       </Header>
+
       <CardsContainer>
+      <ProjectFilter projects={projects} setFilteredProjects={setFilteredProjects} />
         <CardsContainerWrapper>
+        {filteredProjects.map((project, index) => (
           <ProjectCard
-            date={project1.date}
-            image={project1.image}
-            title={project1.title}
-            subtitle={project1.subtitle}
-            description={project1.description}
-            tags={project1.tags}
-            link={project1.link}
-            openInNewTab={project1.openInNewTab}
+            key={index}
+            date={project.date}
+            image={project.image}
+            title={project.title}
+            subtitle={project.subtitle}
+            description={project.description}
+            tags={project.tags}
+            link={project.link}
+            openInNewTab={project.openInNewTab}
           />
-          <ProjectCard
-            date={project2.date}
-            image={project2.image}
-            title={project2.title}
-            subtitle={project2.subtitle}
-            description={project2.description}
-            tags={project2.tags}
-            link={project2.link}
-            openInNewTab={project2.openInNewTab}
-          />
-          <ProjectCard
-            date={project3.date}
-            image={project3.image}
-            title={project3.title}
-            subtitle={project3.subtitle}
-            description={project3.description}
-            tags={project3.tags}
-            link={project3.link}
-            openInNewTab={project3.openInNewTab}
-          />
+        ))}
         </CardsContainerWrapper>
       </CardsContainer>
-      <Marquee speed={80} style={{ marginTop: "5vh" }}>
+      <Marquee
+        speed={80}
+        style={{ paddingTop: "5vh", backgroundColor: "#f2f2f2" }}
+      >
         <Marqueetext>
           <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
           <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
@@ -392,56 +400,26 @@ const OverlapGroup = styled.div`
   // margin-bottom: 20vh;
 `;
 
-// const CardsContainer = styled.div`
-//   z-index: 100;
-//   background-color: #f2f2f2;
-//   padding-top: 4rem;
-//   left: 0;
-//   gap: 1.2rem;
-//   border-top: 1.5px solid #333;
-//   width: 100%;
-//   display: flex; 
-//   flex-direction: column;
-//   justify-content: center; 
-//   align-items: center; 
-
-//   @media (max-width: 800px) {
-//     flex-direction: column;
-//     padding-top: 2rem;
-//     justify-conter: center;
-//   }
-// `;
-
-// const CardsContainerWrapper = styled.div`
-//   width: 90%;
-//   display: flex; 
-//   align-items: center; 
-//   justify-content: center; 
-//   gap: 1.2rem;
-
-//   @media (max-width: 800px) {
-//     flex-direction: column;
-//     width: 90%;
-//   }
-// `;
 const CardsContainer = styled.div`
   z-index: 100;
   background-color: #f2f2f2;
-  padding-top: 4rem;
+  padding-top: 3rem;
   left: 0;
-  gap: 1.2rem;
+  gap: 2rem;
   border-top: 1.5px solid #333;
   width: 100%;
-  display: flex; 
+  display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
-  align-items: center; 
+  justify-content: center;
+  align-items: center;
 
-  @media (max-width: 1200px) { /* For tablets and smaller screens */
+  @media (max-width: 1200px) {
+    /* For tablets and smaller screens */
     padding-top: 2rem;
   }
 
-  @media (max-width: 800px) { /* For mobile screens */
+  @media (max-width: 800px) {
+    /* For mobile screens */
     flex-direction: column;
   }
 `;
@@ -449,23 +427,26 @@ const CardsContainer = styled.div`
 // Wrapper for card groups
 const CardsContainerWrapper = styled.div`
   width: 95%;
-  display: flex; 
-  align-items: center; 
-  justify-content: center; 
-  gap: 1.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
   flex-wrap: wrap; /* Allows wrapping to the next line */
+  padding: 0 3rem;
 
-  @media (max-width: 1200px) { /* For tablets */
+  @media (max-width: 1200px) {
+    /* For tablets */
     width: 100%;
     justify-content: center;
+    padding: 0;
   }
 
-  @media (max-width: 800px) { /* For mobile screens */
+  @media (max-width: 800px) {
+    /* For mobile screens */
     width: 90%;
-    flex-direction: column;
+    align-items: center;
   }
 `;
-
 
 const H4 = styled.div`
   font-family: serif;

@@ -266,7 +266,24 @@ export const Resume = () => {
 
         <Div26>Honors</Div26>
         <div>
-          <Div38>2024臺北市秋季程式設計節【城市通微服務大黑客松】</Div38>
+          <div
+            style={{
+              marginTop: "36px",
+              display: "flex",
+              alignItems: "center",
+              width: "100%",
+              justifyContent: "space-between",
+              gap: "8px",
+            }}
+          >
+            <Div38 style={{ margin: "0px" }} >2024臺北市秋季程式設計節【城市通微服務大黑客松】</Div38>
+            <a
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
+            >
+              <ViewMoreButton onClick={downloadJpg}>View More</ViewMoreButton>
+            </a>
+          </div>
           <Div31>Honorable Mention (Top Four among 111 Teams)</Div31>
           <Div33>Sep 2024</Div33>
         </div>
@@ -278,7 +295,6 @@ export const Resume = () => {
               alignItems: "center",
               width: "100%",
               justifyContent: "space-between",
-              // flexWrap:'wrap',
               gap: "8px",
             }}
           >
@@ -324,6 +340,25 @@ const DownloadButton = styled.button`
   }
 `;
 
+const downloadJpg = () => {
+  // 將 PDF 文件的路徑替換為實際的文件路徑
+  const pdfUrl = "/有球必In CaseBoard.jpg";
+
+  // 創建一個隱藏的 <a> 元素
+  const link = document.createElement("a");
+  link.href = pdfUrl;
+  link.download = "/有球必In CaseBoard.jpg"; // 下載文件的名稱
+
+  // 將 <a> 元素添加到 DOM 中
+  document.body.appendChild(link);
+
+  // 模擬點擊事件
+  link.click();
+
+  // 移除 <a> 元素
+  document.body.removeChild(link);
+};
+
 const downloadPdf = () => {
   // 將 PDF 文件的路徑替換為實際的文件路徑
   const pdfUrl = "/CV.pdf";
@@ -331,7 +366,7 @@ const downloadPdf = () => {
   // 創建一個隱藏的 <a> 元素
   const link = document.createElement("a");
   link.href = pdfUrl;
-  link.download = "resume.pdf"; // 下載文件的名稱
+  link.download = "Tingyi-Lin CV.pdf"; // 下載文件的名稱
 
   // 將 <a> 元素添加到 DOM 中
   document.body.appendChild(link);
@@ -1099,6 +1134,6 @@ const ViewMoreButton = styled.button`
 
   @media (max-width: 480px) {
     padding: 8px 12px;
-    font-size: .8rem;
+    font-size: 0.8rem;
   }
 `;

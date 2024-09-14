@@ -263,6 +263,7 @@ const YoungLions = () => {
           <img
             src="/younglions/logo.svg"
             alt="logo"
+            width="70%"
             style={{ maxWidth: "400px" }}
           />
           <Title2>― A Lung-health check-up mobile app ―</Title2>
