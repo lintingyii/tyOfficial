@@ -276,13 +276,10 @@ export const Resume = () => {
               gap: "8px",
             }}
           >
-            <Div38 style={{ margin: "0px" }} >2024臺北市秋季程式設計節【城市通微服務大黑客松】</Div38>
-            <a
-              rel="noopener noreferrer"
-              style={{ textDecoration: "none" }}
-            >
-              <ViewMoreButton onClick={downloadJpg}>View More</ViewMoreButton>
-            </a>
+            <Div38 style={{ margin: "0px" }}>
+              2024臺北市秋季程式設計節【城市通微服務大黑客松】
+            </Div38>
+            <ViewMoreButton onClick={downloadJpg}>View More</ViewMoreButton>
           </div>
           <Div31>Honorable Mention (Top Four among 111 Teams)</Div31>
           <Div33>Sep 2024</Div33>
