@@ -95,7 +95,7 @@ const LinkButton = ({ imageSrc, imageWidth, href, children, isLoaded }) => (
   </SpecialButton>
 );
 
-export const MegaBank_Redesign = () => {
+export const MegaBankRedesign = () => {
   const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
@@ -129,4 +129,4 @@ export const MegaBank_Redesign = () => {
   );
 };
 
-export default MegaBank_Redesign;
+export default MegaBankRedesign;
