@@ -11,6 +11,7 @@ import Resume from "./resume";
 import MyComponent from "./home";
 import Work from "./work";
 import YoungLions from "./youngLions";
+import MegaBank_Redesign from "./MegaBank_Redesign";
 import styled from "styled-components";
 import CustomCursor from "./CustomCursor";
 import { createGlobalStyle } from "styled-components";
@@ -87,6 +88,7 @@ function App() {
           <Route path="/resume" element={<Resume />} />
           <Route path="/work" element={<Work />} />
           <Route path="/work/youngLions" element={<YoungLions />} />
+          <Route path="/work/MegaBank_Redesign" element={<MegaBank_Redesign />} />
           {/* 其他路由... */}
         </Routes>
         <NavigationBar />

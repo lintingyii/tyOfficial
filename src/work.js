@@ -46,7 +46,6 @@ export const Work = () => {
       description:
         "The first-ever mobile game to play with your lung, not your thumb.",
       tags: [
-        { name: "Graphic design", color: "#D58CFE" },
         { name: "Creative Campaign", color: "#86C5CE" },
       ],
       link: "/work/youngLions",
@@ -55,16 +54,28 @@ export const Work = () => {
     {
       date: "December, 2023",
       image: "/puffer.jpg",
-      title: "羽NIQLO-羽你同在一起",
+      title: "UNIQLO-Puffer together",
       subtitle: "Digital Creative Campaign",
       description:
         "A digital creative campaign to encourage people to recycle down jackets.",
       tags: [
-        { name: "Graphic design", color: "#D58CFE" },
         { name: "UI/UX design", color: "#7D8991" },
         { name: "Creative Campaign", color: "#86C5CE" },
       ],
       link: "https://tome.app/tingyilin/niqlo-pufferverse-cm0l048t70ob76j1jun5bx1iq",
+      openInNewTab: false,
+    },
+    {
+      date: "May, 2023",
+      image: "/megabank.png",
+      title: "Redesign deliverables-Mega Bank",
+      subtitle: "User interface and user experience redesign",
+      description:
+        "Conduct user testing to refine the exchange process and interface, then finalize with testing.",
+      tags: [
+        { name: "UI/UX design", color: "#7D8991" },
+      ],
+      link: "/work/MegaBank_Redesign",
       openInNewTab: false,
     },
   ];

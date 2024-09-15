@@ -71,6 +71,7 @@ const Description = styled.p`
 const TagsContainer = styled.div`
   display: flex;
   gap: 10px;
+  flex-wrap: pre-wrap
 `;
 
 const Tag = styled.div`

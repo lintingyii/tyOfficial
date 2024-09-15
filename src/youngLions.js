@@ -218,7 +218,7 @@ const Video = styled.iframe`
 
 const IconImage = styled.img`
   width: ${(props) => props.imageWidth || "85%"};
-  height: auto; /* 保持图片的宽高比 */
+  height: auto; 
 `;
 
 const BackButton = styled.button`
