@@ -11,7 +11,6 @@ import Marquee from "react-fast-marquee";
 import ProjectFilter from "./ProjectFilter";
 
 export const Work = () => {
-
   const initialProjects = [
     {
       date: "November, 2023",
@@ -45,9 +44,7 @@ export const Work = () => {
       subtitle: "Young Lions Competition, 4TH Prize",
       description:
         "The first-ever mobile game to play with your lung, not your thumb.",
-      tags: [
-        { name: "Creative Campaign", color: "#86C5CE" },
-      ],
+      tags: [{ name: "Creative Campaign", color: "#86C5CE" }],
       link: "/work/youngLions",
       openInNewTab: false,
     },
@@ -72,9 +69,7 @@ export const Work = () => {
       subtitle: "User interface and user experience redesign",
       description:
         "Conduct user testing to refine the exchange process and interface, then finalize with testing.",
-      tags: [
-        { name: "UI/UX design", color: "#7D8991" },
-      ],
+      tags: [{ name: "UI/UX design", color: "#7D8991" }],
       link: "/work/MegaBank_Redesign",
       openInNewTab: false,
     },
@@ -156,7 +151,7 @@ export const Work = () => {
             zoomOut={false}
             toggleAxis={false}
             enableTransition={false}
-            cDistance={12}
+            cDistance={10}
             // positionX={0}
             color1="#809bd6"
             color2="#F7883D"
@@ -170,21 +165,24 @@ export const Work = () => {
       </Header>
 
       <CardsContainer>
-      <ProjectFilter projects={projects} setFilteredProjects={setFilteredProjects} />
+        <ProjectFilter
+          projects={projects}
+          setFilteredProjects={setFilteredProjects}
+        />
         <CardsContainerWrapper>
-        {filteredProjects.map((project, index) => (
-          <ProjectCard
-            key={index}
-            date={project.date}
-            image={project.image}
-            title={project.title}
-            subtitle={project.subtitle}
-            description={project.description}
-            tags={project.tags}
-            link={project.link}
-            openInNewTab={project.openInNewTab}
-          />
-        ))}
+          {filteredProjects.map((project, index) => (
+            <ProjectCard
+              key={index}
+              date={project.date}
+              image={project.image}
+              title={project.title}
+              subtitle={project.subtitle}
+              description={project.description}
+              tags={project.tags}
+              link={project.link}
+              openInNewTab={project.openInNewTab}
+            />
+          ))}
         </CardsContainerWrapper>
       </CardsContainer>
       <Marquee
@@ -258,7 +256,7 @@ const HeadingIAm = styled.div`
   color: #333333;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 8rem;
+  font-size: 9rem;
   line-height: 1;
   font-weight: 700;
   margin: 0 auto;
@@ -269,25 +267,25 @@ const HeadingIAm = styled.div`
   flex-direction: column;
 
   @media (max-width: 1440px) {
-    font-size: 96px;
+    font-size: 8rem;
     top: 0px;
     margin-top: 4rem;
   }
   @media (max-width: 772px) {
-    font-size: 84px;
+    font-size: 7rem;
     top: 0px;
   }
   @media (max-width: 648px) {
     white-space: pre-wrap;
     margin-left: 24px;
-    font-size: 64px;
+    font-size: 5rem;
     top: -10vh;
     margin-top: 0rem;
   }
-  @media (max-width: 375px) {
+  @media (max-width: 480px) {
     white-space: pre-wrap;
     margin-left: 24px;
-    font-size: 56px;
+    font-size: 64px;
     margin-top: 0rem;
   }
 `;
@@ -299,23 +297,25 @@ const OverlapGroupWrapper = styled.div`
   margin: 0 auto; /* 左右居中 */
   display: flex;
   z-index: 3;
-  max-height: 100%;
-  padding-top: 18vh;
-  padding-bottom: 15vh;
+  max-height: 40vh;
+  padding-top: 28vh;
+  padding-bottom: 24vh;
 
-  // @media (max-width: 375px) {
-  //   height: 0vh;
-  //   margin-top: 0vh;
-  //   margin-bottom: 5vh;
-  // }
+  @media (max-width: 1024px) {
+    padding-top: 20vh;
+    padding-bottom: 18vh;
+    height: auto;
+  }
+
   @media (max-width: 480px) {
     padding-top: 15vh;
     padding-bottom: 15vh;
+    height: auto;
   }
   @media (max-width: 375px) {
     padding-top: 15vh;
-    padding-bottom: 20vh;
-    height: 8vh;
+    padding-bottom: 18vh;
+    height: auto;
   }
 `;
 
@@ -416,7 +416,7 @@ const CardsContainer = styled.div`
   background-color: #f2f2f2;
   padding-top: 3rem;
   left: 0;
-  gap: 2rem;
+  gap: 3rem;
   border-top: 1.5px solid #333;
   width: 100%;
   display: flex;
@@ -427,6 +427,7 @@ const CardsContainer = styled.div`
   @media (max-width: 1200px) {
     /* For tablets and smaller screens */
     padding-top: 2rem;
+    gap: 2rem;
   }
 
   @media (max-width: 800px) {

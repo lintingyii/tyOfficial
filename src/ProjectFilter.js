@@ -68,8 +68,8 @@ const Tag = styled.div`
   color: ${(props) => (props.isActive ? "#fff" : props.bgColor || "#e0e0e0")};
   background-color: ${(props) => (props.isActive ? "#333" : "#f2f2f2")};
   border-radius: 50px;
-  padding: 8px 12px;
-  font-size: 1rem;
+  padding: 12px 16px;
+  font-size: 1.2rem;
   font-weight: bold;
   line-height: 1rem;
   cursor: pointer;
@@ -82,6 +82,7 @@ const Tag = styled.div`
 
   @media (max-width: 480px) {
     background-color: ${(props) => (props.isActive ? "#333" : "#e0e0e0")};
+    font-size: 1rem;
   }
 `;
 
