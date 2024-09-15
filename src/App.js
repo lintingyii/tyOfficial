@@ -23,7 +23,7 @@ const GlobalStyle = createGlobalStyle`
  }
 `;
 
-const Div2 = styled.div`
+const Conatiner = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   align-items: center;
@@ -40,7 +40,7 @@ const Div2 = styled.div`
   width: 100%;
   font-size: 30px;
   font-weight: 700;
-  padding: 8px 9px;
+  padding: 10px 24px;
   box-sizing: border-box;
 
   @media (max-width: 440px) {
@@ -104,7 +104,7 @@ function NavigationBar() {
   const isWorkActive = location.pathname.startsWith('/work');
 
   return (
-    <Div2>
+    <Conatiner>
       <Div3 to="/home" isActive={location.pathname === "/home"}>
         Home
       </Div3>
@@ -114,7 +114,7 @@ function NavigationBar() {
       <Div5 to="/work" isActive={isWorkActive}>
         Work
       </Div5>
-    </Div2>
+    </Conatiner>
   );
 }
 
