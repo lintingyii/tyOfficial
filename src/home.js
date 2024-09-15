@@ -1296,13 +1296,26 @@ const FlipCardBack = styled(FlipCardFront)`
   text-align: left;
 `;
 
+const TapToFlip = styled.div`
+  position: absolute;
+  bottom: 10px; 
+  left: auto; 
+  font-size: 14px; 
+  color: #fff; 
+  font-weight: 400;
+  opacity: 0.8;
+`;
+
 function FlipCard({ title, content, bgColor }) {
   const [flipped, setFlipped] = useState(false);
 
   return (
     <DivFlipCard onClick={() => setFlipped(!flipped)}>
       <FlipCardInner flipped={flipped}>
-        <FlipCardFront bgColor={bgColor}>{title}</FlipCardFront>
+        <FlipCardFront bgColor={bgColor}>
+          {title}
+          <TapToFlip>Tap to flip <span style={{fontSize:'22px'}}>⍝</span></TapToFlip> 
+          </FlipCardFront>
         <FlipCardBack bgColor={bgColor}>
           <ContentMob>{content}</ContentMob>
         </FlipCardBack>
@@ -1419,7 +1432,7 @@ const ServiceContent = styled.div`
   white-space: nowrap;
 
   @media (max-width: 480px) {
-    font-size: 32px;
+    font-size: 24px;
     line-height: 1.2;
     padding: 0px;
   }
