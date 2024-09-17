@@ -22,7 +22,7 @@ const Footerwraper = styled.div`
   text-align: center;
   padding: 24px 0px;
   font-size: 1rem;
-  z-index: 9999;
+  z-index: 999;
   display: flex;
   white-space: pre-wrap;
   justify-content: center;
@@ -32,6 +32,7 @@ const Footerwraper = styled.div`
     font-size: 0.8rem;
     flex-direction: column;
     gap: 8px;
+    padding-bottom: 10vh;
   }
 `;
 

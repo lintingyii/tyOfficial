@@ -18,9 +18,9 @@ const Container = styled.div`
   box-sizing: border-box;
   flex: 1;
 
-  @media (max-width: 480px) {
-    padding-bottom: 8vh;
-  }
+  // @media (max-width: 480px) {
+  //   padding-bottom: 8vh;
+  // }
 `;
 
 const Header = styled.header`

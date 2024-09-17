@@ -17,9 +17,9 @@ const Container = styled.div`
   padding: 0 3vw;
   box-sizing: border-box;
 
-  @media (max-width: 480px) {
-    padding-bottom: 8vh;
-  }
+  // @media (max-width: 480px) {
+  //   padding-bottom: 8vh;
+  // }
 `;
 
 const Header = styled.header`
@@ -281,7 +281,7 @@ const GroupImage = styled.img`
   }
 
   @media (max-width: 480px) {
-    width: ${(props) => props.width || "95%"};
+    width: ${(props) => props.width || "90%"};
     height: unset;
   }
 `;
@@ -462,7 +462,7 @@ const SportsWin = () => {
             </TextWrapper>
             <TextWrapper>
               <SpecialText style={{ width: "fit-content", margin: "0" }}>
-                專案開源程式碼 / Open-source project code
+                專案程式碼 / Project code
               </SpecialText>
               <a
                 href="https://github.com/tcfproject-tpe/CDF_Taipei?tab=readme-ov-file"
