@@ -448,17 +448,15 @@ const Banner = styled.picture`
     padding-top: 8vh;
     width: 100%;
     display: flex;
-    // border-style: solid;
-    // border-width: 1.5px;
-    // border-bottom: 1.5px solid;
-    // border-color: #333333;
-    // border-radius: 24px;
     justify-content: right;
 
     @media (max-width: 820px) {
       border: none;
       width: 100%;
       padding-top: 6vh;
+    }
+    @media (max-width: 480px) {
+      padding-top: 0vh;
     }
   }
 `;
@@ -1298,10 +1296,10 @@ const FlipCardBack = styled(FlipCardFront)`
 
 const TapToFlip = styled.div`
   position: absolute;
-  bottom: 10px; 
-  left: auto; 
-  font-size: 14px; 
-  color: #fff; 
+  bottom: 10px;
+  left: auto;
+  font-size: 14px;
+  color: #fff;
   font-weight: 400;
   opacity: 0.8;
 `;
@@ -1314,8 +1312,10 @@ function FlipCard({ title, content, bgColor }) {
       <FlipCardInner flipped={flipped}>
         <FlipCardFront bgColor={bgColor}>
           {title}
-          <TapToFlip>Tap to flip <span style={{fontSize:'22px'}}>⍝</span></TapToFlip> 
-          </FlipCardFront>
+          <TapToFlip>
+            Tap to flip <span style={{ fontSize: "22px" }}>⍝</span>
+          </TapToFlip>
+        </FlipCardFront>
         <FlipCardBack bgColor={bgColor}>
           <ContentMob>{content}</ContentMob>
         </FlipCardBack>

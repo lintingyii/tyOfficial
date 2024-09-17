@@ -73,6 +73,20 @@ export const Work = () => {
       link: "/work/MegaBank_Redesign",
       openInNewTab: false,
     },
+    {
+      date: "September, 2024",
+      image: "/有球必In CaseBoard.jpg",
+      title: "Sports Win",
+      subtitle: "Taipei CodeFest Hackathon - Honorable Mention",
+      description:
+        "A microservice for booking Taipei sports venues, incorporating team-building to maximize venue usage.",
+      tags: [
+        { name: "UI/UX design", color: "#7D8991" },
+        { name: "Frontend coding", color: "#F7883D" },
+      ],
+      link: "/work/sports_win",
+      openInNewTab: false,
+    },
   ];
 
   const [projects, setProjects] = useState(initialProjects); // 初始專案資料

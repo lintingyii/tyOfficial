@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import Footer from "./footer";
 
@@ -16,13 +16,18 @@ const Container = styled.div`
   margin: 0; /* 清除 margin */
   padding: 0 3vw;
   box-sizing: border-box;
+  flex: 1;
+
+  @media (max-width: 480px) {
+    padding-bottom: 8vh;
+  }
 `;
 
 const Header = styled.header`
   margin-top: 12vh;
 
   @media (max-width: 480px) {
-    margin-top: 10vh;
+    margin-top: 5vh;
   }
 `;
 
@@ -47,7 +52,7 @@ const Image = styled.img`
   width: ${(props) => props.width || "70%"};
 
   @media (max-width: 480px) {
-    width: ${(props) => props.width || "100%"};
+    width: ${(props) => props.width || "95%"};
   }
 `;
 
@@ -65,7 +70,7 @@ const MobileImage = styled.img`
   @media (max-width: 480px) {
     display: initial;
     max-width: 400px;
-    width: ${(props) => props.width || "100%"};
+    width: ${(props) => props.width || "95%"};
   }
 `;
 
@@ -118,7 +123,7 @@ const Divider = styled.hr`
   border-top: 1px solid #ccc;
   margin: ${(props) =>
     `${props.margin || "60px"} auto`}; //控制 margin-top 和 margin-bottom
-  width: 90%;
+  width: 80%;
   display: block;
 `;
 
@@ -218,7 +223,7 @@ const Video = styled.iframe`
 
 const IconImage = styled.img`
   width: ${(props) => props.imageWidth || "85%"};
-  height: auto; 
+  height: auto;
 `;
 
 const BackButton = styled.button`
@@ -257,293 +262,298 @@ const LinkButton = ({ imageSrc, imageWidth, href, children }) => (
 
 const YoungLions = () => {
   return (
-    <>
-      <Container>
-        <Header>
-          <img
-            src="/younglions/logo.svg"
-            alt="logo"
-            width="70%"
-            style={{ maxWidth: "400px" }}
-          />
-          <Title2>― A Lung-health check-up mobile app ―</Title2>
-        </Header>
+    <Container>
+      <Header>
+        <img
+          src="/younglions/logo.svg"
+          alt="logo"
+          width="70%"
+          style={{ maxWidth: "400px" }}
+        />
+        <Title2>― A Lung-health check-up mobile app ―</Title2>
+      </Header>
 
+      <Image
+        src="/younglions/kungfu.png"
+        alt="Kungfu Presentation"
+        style={{
+          borderRadius: "10px",
+          boxShadow: "0px 2px 20px 0px rgba(0, 0, 0, 0.05)",
+          border: "1px solid rgba(0, 0, 0, 0.1)",
+        }}
+      />
+
+      <SubTitle>
+        <br />
+        2023 坎城創意節青年競賽 台灣代表選拔 第四名
+        <br />
+        Cannes Lions Festival, Taiwan Representative Competition, 4TH Prize
+        <br />
+        Future young lions award
+        <br />
         <Image
-          src="/younglions/kungfu.png"
-          alt="Kungfu Presentation"
+          src="/younglions/award.png"
+          alt="Award"
           style={{
             borderRadius: "10px",
             boxShadow: "0px 2px 20px 0px rgba(0, 0, 0, 0.05)",
             border: "1px solid rgba(0, 0, 0, 0.1)",
+            marginTop: "1rem",
           }}
         />
+      </SubTitle>
 
-        <SubTitle>
-          <br />
-          2023 坎城創意節青年競賽 台灣代表選拔 第四名
-          <br />
-          Cannes Lions Festival, Taiwan Representative Competition, 4TH Prize
-          <br />
-          Future young lions award
-          <br />
-          <Image src="/younglions/award.png" alt="Award" />
-        </SubTitle>
+      <Divider margin="40px" />
 
-        <Divider />
+      <section>
+        <SectionTitle>Background</SectionTitle>
+        <ImageWrapper>
+          <ContentImage src="/younglions/research-1.png" alt="research" />
+          <ContentImage src="/younglions/research-2.png" alt="research" />
+          <ContentImage src="/younglions/research-3.png" alt="research" />
+        </ImageWrapper>
+      </section>
 
-        <section>
-          <SectionTitle>Background</SectionTitle>
-          <ImageWrapper>
-            <ContentImage src="/younglions/research-1.png" alt="research" />
-            <ContentImage src="/younglions/research-2.png" alt="research" />
-            <ContentImage src="/younglions/research-3.png" alt="research" />
-          </ImageWrapper>
-        </section>
+      <section style={{ marginTop: "6rem" }}>
+        <SectionTitle>Mass Psychology Research</SectionTitle>
+        <LaptopImage
+          src="/younglions/people.png"
+          alt="Psychology"
+          width="80%"
+        />
+        <ImageWrapper width="90%" style={{ gap: "1rem", marginTop: "2rem" }}>
+          <MobileImage
+            src="/younglions/people-1.png"
+            alt="insight"
+            style={{ marginRight: "15px" }}
+          />
+          <MobileImage
+            src="/younglions/people-2.png"
+            alt="insight"
+            style={{ marginLeft: "15px" }}
+          />
+          <MobileImage
+            src="/younglions/people-3.png"
+            alt="insight"
+            style={{ marginRight: "15px" }}
+          />
+        </ImageWrapper>
+      </section>
 
-        <section style={{ marginTop: "6rem" }}>
-          <SectionTitle>Mass Psychology Research</SectionTitle>
+      <CircleWrapper>
+        <Circle color="#f5e1e1" />
+        <Circle color="#c89f9f" />
+        <Circle color="#a76262" />
+        <Circle color="#723939" />
+      </CircleWrapper>
+
+      <section style={{ marginTop: "6rem" }}>
+        <SectionTitle>Creative Insight</SectionTitle>
+        <Text style={{ width: "85%", textAlign: "center" }}>
+          How to change people's perception of health check-ups and raise
+          awareness about lung health ？
+        </Text>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            // gap: "1rem",
+          }}
+        >
+          <Image src="/younglions/think.png" alt="think" width="5rem" />
           <LaptopImage
-            src="/younglions/people.png"
-            alt="Psychology"
+            src="/younglions/insight.png"
+            alt="insight"
             width="80%"
           />
-          <ImageWrapper width="90%" style={{ gap: "1rem", marginTop: "2rem" }}>
-            <MobileImage
-              src="/younglions/people-1.png"
-              alt="insight"
-              style={{ marginRight: "15px" }}
-            />
-            <MobileImage
-              src="/younglions/people-2.png"
-              alt="insight"
-              style={{ marginLeft: "15px" }}
-            />
-            <MobileImage
-              src="/younglions/people-3.png"
-              alt="insight"
-              style={{ marginRight: "15px" }}
-            />
-          </ImageWrapper>
-        </section>
-
-        <CircleWrapper>
-          <Circle color="#f5e1e1" />
-          <Circle color="#c89f9f" />
-          <Circle color="#a76262" />
-          <Circle color="#723939" />
-        </CircleWrapper>
-
-        <section style={{ marginTop: "6rem" }}>
-          <SectionTitle>Creative Insight</SectionTitle>
-          <Text style={{ width: "85%", textAlign: "center" }}>
-            How to change people's perception of health check-ups and raise
-            awareness about lung health ？
-          </Text>
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              gap: "1rem",
-            }}
-          >
-            <Image src="/younglions/think.png" alt="think" width="5rem" />
-            <LaptopImage
-              src="/younglions/insight.png"
-              alt="insight"
-              width="80%"
-            />
+          <ImageWrapper style={{gap:'1rem', marginTop:'1rem'}}>
             <MobileImage src="/younglions/insight-1-m.png" alt="insight" />
             <MobileImage src="/younglions/insight-2-m.png" alt="insight" />
-            <Divider margin="30px" />
-            <ImageWrapper style={{ gap: ".6rem" }}>
-              <LaptopImage
-                src="/younglions/insight-1.png"
-                alt="insight"
-                width="33.3%"
-              />
-              <LaptopImage
-                src="/younglions/insight-2.png"
-                alt="insight"
-                width="33.3%"
-              />
-              <LaptopImage
-                src="/younglions/insight-3.png"
-                alt="insight"
-                width="33.3%"
-              />
-            </ImageWrapper>
-            <ImageWrapper style={{ gap: "1rem" }}>
-              <MobileImage src="/younglions/insight-3-m.png" alt="insight" />
-              <MobileImage src="/younglions/insight-4-m.png" alt="insight" />
-              <MobileImage src="/younglions/insight-5-m.png" alt="insight" />
-            </ImageWrapper>
-          </div>
-        </section>
-
-        <section style={{ marginTop: "6rem" }}>
-          <SectionTitle>Solution & Big idea</SectionTitle>
-          <LaptopImageWrapper style={{ minWidth: "95%", marginTop: "2rem" }}>
-            <LaptopImage
-              src="/younglions/bigidea-1.png"
-              alt="bigidea"
-              width="auto "
-              style={{
-                objectFit: "contain",
-                maxHeight: "350px",
-                width: "fit-content",
-              }}
-            />
-            <LaptopImage
-              src="/younglions/bigidea-2.png"
-              alt="bigidea"
-              width="auto "
-              style={{ objectFit: "contain", maxHeight: "350px" }}
-            />
-          </LaptopImageWrapper>
-          <ImageWrapper
-            style={{
-              gap: "1rem",
-              marginTop: "2rem",
-              display: "flex",
-              flexDirection: "column",
-            }}
-          >
-            <TabletImage src="/younglions/bigidea-1-m.png" alt="bigidea" />
-            <TabletImage src="/younglions/bigidea-2-m.png" alt="bigidea" />
           </ImageWrapper>
-        </section>
+          <Divider margin="30px" />
+          <ImageWrapper>
+            <LaptopImage
+              src="/younglions/insight-1.png"
+              alt="insight"
+              width="33.3%"
+            />
+            <LaptopImage
+              src="/younglions/insight-2.png"
+              alt="insight"
+              width="33.3%"
+            />
+            <LaptopImage
+              src="/younglions/insight-3.png"
+              alt="insight"
+              width="33.3%"
+            />
+          </ImageWrapper>
+          <ImageWrapper style={{ gap: "1rem" }}>
+            <MobileImage src="/younglions/insight-3-m.png" alt="insight" />
+            <MobileImage src="/younglions/insight-4-m.png" alt="insight" />
+            <MobileImage src="/younglions/insight-5-m.png" alt="insight" />
+          </ImageWrapper>
+        </div>
+      </section>
 
-        <Text>
-          以華人世界熟悉的功夫元素「氣」為基礎，透過『呼出一口氣來傳遞「真氣」給武林大師』的遊戲設定，
-          並結合「肺活量」為肺部健康的一大指標這樣的觀念，VC
-          Kungfu將肺部檢測平易化，
-          試圖用有趣方式喚醒大眾對肺部健康的自我意識，並更進一步的去做肺部檢查。
-          <br />
-          <br />
-          We designed a web application game, called VC kungfu (Vital capacity
-          kungfu) to show people how lung health impacts our body.
-          <br />
-          Users make a continuous voice to transport air in lungs, which would
-          become “qi” ,to the kungfu master in game.
-        </Text>
-
-        <Text>
-          為增添遊戲樂趣，VC
-          Kungfu不只紀錄了玩家的音長，更搜集了他們的頻率及分貝，
-          針對「音長」將玩家的肺活量區分成五個等級，每個等級都有其對應的武功招式，同時提供玩家客製化的養肺知識，
-          並透過分析頻率及分貝的變化，融合心理測驗的概念為玩家進行心境剖析。
-          <br />
-          <br />
-          We not only collect the voice length of players, but also their
-          frequency and decibel. According to the voice length, we set 5 levels
-          of vital capacity and they match with 5 Kungfu moves, After that, we
-          provide suggestions for lung care to them based on voice length data.
-          Then we portray player’s state of mind analysis based on the frequency
-          and decibel to enhance the fun of the game.
-        </Text>
-
-        <Text>
-          遊戲結束時，玩家可獲得「獨一無二」的檢測成果圖，
-          其中包含聲音偵測圖、肺活量等級及心理剖析結果，鑑於獨樹一格的風格及結果畫面，許多玩家樂於將遊戲成果分享至社交平台。
-          <br />
-          <br />
-          After playing the game, users would receive a customized result
-          picture with VC kungfu level, lung-caring tips,state of mind analysis
-          and other information to share with others on social media.
-        </Text>
-
-        <CircleWrapper>
-          <Circle color="#f5e1e1" />
-          <Circle color="#c89f9f" />
-          <Circle color="#a76262" />
-          <Circle color="#723939" />
-        </CircleWrapper>
-
-        <section style={{ marginTop: "6rem" }}>
-          <SectionTitle>Information Architecture & User flow</SectionTitle>
+      <section style={{ marginTop: "6rem" }}>
+        <SectionTitle>Solution & Big idea</SectionTitle>
+        <LaptopImageWrapper style={{ minWidth: "95%", marginTop: "2rem" }}>
           <LaptopImage
-            src="/younglions/flow.png"
-            alt="think"
-            width="80%"
-            style={{ marginTop: "2rem" }}
+            src="/younglions/bigidea-1.png"
+            alt="bigidea"
+            width="auto "
+            style={{
+              objectFit: "contain",
+              maxHeight: "350px",
+              width: "fit-content",
+            }}
           />
-          <MobileImage
-            src="/younglions/flow-m.png"
-            alt="think"
-            width="95%"
-            style={{ marginTop: "2rem" }}
-          />
-        </section>
-
-        <section style={{ marginTop: "6rem" }}>
-          <SectionTitle>Final results</SectionTitle>
           <LaptopImage
-            src="/younglions/result.png"
-            alt="think"
-            width="80%"
-            style={{ marginTop: "2rem" }}
+            src="/younglions/bigidea-2.png"
+            alt="bigidea"
+            width="auto "
+            style={{ objectFit: "contain", maxHeight: "350px" }}
           />
-          <MobileImage
-            src="/younglions/media.png"
-            alt="think"
-            width="100%"
-            style={{ marginTop: "2rem" }}
-          />
-          <MobileImage
-            src="/younglions/data.png"
-            alt="think"
-            width="100%"
-          />
-        </section>
-
-        <section style={{ marginTop: "6rem" }}>
-          <SectionTitle>More information</SectionTitle>
-
-          <ButtonGroup>
-            <LinkButton
-              imageSrc="/younglions/color.svg"
-              href="https://tome.app/tingyilin/company-roadmap-copy-cm0l05clr0oel81lrz6b9vt89"
-              imageWidth="70%"
-            >
-              Design Details
-            </LinkButton>
-            <LinkButton
-              imageSrc="/younglions/logo-c.svg"
-              href="https://vc-kungfu.web.app/"
-              // imageHeight="80%"
-            >
-              VC Kungfu Game
-            </LinkButton>
-            <LinkButton
-              imageSrc="/younglions/ig.svg"
-              href="https://www.instagram.com/vckungfu"
-              imageWidth="30%"
-            >
-              Official IG Acount
-            </LinkButton>
-          </ButtonGroup>
-
-          <Video
-            src="https://www.youtube.com/embed/fJtoTWpaS9k"
-            title="YouTube video player"
-            frameBorder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowFullScreen
-          />
-        </section>
-
-        <a
-          href="/work"
-          rel="noopener noreferrer"
-          style={{ textDecoration: "none" }}
+        </LaptopImageWrapper>
+        <ImageWrapper
+          style={{
+            gap: "1rem",
+            marginTop: "2rem",
+            display: "flex",
+            flexDirection: "column",
+          }}
         >
-          <BackButton>Back to Work</BackButton>
-        </a>
-        <Footer />
-      </Container>
-    </>
+          <TabletImage src="/younglions/bigidea-1-m.png" alt="bigidea" />
+          <TabletImage src="/younglions/bigidea-2-m.png" alt="bigidea" />
+        </ImageWrapper>
+      </section>
+
+      <Text>
+        以華人世界熟悉的功夫元素「氣」為基礎，透過『呼出一口氣來傳遞「真氣」給武林大師』的遊戲設定，
+        並結合「肺活量」為肺部健康的一大指標這樣的觀念，VC
+        Kungfu將肺部檢測平易化，
+        試圖用有趣方式喚醒大眾對肺部健康的自我意識，並更進一步的去做肺部檢查。
+        <br />
+        <br />
+        We designed a web application game, called VC kungfu (Vital capacity
+        kungfu) to show people how lung health impacts our body.
+        <br />
+        Users make a continuous voice to transport air in lungs, which would
+        become “qi” ,to the kungfu master in game.
+      </Text>
+
+      <Text>
+        為增添遊戲樂趣，VC
+        Kungfu不只紀錄了玩家的音長，更搜集了他們的頻率及分貝，
+        針對「音長」將玩家的肺活量區分成五個等級，每個等級都有其對應的武功招式，同時提供玩家客製化的養肺知識，
+        並透過分析頻率及分貝的變化，融合心理測驗的概念為玩家進行心境剖析。
+        <br />
+        <br />
+        We not only collect the voice length of players, but also their
+        frequency and decibel. According to the voice length, we set 5 levels of
+        vital capacity and they match with 5 Kungfu moves, After that, we
+        provide suggestions for lung care to them based on voice length data.
+        Then we portray player’s state of mind analysis based on the frequency
+        and decibel to enhance the fun of the game.
+      </Text>
+
+      <Text>
+        遊戲結束時，玩家可獲得「獨一無二」的檢測成果圖，
+        其中包含聲音偵測圖、肺活量等級及心理剖析結果，鑑於獨樹一格的風格及結果畫面，許多玩家樂於將遊戲成果分享至社交平台。
+        <br />
+        <br />
+        After playing the game, users would receive a customized result picture
+        with VC kungfu level, lung-caring tips,state of mind analysis and other
+        information to share with others on social media.
+      </Text>
+
+      <CircleWrapper>
+        <Circle color="#f5e1e1" />
+        <Circle color="#c89f9f" />
+        <Circle color="#a76262" />
+        <Circle color="#723939" />
+      </CircleWrapper>
+
+      <section style={{ marginTop: "6rem" }}>
+        <SectionTitle>Information Architecture & User flow</SectionTitle>
+        <LaptopImage
+          src="/younglions/flow.png"
+          alt="think"
+          width="80%"
+          style={{ marginTop: "2rem" }}
+        />
+        <MobileImage
+          src="/younglions/flow-m.png"
+          alt="think"
+          width="95%"
+          style={{ marginTop: "2rem" }}
+        />
+      </section>
+
+      <section style={{ marginTop: "6rem" }}>
+        <SectionTitle>Final results</SectionTitle>
+        <LaptopImage
+          src="/younglions/result.png"
+          alt="think"
+          width="80%"
+          style={{ marginTop: "2rem" }}
+        />
+        <MobileImage
+          src="/younglions/media.png"
+          alt="think"
+          width="100%"
+          style={{ marginTop: "2rem" }}
+        />
+        <MobileImage src="/younglions/data.png" alt="think" width="100%" />
+      </section>
+
+      <section style={{ marginTop: "6rem" }}>
+        <SectionTitle>More information</SectionTitle>
+
+        <ButtonGroup>
+          <LinkButton
+            imageSrc="/younglions/color.svg"
+            href="https://tome.app/tingyilin/company-roadmap-copy-cm0l05clr0oel81lrz6b9vt89"
+            imageWidth="70%"
+          >
+            Design Details
+          </LinkButton>
+          <LinkButton
+            imageSrc="/younglions/logo-c.svg"
+            href="https://vc-kungfu.web.app/"
+            // imageHeight="80%"
+          >
+            VC Kungfu Game
+          </LinkButton>
+          <LinkButton
+            imageSrc="/younglions/ig.svg"
+            href="https://www.instagram.com/vckungfu"
+            imageWidth="30%"
+          >
+            Official IG Acount
+          </LinkButton>
+        </ButtonGroup>
+
+        <Video
+          src="https://www.youtube.com/embed/fJtoTWpaS9k"
+          title="YouTube video player"
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowFullScreen
+        />
+      </section>
+
+      <a
+        href="/work"
+        rel="noopener noreferrer"
+        style={{ textDecoration: "none" }}
+      >
+        <BackButton>Back to Work</BackButton>
+      </a>
+      <Footer />
+    </Container>
   );
 };
 

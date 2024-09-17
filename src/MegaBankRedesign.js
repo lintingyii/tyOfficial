@@ -17,6 +17,10 @@ const Container = styled.div`
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    padding-bottom: 8vh;
+  }
 `;
 
 const Image = styled.img`

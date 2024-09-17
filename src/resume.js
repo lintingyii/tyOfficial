@@ -279,7 +279,13 @@ export const Resume = () => {
             <Div38 style={{ margin: "0px" }}>
               2024臺北市秋季程式設計節【城市通微服務大黑客松】
             </Div38>
-            <ViewMoreButton onClick={downloadJpg}>View More</ViewMoreButton>
+            <a
+              href="/work/sports_win"
+              rel="noopener noreferrer"
+              style={{ textDecoration: "none" }}
+            >
+            <ViewMoreButton>View More</ViewMoreButton>
+            </a>
           </div>
           <Div31>Honorable Mention (Top Four among 111 Teams)</Div31>
           <Div33>Sep 2024</Div33>
@@ -392,6 +398,9 @@ const Div = styled.div`
   }
   @media (max-width: 912px) {
     padding-top: 6vh;
+  }
+  @media (max-width: 480px) {
+    padding-top: 0vh;
   }
 `;
 
