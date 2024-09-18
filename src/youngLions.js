@@ -155,7 +155,7 @@ const Text = styled.div`
   margin: 30px auto;
   color: #444;
   width: 70%;
-  text-align: left;
+  text-align: justify;
 
   @media (max-width: 480px) {
     width: 85%;

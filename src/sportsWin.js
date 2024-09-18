@@ -127,7 +127,7 @@ const Text = styled.div`
   text-align: justify;
 
   @media (max-width: 480px) {
-    width: 80%;
+    width: 85%;
   }
 `;
 
