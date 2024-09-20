@@ -1,14 +1,13 @@
 import react, { useState } from "react";
-import "./style.css";
 import styled, { keyframes } from "styled-components";
-import ProjectCard from "./ProjectCard";
+import { LargeProjectCard, ProjectCard } from "../Components/ProjectCard";
 import { ShaderGradientCanvas, ShaderGradient } from "shadergradient";
 import * as reactSpring from "@react-spring/three";
 import * as drei from "@react-three/drei";
 import * as fiber from "@react-three/fiber";
-import Footer from "./footer";
+import Footer from "../Components/footer";
 import Marquee from "react-fast-marquee";
-import ProjectFilter from "./ProjectFilter";
+import ProjectFilter from "../Components/ProjectFilter";
 
 export const Work = () => {
   const initialProjects = [
@@ -185,7 +184,7 @@ export const Work = () => {
         />
         <CardsContainerWrapper>
           {filteredProjects.map((project, index) => (
-            <ProjectCard
+            <LargeProjectCard
               key={index}
               date={project.date}
               image={project.image}
@@ -201,20 +200,20 @@ export const Work = () => {
       </CardsContainer>
       <Marquee
         speed={80}
-        style={{ paddingTop: "5vh", backgroundColor: "#f2f2f2" }}
+        style={{backgroundColor:'#f2f2f2'}}
       >
         <Marqueetext>
-          <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
-          <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
-          <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
-          <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
-          <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
-          <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
-          <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
-          <MarqueeSpan>Coming sooon ✨</MarqueeSpan>
+          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
+          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
+          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
+          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
+          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
+          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
+          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
+          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
         </Marqueetext>
       </Marquee>
-      <Footer />
+      {/* <Footer /> */}
     </Div>
   );
 };
@@ -227,7 +226,6 @@ const Div = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
   top: 0;
   left: 0;
   margin: 0; /* 清除 margin */
@@ -452,13 +450,14 @@ const CardsContainer = styled.div`
 
 // Wrapper for card groups
 const CardsContainerWrapper = styled.div`
-  width: 95%;
+  width: 80%;
+  margin: 0 auto;
   display: flex;
-  align-items: center;
+  // align-items: left;
   justify-content: center;
-  gap: 1.5rem;
+  gap: 2rem;
   flex-wrap: wrap; /* Allows wrapping to the next line */
-  padding: 0 3rem;
+  // padding: 0 3rem;
 
   @media (max-width: 1200px) {
     /* For tablets */
@@ -516,26 +515,24 @@ const Marqueetext = styled.div`
   font-family: serif;
   font-size: 2rem;
   line-height: 1.6;
-  padding: 16px;
+  padding: 24px;
   background-color: #333;
-  color: #000fff;
+  color: #fff;
   width: 100%;
   display: flex;
+  gap: 1rem;
+  margin-top: 12vh;
 
   @media (max-width: 480px) {
-    font-size: 1rem;
+    font-size: 1.6rem;
     line-height: 1.4;
     padding: 12px;
+    margin-top: 4rem;
   }
 `;
 
 const MarqueeSpan = styled.div`
-  font-family: serif;
+  width: 100%;
   display: flex;
-  margin-left: 32px;
-  color: #fff;
-
-  @media (max-width: 480px) {
-    margin-left: 16px;
-  }
+  margin-left: 6px;
 `;

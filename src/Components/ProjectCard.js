@@ -4,7 +4,7 @@ import styled from "styled-components";
 const DateLabel = styled.div`
   color: #333;
   font-size: 14px;
-  margin-bottom: 8px;
+  // margin-bottom: 8px;
   transition: color 0.3s ease-in;
 `;
 
@@ -32,9 +32,9 @@ const ImageContainer = styled.div`
       object-fit: cover;
     }
   }
-  
+
   @media (max-width: 480px) {
-      height: 100%;
+    height: 100%;
   }
 `;
 
@@ -42,8 +42,7 @@ const Title = styled.h3`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 24px;
-  margin: 8px 0;
-  // height: 28px;
+  margin: 16px 0;
   color: #333333;
   transition: color 0.3s ease-in;
 `;
@@ -53,7 +52,7 @@ const Subtitle = styled.h4`
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
   color: #333;
-  margin-bottom: 0px;
+  margin: 0;
   font-weight: normal;
   transition: color 0.3s ease-in;
 `;
@@ -63,7 +62,7 @@ const Description = styled.p`
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 16px;
   color: #555555;
-  margin-top: 8px;
+  margin-top: 0px;
   margin-bottom: 32px;
   transition: color 0.3s ease-in;
 `;
@@ -71,7 +70,7 @@ const Description = styled.p`
 const TagsContainer = styled.div`
   display: flex;
   gap: 10px;
-  flex-wrap: pre-wrap
+  flex-wrap: pre-wrap;
 `;
 
 const Tag = styled.div`
@@ -91,10 +90,11 @@ const Tag = styled.div`
 const CardContainer = styled.a`
   border-radius: 12px;
   max-width: 400px;
-  width:100%;
+  width: 100%;
   padding: 20px;
   text-align: left;
-  font-family: Arial, sans-serif;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   border: 1.5px solid #333;
   position: relative;
   transition: background-color 0.3s ease-in;
@@ -118,7 +118,7 @@ const CardContainer = styled.a`
       filter: grayscale(100%);
     }
   }
-  
+
   @media (max-width: 800px) {
     width: 90%;
   }
@@ -162,4 +162,138 @@ function ProjectCard({
   );
 }
 
-export default ProjectCard;
+const LargeImageContainer = styled(ImageContainer)`
+  flex: 1;
+  width: auto; // 調整圖片容器高度，讓它隨內容變化
+  margin: 0;
+
+  @media (max-width: 800px) {
+    max-width: 100%; // 在較小屏幕上改成100%
+  }
+`;
+
+const LargeTitle = styled.h3`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 2rem;
+  margin: 0px;
+  margin-top: 24px;
+  color: #333333;
+  transition: color 0.3s ease-in;
+
+  @media (max-width: 480px) {
+    font-size: 24px;
+    margin-top: 12px;
+  }
+`;
+
+const TitleGroup = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    align-items: unset;
+    justify-content: unset;
+    margin-top: .8rem;
+  }
+`;
+
+const LargeContent = styled.div`
+  height: 250px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: space-around;
+  padding: 0;
+  margin: 0;
+
+  @media (max-width: 800px) {
+    padding-left: 0;
+  }
+`;
+
+const LargeCardContainer = styled(CardContainer)`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  padding: 20px;
+  max-width: 100%; // 讓橫向卡片佔滿寬度
+  height: auto;
+  gap: 4%;
+
+  @media (max-width: 800px) {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  &:hover {
+    background-color: #333;
+    color: #fff;
+
+    ${LargeTitle}, ${Subtitle}, ${Description}, ${DateLabel} {
+      color: #fff;
+    }
+
+    ${Tag} {
+      background-color: #fff;
+    }
+
+    ${ImageContainer} {
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+    }
+  }
+`;
+
+function LargeProjectCard({
+  date,
+  image,
+  subtitle,
+  title,
+  description,
+  tags,
+  link,
+  openInNewTab = false,
+}) {
+  const handleClick = () => {
+    if (openInNewTab) {
+      window.open(link, "_blank");
+    } else {
+      window.location.href = link;
+    }
+  };
+
+  return (
+    <LargeCardContainer onClick={handleClick}>
+      <LargeImageContainer>
+        <img src={image} alt={title} />
+      </LargeImageContainer>
+      <LargeContent>
+        <div
+          style={{ display: "flex", width: "100%", flexDirection: "column" }}
+        >
+          <TitleGroup>
+            <DateLabel>{date}</DateLabel>
+            <Subtitle>{subtitle}</Subtitle>
+          </TitleGroup>
+          <LargeTitle>{title}</LargeTitle>
+          <Description>{description}</Description>
+        </div>
+        <TagsContainer>
+          {tags.map((tag, index) => (
+            <Tag key={index} bgColor={tag.color}>
+              {tag.name}
+            </Tag>
+          ))}
+        </TagsContainer>
+      </LargeContent>
+    </LargeCardContainer>
+  );
+}
+
+export { ProjectCard, LargeProjectCard };

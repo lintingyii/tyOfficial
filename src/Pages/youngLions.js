@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Footer from "./footer";
 
 const Container = styled.div`
   text-align: center;
@@ -10,7 +9,7 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
+  // position: absolute;
   top: 0;
   left: 0;
   margin: 0; /* 清除 margin */
@@ -552,7 +551,6 @@ const YoungLions = () => {
       >
         <BackButton>Back to Work</BackButton>
       </a>
-      <Footer />
     </Container>
   );
 };

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Footer from "./footer";
-import LoadingSpinner from "./LoadingSpinner";
+import Footer from "../Components/footer";
+import LoadingSpinner from "../Components/LoadingSpinner";
 
 const Container = styled.div`
   text-align: center;
@@ -11,9 +11,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -128,7 +125,6 @@ export const MegaBankRedesign = () => {
       >
         <BackButton>Back to Work</BackButton>
       </a>
-      <Footer />
     </Container>
   );
 };

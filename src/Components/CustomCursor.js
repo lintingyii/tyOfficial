@@ -14,7 +14,7 @@ const CustomCursorDiv = styled.div`
   border-radius: 50%;  /* 无论是否是链接，都是圆形 */
   position: fixed;
   pointer-events: none;
-  z-index: 10000;
+  z-index: 10001;
   transform: ${(props) => (props.isLink ? 'translate(-50%, -50%)' : 'translate(-50%, -50%)')};
   opacity: ${(props) => (props.visible ? 1 : 0)};
   transition: opacity 0.15s ease-in-out, transform 0.15s ease-in-out, width 0.15s ease-in-out, height 0.15s ease-in-out;

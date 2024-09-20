@@ -2,9 +2,10 @@ import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
 import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
-import Footer from "./footer";
+import Footer from "../Components/footer";
 import { color } from "framer-motion";
-import ServiceCardComponent from "./ServiceCard";
+import ServiceCardComponent from "../Components/ServiceCard";
+import { LargeProjectCard } from "../Components/ProjectCard";
 
 function MyComponent(props) {
   useEffect(() => {
@@ -86,6 +87,48 @@ function MyComponent(props) {
       document.body.removeChild(script);
     };
   }, []);
+
+  const Projects = [
+    {
+      date: "November, 2023",
+      image: "/arron-nieh.png",
+      title: "Aaron Nieh : Behind the Covers",
+      subtitle: "Lecture Visual Identity",
+      description:
+        'The key visual poster and event website for Aaron Nieh’s lecture, "Behind the Covers," at NCCU.',
+      tags: [
+        { name: "Graphic design", color: "#D58CFE" },
+        { name: "Frontend coding", color: "#F7883D" },
+      ],
+      link: "https://mellifluous-brioche-700f0a.netlify.app/",
+      openInNewTab: true,
+    },
+    {
+      date: "May, 2023",
+      image: "/megabank.png",
+      title: "Redesign deliverables-Mega Bank",
+      subtitle: "User interface and user experience redesign",
+      description:
+        "Conduct user testing to refine the exchange process and interface, then finalize with testing.",
+      tags: [{ name: "UI/UX design", color: "#7D8991" }],
+      link: "/work/MegaBank_Redesign",
+      openInNewTab: false,
+    },
+    {
+      date: "September, 2024",
+      image: "/有球必In CaseBoard.jpg",
+      title: "Sports Win",
+      subtitle: "Taipei CodeFest Hackathon - Honorable Mention",
+      description:
+        "A microservice for booking Taipei sports venues, incorporating team-building to maximize venue usage.",
+      tags: [
+        { name: "UI/UX design", color: "#7D8991" },
+        { name: "Frontend coding", color: "#F7883D" },
+      ],
+      link: "/work/sports_win",
+      openInNewTab: false,
+    },
+  ];
 
   return (
     <Div>
@@ -284,7 +327,7 @@ function MyComponent(props) {
         </Marqueetext>
       </Marquee>
 
-      <ServiceSection>
+      <Section>
         <SectionTitle>
           <div style={{ display: "flex" }}>
             Service
@@ -365,7 +408,7 @@ function MyComponent(props) {
                 display: "flex",
               }}
             ></creattie-embed>
-            <ServiceContent>UX & UI Design</ServiceContent>
+            <ServiceContent>UI / UX Design</ServiceContent>
             <ServiceDes>
               Digital Product • Design Systems • User Journeys • Prototyping
             </ServiceDes>
@@ -386,12 +429,12 @@ function MyComponent(props) {
             ></creattie-embed>
             <ServiceContent>Graphic Design</ServiceContent>
             <ServiceDes>
-              Design for Print • Packaging • Marketing Design • Iconography •
+              Design for Print • Packaging • Marketing Design •
               Illustration
             </ServiceDes>
           </ServiceCardComponent>
         </CardsContainer>
-      </ServiceSection>
+      </Section>
       <div
         style={{
           width: "100%",
@@ -399,7 +442,7 @@ function MyComponent(props) {
           backgroundColor: "#f2f2f2",
           zIndex: "999",
           justifyContent: "center",
-          padding: "2rem",
+          padding: "4rem",
           boxSizing: "border-box",
         }}
       >
@@ -413,7 +456,36 @@ function MyComponent(props) {
           <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
         </Flower>
       </div>
-      <Footer />
+
+      <Section style={{ paddingTop: "0rem" }}>
+        <SectionTitle style={{ flexDirection:'row', justifyContent:'center' }}>
+          Feature
+          <span
+            style={{
+              fontFamily: "serif",
+              fontStyle: "italic",
+            }}
+          >
+            (s)
+          </span>
+        </SectionTitle>
+        <CardsContainerWrapper>
+            {Projects.map((project, index) => (
+              <LargeProjectCard
+                key={index}
+                date={project.date}
+                image={project.image}
+                title={project.title}
+                subtitle={project.subtitle}
+                description={project.description}
+                tags={project.tags}
+                link={project.link}
+                openInNewTab={project.openInNewTab}
+              />
+            ))}
+        </CardsContainerWrapper>
+      </Section>
+      {/* <Footer /> */}
     </Div>
   );
 }
@@ -426,9 +498,6 @@ const Div = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
-  top: 0;
-  right: 0;
 
   @media (max-width: 440px) {
     // padding-top: 6vh;
@@ -459,55 +528,6 @@ const Banner = styled.picture`
       padding-top: 0vh;
     }
   }
-`;
-
-const Div2 = styled.div`
-  align-items: center;
-  position: fixed;
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-  justify-content: center;
-  border-radius: 50px;
-  border: 1.5px solid #333333;
-  background-color: #fff;
-  align-self: stretch;
-  display: flex;
-  width: 97%;
-  font-size: 30px;
-  color: #333333;
-  font-weight: 700;
-  padding: 8px 9px;
-  @media (max-width: 820px) {
-    max-width: 95%;
-  }
-  @media (max-width: 440px) {
-    max-width: 95%;
-    font-size: 24px;
-  }
-`;
-
-const Div3 = styled.div`
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #0000ff;
-`;
-
-const Div4 = styled.div`
-  text-align: center;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  flex-grow: 1;
-  flex-basis: auto;
-  color: #333333;
-`;
-
-const Div5 = styled.div`
-  text-align: right;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #333333;
 `;
 
 const typing = keyframes`
@@ -1071,188 +1091,6 @@ const Span = styled.span`
   white-space: nowrap;
 `;
 
-const RecentWorksContainer = styled.div`
-  display: flex;
-  margin-top: 38px;
-  width: 100%;
-  max-width: 1400px;
-  flex-direction: column;
-
-  @media (max-width: 991px) {
-    max-width: 100%;
-  }
-`;
-
-const RecentWorksTitle = styled.div`
-  color: #333333;
-  text-align: center;
-  align-self: center;
-  font: 500 42px/88% system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-`;
-
-const Divider = styled.div`
-  background-color: rgba(51, 51, 51, 1);
-  margin-top: 50px;
-  height: 1.5px;
-
-  @media (max-width: 991px) {
-    max-width: 100%;
-    margin-top: 40px;
-  }
-`;
-
-const WorkSection = styled.div`
-  margin-top: 32px;
-  display: flex;
-  flex-direction: row;
-  // justify-content: center;
-  height: 440px;
-
-  @media (max-width: 990px) {
-    flex-direction: column;
-    max-width: 100%;
-    margin-top: 40px;
-  }
-`;
-
-const LeftColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  line-height: normal;
-  width: 55%;
-  margin-left: 0px;
-  margin: 0;
-  height: 440px;
-
-  @media (max-width: 991px) {
-    width: 100%;
-  }
-`;
-
-const WorkImage = styled.img`
-  height: 100%;
-  flex-grow: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  // top: 24px;
-
-  @media (max-width: 991px) {
-    max-width: 100%;
-    margin-top: 32px;
-  }
-`;
-
-const RightColumn = styled.div`
-  display: flex;
-  flex-direction: column;
-  line-height: normal;
-  width: 44%;
-  margin-left: 24px;
-  justify-content: space-between;
-
-  @media (max-width: 991px) {
-    width: 100%;
-  }
-`;
-
-const YearAndCategories = styled.div`
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  font-size: 20px;
-  // margin-top: 36px;
-  white-space: nowrap;
-  padding: 0 1px;
-  @media (max-width: 991px) {
-    max-width: 100%;
-    flex-wrap: wrap;
-    white-space: initial;
-  }
-`;
-
-const YearLabel = styled.div`
-  color: #000;
-  font-family: Noto Sans TC, sans-serif;
-  font-weight: 500;
-  line-height: 100%;
-  align-self: start;
-  // margin-top: 12px;
-`;
-
-const CategoriesContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: end;
-  color: #7d8991;
-  font-weight: 700;
-  gap: 12px;
-
-  @media (max-width: 991px) {
-    white-space: initial;
-  }
-`;
-
-const CategoryLabel = styled.div`
-  font-family: Roboto, sans-serif;
-  justify-content: center;
-  border-radius: 80px;
-  background-color: #fff;
-  // margin-left: 20px;
-  padding: 4px 24px;
-  @media (max-width: 991px) {
-    white-space: initial;
-    margin-left: 10px;
-    padding: 0 20px;
-  }
-`;
-
-const LectureDetails = styled.div`
-  display: flex;
-  // margin-top: 180px;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 50px;
-  color: #000;
-  font-weight: 500;
-  @media (max-width: 991px) {
-    max-width: 100%;
-    margin-top: 40px;
-    flex-wrap: wrap;
-  }
-`;
-
-const LectureInfoContainer = styled.div`
-  align-self: start;
-  display: flex;
-  flex-direction: column;
-`;
-
-const LectureTitle = styled.div`
-  font: 14px/250.5% Noto Sans TC, sans-serif;
-`;
-
-const SpeakerInfo = styled.div`
-  margin-top: 12px;
-  white-space: nowrap;
-  font: 24px/146% Noto Sans TC, sans-serif;
-  @media (max-width: 991px) {
-    white-space: initial;
-  }
-`;
-
-const SpeakerImage = styled.img`
-  aspect-ratio: 0.97;
-  object-fit: auto;
-  object-position: center;
-  width: 37px;
-  fill: #333;
-  align-self: end;
-  margin-top: 22px;
-`;
-
 const DivFlipCard = styled.div`
   background-color: #f2f2f2;
   perspective: 1000px;
@@ -1337,34 +1175,36 @@ const ContentMob = styled.div`
   }
 `;
 
-const ServiceSection = styled.div`
+const Section = styled.div`
   width: 100%;
   background-color: #f2f2f2;
   z-index: 100;
   display: flex;
-  flex-direction: column; /* 使子元素上下排列 */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding-top: 3rem;
+  padding-top: 4rem;
 
   @media (max-width: 480px) {
     gap: 24px;
-    padding-top: 2.5rem;
+    padding-top: 3rem;
   }
 `;
 
 const CardsContainer = styled.div`
-  width: 90%;
-  display: flex;s
+  width: 80%;
+  display: flex;
   justify-content: space-around;
   align-items: center;
   gap: 1.5rem;
-  flex-wrap: pre-wrap;
+  // flex-wrap: wrap;
+  flex-direction: row;
 
   @media (max-width: 480px) {
     flex-direction: column;
     gap: 24px;
+    width: 90%;
   }
 `;
 
@@ -1394,42 +1234,17 @@ const SectionTitle = styled.div`
   }
 `;
 
-// const ServiceCard = styled.div`
-//   background-color: #333333;
-//   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-//     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-//   width: 100%;
-//   font-size: 48px;
-//   text-align: center;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   padding: 24px;
-//   border-radius: 16px;
-//   transition: background-color 0.2s ease-in;
-//   flex-grow: 1; /* 使 ServiceCard 在容器内均匀分配空间 */
-
-//   &:hover {
-//     background-color: ${(props) => props.hoverColor || "#333"};
-//   }
-
-//   @media (max-width: 480px) {
-//     width: 100%;
-//     box-sizing: border-box;
-//   }
-// `;
-
 const ServiceContent = styled.div`
   color: #fff;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  width: 20%;
+  width: 100%;
   font-weight: 700;
   font-size: 2rem;
   text-align: center;
   display: flex;
   justify-content: center;
-  white-space: nowrap;
+  white-space: pre-wrap;
 
   @media (max-width: 480px) {
     font-size: 24px;
@@ -1494,4 +1309,26 @@ const Flower = styled.svg`
   stroke: ${(props) => props.stroke || "#333"};
   stroke-width: 0.6;
   animation: ${rotate} 8s linear infinite;
+`;
+
+const CardsContainerWrapper = styled.div`
+  width: 80%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap; /* Allows wrapping to the next line */
+
+  @media (max-width: 1200px) {
+    /* For tablets */
+    // width: 100%;
+    justify-content: center;
+    padding: 0;
+  }
+
+  @media (max-width: 480px) {
+    /* For mobile screens */
+    width: 90%;
+    align-items: center;
+  }
 `;

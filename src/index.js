@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Footer from './footer';
+import Footer from './Components/footer';
 
 ReactDOM.render(
   <React.StrictMode>
     <div>
       <App />
-      <Footer />
+      {/* <Footer /> */}
     </div>
   </React.StrictMode>,
   document.getElementById('root')

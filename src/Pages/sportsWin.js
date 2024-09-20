@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Footer from "./footer";
+import Footer from "../Components/footer";
 
 const Container = styled.div`
   text-align: center;
@@ -10,9 +10,6 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
   margin: 0; /* 清除 margin */
   padding: 0 3vw;
   box-sizing: border-box;
@@ -856,7 +853,6 @@ const SportsWin = () => {
         >
           <BackButton>Back to Work</BackButton>
         </a>
-        <Footer color="#fff" />
       </Container>
     </>
   );

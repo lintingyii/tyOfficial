@@ -1,7 +1,6 @@
 import React from "react";
-import "./style.css";
 import styled, { keyframes } from "styled-components";
-import Footer from "./footer";
+import Footer from "../Components/footer";
 
 export const Resume = () => {
   return (
@@ -319,7 +318,7 @@ export const Resume = () => {
 
       <DownloadButton onClick={downloadPdf}>Download CV PDF</DownloadButton>
 
-      <Footer />
+      {/* <Footer /> */}
     </Div>
   );
 };
@@ -387,7 +386,7 @@ const Div = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
+  // position: absolute;
   top: 0;
   left: 0;
   padding-top: 13vh;

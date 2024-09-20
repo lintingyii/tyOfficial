@@ -7,14 +7,15 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
-import Resume from "./resume";
-import MyComponent from "./home";
-import Work from "./work";
-import YoungLions from "./youngLions";
-import MegaBankRedesign from "./MegaBankRedesign";
-import SportsWin from "./sportsWin";
+import Resume from "./Pages/resume";
+import MyComponent from "./Pages/home";
+import Work from "./Pages/work";
+import YoungLions from "./Pages/youngLions";
+import MegaBankRedesign from "./Pages/MegaBankRedesign";
+import SportsWin from "./Pages/sportsWin";
 import styled from "styled-components";
-import CustomCursor from "./CustomCursor";
+import CustomCursor from "./Components/CustomCursor";
+import Footer from "./Components/footer";
 import { createGlobalStyle } from "styled-components";
 import "./App.css";
 
@@ -25,50 +26,88 @@ const GlobalStyle = createGlobalStyle`
 `;
 
 const Conatiner = styled.div`
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   align-items: center;
   position: fixed;
   top: 5px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000;
+  z-index: 9999;
   justify-content: space-between;
+  display: flex;
+  width: 100%;
+  box-sizing: border-box;
+  height: fit-content;
+  font-size: 30px;
+  line-height: 1.18;
+
+  @media (max-width: 480px) {
+    font-size: 0.9rem;
+    top: unset;
+    bottom: 1rem;
+    width: 90%;
+  }
+`;
+
+const Logo = styled.div`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  border-radius: 50px;
+  border: 1.5px solid #333;
+  background-color: ${({ isActive }) => (isActive ? "#f2f2f2" : "#ffffff")};
+  display: flex;
+  width: 20%;
+  font-weight: 700;
+  padding: 10px 24px;
+  box-sizing: border-box;
+  height: fit-content;
+  justify-content: center;
+
+  @media (max-width: 480px) {
+    top: unset;
+    width: 28%;
+    padding: 4px 10px;
+  }
+`;
+
+const Wrapper = styled.div`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   border-radius: 50px;
   border: 1.5px solid #333333;
   background-color: #fff;
   display: flex;
-  width: 100%;
-  font-size: 30px;
+  justify-content: space-between;
+  width: 80%;
   font-weight: 700;
   padding: 10px 24px;
   box-sizing: border-box;
   height: fit-content;
 
   @media (max-width: 480px) {
-    font-size: 20px;
     top: unset;
-    bottom: 16px;
-    width: 90%;
-    padding: 10px 20px;
+    width: 100%;
+    padding: 4px 10px;
   }
 `;
 
-const Div3 = styled(Link)`
+const NavItem = styled(Link)`
   text-decoration: none;
+  white-space: nowrap;
   color: ${({ isActive }) => (isActive ? "#0000FF" : "#333333")};
+
+  @media (max-width: 480px) {
+    padding: 8px 12px;
+  }
 `;
 
-const Div4 = styled(Link)`
+const SpecialNavItem = styled(Link)`
   text-decoration: none;
-  text-align: center;
-  flex-basis: auto;
-  color: ${({ isActive }) => (isActive ? "#0000FF" : "#333333")};
-`;
+  white-space: nowrap;
+  color: ${({ isActive }) => (isActive ? "#D58CFE" : "#333")};
 
-const Div5 = styled(Link)`
-  text-decoration: none;
-  color: ${(props) => (props.isActive ? "#0000FF" : "#333333")};
+  @media (max-width: 480px) {
+    padding: 8px 12px;
+  }
 `;
 
 const ScrollToTop = () => {
@@ -92,9 +131,15 @@ const ProgressBar = styled.div`
   transition: width 0.25s ease; /* 平滑滾動效果 */
 `;
 
+const Main = styled.div`
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+`;
+
 function App() {
   return (
-    <>
+    <Main>
       <CustomCursor />
       <GlobalStyle />
       <Router>
@@ -113,8 +158,9 @@ function App() {
           {/* 其他路由... */}
         </Routes>
         <NavigationBar />
+        <Footer />
       </Router>
-    </>
+    </Main>
   );
 }
 
@@ -147,15 +193,22 @@ function NavigationBar() {
   return (
     <div>
       <Conatiner>
-        <Div3 to="/home" isActive={location.pathname === "/home"}>
-          Home
-        </Div3>
-        <Div4 to="/resume" isActive={location.pathname === "/resume"}>
-          Resume
-        </Div4>
-        <Div5 to="/work" isActive={isWorkActive}>
-          Work
-        </Div5>
+        <Logo isActive={location.pathname === "/home"}>
+          <SpecialNavItem to="/home" isActive={location.pathname === "/home"}>
+            {location.pathname === "/home" ? "Hello 👋🏻" : "Ting-yi"}
+          </SpecialNavItem>
+        </Logo>
+        <Wrapper>
+          <NavItem to="/resume" isActive={location.pathname === "/resume"}>
+            Resume
+          </NavItem>
+          <NavItem to="/work" isActive={isWorkActive}>
+            Work
+          </NavItem>
+          <NavItem as="a" href="mailto:910620morgan@gmail.com">
+            Contact
+          </NavItem>
+        </Wrapper>
       </Conatiner>
       <ProgressBar scroll={scroll} />
     </div>
