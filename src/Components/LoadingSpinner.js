@@ -11,8 +11,9 @@ const bounce = keyframes`
 `;
 
 const P = styled.p`
-  font-family: serif;
-  font-size: 1rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 1.5rem;
   color: #4B4B4B;
 `;
 
@@ -22,19 +23,20 @@ const Ball = styled.div`
   background-color: ${(props) => props.color};
   border-radius: 50%;
   position: absolute;
-  bottom: 20vh;
+  bottom: 40vh;
   animation: ${bounce} ${(props) => props.duration}s ease-in-out infinite;
   animation-delay: ${(props) => props.delay}s;
 `;
 
 const BallContainer = styled.div`
   width: 100%;
-  height: 85vh;
+  height: 100vh;
   position: relative;
+  background-color: #f2f2f2;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  //   padding-bottom: 20vh;
+  padding-bottom: 20vh;
   box-sizing: border-box;
 `;
 

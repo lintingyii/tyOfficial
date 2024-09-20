@@ -77,6 +77,7 @@ const Footerwraper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 2.5%;
+  margin-top: 5%;
   padding: 48px;
 
   @media (max-width: 480px) {
@@ -85,7 +86,9 @@ const Footerwraper = styled.div`
     gap: 8px;
     width: 90%;
     margin: 5%;
+    margin-top: 10%;
     padding: 24px;
+    padding-bottom: 64px;
   }
 `;
 
@@ -103,6 +106,7 @@ const Ending = styled.div`
   display: flex;
   flex-direction: row;
   width: 100%;
+  justify-content: center;
 
   @media (max-width: 480px) {
     flex-direction: column;

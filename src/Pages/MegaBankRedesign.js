@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-import Footer from "../Components/footer";
 import LoadingSpinner from "../Components/LoadingSpinner";
 
 const Container = styled.div`
@@ -22,7 +21,7 @@ const Container = styled.div`
 
 const Image = styled.img`
   width: ${(props) => props.width || "100%"};
-  display: ${(props) => (props.isLoaded ? "block" : "none")};
+  display: block;
 `;
 
 const SpecialButton = styled.button`
@@ -32,14 +31,14 @@ const SpecialButton = styled.button`
   background-color: #f5f5f5;
   border: 1px solid rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
-  display: ${(props) => (props.isLoaded ? "flex" : "none")};
+  display: flex;
   padding: 1rem;
   margin: auto;
   margin-top: 40px;
   width: 70%;
 
   a {
-display: ${(props) => (props.isLoaded ? "flex" : "none")};
+    display: flex;
     color: #666;
     align-items: center;
     justify-content: center;
@@ -80,8 +79,8 @@ const BackButton = styled.button`
   }
 `;
 
-const LinkButton = ({ imageSrc, imageWidth, href, children, isLoaded }) => (
-  <SpecialButton isLoaded={isLoaded}>
+const LinkButton = ({ imageSrc, imageWidth, href, children }) => (
+  <SpecialButton>
     <a
       href={href}
       target="_blank"
@@ -97,24 +96,12 @@ const LinkButton = ({ imageSrc, imageWidth, href, children, isLoaded }) => (
 );
 
 export const MegaBankRedesign = () => {
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoaded(true);
-    }, 2800);
-
-    return () => clearTimeout(timer);
-  }, []);
-
   return (
     <Container>
-      {!isLoaded && <LoadingSpinner />}
-      <Image src="/megabank.jpg" alt="MegaBank_redesign" isLoaded={isLoaded} />
+      <Image src="/megabank.jpg" alt="MegaBank_redesign" />
       <LinkButton
         imageSrc="/mega.png"
         href="https://www.figma.com/proto/EF36FvpfiARyTCxh68FFTg/mega-bank?page-id=0%3A1&node-id=14-37&node-type=canvas&viewport=419%2C368%2C0.05&t=il7Oa4MRE3tHWUDE-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=14%3A37"
-        isLoaded={isLoaded}
       >
         Prototype 👀
       </LinkButton>

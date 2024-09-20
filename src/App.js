@@ -18,6 +18,7 @@ import CustomCursor from "./Components/CustomCursor";
 import Footer from "./Components/footer";
 import { createGlobalStyle } from "styled-components";
 import "./App.css";
+import LoadingSpinner from "./Components/LoadingSpinner";
 
 const GlobalStyle = createGlobalStyle`
   body, * {
@@ -25,7 +26,7 @@ const GlobalStyle = createGlobalStyle`
  }
 `;
 
-const Conatiner = styled.div`
+const Container = styled.div`
   align-items: center;
   position: fixed;
   top: 5px;
@@ -120,6 +121,38 @@ const ScrollToTop = () => {
   return null;
 };
 
+function PageWithLoading() {
+  const location = useLocation(); // 监听路径变化
+  const [loading, setLoading] = useState(true); // 管理加载状态
+
+  useEffect(() => {
+    // 每次页面路径变化时触发
+    setLoading(true); // 页面变化时显示 loading
+    const timer = setTimeout(() => {
+      setLoading(false); // 2 秒后关闭 loading
+    }, 2000);
+
+    return () => clearTimeout(timer); // 清除定时器，避免内存泄漏
+  }, [location]); // location 变化时重新运行
+
+  // 页面加载时显示 Loading 组件
+  if (loading) {
+    return <LoadingSpinner />;
+  }
+
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/home" />} />
+      <Route path="/home" element={<MyComponent />} />
+      <Route path="/resume" element={<Resume />} />
+      <Route path="/work" element={<Work />} />
+      <Route path="/work/youngLions" element={<YoungLions />} />
+      <Route path="/work/MegaBank_Redesign" element={<MegaBankRedesign />} />
+      <Route path="/work/sports_win" element={<SportsWin />} />
+    </Routes>
+  );
+}
+
 const ProgressBar = styled.div`
   position: fixed;
   top: 0;
@@ -138,29 +171,29 @@ const Main = styled.div`
 `;
 
 function App() {
+
   return (
-    <Main>
-      <CustomCursor />
-      <GlobalStyle />
-      <Router>
-        <ScrollToTop />
-        <Routes>
-          <Route path="/" element={<Navigate to="/home" />} />
-          <Route path="/home" element={<MyComponent />} />
-          <Route path="/resume" element={<Resume />} />
-          <Route path="/work" element={<Work />} />
-          <Route path="/work/youngLions" element={<YoungLions />} />
-          <Route
-            path="/work/MegaBank_Redesign"
-            element={<MegaBankRedesign />}
-          />
-          <Route path="/work/sports_win" element={<SportsWin />} />
-          {/* 其他路由... */}
-        </Routes>
-        <NavigationBar />
-        <Footer />
-      </Router>
-    </Main>
+      <Main>
+        <CustomCursor />
+        <GlobalStyle />
+        <Router>
+          <ScrollToTop />
+          <Routes>
+            <Route path="/" element={<Navigate to="/home" />} />
+            <Route path="/home" element={<MyComponent />} />
+            <Route path="/resume" element={<Resume />} />
+            <Route path="/work" element={<Work />} />
+            <Route path="/work/youngLions" element={<YoungLions />} />
+            <Route
+              path="/work/MegaBank_Redesign"
+              element={<MegaBankRedesign />}
+            />
+            <Route path="/work/sports_win" element={<SportsWin />} />
+          </Routes>
+          <NavigationBar />
+          <Footer />
+        </Router>
+      </Main>
   );
 }
 
@@ -192,7 +225,7 @@ function NavigationBar() {
 
   return (
     <div>
-      <Conatiner>
+      <Container>
         <Logo isActive={location.pathname === "/home"}>
           <SpecialNavItem to="/home" isActive={location.pathname === "/home"}>
             {location.pathname === "/home" ? "Hello 👋🏻" : "Ting-yi"}
@@ -209,7 +242,7 @@ function NavigationBar() {
             Contact
           </NavItem>
         </Wrapper>
-      </Conatiner>
+      </Container>
       <ProgressBar scroll={scroll} />
     </div>
   );
