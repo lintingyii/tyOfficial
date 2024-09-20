@@ -29,7 +29,7 @@ const GlobalStyle = createGlobalStyle`
 const Container = styled.div`
   align-items: center;
   position: fixed;
-  top: 5px;
+  top: 0px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
@@ -158,10 +158,15 @@ const ProgressBar = styled.div`
   top: 0;
   left: 0;
   height: 5px;
+  display: none;
   background-color: #d58cfe;
   width: ${(props) => props.scroll}; /* 透過 scroll 動態設置寬度 */
   z-index: 999;
   transition: width 0.25s ease; /* 平滑滾動效果 */
+
+  @media (max-width: 480px) {
+    display: unset;
+  }
 `;
 
 const Main = styled.div`
