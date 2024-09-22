@@ -8,6 +8,7 @@ import * as fiber from "@react-three/fiber";
 import Footer from "../Components/footer";
 import Marquee from "react-fast-marquee";
 import ProjectFilter from "../Components/ProjectFilter";
+import IntroductionCard from "../Components/IntroductionCard";
 
 export const Work = () => {
   const initialProjects = [
@@ -55,8 +56,9 @@ export const Work = () => {
       description:
         "A digital creative campaign to encourage people to recycle down jackets.",
       tags: [
-        { name: "UI/UX design", color: "#7D8991" },
+        // { name: "UI/UX design", color: "#7D8991" },
         { name: "Creative Campaign", color: "#86C5CE" },
+        { name: "Graphic design", color: "#D58CFE" }
       ],
       link: "https://tome.app/tingyilin/niqlo-pufferverse-cm0l048t70ob76j1jun5bx1iq",
       openInNewTab: false,
@@ -88,6 +90,29 @@ export const Work = () => {
     },
   ];
 
+  const [introductionDescription, setIntroductionDescription] = useState(
+    <Content>
+      <DefaultIcon />
+      <TextWrapperSmall>
+        <p style={{ margin: "0" }}>
+          I'm a
+          <span
+            style={{
+              color: "#000fff",
+              margin: "0 4px",
+              width: "fit-content",
+              fontWeight: "500",
+            }}
+          >
+            multidisciplinary designer
+          </span>
+          passionate about creating innovative, user-centered and good-looking
+          things. With a strong background in user experience, I bring
+          creativity and precision to every project.
+        </p>
+      </TextWrapperSmall>
+    </Content>
+  );
   const [projects, setProjects] = useState(initialProjects); // 初始專案資料
   const [filteredProjects, setFilteredProjects] = useState(initialProjects); // 篩選後的專案資料
 
@@ -181,6 +206,10 @@ export const Work = () => {
         <ProjectFilter
           projects={projects}
           setFilteredProjects={setFilteredProjects}
+          setIntroductionDescription={setIntroductionDescription}
+        />
+        <IntroductionCard
+          description={introductionDescription} // 使用狀態作為內容
         />
         <CardsContainerWrapper>
           {filteredProjects.map((project, index) => (
@@ -198,10 +227,7 @@ export const Work = () => {
           ))}
         </CardsContainerWrapper>
       </CardsContainer>
-      <Marquee
-        speed={80}
-        style={{backgroundColor:'#f2f2f2'}}
-      >
+      <Marquee speed={80} style={{ backgroundColor: "#f2f2f2" }}>
         <Marqueetext>
           <MarqueeSpan>Let's work together 👀</MarqueeSpan>
           <MarqueeSpan>Let's work together 👀</MarqueeSpan>
@@ -213,7 +239,6 @@ export const Work = () => {
           <MarqueeSpan>Let's work together 👀</MarqueeSpan>
         </Marqueetext>
       </Marquee>
-      {/* <Footer /> */}
     </Div>
   );
 };
@@ -451,20 +476,10 @@ const CardsContainer = styled.div`
 // Wrapper for card groups
 const CardsContainerWrapper = styled.div`
   width: 80%;
-  margin: 0 auto;
   display: flex;
-  // align-items: left;
   justify-content: center;
   gap: 2rem;
   flex-wrap: wrap; /* Allows wrapping to the next line */
-  // padding: 0 3rem;
-
-  @media (max-width: 1200px) {
-    /* For tablets */
-    width: 100%;
-    justify-content: center;
-    padding: 0;
-  }
 
   @media (max-width: 800px) {
     /* For mobile screens */
@@ -473,43 +488,39 @@ const CardsContainerWrapper = styled.div`
   }
 `;
 
-const H4 = styled.div`
+const Content = styled.div`
   font-family: serif;
-  font-style: italic;
-  margin-top: 5vh;
-  background-color: #333;
-  color: #fff;
-  padding: 0px 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @media (max-width: 480px) {
+    align-items: flex-start;
+  }
 `;
 
-// const bounce = keyframes`
-//   0%, 100% {
-//     transform: translateY(0) translateX(0);
-//   }
-//   50% {
-//     transform: translateY(-200px) translateX(0px);
-//   }
-// `;
+const TextWrapperSmall = styled.div`
+  text-align: left;
+  whitespace: "nowrap";
+`;
 
-// const Ball = styled.div`
-//   width: ${props => props.size}px;
-//   height: ${props => props.size}px;
-//   background-color: ${props => props.color};
-//   border-radius: 50%;
-//   position: absolute;
-//   bottom: 0;
-//   animation: ${bounce} ${props => props.duration}s ease-in-out infinite;
-//   animation-delay: ${props => props.delay}s;
-// `;
-
-// const BallContainer = styled.div`
-//   width: 100%;
-//   height: 400px;
-//   position: relative;
-//   display: flex;
-//   justify-content: center;
-//   align-items: flex-end;
-// `;
+const DefaultIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    width="20%"
+    height="20%"
+    fill="#000fff"
+    style={{
+      maxWidth: "2rem",
+      minWidth: "1.5rem",
+      maxHeight: "2rem",
+      minHeight: "1.5rem",
+    }}
+  >
+    <path d="M232,104a56.06,56.06,0,0,0-56-56H136a24,24,0,0,1,24-24,8,8,0,0,0,0-16,40,40,0,0,0-40,40H80a56.06,56.06,0,0,0-56,56,16,16,0,0,0,8,13.84V128c0,35.53,33.12,62.12,59.74,83.49C103.66,221.07,120,234.18,120,240a8,8,0,0,0,16,0c0-5.82,16.34-18.93,28.26-28.51C190.88,190.12,224,163.53,224,128V117.84A16,16,0,0,0,232,104Zm-77.75,95c-10.62,8.52-20,16-26.25,23.37-6.25-7.32-15.63-14.85-26.25-23.37C77.8,179.79,48,155.86,48,128v-8H208v8C208,155.86,178.2,179.79,154.25,199Z" />
+  </svg>
+);
 
 const Marqueetext = styled.div`
   font-family: serif;

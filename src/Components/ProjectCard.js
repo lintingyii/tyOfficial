@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+//ProjectCard
+
 const DateLabel = styled.div`
   color: #333;
   font-size: 14px;
@@ -62,7 +64,7 @@ const Description = styled.p`
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 16px;
   color: #555555;
-  margin-top: 0px;
+  margin-top: 4px;
   margin-bottom: 32px;
   transition: color 0.3s ease-in;
 `;
@@ -102,15 +104,15 @@ const CardContainer = styled.a`
 
   &:hover {
     cursor: pointer;
-    background-color: #333; /* 鼠标悬停时的背景色 */
-    color: #fff; /* 鼠标悬停时的文字颜色 */
+    background-color: #333;
+    color: #fff;
 
     ${Title}, ${Subtitle}, ${Description}, ${DateLabel} {
-      color: #fff; /* 子元素的文字颜色 */
+      color: #fff;
     }
 
     ${Tag} {
-      background-color: #fff; /* 标签背景色 */
+      background-color: #fff;
     }
 
     ${ImageContainer} {
@@ -162,13 +164,29 @@ function ProjectCard({
   );
 }
 
+//LargeProjectCard
+
 const LargeImageContainer = styled(ImageContainer)`
   flex: 1;
-  width: auto; // 調整圖片容器高度，讓它隨內容變化
+  width: auto;
   margin: 0;
+  // animation: slideIn 1s ease-out;
+  // animation-timeline: view();
+  // animation-range: entry 0% cover 40%;
+
+  // @keyframes slideIn {
+  //   from {
+  //     opacity: 1;
+  //     transform: translateX(-100%); /* 從左側外面開始 */
+  //   }
+  //   to {
+  //     opacity: 1;
+  //     transform: translateX(0); /* 到達正常位置 */
+  //   }
+  // }
 
   @media (max-width: 800px) {
-    max-width: 100%; // 在較小屏幕上改成100%
+    max-width: 100%;
   }
 `;
 
@@ -180,6 +198,20 @@ const LargeTitle = styled.h3`
   margin-top: 24px;
   color: #333333;
   transition: color 0.3s ease-in;
+  // animation: slideIn 1s ease-out;
+  // animation-timeline: view();
+  // animation-range: entry 0% cover 40%;
+
+  // @keyframes slideIn {
+  //   from {
+  //     opacity: 1;
+  //     transform: translateX(-100%); /* 從左側外面開始 */
+  //   }
+  //   to {
+  //     opacity: 1;
+  //     transform: translateX(0); /* 到達正常位置 */
+  //   }
+  // }
 
   @media (max-width: 480px) {
     font-size: 24px;
@@ -193,12 +225,26 @@ const TitleGroup = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  // animation: slideIn 1s ease-out;
+  // animation-timeline: view();
+  // animation-range: entry 0% cover 40%;
+
+  // @keyframes slideIn {
+  //   from {
+  //     opacity: 1;
+  //     transform: translateX(-100%); /* 從左側外面開始 */
+  //   }
+  //   to {
+  //     opacity: 1;
+  //     transform: translateX(0); /* 到達正常位置 */
+  //   }
+  // }
 
   @media (max-width: 800px) {
     flex-direction: column;
     align-items: unset;
     justify-content: unset;
-    margin-top: .8rem;
+    margin-top: 0.8rem;
   }
 `;
 
@@ -211,6 +257,20 @@ const LargeContent = styled.div`
   justify-content: space-around;
   padding: 0;
   margin: 0;
+  // animation: slideIn 1s ease-out;
+  // animation-timeline: view();
+  // animation-range: entry 0% cover 40%;
+
+  // @keyframes slideIn {
+  //   from {
+  //     opacity: 1;
+  //     transform: translateX(-100%); /* 從左側外面開始 */
+  //   }
+  //   to {
+  //     opacity: 1;
+  //     transform: translateX(0); /* 到達正常位置 */
+  //   }
+  // }
 
   @media (max-width: 800px) {
     padding-left: 0;
@@ -222,13 +282,28 @@ const LargeCardContainer = styled(CardContainer)`
   flex-direction: row;
   align-items: center;
   padding: 20px;
-  max-width: 100%; // 讓橫向卡片佔滿寬度
+  max-width: 100%;
   height: auto;
   gap: 4%;
+  animation: slideIn 3s ease;
+  animation-timeline: view();
+  animation-range: entry 0% cover 25%;
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateX(-100%); /* 從左側外面開始 */
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0); /* 到達正常位置 */
+    }
+  }
 
   @media (max-width: 800px) {
     flex-direction: column;
     width: 100%;
+    animation: slideIn 1s ease;
   }
 
   &:hover {

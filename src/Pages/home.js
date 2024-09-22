@@ -429,8 +429,7 @@ function MyComponent(props) {
             ></creattie-embed>
             <ServiceContent>Graphic Design</ServiceContent>
             <ServiceDes>
-              Design for Print • Packaging • Marketing Design •
-              Illustration
+              Design for Print • Packaging • Marketing Design • Illustration
             </ServiceDes>
           </ServiceCardComponent>
         </CardsContainer>
@@ -458,7 +457,9 @@ function MyComponent(props) {
       </div>
 
       <Section style={{ paddingTop: "0rem" }}>
-        <SectionTitle style={{ flexDirection:'row', justifyContent:'center' }}>
+        <SectionTitle
+          style={{ flexDirection: "row", justifyContent: "center" }}
+        >
           Feature
           <span
             style={{
@@ -470,20 +471,30 @@ function MyComponent(props) {
           </span>
         </SectionTitle>
         <CardsContainerWrapper>
-            {Projects.map((project, index) => (
-              <LargeProjectCard
-                key={index}
-                date={project.date}
-                image={project.image}
-                title={project.title}
-                subtitle={project.subtitle}
-                description={project.description}
-                tags={project.tags}
-                link={project.link}
-                openInNewTab={project.openInNewTab}
-              />
-            ))}
+          {Projects.map((project, index) => (
+            <LargeProjectCard
+              key={index}
+              date={project.date}
+              image={project.image}
+              title={project.title}
+              subtitle={project.subtitle}
+              description={project.description}
+              tags={project.tags}
+              link={project.link}
+              openInNewTab={project.openInNewTab}
+            />
+          ))}
         </CardsContainerWrapper>
+        <a
+          href="/work"
+          rel="noopener noreferrer"
+          style={{ textDecoration: "none" }}
+        >
+          <ViewMoreButton>
+            View More Works
+            <EyeIcon />
+          </ViewMoreButton>
+        </a>
       </Section>
       {/* <Footer /> */}
     </Div>
@@ -1332,3 +1343,42 @@ const CardsContainerWrapper = styled.div`
     align-items: center;
   }
 `;
+
+const ViewMoreButton = styled.button`
+  height: 100%;
+  background-color: #e1cdff;
+  color: #333;
+  padding: 12px 24px;
+  font-size: 1rem;
+  border: none;
+  border-radius: 50px;
+  white-space: nowrap;
+  cursor: pointer;
+  display: flex;
+  gap: 0.8rem;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  transition: background-color 0.8s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+    color: #f2f2f2;
+  }
+
+  @media (max-width: 480px) {
+    padding: 8px 12px;
+    font-size: 0.8rem;
+  }
+`;
+
+const EyeIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    width="20"
+    height="20"
+    fill="currentColor"
+  >
+    <path d="M247.31,124.76c-.35-.79-8.82-19.58-27.65-38.41C194.57,61.26,162.88,48,128,48S61.43,61.26,36.34,86.35C17.51,105.18,9,124,8.69,124.76a8,8,0,0,0,0,6.5c.35.79,8.82,19.57,27.65,38.4C61.43,194.74,93.12,208,128,208s66.57-13.26,91.66-38.34c18.83-18.83,27.3-37.61,27.65-38.4A8,8,0,0,0,247.31,124.76ZM128,168a40,40,0,1,1,40-40A40,40,0,0,1,128,168Z" />
+  </svg>
+);

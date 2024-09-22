@@ -176,29 +176,28 @@ const Main = styled.div`
 `;
 
 function App() {
-
   return (
-      <Main>
-        <CustomCursor />
-        <GlobalStyle />
-        <Router>
-          <ScrollToTop />
-          <Routes>
-            <Route path="/" element={<Navigate to="/home" />} />
-            <Route path="/home" element={<MyComponent />} />
-            <Route path="/resume" element={<Resume />} />
-            <Route path="/work" element={<Work />} />
-            <Route path="/work/youngLions" element={<YoungLions />} />
-            <Route
-              path="/work/MegaBank_Redesign"
-              element={<MegaBankRedesign />}
-            />
-            <Route path="/work/sports_win" element={<SportsWin />} />
-          </Routes>
-          <NavigationBar />
-          <Footer />
-        </Router>
-      </Main>
+    <Main>
+      <CustomCursor />
+      <GlobalStyle />
+      <Router>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Navigate to="/home" />} />
+          <Route path="/home" element={<MyComponent />} />
+          <Route path="/resume" element={<Resume />} />
+          <Route path="/work" element={<Work />} />
+          <Route path="/work/youngLions" element={<YoungLions />} />
+          <Route
+            path="/work/MegaBank_Redesign"
+            element={<MegaBankRedesign />}
+          />
+          <Route path="/work/sports_win" element={<SportsWin />} />
+        </Routes>
+        <NavigationBar />
+        <Footer />
+      </Router>
+    </Main>
   );
 }
 
