@@ -1347,7 +1347,7 @@ const CardsContainerWrapper = styled.div`
 const ViewMoreButton = styled.button`
   height: 100%;
   background-color: #e1cdff;
-  color: #333;
+  color: #000fff;
   padding: 12px 24px;
   font-size: 1rem;
   border: none;
@@ -1366,8 +1366,10 @@ const ViewMoreButton = styled.button`
   }
 
   @media (max-width: 480px) {
-    padding: 8px 12px;
+    padding: 8px 16px;
     font-size: 0.8rem;
+    align-items: center;
+    gap: 0.5rem;
   }
 `;
 

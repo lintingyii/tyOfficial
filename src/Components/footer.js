@@ -36,6 +36,12 @@ export const Footer = ({ color }) => {
                 <LinkedInIcon />
               </Span>
             </Link>
+            <Link href="https://www.instagram.com/mglty.19/" target="_blank" rel="noopener noreferrer">
+              <Span>
+                Instagram
+                <IGIcon />
+              </Span>
+            </Link>
           </LinkGroup>
         </Text>
         <BgIcon />
@@ -171,8 +177,10 @@ const Span = styled.div`
   }
 
   @media (max-width: 480px) {
-    padding: 8px 12px;
+    padding: 8px 16px;
     font-size: 0.8rem;
+    align-items: center;
+    gap: 0.3rem;
   }
 `;
 
@@ -247,5 +255,17 @@ const LinkedInIcon = () => (
     fill="currentColor"
   >
     <path d="M216,24H40A16,16,0,0,0,24,40V216a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V40A16,16,0,0,0,216,24ZM96,176a8,8,0,0,1-16,0V112a8,8,0,0,1,16,0ZM88,96a12,12,0,1,1,12-12A12,12,0,0,1,88,96Zm96,80a8,8,0,0,1-16,0V140a20,20,0,0,0-40,0v36a8,8,0,0,1-16,0V112a8,8,0,0,1,15.79-1.78A36,36,0,0,1,184,140Z" />
+  </svg>
+);
+
+const IGIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    width="20"
+    height="20"
+    fill="currentColor"
+  >
+    <path d="M160,128a32,32,0,1,1-32-32A32,32,0,0,1,160,128Zm72-48v96a56.06,56.06,0,0,1-56,56H80a56.06,56.06,0,0,1-56-56V80A56.06,56.06,0,0,1,80,24h96A56.06,56.06,0,0,1,232,80Zm-56,48a48,48,0,1,0-48,48A48.05,48.05,0,0,0,176,128Zm24-60a12,12,0,1,0-12,12A12,12,0,0,0,200,68Z"/>
   </svg>
 );

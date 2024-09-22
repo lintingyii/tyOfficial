@@ -316,7 +316,7 @@ export const Resume = () => {
         </div>
       </Div2>
 
-      <DownloadButton onClick={downloadPdf}>Download CV PDF</DownloadButton>
+      <DownloadButton onClick={downloadPdf}>Download CV PDF<DownloadIcon/></DownloadButton>
 
       {/* <Footer /> */}
     </Div>
@@ -325,14 +325,18 @@ export const Resume = () => {
 export default Resume;
 
 const DownloadButton = styled.button`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: #e1cdff;
   color: #0000ff;
-  padding: 8px 24px;
-  font-size: 16px;
+  padding: 12px 24px;
+  font-size: 1rem;
   border: none;
   border-radius: 50px;
   cursor: pointer;
   margin-top: 90px;
+  display: flex;
+  gap: 0.5rem;
 
   transition: background-color 0.8s;
 
@@ -340,6 +344,10 @@ const DownloadButton = styled.button`
     background-color: rgba(0, 0, 0, 0.8);
     color: #ffffff;
   }
+  // @media (max-width: 480px) {
+  //   padding: 8px 12px;
+  //   font-size: 0.8rem;
+  // }
 `;
 
 const downloadJpg = () => {
@@ -360,6 +368,18 @@ const downloadJpg = () => {
   // 移除 <a> 元素
   document.body.removeChild(link);
 };
+
+const DownloadIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    width="20"
+    height="20"
+    fill="currentColor"
+  >
+    <path d="M223.16,68.42l-16-32A8,8,0,0,0,200,32H56a8,8,0,0,0-7.16,4.42l-16,32A8.08,8.08,0,0,0,32,72V208a16,16,0,0,0,16,16H208a16,16,0,0,0,16-16V72A8.08,8.08,0,0,0,223.16,68.42Zm-57.5,89.24-32,32a8,8,0,0,1-11.32,0l-32-32a8,8,0,0,1,11.32-11.32L120,164.69V104a8,8,0,0,1,16,0v60.69l18.34-18.35a8,8,0,0,1,11.32,11.32ZM52.94,64l8-16H195.06l8,16Z"/>
+  </svg>
+);
 
 const downloadPdf = () => {
   // 將 PDF 文件的路徑替換為實際的文件路徑
