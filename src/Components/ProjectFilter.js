@@ -85,7 +85,7 @@ const ProjectFilter = ({
 
   const getIntroductionByTag = (tag) => {
     switch (tag) {
-      case "":
+      default:
         return (
           <Content>
             <DefaultIcon />
