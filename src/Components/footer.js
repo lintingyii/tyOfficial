@@ -131,7 +131,7 @@ const Header = styled.h1`
   // animation-range: entry 0% cover 60%;
   z-index: 1;
   opacity: 0; /* 初始為不可見 */
-  transition: opacity 1.5s ease, transform 1.5s ease;
+  transition: opacity 1.5s ease, transform 1.5s ease, color .8 ease;
   transform: translateY(-100%);
 
   &.visible {
