@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
 import { useLocation } from "react-router-dom";
+import { useInView } from 'react-intersection-observer';
 
 export const Footer = ({ color }) => {
   const location = useLocation();
@@ -15,10 +16,15 @@ export const Footer = ({ color }) => {
       footerColor = "#f2f2f2"; // 默認顏色
   }
 
+  const  { ref , inView , entry }  =  useInView ( { 
+    /* 可選選項 */ 
+    Threshold : 0.2 , 
+  } ) ;
+
   return (
     <FooterContainer color={footerColor}>
       <Footerwraper>
-        <Header>Let's connect ◡̎</Header>
+        <Header ref={ref} className={inView ? "visible" : ""}>Let's connect ◡̎</Header>
         <Hr />
         <Text>
           Thank you for visiting. <br />
@@ -101,16 +107,16 @@ const Footerwraper = styled.div`
   }
 `;
 
-const load = keyframes`
-  0% {
-    transform: translateY(90px);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-`;
+// const load = keyframes`
+//   0% {
+//     transform: translateY(90px);
+//     opacity: 1;
+//   }
+//   100% {
+//     transform: translateY(0px);
+//     opacity: 1;
+//   }
+// `;
 
 const Header = styled.h1`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -121,10 +127,17 @@ const Header = styled.h1`
   color: #fff;
   width: 100%;
   transition: 1s ease;
-  animation: ${load} 1s ease;
-  animation-timeline: view();
-  animation-range: entry 0% cover 60%;
+  // animation-timeline: view();
+  // animation-range: entry 0% cover 60%;
   z-index: 1;
+  opacity: 0; /* 初始為不可見 */
+  transition: opacity 1.5s ease, transform 1.5s ease;
+  transform: translateY(-100%);
+
+  &.visible {
+    opacity: 1;
+    transform: translateY(0); /* 滑入畫面 */
+  }
 
   &:hover {
     color: #000fff;

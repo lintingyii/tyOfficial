@@ -88,6 +88,20 @@ export const Work = () => {
       link: "/work/sports_win",
       openInNewTab: false,
     },
+    // {
+    //   date: "October, 2024",
+    //   image: "/todos.png",
+    //   title: "Simple TODO(s)",
+    //   subtitle: "TODOs WebAPP",
+    //   description:
+    //     "A microservice for booking Taipei sports venues, incorporating team-building to maximize venue usage.",
+    //   tags: [
+    //     { name: "UI/UX design", color: "#7D8991" },
+    //     { name: "Frontend coding", color: "#F7883D" },
+    //   ],
+    //   link: "/work/sports_win",
+    //   openInNewTab: false,
+    // },
   ];
 
   const [introductionDescription, setIntroductionDescription] = useState(

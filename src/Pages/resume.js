@@ -499,7 +499,7 @@ const Div6 = styled.div`
 const Div7 = styled.div`
   color: #555;
   margin-top: 20px;
-  white-space: nowrap;
+  white-space: pre-wrap;
   font: 400 15px/150% Assistant, sans-serif;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;

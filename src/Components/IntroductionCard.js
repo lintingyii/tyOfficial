@@ -1,16 +1,6 @@
 import React from "react";
 import styled, { keyframes } from "styled-components";
-
-const load = keyframes`
-  0% {
-    transform: translateX(-40px);
-    opacity: 0;
-  }
-  100% {
-    transform: translateY(0px);
-    opacity: 1;
-  }
-`;
+import { useInView } from 'react-intersection-observer';
 
 const CardContainer = styled.div`
   display: flex;
@@ -21,8 +11,14 @@ const CardContainer = styled.div`
   border: 1.5px solid ${({ borderColor }) => borderColor || '#E2E2E2'};
   border-radius: 12px;
   box-sizing: border-box;
-  animation: ${load} 400ms ease-in forwards;
-  animation-delay: 20ms;
+  opacity: 0; 
+  transition: opacity 1.5s ease, transform 1.5s ease, background-color 0.8s ease;
+  transform: translateX(-100%);
+
+  &.visible {
+    opacity: 1;
+    transform: translateX(0); /* 滑入畫面 */
+  }
 
   @media (max-width: 800px) {
     width: 90%;
@@ -46,8 +42,13 @@ function IntroductionCard({
     description,
     borderColor 
   }) {
+    const  { ref , inView , entry }  =  useInView ( { 
+        /* 可選選項 */ 
+        Threshold : 0.2 , 
+      } ) ;
+
     return (
-        <CardContainer borderColor={borderColor}>
+        <CardContainer borderColor={borderColor} ref={ref} className={inView ? "visible" : ""}>
             <Content>
                 {description}
             </Content>

@@ -1,5 +1,6 @@
-import React from "react";
+import React,{ useEffect, useRef } from "react";
 import styled from "styled-components";
+import { useInView } from 'react-intersection-observer';
 
 //ProjectCard
 
@@ -170,20 +171,6 @@ const LargeImageContainer = styled(ImageContainer)`
   flex: 1;
   width: auto;
   margin: 0;
-  // animation: slideIn 1s ease-out;
-  // animation-timeline: view();
-  // animation-range: entry 0% cover 40%;
-
-  // @keyframes slideIn {
-  //   from {
-  //     opacity: 1;
-  //     transform: translateX(-100%); /* 從左側外面開始 */
-  //   }
-  //   to {
-  //     opacity: 1;
-  //     transform: translateX(0); /* 到達正常位置 */
-  //   }
-  // }
 
   @media (max-width: 800px) {
     max-width: 100%;
@@ -198,20 +185,6 @@ const LargeTitle = styled.h3`
   margin-top: 24px;
   color: #333333;
   transition: color 0.3s ease-in;
-  // animation: slideIn 1s ease-out;
-  // animation-timeline: view();
-  // animation-range: entry 0% cover 40%;
-
-  // @keyframes slideIn {
-  //   from {
-  //     opacity: 1;
-  //     transform: translateX(-100%); /* 從左側外面開始 */
-  //   }
-  //   to {
-  //     opacity: 1;
-  //     transform: translateX(0); /* 到達正常位置 */
-  //   }
-  // }
 
   @media (max-width: 480px) {
     font-size: 24px;
@@ -225,20 +198,6 @@ const TitleGroup = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  // animation: slideIn 1s ease-out;
-  // animation-timeline: view();
-  // animation-range: entry 0% cover 40%;
-
-  // @keyframes slideIn {
-  //   from {
-  //     opacity: 1;
-  //     transform: translateX(-100%); /* 從左側外面開始 */
-  //   }
-  //   to {
-  //     opacity: 1;
-  //     transform: translateX(0); /* 到達正常位置 */
-  //   }
-  // }
 
   @media (max-width: 800px) {
     flex-direction: column;
@@ -257,20 +216,6 @@ const LargeContent = styled.div`
   justify-content: space-around;
   padding: 0;
   margin: 0;
-  // animation: slideIn 1s ease-out;
-  // animation-timeline: view();
-  // animation-range: entry 0% cover 40%;
-
-  // @keyframes slideIn {
-  //   from {
-  //     opacity: 1;
-  //     transform: translateX(-100%); /* 從左側外面開始 */
-  //   }
-  //   to {
-  //     opacity: 1;
-  //     transform: translateX(0); /* 到達正常位置 */
-  //   }
-  // }
 
   @media (max-width: 800px) {
     padding-left: 0;
@@ -285,19 +230,13 @@ const LargeCardContainer = styled(CardContainer)`
   max-width: 100%;
   height: auto;
   gap: 4%;
-  animation: slideIn 3s ease;
-  animation-timeline: view();
-  animation-range: entry 0% cover 25%;
+  opacity: 0; /* 初始為不可見 */
+  transition: opacity 1.5s ease, transform 1.5s ease, background-color 0.8s ease;
+  transform: translateX(-100%);
 
-  @keyframes slideIn {
-    from {
-      opacity: 0;
-      transform: translateX(-100%); /* 從左側外面開始 */
-    }
-    to {
-      opacity: 1;
-      transform: translateX(0); /* 到達正常位置 */
-    }
+   &.visible {
+    opacity: 1;
+    transform: translateX(0); /* 滑入畫面 */
   }
 
   @media (max-width: 800px) {
@@ -343,8 +282,13 @@ function LargeProjectCard({
     }
   };
 
+  const  { ref , inView , entry }  =  useInView ( { 
+    /* 可選選項 */ 
+    Threshold : 0.2 , 
+  } ) ;
+
   return (
-    <LargeCardContainer onClick={handleClick}>
+    <LargeCardContainer onClick={handleClick} ref={ref} className={inView ? "visible" : ""}> 
       <LargeImageContainer>
         <img src={image} alt={title} />
       </LargeImageContainer>
