@@ -38,7 +38,7 @@ export const Work = () => {
       openInNewTab: false,
     },
     {
-      date: "January - April 2023",
+      date: "January, 2023",
       image: "/younglions.png",
       title: "VC Kungfu",
       subtitle: "Young Lions Competition, 4TH Prize",

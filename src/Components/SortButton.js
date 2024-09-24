@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components";
+import { useInView } from 'react-intersection-observer';
 
 const Button = styled.button`
   color: ${({ isSorted }) => (isSorted ? "#a8a8a8" : "#e2e2e2")};
@@ -9,10 +10,14 @@ const Button = styled.button`
   width: auto;
   cursor: pointer;
   background-color: ${({ isSorted }) => (isSorted ? "#e2e2e2" : "#f2f2f2")};
+  opacity: 0; 
+  transition: opacity 1.5s ease, transform 1.5s ease, background-color 0.8s ease;
+  transform: translateX(-200%);
 
-//   &:hover {
-//     background-color: #F6F6F6;
-//   }
+  &.visible {
+    opacity: 1;
+    transform: translateX(0); /* 滑入畫面 */
+  }
 `;
 
 const Container = styled.div`
@@ -39,26 +44,60 @@ const ClockIcon = () => (
 );
 
 const SortButton = ({ filteredProjects, originalFilteredProjects, setFilteredProjects, isSorted, setIsSorted }) => {
+
+    const  { ref , inView , entry }  =  useInView ( { 
+        /* 可選選項 */ 
+        Threshold : 0.2 , 
+      } ) ;
   
-    const handleSortToggle = () => {
-      if (isSorted) {
-        // 回到篩選後的原始順序
-        setFilteredProjects(originalFilteredProjects);
-      } else {
-        // 按日期排序
-        const sortedProjects = [...filteredProjects].sort((a, b) => {
-          const dateA = new Date(a.date);
-          const dateB = new Date(b.date);
-          return dateB - dateA;
-        });
-        setFilteredProjects(sortedProjects);
-      }
-      setIsSorted(!isSorted); // 切換排序狀態
-    };
+      const handleSortToggle = () => {
+        if (isSorted) {
+          setFilteredProjects(originalFilteredProjects);
+        } else {
+          const months = {
+            January: 0,
+            February: 1,
+            March: 2,
+            April: 3,
+            May: 4,
+            June: 5,
+            July: 6,
+            August: 7,
+            September: 8,
+            October: 9,
+            November: 10,
+            December: 11,
+          };
+      
+          const sortedProjects = [...filteredProjects].sort((a, b) => {
+            const parseDate = (dateStr) => {
+              // Handle both "Month, Year" and "Month - Month Year" formats
+              if (dateStr.includes("-")) {
+                // Extract the first month and year from "Month - Month Year"
+                const [range, year] = dateStr.split(" ");
+                const [startMonth] = range.split(" - ");
+                return new Date(year, months[startMonth.trim()]);
+              } else {
+                // Handle "Month, Year" format
+                const [month, year] = dateStr.split(", ");
+                return new Date(year, months[month.trim()]);
+              }
+            };
+      
+            const dateA = parseDate(a.date);
+            const dateB = parseDate(b.date);
+      
+            return dateB - dateA;
+          });
+      
+          setFilteredProjects(sortedProjects);
+        }
+        setIsSorted(!isSorted);
+      };      
 
   return (
     <Container>
-      <Button isSorted={isSorted} onClick={handleSortToggle}>
+      <Button isSorted={isSorted} onClick={handleSortToggle} ref={ref} className={inView ? "visible" : ""}>
         <ClockIcon />
       </Button>
     </Container>
