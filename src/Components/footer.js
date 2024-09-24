@@ -107,17 +107,6 @@ const Footerwraper = styled.div`
   }
 `;
 
-// const load = keyframes`
-//   0% {
-//     transform: translateY(90px);
-//     opacity: 1;
-//   }
-//   100% {
-//     transform: translateY(0px);
-//     opacity: 1;
-//   }
-// `;
-
 const Header = styled.h1`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;

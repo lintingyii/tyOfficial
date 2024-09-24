@@ -11,6 +11,7 @@ const CardContainer = styled.div`
   border: 1.5px solid ${({ borderColor }) => borderColor || '#E2E2E2'};
   border-radius: 12px;
   box-sizing: border-box;
+  margin: 0 auto;
   opacity: 0; 
   transition: opacity 1.5s ease, transform 1.5s ease, background-color 0.8s ease;
   transform: translateX(-100%);

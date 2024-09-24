@@ -77,7 +77,6 @@ const ProjectFilter = ({
       );
       setFilteredProjects(filtered);
 
-      // 根据选定的标签更新介绍卡片的描述
       const introduction = getIntroductionByTag(tags);
       setIntroductionDescription(introduction);
     }

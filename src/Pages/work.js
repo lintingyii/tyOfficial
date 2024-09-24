@@ -5,10 +5,10 @@ import { ShaderGradientCanvas, ShaderGradient } from "shadergradient";
 import * as reactSpring from "@react-spring/three";
 import * as drei from "@react-three/drei";
 import * as fiber from "@react-three/fiber";
-import Footer from "../Components/footer";
 import Marquee from "react-fast-marquee";
 import ProjectFilter from "../Components/ProjectFilter";
 import IntroductionCard from "../Components/IntroductionCard";
+import SortButton from "../Components/SortButton";
 
 export const Work = () => {
   const initialProjects = [
@@ -58,7 +58,7 @@ export const Work = () => {
       tags: [
         // { name: "UI/UX design", color: "#7D8991" },
         { name: "Creative Campaign", color: "#86C5CE" },
-        { name: "Graphic design", color: "#D58CFE" }
+        { name: "Graphic design", color: "#D58CFE" },
       ],
       link: "https://tome.app/tingyilin/niqlo-pufferverse-cm0l048t70ob76j1jun5bx1iq",
       openInNewTab: false,
@@ -128,7 +128,10 @@ export const Work = () => {
     </Content>
   );
   const [projects, setProjects] = useState(initialProjects); // 初始專案資料
-  const [filteredProjects, setFilteredProjects] = useState(initialProjects); // 篩選後的專案資料
+  const [filteredProjects, setFilteredProjects] = useState(initialProjects); // ProjectFilter篩選後的專案資料
+  const [originalFilteredProjects, setOriginalFilteredProjects] =
+    useState(initialProjects); // SortButton排序後的原始專案資料
+  const [isSorted, setIsSorted] = useState(false); // 控制SortButton排序狀態
 
   const StyledShaderGradientCanvas = styled.div`
     position: absolute;
@@ -219,12 +222,25 @@ export const Work = () => {
       <CardsContainer>
         <ProjectFilter
           projects={projects}
-          setFilteredProjects={setFilteredProjects}
+          setFilteredProjects={(filtered) => {
+            setFilteredProjects(filtered);
+            setOriginalFilteredProjects(filtered); // 保存篩選後的原始專案列表
+            setIsSorted(false); // 重置排序狀態為未排序
+          }}
           setIntroductionDescription={setIntroductionDescription}
         />
-        <IntroductionCard
-          description={introductionDescription} // 使用狀態作為內容
-        />
+        <ProjectDesGroup>
+          <IntroductionCard
+            description={introductionDescription} // 使用狀態作為內容
+          />
+          <SortButton
+            filteredProjects={filteredProjects}
+            originalFilteredProjects={originalFilteredProjects}
+            setFilteredProjects={setFilteredProjects}
+            isSorted={isSorted}
+            setIsSorted={setIsSorted}
+          />
+        </ProjectDesGroup>
         <CardsContainerWrapper>
           {filteredProjects.map((project, index) => (
             <LargeProjectCard
@@ -535,6 +551,14 @@ const DefaultIcon = () => (
     <path d="M232,104a56.06,56.06,0,0,0-56-56H136a24,24,0,0,1,24-24,8,8,0,0,0,0-16,40,40,0,0,0-40,40H80a56.06,56.06,0,0,0-56,56,16,16,0,0,0,8,13.84V128c0,35.53,33.12,62.12,59.74,83.49C103.66,221.07,120,234.18,120,240a8,8,0,0,0,16,0c0-5.82,16.34-18.93,28.26-28.51C190.88,190.12,224,163.53,224,128V117.84A16,16,0,0,0,232,104Zm-77.75,95c-10.62,8.52-20,16-26.25,23.37-6.25-7.32-15.63-14.85-26.25-23.37C77.8,179.79,48,155.86,48,128v-8H208v8C208,155.86,178.2,179.79,154.25,199Z" />
   </svg>
 );
+
+const ProjectDesGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  width: fit-content;
+  gap: 1.5rem;
+`;
 
 const Marqueetext = styled.div`
   font-family: serif;
