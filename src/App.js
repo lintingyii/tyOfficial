@@ -13,6 +13,7 @@ import Work from "./Pages/work";
 import YoungLions from "./Pages/youngLions";
 import MegaBankRedesign from "./Pages/MegaBankRedesign";
 import SportsWin from "./Pages/sportsWin";
+import HiveBee from "./Pages/HiveBee";
 import styled from "styled-components";
 import CustomCursor from "./Components/CustomCursor";
 import Footer from "./Components/footer";
@@ -193,6 +194,7 @@ function App() {
             element={<MegaBankRedesign />}
           />
           <Route path="/work/sports_win" element={<SportsWin />} />
+          <Route path="/work/HiveBee" element={<HiveBee />} />
         </Routes>
         <NavigationBar />
         <Footer />

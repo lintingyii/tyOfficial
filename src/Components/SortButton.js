@@ -10,14 +10,6 @@ const Button = styled.button`
   width: auto;
   cursor: pointer;
   background-color: ${({ isSorted }) => (isSorted ? "#e2e2e2" : "#f2f2f2")};
-  opacity: 0; 
-  transition: opacity 1.5s ease, transform 1.5s ease, background-color 0.8s ease;
-  transform: translateX(-200%);
-
-  &.visible {
-    opacity: 1;
-    transform: translateX(0); /* 滑入畫面 */
-  }
 `;
 
 const Container = styled.div`
@@ -25,6 +17,14 @@ const Container = styled.div`
   width: 80%;
   margin: 0 auto;
   justify-content: right;
+  opacity: 0; 
+  transition: opacity 1.5s ease, transform 1.5s ease, background-color 0.8s ease;
+  transform: translateX(-100%);
+
+  &.visible {
+    opacity: 1;
+    transform: translateX(0); /* 滑入畫面 */
+  }
 
   @media (max-width: 480px) {
     width: 90%;
@@ -96,8 +96,8 @@ const SortButton = ({ filteredProjects, originalFilteredProjects, setFilteredPro
       };      
 
   return (
-    <Container>
-      <Button isSorted={isSorted} onClick={handleSortToggle} ref={ref} className={inView ? "visible" : ""}>
+    <Container ref={ref} className={inView ? "visible" : ""}>
+      <Button isSorted={isSorted} onClick={handleSortToggle} >
         <ClockIcon />
       </Button>
     </Container>
