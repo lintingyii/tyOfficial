@@ -102,6 +102,19 @@ export const Work = () => {
       link: "https://simpletodos2024.netlify.app/",
       openInNewTab: true,
     },
+    // {
+    //   date: "March, 2024",
+    //   image: "/hivebee/hb demo.png",
+    //   title: "Hive Bee - We made donations enjoyable",
+    //   subtitle: "SaaS product design",
+    //   description:
+    //     "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
+    //   tags: [
+    //     { name: "UI/UX design", color: "#7D8991" },
+    //   ],
+    //   link: "/work/HiveBee",
+    //   openInNewTab: false,
+    // },
   ];
 
   const [introductionDescription, setIntroductionDescription] = useState(

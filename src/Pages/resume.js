@@ -316,7 +316,7 @@ export const Resume = () => {
         </div>
       </Div2>
 
-      <DownloadButton onClick={downloadPdf}>Download CV PDF<DownloadIcon/></DownloadButton>
+      <DownloadButton onClick={downloadPdf}>Download resume PDF<DownloadIcon/></DownloadButton>
 
       {/* <Footer /> */}
     </Div>

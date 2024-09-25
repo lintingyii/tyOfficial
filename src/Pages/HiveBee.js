@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import Footer from "../Components/footer";
 
 const Container = styled.div`
   text-align: center;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #fff;
+  background-color: #f2f2f2;
   flex-direction: column;
   align-items: center;
   width: 100%;
@@ -58,8 +57,27 @@ const Image = styled.img`
   }
 `;
 
+const HalfImage = styled.img`
+  width: ${(props) => props.width || "50%"};
+  border-radius: 10px;
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  max-width: 400px;
+
+  @media (max-width: 1020px) {
+    width: ${(props) => props.width || "100%"};
+    max-width: unset;
+    aspect-ratio: unset;
+  }
+
+  @media (max-width: 480px) {
+    width: ${(props) => props.width || "95%"};
+  }
+`;
+
 const DisImage = styled.img`
-  width: ${(props) => props.width || "30%"};
+  width: ${(props) => props.width || "100%"};
+  border-radius: 10px;
 
   @media (max-width: 480px) {
     width: ${(props) => props.width || "95%"};
@@ -128,7 +146,47 @@ const Text = styled.div`
   }
 `;
 
+const HalfText = styled.div`
+  font-size: 1rem;
+  margin: 0 auto;
+  color: #444;
+  width: 100%;
+  text-align: justify;
+
+  @media (max-width: 480px) {
+    width: 85%;
+  }
+`;
+
+const ContentText = styled.div`
+  font-size: 1rem;
+  margin: 0;
+  color: #8c8c8c;
+  width: 100%;
+  text-align: left;
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 480px) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: none;
+  }
+`;
+
 const DisText = styled.div`
+  font-size: 1rem;
+  margin: 0;
+  color: #444;
+  width: 90%;
+  text-align: justify;
+  border-left: 13px solid #e87cdc;
+  padding-left: 0.5rem;
+
+  @media (max-width: 480px) {
+    width: 80%;
+  }
+`;
+
+const DisTextTitle = styled.div`
   font-size: 1rem;
   margin: 0;
   color: #444;
@@ -173,7 +231,7 @@ const SpecialText = styled.div`
   font-size: 1rem;
   font-weight: 700;
   margin: 10px auto;
-  color: #475259;
+  color: #333333;
   width: fit-content;
   height: fit-content;
   text-align: center;
@@ -185,21 +243,49 @@ const SpecialText = styled.div`
   &::after {
     content: "";
     position: absolute;
-    bottom: -2px;
+    bottom: 0px;
     left: 0;
     width: 100%;
     height: 15px;
-    background-color: #e7ff51;
+    background-color: #f6d671;
     z-index: -1;
   }
 `;
 
 const TextWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+  background-color: #f8f8f8;
   width: 100%;
-  justify-content: space-between;
   margin: 0 auto;
-  // margin-top: 3rem;
+  margin-top: 3rem;
+  padding: 24px;
+  gap: 1rem;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  width: 70%;
+
+  @media (max-width: 480px) {
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    margin-top: 2rem;
+  }
+`;
+
+const TextWrapperSmall = styled.div`
+  display: flex;
+  flex-direction: row;
+  background-color: #f2f2f2;
+  width: 100%;
+  margin: 0 auto;
+  padding: 24px;
+  gap: 1.5rem;
+  box-sizing: border-box;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
 
   @media (max-width: 480px) {
     flex-direction: column;
@@ -209,17 +295,68 @@ const TextWrapper = styled.div`
   }
 `;
 
+const HalfTextWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 24px;
+  gap: 1rem;
+`;
+
+const ContentWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0 auto;
+  padding: 12px;
+  box-sizing: border-box;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+const HalfWrapper = styled.div`
+  display: flex;
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 3rem;
+  box-sizing: border-box;
+  gap: 1rem;
+  line-height: 1.5;
+
+  @media (max-width: 1020px) {
+    flex-direction: column;
+  }
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    margin-top: 2rem;
+  }
+`;
+
 const TextWrapperContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  border-radius: 16px;
-  border: 1px solid #5ab4c5;
+  border-radius: 10px;
+border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 24px;
-  width: 60%;
+  width: 100%;
+  box-sizing: border-box;
   margin: 0 auto;
   margin-top: 30px;
-  background-color: #edf8fa;
+  background-color: #f8f8f8;
 
   @media (max-width: 480px) {
     width: 95%;
@@ -229,11 +366,11 @@ const TextWrapperContainer = styled.div`
 
 const DiscriptionWrapper = styled.div`
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  width: 65%;
+  width: 70%;
   margin: 0 auto;
   margin-top: 30px;
 
@@ -267,10 +404,10 @@ const ImageWrapper = styled.div`
 `;
 
 const GroupImage = styled.img`
-  width: 49%;  /* 調整為容器的百分比 */
+  width: 49%; /* 調整為容器的百分比 */
   height: 50vh;
   object-fit: cover;
-  // aspect-ratio: 16:9; 
+  // aspect-ratio: 16:9;
 
   @media (max-width: 1024px) {
     width: ${(props) => props.width || "100%"};
@@ -307,19 +444,19 @@ const HiveBee = () => {
       <Container>
         <Header>
           <img
-            src="/sportswin/sportswin.svg"
+            src="/hivebee/logo.svg"
             alt="logo"
             width="70%"
             style={{ maxWidth: "400px" }}
           />
           <Title2>
-            ― A microservice for booking Taipei sports venues, incorporating
-            team-building to maximize venue usage. ―
+            ― We created unique event experiences that made interactions between
+            streamers and audiences more lively and engaging. ―
           </Title2>
         </Header>
 
         <Image
-          src="/有球必In CaseBoard.jpg"
+          src="/hivebee/hb demo.gif"
           alt="Kungfu Presentation"
           style={{
             borderRadius: "10px",
@@ -328,64 +465,138 @@ const HiveBee = () => {
         />
 
         <SubTitle>
-          <br />
-          <span style={{ fontWeight: "600" }}>
-            2024臺北市秋季程式設計節【城市通微服務大黑客松】
-          </span>
-          <br />
-          佳作（111組中的四強）
-          <br />
-          <Image
-            src="/sportswin/group.jpg"
-            alt="Group"
-            style={{
-              borderRadius: "10px",
-              border: "1px solid rgba(0, 0, 0, 0.1)",
-              margin: "1rem 0",
-            }}
-          />
-          <TextWrapper style={{ width: "70%" }}>
-            <SpecialText style={{ width: "fit-content", margin: "0" }}>
-              我的角色 / My role
-            </SpecialText>
-            <Text
-              style={{
-                margin: "0",
-                width: "fit-content",
-                fontWeight: "600",
-                color: "#5AB4C5",
-                textAlign: "center",
-              }}
-            >
-              # UI/UX design <br /> # Frontend slicing <br /> # Demo and report
-            </Text>
+          <TextWrapper>
+            <ContentWrapper>
+              <SpecialText style={{ margin: "0" }}>
+                任職公司 / Company
+              </SpecialText>
+              <Text
+                style={{
+                  margin: "0",
+                  width: "fit-content",
+                  fontWeight: "600",
+                  color: "#AB005F",
+                  textAlign: "right",
+                }}
+              >
+                KOL Tech CO. 群人行銷
+              </Text>
+            </ContentWrapper>
+            <ContentWrapper>
+              <SpecialText style={{ margin: "0" }}>
+                我的角色 / My role
+              </SpecialText>
+              <Text
+                style={{
+                  margin: "0",
+                  width: "fit-content",
+                  fontWeight: "600",
+                  color: "#AB005F",
+                  textAlign: "right",
+                }}
+              >
+                Product Designer
+              </Text>
+            </ContentWrapper>
+            <TextWrapperSmall>
+              <ContentText>
+                <span style={{ fontWeight: "600", color: "#333" }}>
+                  User Experience Strategy
+                </span>
+                <br /># Competitor analysis <br /> # Contextual inquiry <br /> #
+                User Interview <br /># Functional mapping <br /> # User-flow
+              </ContentText>
+              <ContentText style={{ border: "none" }}>
+                <span style={{ fontWeight: "600", color: "#333" }}>
+                  Interface Design Execution
+                </span>
+                <br /># Wireframe and Lo-fi Prototype <br /> # UI Kit <br /> #
+                Design system
+                <br /> # Hi-fi Prototype <br /> # Usability testing
+              </ContentText>
+            </TextWrapperSmall>
+            <ContentWrapper style={{ border: "none" }}>
+              <SpecialText style={{ margin: "0" }}>
+                專案時程 / Timeline
+              </SpecialText>
+              <Text
+                style={{
+                  margin: "0",
+                  width: "fit-content",
+                  fontWeight: "600",
+                  color: "#AB005F",
+                  textAlign: "right",
+                }}
+              >
+                March to May 2024
+              </Text>
+            </ContentWrapper>
           </TextWrapper>
         </SubTitle>
 
-        <Divider margin="40px" />
+        <Divider margin="60px" />
 
         <section>
           <SectionTitle>Background & Goal</SectionTitle>
-          <Text>
-            為達到透明開放、科技普惠、建立服務型政府的目標，競賽以市政服務為核心概念，旨在開發一個開源的
-            ”城市通數位微服務內容”，參賽者需基於生活的不便經驗，提出解決方案，並確保該方案適用於全台各縣市，惠及所有民眾。
-          </Text>
-          <SpecialText>打造相容於台北通</SpecialText>
-          <SpecialText>且自己會想用的公民科技微服務</SpecialText>
+          <HalfWrapper>
+            <HalfTextWrapper>
+              <HalfText>
+                這是我入職公司後經手的第二個數位產品——直播贊助互動平台。產品的願景是打造一個讓直播主能與贊助者進行緊密、生動且有趣互動的直播生態，促進雙方的積極交流。
+              </HalfText>
 
-          <Text style={{ textAlign: "left" }}>
-            The competition aims to develop open-source "CityPass digital
-            microservices" to enhance municipal services, focusing on solutions
-            to daily inconveniences. Participants must ensure their proposals
-            benefit all cities and counties in Taiwan.
-          </Text>
-          <SpecialText>A civic tech microservice compatible</SpecialText>
-          <SpecialText>with TaipeiPass and personally useful.</SpecialText>
+              <HalfText>
+                <SpecialText>幫助創作者產出更多豐富有趣的內容</SpecialText>
+                {/* <SpecialText>讓每一次的觀賞體驗都充滿樂趣</SpecialText> */}
+              </HalfText>
+
+              <HalfText style={{ textAlign: "left" }}>
+                This is the second digital product I worked on after joining the
+                company—a live stream sponsorship interaction platform. The
+                product aims to create a vibrant live streaming ecosystem where
+                streamers can engage in close, dynamic, and entertaining
+                interactions with their sponsors, fostering active exchanges.
+              </HalfText>
+
+              <HalfText>
+                <SpecialText>Encourages creators to produce </SpecialText>
+                <SpecialText>more engaging and diverse content</SpecialText>
+              </HalfText>
+            </HalfTextWrapper>
+            <HalfImage src="/hivebee/droping.gif" alt="animation" />
+          </HalfWrapper>
         </section>
 
-        <section style={{ marginTop: "6rem" }}>
-          <SectionTitle>Our mission</SectionTitle>
-          <Image
+        <section style={{ marginTop: "7rem" }}>
+          <SectionTitle>Problems</SectionTitle>
+          <DiscriptionWrapper>
+            <TextWrapperContainer>
+            <DisImage
+              src="/hivebee/old-ui-1.png"
+              alt="discription"
+            />
+              <ContentText>Challenge 01</ContentText>
+              <DisTextTitle>
+              outdated design system
+              </DisTextTitle>
+              <DisText>
+                We chose to place the
+                <span
+                  style={{
+                    color: "#E87CDC",
+                    fontWeight: "500",
+                    margin: "0 3px",
+                  }}
+                >
+                  Sports Win microservice
+                </span>
+                in the "Service Collage" section of the TaipeiPass service page,
+                aimed at recommending services to users with unclear needs and
+                encouraging engagement.
+              </DisText>
+            </TextWrapperContainer>
+          </DiscriptionWrapper>
+        </section>
+          {/* <Image
             src="/sportswin/think.png"
             alt="think"
             width="5rem"
@@ -419,7 +630,7 @@ const HiveBee = () => {
             enjoy sports without limitations on venue or group size, while
             maximizing the efficiency of all sports facilities in Taipei.
           </Text>
-        </section>
+        </section> */}
 
         <CircleWrapper>
           <Circle color="#EDF8FA" />
@@ -428,7 +639,7 @@ const HiveBee = () => {
           <Circle color="#468D9B" />
         </CircleWrapper>
 
-        <section style={{ marginTop: "5rem" }}>
+        {/* <section style={{ marginTop: "5rem" }}>
           <SectionTitle>Mission scope</SectionTitle>
           <TextWrapperContainer>
             <TextWrapper>
@@ -488,252 +699,10 @@ const HiveBee = () => {
           <Divider
             margin="40px"
             style={{ borderTop: "1px solid #B4E2EA", width: "70%" }}
-          />
+          /> */}
 
-          <DiscriptionWrapper>
-            <DisImage
-              src="/sportswin/dis-0.png"
-              alt="discription"
-              style={{ maxWidth: "400px" }}
-            />
-            <DisTextWrapper>
-              <DisText>
-                我們選擇將
-                <span style={{ color: "#E87CDC", fontWeight: "500" }}>
-                  有球必In
-                </span>
-                微服務入口設置於台北通服務頁面的「服務拼貼」區塊。該區域旨在向需求不明確的用戶推薦服務，透過引導來刺激他們的使用意願。
-              </DisText>
-              <DisText>
-                We chose to place the
-                <span
-                  style={{
-                    color: "#E87CDC",
-                    fontWeight: "500",
-                    margin: "0 3px",
-                  }}
-                >
-                  Sports Win microservice
-                </span>
-                in the "Service Collage" section of the TaipeiPass service page,
-                aimed at recommending services to users with unclear needs and
-                encouraging engagement.
-              </DisText>
-            </DisTextWrapper>
-          </DiscriptionWrapper>
 
-          <Divider
-            margin="40px"
-            style={{ borderTop: "1px solid #B4E2EA", width: "70%" }}
-          />
-
-          <DiscriptionWrapper>
-            <DisImage
-              src="/sportswin/dis-1.png"
-              alt="discription"
-              style={{ maxWidth: "400px" }}
-            />
-            <DisTextWrapper>
-              <DisText>
-                首先以
-                <span style={{ color: "#E87CDC", fontWeight: "500" }}>
-                  球類運動
-                </span>
-                為出發進行分類，更加貼近用戶愛好，讓用戶可以在日常生活情境中，依照自己的喜好和需求獲取想要的資訊。
-              </DisText>
-              <DisText>
-                We categorize by
-                <span
-                  style={{
-                    color: "#E87CDC",
-                    fontWeight: "500",
-                    margin: "0 3px",
-                  }}
-                >
-                  sports types
-                </span>
-                to align with user preferences, allowing them to easily access
-                relevant information based on their interests and needs in daily
-                life.
-              </DisText>
-            </DisTextWrapper>
-          </DiscriptionWrapper>
-
-          <Divider
-            margin="40px"
-            style={{ borderTop: "1px solid #B4E2EA", width: "70%" }}
-          />
-
-          <DiscriptionWrapper>
-            <DisImage
-              src="/sportswin/dis-2.png"
-              alt="discription"
-              style={{ maxWidth: "400px" }}
-            />
-            <DisTextWrapper>
-              <DisText>
-                依照用戶所選球類運動，我們網羅全台北市所有
-                <span style={{ color: "#E87CDC", fontWeight: "500" }}>
-                  免費及付費
-                </span>
-                運動場館資訊，並將付費場地依照場地空缺數分為【
-                <span
-                  style={{
-                    color: "#76A732",
-                    fontWeight: "500",
-                    padding: "2px 8px",
-                    backgroundColor: "#E3E7E9",
-                    borderRadius: "6px",
-                    margin: "0 4px",
-                  }}
-                >
-                  尚可預約
-                </span>{" "}
-                /
-                <span
-                  style={{
-                    color: "#D45251",
-                    fontWeight: "500",
-                    padding: "2px 8px",
-                    backgroundColor: "#E3E7E9",
-                    borderRadius: "6px",
-                    margin: "0 4px",
-                  }}
-                >
-                  不可預約
-                </span>
-                】實時顯示在畫面，供用戶快速掌握球場的使用狀況，並依需求決定預約場館。
-              </DisText>
-              <DisText>
-                Based on the user's selected sport, we compile all
-                <span
-                  style={{
-                    color: "#E87CDC",
-                    fontWeight: "500",
-                    margin: "0 3px",
-                  }}
-                >
-                  free and paid sports
-                </span>
-                venue information in Taipei. Paid venues are categorized as
-                <span
-                  style={{
-                    color: "#76A732",
-                    fontWeight: "500",
-                    padding: "1px 8px",
-                    backgroundColor: "#E3E7E9",
-                    borderRadius: "6px",
-                    margin: "0 2px",
-                  }}
-                >
-                  Available
-                </span>
-                /
-                <span
-                  style={{
-                    color: "#D45251",
-                    fontWeight: "500",
-                    padding: "1px 8px",
-                    backgroundColor: "#E3E7E9",
-                    borderRadius: "6px",
-                    margin: "0 2px",
-                  }}
-                >
-                  Unavailable
-                </span>
-                based on real-time availability, allowing users to quickly view
-                and decide on booking.
-              </DisText>
-            </DisTextWrapper>
-          </DiscriptionWrapper>
-
-          <Divider
-            margin="40px"
-            style={{ borderTop: "1px solid #B4E2EA", width: "70%" }}
-          />
-
-          <DiscriptionWrapper>
-            <DisImage
-              src="/sportswin/dis-3.png"
-              alt="discription"
-              style={{ maxWidth: "400px" }}
-            />
-            <DisTextWrapper>
-              <DisText>
-                點進卡片後，用戶可以查看各場館的
-                <span style={{ color: "#E87CDC", fontWeight: "500" }}>
-                  場地資訊
-                </span>
-                並依照需求決定是否進行預約，我們也串連
-                <span style={{ color: "#E87CDC", fontWeight: "500" }}>
-                  Google地圖功能
-                </span>
-                ，讓用戶不須跨平台交叉比對資料。
-              </DisText>
-              <DisText>
-                After clicking on a card, users can view
-                <span
-                  style={{
-                    color: "#E87CDC",
-                    fontWeight: "500",
-                    margin: "0 3px",
-                  }}
-                >
-                  venue details
-                </span>
-                and decide whether to book. We've integrated
-                <span
-                  style={{
-                    color: "#E87CDC",
-                    fontWeight: "500",
-                    margin: "0 3px",
-                  }}
-                >
-                  Google Maps
-                </span>
-                , so users can access all necessary information without
-                switching platforms.
-              </DisText>
-            </DisTextWrapper>
-          </DiscriptionWrapper>
-
-          <Divider
-            margin="40px"
-            style={{ borderTop: "1px solid #B4E2EA", width: "70%" }}
-          />
-
-          <DiscriptionWrapper>
-            <DisImage
-              src="/sportswin/dis-4.png"
-              alt="discription"
-              style={{ maxWidth: "400px" }}
-            />
-            <DisTextWrapper>
-              <DisText>
-                最先預約到場地的個體用戶在線上租場地後，可以依自身狀況與意願決定是否發起
-                <span style={{ color: "#E87CDC", fontWeight: "500" }}>
-                  球友招募行動
-                </span>
-                ，開放場地給其他球友一起報隊使用。
-              </DisText>
-              <DisText>
-                Users who first book the venue online can choose to
-                <span
-                  style={{
-                    color: "#E87CDC",
-                    fontWeight: "500",
-                    margin: "0 3px",
-                  }}
-                >
-                  recruit teammates
-                </span>
-                based on their needs, sharing the space with others for team
-                play.
-              </DisText>
-            </DisTextWrapper>
-          </DiscriptionWrapper>
-
-          <Divider
+          {/* <Divider
             margin="40px"
             style={{ borderTop: "1px solid #B4E2EA", width: "70%" }}
           />
@@ -767,7 +736,7 @@ const HiveBee = () => {
               </DisText>
             </DisTextWrapper>
           </DiscriptionWrapper>
-        </section>
+        </section> */}
 
         <CircleWrapper style={{ marginTop: "5rem" }}>
           <Circle color="#EDF8FA" />
