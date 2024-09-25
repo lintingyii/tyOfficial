@@ -122,9 +122,11 @@ const Text = styled.div`
   color: #444;
   width: 70%;
   text-align: justify;
+  line-height: 1.5;
 
   @media (max-width: 480px) {
     width: 85%;
+    text-align: left;
   }
 `;
 
@@ -134,11 +136,14 @@ const DisText = styled.div`
   color: #444;
   width: 90%;
   text-align: justify;
-  border-left: 13px solid #e87cdc;
-  padding-left: 0.5rem;
+  border-left: 10px solid #e87cdc;
+  padding-left: 0.8rem;
+  line-height: 1.5;
 
   @media (max-width: 480px) {
     width: 80%;
+    text-align: left;
+    border-left: 8px solid #e87cdc;
   }
 `;
 

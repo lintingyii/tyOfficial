@@ -78,10 +78,6 @@ const HalfImage = styled.img`
 const DisImage = styled.img`
   width: ${(props) => props.width || "100%"};
   border-radius: 10px;
-
-  @media (max-width: 480px) {
-    width: ${(props) => props.width || "95%"};
-  }
 `;
 
 const LaptopImage = styled.img`
@@ -140,6 +136,7 @@ const Text = styled.div`
   color: #444;
   width: 70%;
   text-align: justify;
+  line-height: 1.5;
 
   @media (max-width: 480px) {
     width: 85%;
@@ -176,30 +173,50 @@ const DisText = styled.div`
   font-size: 1rem;
   margin: 0;
   color: #444;
-  width: 90%;
+  width: 100%;
   text-align: justify;
-  border-left: 13px solid #e87cdc;
-  padding-left: 0.5rem;
+  box-sizing: border-box;
+  padding-top: 0.5rem;
+  // border-left: 10px solid #AB005F;
+  // padding-left: 0.5rem;
+  // padding-bottom: 0.2rem;
+  line-height: 1.5;
 
   @media (max-width: 480px) {
-    width: 80%;
+    width: 100%;
+    padding-top: 0rem;
+    text-align: left;
   }
 `;
 
 const DisTextTitle = styled.div`
   font-size: 1rem;
   margin: 0;
-  color: #444;
-  width: 90%;
-  text-align: justify;
-  border-left: 13px solid #e87cdc;
-  padding-left: 0.5rem;
-
-  @media (max-width: 480px) {
-    width: 80%;
-  }
+  color: #fff;
+  background-image: var(
+    --Gradient-style-gradient2,
+    linear-gradient(91deg, #eaa700 0%, #f6d671 100%)
+  );
+  width: fit-content;
+  align-self: flex-start;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  white-space: nowrap;
 `;
 
+const CardHeader = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  justify-content: space-between;
+
+  @media (max-width: 480px) {
+    flex-direction: column;
+    align-items: left;
+  }
+`;
 const DisTextWrapper = styled.div`
   display: flex;
   flex-direction: column;
@@ -256,7 +273,6 @@ const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
   background-color: #f8f8f8;
-  width: 100%;
   margin: 0 auto;
   margin-top: 3rem;
   padding: 24px;
@@ -348,9 +364,9 @@ const HalfWrapper = styled.div`
 const TextWrapperContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1rem;
   border-radius: 10px;
-border: 1px solid rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 24px;
   width: 100%;
   box-sizing: border-box;
@@ -359,8 +375,8 @@ border: 1px solid rgba(0, 0, 0, 0.1);
   background-color: #f8f8f8;
 
   @media (max-width: 480px) {
-    width: 95%;
     box-sizing: border-box;
+    padding: 1rem;
   }
 `;
 
@@ -370,12 +386,13 @@ const DiscriptionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
-  margin-top: 30px;
+  margin-top: 2rem;
 
   @media (max-width: 480px) {
     width: 95%;
+    margin-top: 1rem;
     box-sizing: border-box;
     flex-direction: column;
   }
@@ -570,33 +587,30 @@ const HiveBee = () => {
           <SectionTitle>Problems</SectionTitle>
           <DiscriptionWrapper>
             <TextWrapperContainer>
-            <DisImage
-              src="/hivebee/old-ui-1.png"
-              alt="discription"
-            />
-              <ContentText>Challenge 01</ContentText>
-              <DisTextTitle>
-              outdated design system
-              </DisTextTitle>
+              <DisImage src="/hivebee/old-ui-1.png" alt="discription" />
+              <CardHeader>
+                <ContentText style={{ border: "none" }}>
+                  Challenge 01
+                </ContentText>
+                <DisTextTitle>Outdated design system</DisTextTitle>
+              </CardHeader>
               <DisText>
-                We chose to place the
-                <span
-                  style={{
-                    color: "#E87CDC",
-                    fontWeight: "500",
-                    margin: "0 3px",
-                  }}
-                >
-                  Sports Win microservice
-                </span>
-                in the "Service Collage" section of the TaipeiPass service page,
-                aimed at recommending services to users with unclear needs and
-                encouraging engagement.
+                當我初次接手該產品時，產品已經上線了一段時間。然而，由於開發團隊缺乏UI/UX背景，介面設計相對粗糙、直接，導致視覺表現不佳。從附圖可以看出，介面的資訊排列雜亂且分散，未能有效傳達核心內容，也難以提供良好的使用體驗。
+              </DisText>
+              <DisText>
+                When I first took over this product, it had already been live
+                for some time. However, due to the development team's lack of
+                UI/UX expertise, the interface was designed in a rather basic
+                and direct manner, resulting in suboptimal visual presentation.
+                As shown in the attached image, the interface suffers from
+                cluttered and disorganized information, failing to effectively
+                communicate key content and providing a less-than-ideal user
+                experience.
               </DisText>
             </TextWrapperContainer>
           </DiscriptionWrapper>
         </section>
-          {/* <Image
+        {/* <Image
             src="/sportswin/think.png"
             alt="think"
             width="5rem"
@@ -701,8 +715,7 @@ const HiveBee = () => {
             style={{ borderTop: "1px solid #B4E2EA", width: "70%" }}
           /> */}
 
-
-          {/* <Divider
+        {/* <Divider
             margin="40px"
             style={{ borderTop: "1px solid #B4E2EA", width: "70%" }}
           />
