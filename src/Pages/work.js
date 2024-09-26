@@ -96,7 +96,7 @@ export const Work = () => {
       description:
         "A minimalist to-do list web-app with task management and fascinating theme switching, keeping you productive in any environment.",
       tags: [
-        { name: "UI/UX design", color: "#7D8991" },
+        // { name: "UI/UX design", color: "#7D8991" },
         { name: "Frontend coding", color: "#F7883D" },
       ],
       link: "https://simpletodos2024.netlify.app/",

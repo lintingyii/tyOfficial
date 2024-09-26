@@ -330,7 +330,7 @@ function MyComponent(props) {
       <Section>
         <SectionTitle>
           <div style={{ display: "flex" }}>
-            Service
+            Strength
             <span
               style={{
                 fontFamily: "serif",

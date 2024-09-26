@@ -53,7 +53,7 @@ const Image = styled.img`
   width: ${(props) => props.width || "70%"};
 
   @media (max-width: 480px) {
-    width: ${(props) => props.width || "95%"};
+    width: 95%;
   }
 `;
 
@@ -71,31 +71,13 @@ const HalfImage = styled.img`
   }
 
   @media (max-width: 480px) {
-    width: ${(props) => props.width || "95%"};
+    width: ${(props) => props.width || "100%"};
   }
 `;
 
 const DisImage = styled.img`
   width: ${(props) => props.width || "100%"};
   border-radius: 10px;
-`;
-
-const LaptopImage = styled.img`
-  width: ${(props) => props.width || "70%"};
-
-  @media (max-width: 480px) {
-    display: none;
-  }
-`;
-
-const MobileImage = styled.img`
-  display: none;
-
-  @media (max-width: 480px) {
-    display: initial;
-    max-width: 400px;
-    width: ${(props) => props.width || "90%"};
-  }
 `;
 
 const Divider = styled.hr`
@@ -108,9 +90,38 @@ const Divider = styled.hr`
 `;
 
 const SectionTitle = styled.h1`
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin: 10px 0;
   color: #444;
+`;
+
+const BlockTitle = styled.h3`
+  font-size: 1.5rem;
+  margin: 0 auto;
+  margin-top: 3rem;
+  color: #8c8c8c;
+  width: 70%;
+  font-weight: 400;
+  text-align: left;
+
+  @media (max-width: 480px) {
+    width: 95%;
+    font-size: 1rem;
+  }
+`;
+
+const BlockHeader = styled.h1`
+  font-size: 1.8rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  color: #444;
+  width: 70%;
+  text-align: left;
+
+  @media (max-width: 480px) {
+    width: 95%;
+    font-size: 1.5rem;
+  }
 `;
 
 const CircleWrapper = styled.div`
@@ -121,6 +132,10 @@ const CircleWrapper = styled.div`
   height: 100px;
   gap: 10px;
   margin: 3rem;
+
+  @media (max-width: 480px) {
+    margin: 2rem;
+  }
 `;
 
 const Circle = styled.div`
@@ -135,11 +150,11 @@ const Text = styled.div`
   margin: 30px auto;
   color: #444;
   width: 70%;
-  text-align: justify;
+  text-align: left;
   line-height: 1.5;
 
   @media (max-width: 480px) {
-    width: 85%;
+    width: 95%;
   }
 `;
 
@@ -151,7 +166,7 @@ const HalfText = styled.div`
   text-align: justify;
 
   @media (max-width: 480px) {
-    width: 85%;
+    width: 100%;
   }
 `;
 
@@ -176,7 +191,6 @@ const DisText = styled.div`
   width: 100%;
   text-align: justify;
   box-sizing: border-box;
-  padding-top: 0.5rem;
   // border-left: 10px solid #AB005F;
   // padding-left: 0.5rem;
   // padding-bottom: 0.2rem;
@@ -202,6 +216,10 @@ const DisTextTitle = styled.div`
   padding: 0.5rem 1rem;
   border-radius: 50px;
   white-space: nowrap;
+
+  @media (max-width: 480px) {
+    padding: 0.4rem 0.8rem;
+  }
 `;
 
 const CardHeader = styled.div`
@@ -227,6 +245,71 @@ const DisTextWrapper = styled.div`
     align-items: center;
   }
 `;
+
+const InfoCard = styled.div`
+  display: flex;
+  align-items: left;
+  padding: 20px;
+  width: 70%;
+  height: auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin: 0 auto;
+  margin-top: 2rem;
+
+  @media (max-width: 800px) {
+    width: 95%;
+  }
+`;
+
+const InfoContent = styled.div`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  @media (max-width: 480px) {
+    align-items: flex-start;
+  }
+`;
+
+const InfoIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    width="20%"
+    height="20%"
+    fill="#EAA700"
+    style={{
+      maxWidth: "2rem",
+      minWidth: "1.5rem",
+      maxHeight: "2rem",
+      minHeight: "1.5rem",
+    }}
+  >
+    <path d="M198.13,202.85A8,8,0,0,1,192,216H24a8,8,0,0,1-6.12-13.15c14.94-17.78,33.52-30.41,54.17-37.17a68,68,0,1,1,71.9,0C164.6,172.44,183.18,185.07,198.13,202.85ZM196.86,61.39a8,8,0,0,0-4.22,10.5,92.26,92.26,0,0,1,0,72.22,8,8,0,1,0,14.72,6.29,108.36,108.36,0,0,0,0-84.8A8,8,0,0,0,196.86,61.39Zm39.85-8.54a8,8,0,1,0-14.7,6.3,124.43,124.43,0,0,1,0,97.7,8,8,0,1,0,14.7,6.3,140.34,140.34,0,0,0,0-110.3Z" />{" "}
+  </svg>
+);
+
+const DesignIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    width="20%"
+    height="20%"
+    fill="#EAA700"
+    style={{
+      maxWidth: "2rem",
+      minWidth: "1.5rem",
+      maxHeight: "2rem",
+      minHeight: "1.5rem",
+    }}
+  >
+    <path d="M225.86,102.82c-3.77-3.94-7.67-8-9.14-11.57-1.36-3.27-1.44-8.69-1.52-13.94-.15-9.76-.31-20.82-8-28.51s-18.75-7.85-28.51-8c-5.25-.08-10.67-.16-13.94-1.52-3.56-1.47-7.63-5.37-11.57-9.14C146.28,23.51,138.44,16,128,16s-18.27,7.51-25.18,14.14c-3.94,3.77-8,7.67-11.57,9.14C88,40.64,82.56,40.72,77.31,40.8c-9.76.15-20.82.31-28.51,8S41,67.55,40.8,77.31c-.08,5.25-.16,10.67-1.52,13.94-1.47,3.56-5.37,7.63-9.14,11.57C23.51,109.72,16,117.56,16,128s7.51,18.27,14.14,25.18c3.77,3.94,7.67,8,9.14,11.57,1.36,3.27,1.44,8.69,1.52,13.94.15,9.76.31,20.82,8,28.51s18.75,7.85,28.51,8c5.25.08,10.67.16,13.94,1.52,3.56,1.47,7.63,5.37,11.57,9.14C109.72,232.49,117.56,240,128,240s18.27-7.51,25.18-14.14c3.94-3.77,8-7.67,11.57-9.14,3.27-1.36,8.69-1.44,13.94-1.52,9.76-.15,20.82-.31,28.51-8s7.85-18.75,8-28.51c.08-5.25.16-10.67,1.52-13.94,1.47-3.56,5.37-7.63,9.14-11.57C232.49,146.28,240,138.44,240,128S232.49,109.73,225.86,102.82Zm-52.2,6.84-56,56a8,8,0,0,1-11.32,0l-24-24a8,8,0,0,1,11.32-11.32L112,148.69l50.34-50.35a8,8,0,0,1,11.32,11.32Z" />{" "}
+  </svg>
+);
 
 const LinkText = styled.div`
   font-size: 1rem;
@@ -371,7 +454,7 @@ const TextWrapperContainer = styled.div`
   width: 100%;
   box-sizing: border-box;
   margin: 0 auto;
-  margin-top: 30px;
+  margin-top: 1rem;
   background-color: #f8f8f8;
 
   @media (max-width: 480px) {
@@ -386,7 +469,7 @@ const DiscriptionWrapper = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  width: 80%;
+  width: 70%;
   margin: 0 auto;
   margin-top: 2rem;
 
@@ -521,7 +604,7 @@ const HiveBee = () => {
                   User Experience Strategy
                 </span>
                 <br /># Competitor analysis <br /> # Contextual inquiry <br /> #
-                User Interview <br /># Functional mapping <br /> # User-flow
+                User Interview <br /># Functional mapping <br /> # User flow
               </ContentText>
               <ContentText style={{ border: "none" }}>
                 <span style={{ fontWeight: "600", color: "#333" }}>
@@ -585,6 +668,39 @@ const HiveBee = () => {
 
         <section style={{ marginTop: "7rem" }}>
           <SectionTitle>Problems</SectionTitle>
+          <InfoCard>
+            <InfoContent>
+              <InfoIcon />
+              <HalfTextWrapper style={{ padding: "0px", gap: ".5rem" }}>
+                <DisText>
+                  當我初次接手該產品時，雖然產品已經上線了一段時間，但使用成效不如預期。因此，我首先針對兩大核心使用者群體——直播贊助者與直播主，分別進行了用戶訪談。通過這些訪談，我整理並歸納出使用上的痛點，並發掘了多個產品優化的機會點。
+                </DisText>
+                <DisText>
+                  When I first took over the product, it had already been live
+                  for some time, but its performance was below expectations. My
+                  initial step was to conduct user interviews with two key user
+                  groups—sponsors and streamers. Through these interviews, I
+                  identified several pain points in the user experience and
+                  uncovered multiple opportunities for product improvement.
+                </DisText>
+              </HalfTextWrapper>
+            </InfoContent>
+          </InfoCard>
+
+          <Image
+            src="/hivebee/pain-point.png"
+            alt="affinity diagram"
+            width={"80%"}
+            style={{ marginTop: "2rem" }}
+          />
+
+          <CircleWrapper>
+            <Circle color="#EDDDFF" />
+            <Circle color="#D9B9FF" />
+            <Circle color="#BA87F4" />
+            <Circle color="#C5006C" />
+          </CircleWrapper>
+
           <DiscriptionWrapper>
             <TextWrapperContainer>
               <DisImage src="/hivebee/old-ui-1.png" alt="discription" />
@@ -594,238 +710,201 @@ const HiveBee = () => {
                 </ContentText>
                 <DisTextTitle>Outdated design system</DisTextTitle>
               </CardHeader>
-              <DisText>
-                當我初次接手該產品時，產品已經上線了一段時間。然而，由於開發團隊缺乏UI/UX背景，介面設計相對粗糙、直接，導致視覺表現不佳。從附圖可以看出，介面的資訊排列雜亂且分散，未能有效傳達核心內容，也難以提供良好的使用體驗。
+              <DisText style={{ marginTop: ".5rem" }}>
+                由於開發團隊缺乏 UI/UX
+                設計背景，介面設計相對粗糙、直接且缺乏美感。該工具的「用戶設定流程」過於繁瑣且高度複雜，舊版介面多以表單形式呈現，這讓用戶在面對大量資訊時感到負擔沉重，體驗不佳。
               </DisText>
               <DisText>
-                When I first took over this product, it had already been live
-                for some time. However, due to the development team's lack of
-                UI/UX expertise, the interface was designed in a rather basic
-                and direct manner, resulting in suboptimal visual presentation.
-                As shown in the attached image, the interface suffers from
-                cluttered and disorganized information, failing to effectively
-                communicate key content and providing a less-than-ideal user
+                Due to the development team's lack of UI/UX expertise, the
+                interface design was rather rough, straightforward, and visually
+                unappealing. The tool featured a complex and tedious "user setup
+                process," with most of the previous version's interface being
+                heavily form-based. This resulted in users feeling overwhelmed
+                by the excessive information and having a poor overall
                 experience.
               </DisText>
             </TextWrapperContainer>
           </DiscriptionWrapper>
+          <DiscriptionWrapper>
+            <TextWrapperContainer>
+              <DisImage src="/hivebee/old-ui-21.png" alt="discription" />
+              <CardHeader>
+                <ContentText style={{ border: "none" }}>
+                  Challenge 02
+                </ContentText>
+                <DisTextTitle>Chaotic information and hierarchy</DisTextTitle>
+              </CardHeader>
+              <DisText style={{ marginTop: ".5rem" }}>
+                設計上缺乏完善的 UI Kit
+                和設計系統，且未導入可重用元件的概念，導致畫面缺乏一致性，進而使資訊和視覺層級雜亂，降低了排版的清晰度和操作的易用性。
+              </DisText>
+              <DisText>
+                The design lacked a proper UI Kit and design system, with no
+                implementation of reusable components. This resulted in
+                inconsistent visuals and contributed to disorganized information
+                and visual hierarchy, ultimately reducing the clarity of the
+                layout and diminishing overall usability.
+              </DisText>
+            </TextWrapperContainer>
+          </DiscriptionWrapper>
+          <DiscriptionWrapper>
+            <TextWrapperContainer>
+              <DisImage src="/hivebee/old-ui-3.jpg" alt="discription" />
+              <CardHeader>
+                <ContentText style={{ border: "none" }}>
+                  Challenge 03
+                </ContentText>
+                <DisTextTitle>Low usability experience</DisTextTitle>
+              </CardHeader>
+              <DisText style={{ marginTop: ".5rem" }}>
+                除了畫面設計上的問題，不即時的使用回饋也導致用戶在每一個操作階段都感到不知所措。而不夠流暢的用戶流程規劃，進一步降低了用戶的使用意願。
+              </DisText>
+              <DisText>
+                Aside from the issues with the visual design, the lack of
+                real-time user feedback left users feeling uncertain at every
+                stage of interaction. Additionally, the poorly structured user
+                flow further diminished the overall user experience,
+                discouraging continued engagement.
+              </DisText>
+            </TextWrapperContainer>
+          </DiscriptionWrapper>
         </section>
-        {/* <Image
-            src="/sportswin/think.png"
-            alt="think"
-            width="5rem"
-            style={{ marginTop: "2rem" }}
-          />
-          <Text>
-            <span style={{ textAlign: "center" }}>
-              你是否有想打球但租不到場地、找不到球友的經驗？為解決這個問題，我們設計了「
-              <span style={{ color: "#5AB4C5", fontWeight: "bold" }}>
-                有球必In
-              </span>
-              」
-            </span>
-            <br />
-            一個整合大台北所有付費及免費運動場地的租借系統微服務，
-            結合共享經濟概念，提供組隊功能，讓市民無需受限於場地和人數，盡情享受運動，同時最大化台北市運動場地的使用效益。
-          </Text>
-
-          <Text>
-            <span style={{ textAlign: "center" }}>
-              Have you ever wanted to play sports but couldn’t find a venue or
-              teammates? To solve this problem, we designed "
-              <span style={{ color: "#5AB4C5", fontWeight: "bold" }}>
-                Sports Win
-              </span>
-              ."
-            </span>
-            <br />A microservice that aggregates all paid and free sports venue
-            rentals in Greater Taipei, incorporating the concept of the shared
-            economy. It offers a team-building feature, allowing citizens to
-            enjoy sports without limitations on venue or group size, while
-            maximizing the efficiency of all sports facilities in Taipei.
-          </Text>
-        </section> */}
 
         <CircleWrapper>
-          <Circle color="#EDF8FA" />
-          <Circle color="#B4E2EA" />
-          <Circle color="#5AB4C5" />
-          <Circle color="#468D9B" />
-        </CircleWrapper>
-
-        {/* <section style={{ marginTop: "5rem" }}>
-          <SectionTitle>Mission scope</SectionTitle>
-          <TextWrapperContainer>
-            <TextWrapper>
-              <SpecialText style={{ width: "fit-content", margin: "0" }}>
-                競賽說明 / Competition Guidelines
-              </SpecialText>
-              <a
-                href="https://hackmd.io/@Morgannn/HJRg_2uj0"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: "none" }}
-              >
-                <LinkText>工作坊HackMD筆記</LinkText>
-              </a>
-            </TextWrapper>
-            <TextWrapper>
-              <SpecialText style={{ width: "fit-content", margin: "0" }}>
-                資料來源 / Data source
-              </SpecialText>
-              <a
-                href="https://data.gov.tw/dataset/22849"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: "none" }}
-              >
-                <LinkText>全國運動場館資訊</LinkText>
-              </a>
-            </TextWrapper>
-            <TextWrapper>
-              <SpecialText style={{ width: "fit-content", margin: "0" }}>
-                專案程式碼 / Project code
-              </SpecialText>
-              <a
-                href="https://github.com/tcfproject-tpe/CDF_Taipei?tab=readme-ov-file"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: "none" }}
-              >
-                <LinkText>GitHub連結</LinkText>
-              </a>
-            </TextWrapper>
-            <TextWrapper>
-              <SpecialText style={{ width: "fit-content", margin: "0" }}>
-                API規格書 / API documentation
-              </SpecialText>
-              <a
-                href="https://read-book-press.vercel.app/"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ textDecoration: "none" }}
-              >
-                <LinkText>開發全說明</LinkText>
-              </a>
-            </TextWrapper>
-          </TextWrapperContainer>
-
-          <Divider
-            margin="40px"
-            style={{ borderTop: "1px solid #B4E2EA", width: "70%" }}
-          /> */}
-
-        {/* <Divider
-            margin="40px"
-            style={{ borderTop: "1px solid #B4E2EA", width: "70%" }}
-          />
-
-          <DiscriptionWrapper>
-            <DisImage
-              src="/sportswin/dis-5.png"
-              alt="discription"
-              style={{ maxWidth: "400px" }}
-            />
-            <DisTextWrapper>
-              <DisText>
-                晚一步預約的用戶雖然租不到場地，但可以選擇是否在該時段
-                <span style={{ color: "#E87CDC", fontWeight: "500" }}>
-                  報團打球
-                </span>
-                ，響應他人的球友募集行動，讓「晚一步」的經驗也可以成為一份美好的回憶。
-              </DisText>
-              <DisText>
-                Users who miss out on booking a venue can still join a team by
-                <span
-                  style={{
-                    color: "#E87CDC",
-                    fontWeight: "500",
-                    margin: "0 3px",
-                  }}
-                >
-                  responding to recruitment efforts
-                </span>
-                , turning the "missed opportunity" into a positive experience.
-              </DisText>
-            </DisTextWrapper>
-          </DiscriptionWrapper>
-        </section> */}
-
-        <CircleWrapper style={{ marginTop: "5rem" }}>
-          <Circle color="#EDF8FA" />
-          <Circle color="#B4E2EA" />
-          <Circle color="#5AB4C5" />
-          <Circle color="#468D9B" />
+          <Circle color="#EDDDFF" />
+          <Circle color="#D9B9FF" />
+          <Circle color="#BA87F4" />
+          <Circle color="#C5006C" />
         </CircleWrapper>
 
         <section style={{ marginTop: "5rem" }}>
-          <SectionTitle>Purposes and goals</SectionTitle>
-          <Text>
-            我們注意到許多想運動的個體往往因為租不到場地而失去運動機會，相反的，有些場地則因為使用人數不多而導致資源白白被晾著，
-            因此我們融入共享經濟的概念，除了讓運動資源、場館資訊更加透明化外，
-            還設計線上組隊功能，提倡將有限的運動場地資源效益最大化，
-            再也不會讓找不到球友成為拒絕運動的藉口，
-            <br />
-            <span style={{ color: "#5AB4C5", fontWeight: "bold" }}>
-              透過這個微服務平台，我們希望可以提高市民參與運動的意願，並讓台北市所有運動場地的效益得以最大化的進行發揮。
-            </span>
-          </Text>
+          <SectionTitle>Solution</SectionTitle>
+          <InfoCard>
+            <InfoContent>
+              <DesignIcon />
+              <HalfTextWrapper style={{ padding: "0px", gap: ".5rem" }}>
+                <DisText>
+                  在分析競品之後，我們決定與視覺設計師合作，為產品打造活潑、年輕化的品牌識別系統，並將其命名為「HiveBee」，賦予產品全新的面貌與獨特的區隔性。針對新版本的視覺設計，我建立了完整的設計系統，確保產品畫面與品牌視覺的一致性。此外，我進一步優化了用戶流程和易用性，提升了整體的用戶體驗。
+                </DisText>
+                <DisText>
+                  After conducting a competitive analysis, we decided to
+                  collaborate with a visual designer to create a vibrant and
+                  youthful brand identity for the product, which we named
+                  "HiveBee," giving it a fresh look and distinct features. For
+                  the new version's visuals, I developed a comprehensive design
+                  system to ensure consistency between the product interface and
+                  its visual identity. Additionally, I further optimized the
+                  user flow and usability to deliver an improved overall user
+                  experience.
+                </DisText>
+              </HalfTextWrapper>
+            </InfoContent>
+          </InfoCard>
 
-          <Text>
-            We noticed that many individuals miss out on playing sports due to
-            lack of venue availability, while some venues remain underutilized.
-            To address this, we incorporated the concept of the shared economy,
-            making sports resources and venue information more transparent. We
-            also introduced an online team-building feature to maximize the use
-            of limited venues, ensuring that not finding teammates is never an
-            excuse to skip sports.
-            <br />
-            <span style={{ color: "#5AB4C5", fontWeight: "bold" }}>
-              Through this microservice platform, we aim to boost citizen
-              engagement in sports and maximize the utilization of all sports
-              venues in Taipei.
-            </span>
-          </Text>
+          <Image
+            src="/hivebee/stage.png"
+            alt="affinity diagram"
+            style={{ marginTop: "2rem" }}
+          />
         </section>
+
+        <Divider
+          margin="4rem"
+          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
+        />
 
         <section>
-          <LaptopImage
-            src="/sportswin/winbanner.jpg"
-            alt="Group"
-            style={{
-              borderRadius: "10px",
-              margin: "1rem 0",
-            }}
+          <BlockTitle>Step.1</BlockTitle>
+          <BlockHeader>Functional Map</BlockHeader>
+          <Text style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            為了解決產品功能過多導致資訊混亂的問題，我重新規劃了功能和資訊架構，協助團隊釐清產品脈絡，並清楚定義功能模組，分類與組織訊息、優化層級規劃，透過繪製功能地圖，進一步理清了操作流程的細節。
+          </Text>
+          <Text style={{ marginTop: "0rem" }}>
+            To solve the problem of information overload caused by too many
+            product features, I restructured the functionality and information
+            architecture. I helped the team clarify the product’s framework,
+            clearly defined feature modules, categorized and organized
+            information, and optimized the hierarchical structure. By creating a
+            functional map, we refined the operational workflow and details.
+          </Text>
+
+          <Image
+            src="/hivebee/IA.png"
+            alt="affinity diagram"
+            width={"80%"}
+            style={{ marginTop: "1rem" }}
           />
-          <MobileImage
-            src="/sportswin/winbanner-m.jpg"
-            alt="Group"
-            style={{
-              borderRadius: "10px",
-            }}
+        </section>
+
+        <Divider
+          margin="4rem"
+          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
+        />
+
+        <section>
+          <BlockTitle>Step.2</BlockTitle>
+          <BlockHeader>User Flow</BlockHeader>
+          <Text style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            為了更深入了解並釐清用戶在系統操作上的邏輯與流程，我基於已確立的資訊架構，思考操作邏輯，並繪製用戶流程圖。這些流程圖成為與開發團隊討論的重要工具，幫助我們共同理解各種狀態的運作方式，並作為繪製
+            Wireframe
+            的依據之一，以此確保用戶體驗完善、頁面之間的連結關係清晰，且所有功能需求皆完整。
+          </Text>
+          <Text style={{ marginTop: "0rem" }}>
+            To gain a deeper understanding and clarify the user's logic and flow
+            within the system, I built on the established information
+            architecture and mapped out the operational logic through user flow
+            diagrams. These diagrams became essential tools for discussions with
+            the development team, helping us mutually understand how various
+            states function. They also served as one of the key references for
+            wireframe design, ensuring a seamless user experience, clear
+            page-to-page relationships, and the completeness of all necessary
+            features.
+          </Text>
+
+          <Image
+            src="/hivebee/flow.png"
+            alt="affinity diagram"
+            width={"80%"}
+            style={{ marginTop: "1rem" }}
+          />
+        </section>
+
+        <Divider
+          margin="4rem"
+          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
+        />
+
+        <section>
+          <BlockTitle>Step.3</BlockTitle>
+          <BlockHeader>User Flow</BlockHeader>
+          <Text style={{ marginTop: "1rem", marginBottom: "1rem" }}>
+            為了更深入了解並釐清用戶在系統操作上的邏輯與流程，我基於已確立的資訊架構，思考操作邏輯，並繪製用戶流程圖。這些流程圖成為與開發團隊討論的重要工具，幫助我們共同理解各種狀態的運作方式，並作為繪製
+            Wireframe
+            的依據之一，以此確保用戶體驗完善、頁面之間的連結關係清晰，且所有功能需求皆完整。
+          </Text>
+          <Text style={{ marginTop: "0rem" }}>
+            To gain a deeper understanding and clarify the user's logic and flow
+            within the system, I built on the established information
+            architecture and mapped out the operational logic through user flow
+            diagrams. These diagrams became essential tools for discussions with
+            the development team, helping us mutually understand how various
+            states function. They also served as one of the key references for
+            wireframe design, ensuring a seamless user experience, clear
+            page-to-page relationships, and the completeness of all necessary
+            features.
+          </Text>
+
+          <Image
+            src="/hivebee/flow.png"
+            alt="affinity diagram"
+            width={"90%"}
+            style={{ marginTop: "1rem" }}
           />
         </section>
 
         <section style={{ marginTop: "5rem" }}>
-          <SectionTitle>Event Highlights</SectionTitle>
-          <ImageWrapper>
-            <GroupImage
-              src="/sportswin/group-2.jpg"
-              alt="Group"
-              style={{
-                borderRadius: "10px",
-                margin: "1rem 0",
-              }}
-            />
-            <GroupImage
-              src="/sportswin/group-3.jpg"
-              alt="Group"
-              style={{
-                borderRadius: "10px",
-                margin: "1rem 0",
-              }}
-            />
-          </ImageWrapper>
+          <SectionTitle>Feature work</SectionTitle>
+          <BlockTitle>UX Content</BlockTitle>
         </section>
 
         <a

@@ -80,7 +80,7 @@ const MobileImage = styled.img`
   @media (max-width: 480px) {
     display: initial;
     max-width: 400px;
-    width: ${(props) => props.width || "90%"};
+    width: ${(props) => props.width || "95%"};
   }
 `;
 
@@ -94,7 +94,7 @@ const Divider = styled.hr`
 `;
 
 const SectionTitle = styled.h1`
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin: 10px 0;
   color: #444;
 `;
@@ -125,7 +125,7 @@ const Text = styled.div`
   line-height: 1.5;
 
   @media (max-width: 480px) {
-    width: 85%;
+    width: 95%;
     text-align: left;
   }
 `;
@@ -283,7 +283,7 @@ const GroupImage = styled.img`
   }
 
   @media (max-width: 480px) {
-    width: ${(props) => props.width || "90%"};
+    width: ${(props) => props.width || "95%"};
     height: unset;
   }
 `;

@@ -285,6 +285,7 @@ function LargeProjectCard({
   const  { ref , inView , entry }  =  useInView ( { 
     /* 可選選項 */ 
     Threshold : 0.2 , 
+    triggerOnce: true,
   } ) ;
 
   return (
