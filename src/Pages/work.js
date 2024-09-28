@@ -23,6 +23,10 @@ export const Work = () => {
         { name: "Graphic design", color: "#D58CFE" },
         { name: "Frontend coding", color: "#F7883D" },
       ],
+      subtags: [
+        { name: "Poster", color: "#D58CFE" },
+        { name: "RWD", color: "#F7883D" },
+      ],
       link: "https://mellifluous-brioche-700f0a.netlify.app/",
       openInNewTab: true,
     },
@@ -34,6 +38,7 @@ export const Work = () => {
       description:
         "VIS design for a local mango smallholder farmer in Kaohsiung, Taiwan.",
       tags: [{ name: "Graphic design", color: "#D58CFE" }],
+      subtags: [{ name: "Branding", color: "#D58CFE" }],
       link: "https://tome.app/tingyilin/brand-guidelines-copy-cm0xur3fw082h8d3gyahzjrak",
       openInNewTab: false,
     },
@@ -71,6 +76,7 @@ export const Work = () => {
       description:
         "Conduct user testing to refine the exchange process and interface, then finalize with testing.",
       tags: [{ name: "UI/UX design", color: "#7D8991" }],
+      subtags: [{ name: "APP", color: "#7D8991" }],
       link: "/work/MegaBank_Redesign",
       openInNewTab: false,
     },
@@ -85,6 +91,7 @@ export const Work = () => {
         { name: "UI/UX design", color: "#7D8991" },
         { name: "Frontend coding", color: "#F7883D" },
       ],
+      subtags: [{ name: "APP", color: "#7D8991" }],
       link: "/work/sports_win",
       openInNewTab: false,
     },
@@ -99,6 +106,9 @@ export const Work = () => {
         // { name: "UI/UX design", color: "#7D8991" },
         { name: "Frontend coding", color: "#F7883D" },
       ],
+      subtags: [
+        { name: "RWD", color: "#F7883D" }
+      ],
       link: "https://simpletodos2024.netlify.app/",
       openInNewTab: true,
     },
@@ -112,6 +122,7 @@ export const Work = () => {
       tags: [
         { name: "UI/UX design", color: "#7D8991" },
       ],
+      subtags: [{ name: "SaaS", color: "#7D8991" }],
       link: "/work/HiveBee",
       openInNewTab: false,
     },
@@ -264,6 +275,7 @@ export const Work = () => {
               subtitle={project.subtitle}
               description={project.description}
               tags={project.tags}
+              subtags={project.subtags}
               link={project.link}
               openInNewTab={project.openInNewTab}
             />

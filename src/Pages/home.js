@@ -90,18 +90,18 @@ function MyComponent(props) {
 
   const Projects = [
     {
-      date: "November, 2023",
-      image: "/arron-nieh.png",
-      title: "Aaron Nieh : Behind the Covers",
-      subtitle: "Lecture Visual Identity",
+      date: "March, 2024",
+      image: "/hivebee/hb demo.png",
+      title: "Hive Bee - We made donations enjoyable",
+      subtitle: "SaaS product design",
       description:
-        'The key visual poster and event website for Aaron Nieh’s lecture, "Behind the Covers," at NCCU.',
+        "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
       tags: [
-        { name: "Graphic design", color: "#D58CFE" },
-        { name: "Frontend coding", color: "#F7883D" },
+        { name: "UI/UX design", color: "#7D8991" },
       ],
-      link: "https://mellifluous-brioche-700f0a.netlify.app/",
-      openInNewTab: true,
+      subtags: [{ name: "SaaS", color: "#7D8991" }],
+      link: "/work/HiveBee",
+      openInNewTab: false,
     },
     {
       date: "May, 2023",
@@ -111,6 +111,7 @@ function MyComponent(props) {
       description:
         "Conduct user testing to refine the exchange process and interface, then finalize with testing.",
       tags: [{ name: "UI/UX design", color: "#7D8991" }],
+      subtags: [{ name: "APP", color: "#7D8991" }],
       link: "/work/MegaBank_Redesign",
       openInNewTab: false,
     },
@@ -125,6 +126,7 @@ function MyComponent(props) {
         { name: "UI/UX design", color: "#7D8991" },
         { name: "Frontend coding", color: "#F7883D" },
       ],
+      subtags: [{ name: "APP", color: "#7D8991" }],
       link: "/work/sports_win",
       openInNewTab: false,
     },
@@ -480,6 +482,7 @@ function MyComponent(props) {
               subtitle={project.subtitle}
               description={project.description}
               tags={project.tags}
+              subtags={project.subtags}
               link={project.link}
               openInNewTab={project.openInNewTab}
             />

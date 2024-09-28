@@ -1,6 +1,6 @@
-import React,{ useEffect, useRef } from "react";
+import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
-import { useInView } from 'react-intersection-observer';
+import { useInView } from "react-intersection-observer";
 
 //ProjectCard
 
@@ -88,6 +88,23 @@ const Tag = styled.div`
   line-height: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease-in;
+`;
+
+const SubTag = styled.div`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  border-color: ${(props) => props.bgColor || "#e0e0e0"};
+  color: ${(props) => props.bgColor || "#e0e0e0"};
+  border-style: solid;
+  border-width: 1px;
+  background-color: none;
+  border-radius: 50px;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1rem;
+  cursor: pointer;
+  transition: border-color, color 0.3s ease-in;
 `;
 
 const CardContainer = styled.a`
@@ -234,7 +251,7 @@ const LargeCardContainer = styled(CardContainer)`
   transition: opacity 1.5s ease, transform 1.5s ease, background-color 0.8s ease;
   transform: translateX(-100%);
 
-   &.visible {
+  &.visible {
     opacity: 1;
     transform: translateX(0); /* 滑入畫面 */
   }
@@ -271,6 +288,7 @@ function LargeProjectCard({
   title,
   description,
   tags,
+  subtags,
   link,
   openInNewTab = false,
 }) {
@@ -282,14 +300,18 @@ function LargeProjectCard({
     }
   };
 
-  const  { ref , inView , entry }  =  useInView ( { 
-    /* 可選選項 */ 
-    Threshold : 0.2 , 
+  const { ref, inView, entry } = useInView({
+    /* 可選選項 */
+    Threshold: 0.2,
     triggerOnce: true,
-  } ) ;
+  });
 
   return (
-    <LargeCardContainer onClick={handleClick} ref={ref} className={inView ? "visible" : ""}> 
+    <LargeCardContainer
+      onClick={handleClick}
+      ref={ref}
+      className={inView ? "visible" : ""}
+    >
       <LargeImageContainer>
         <img src={image} alt={title} />
       </LargeImageContainer>
@@ -309,6 +331,13 @@ function LargeProjectCard({
             <Tag key={index} bgColor={tag.color}>
               {tag.name}
             </Tag>
+          ))}
+
+          {subtags &&
+            subtags.map((subtag, index) => (
+              <SubTag key={index} bgColor={subtag.color}>
+                {subtag.name}
+              </SubTag>
           ))}
         </TagsContainer>
       </LargeContent>

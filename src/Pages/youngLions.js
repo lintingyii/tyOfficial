@@ -539,7 +539,7 @@ const YoungLions = () => {
             href="https://www.instagram.com/vckungfu"
             imageWidth="30%"
           >
-            Official IG Acount
+            Official IG Account
           </LinkButton>
         </ButtonGroup>
 

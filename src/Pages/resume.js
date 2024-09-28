@@ -169,24 +169,7 @@ export const Resume = () => {
             />
           </Div23>
         </Div13>
-        {/* <Div24>
-          <Div25>
-            <Column3>
-              <Img7
-                loading="lazy"
-                srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/28e71fc37a725799b908d380138c350d2c74548f9e6c9d5148c670056fc629bc?apiKey=fe9890881c354019b717422c47a9cee2&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/28e71fc37a725799b908d380138c350d2c74548f9e6c9d5148c670056fc629bc?apiKey=fe9890881c354019b717422c47a9cee2&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/28e71fc37a725799b908d380138c350d2c74548f9e6c9d5148c670056fc629bc?apiKey=fe9890881c354019b717422c47a9cee2&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/28e71fc37a725799b908d380138c350d2c74548f9e6c9d5148c670056fc629bc?apiKey=fe9890881c354019b717422c47a9cee2&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/28e71fc37a725799b908d380138c350d2c74548f9e6c9d5148c670056fc629bc?apiKey=fe9890881c354019b717422c47a9cee2&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/28e71fc37a725799b908d380138c350d2c74548f9e6c9d5148c670056fc629bc?apiKey=fe9890881c354019b717422c47a9cee2&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/28e71fc37a725799b908d380138c350d2c74548f9e6c9d5148c670056fc629bc?apiKey=fe9890881c354019b717422c47a9cee2&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/28e71fc37a725799b908d380138c350d2c74548f9e6c9d5148c670056fc629bc?apiKey=fe9890881c354019b717422c47a9cee2&"
-              />
-              <Img8
-                loading="lazy"
-                srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/82a7b228fe15e3d43e423e0c4db0979bb0e4d254d9606f3f82156faff41964f0?apiKey=fe9890881c354019b717422c47a9cee2&"
-              />
-              <Img9
-                loading="lazy"
-                srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/e7581e7fa76669d574af022b9fd7c3a96a9b31d34e1e86c05c31c280832fbf54?apiKey=fe9890881c354019b717422c47a9cee2&"
-              />
-            </Column3>
-          </Div25>
-        </Div24> */}
+
         <Div26>Education</Div26>
         <Div27>
           <Div28>
@@ -388,7 +371,7 @@ const downloadPdf = () => {
   // 創建一個隱藏的 <a> 元素
   const link = document.createElement("a");
   link.href = pdfUrl;
-  link.download = "Tingyi-Lin CV.pdf"; // 下載文件的名稱
+  link.download = "Ting-yi Lin CV.pdf"; // 下載文件的名稱
 
   // 將 <a> 元素添加到 DOM 中
   document.body.appendChild(link);
