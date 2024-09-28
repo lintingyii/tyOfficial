@@ -11,12 +11,12 @@ const Container = styled.div`
   align-items: center;
   width: 100%;
   margin: 0; /* 清除 margin */
-  padding: 0 3vw;
+  // padding: 0 3vw;
   box-sizing: border-box;
 
-  // @media (max-width: 480px) {
-  //   padding-bottom: 8vh;
-  // }
+  @media (max-width: 880px) {
+    padding: 0 3vw;
+  }
 `;
 
 const Header = styled.header`
@@ -36,7 +36,7 @@ const Title2 = styled.h2`
   white-space: pre-wrap;
   margin: 1rem 0 2rem 0;
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     font-size: 1rem;
   }
 `;
@@ -53,7 +53,7 @@ const SubTitle = styled.div`
 const Image = styled.img`
   width: ${(props) => props.width || "70%"};
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     width: ${(props) => props.width || "95%"};
   }
 `;
@@ -61,7 +61,7 @@ const Image = styled.img`
 const DisImage = styled.img`
   width: ${(props) => props.width || "30%"};
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     width: ${(props) => props.width || "95%"};
   }
 `;
@@ -69,7 +69,7 @@ const DisImage = styled.img`
 const LaptopImage = styled.img`
   width: ${(props) => props.width || "70%"};
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     display: none;
   }
 `;
@@ -77,7 +77,7 @@ const LaptopImage = styled.img`
 const MobileImage = styled.img`
   display: none;
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     display: initial;
     max-width: 400px;
     width: ${(props) => props.width || "95%"};
@@ -124,7 +124,7 @@ const Text = styled.div`
   text-align: justify;
   line-height: 1.5;
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     width: 95%;
     text-align: left;
   }
@@ -140,7 +140,7 @@ const DisText = styled.div`
   padding-left: 0.8rem;
   line-height: 1.5;
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     width: 80%;
     text-align: left;
     border-left: 8px solid #e87cdc;
@@ -153,7 +153,7 @@ const DisTextWrapper = styled.div`
   gap: 1rem;
   align-items: left;
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     align-items: center;
   }
 `;
@@ -206,7 +206,7 @@ const TextWrapper = styled.div`
   margin: 0 auto;
   // margin-top: 3rem;
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     flex-direction: column;
     gap: 1rem;
     justify-content: center;
@@ -226,7 +226,7 @@ const TextWrapperContainer = styled.div`
   margin-top: 30px;
   background-color: #edf8fa;
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     width: 95%;
     box-sizing: border-box;
   }
@@ -242,7 +242,7 @@ const DiscriptionWrapper = styled.div`
   margin: 0 auto;
   margin-top: 30px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     width: 95%;
     box-sizing: border-box;
     flex-direction: column;
@@ -264,7 +264,7 @@ const ImageWrapper = styled.div`
     gap: unset;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     flex-direction: column;
     width: ${(props) => props.width || "100%"};
     gap: unset;
@@ -282,7 +282,7 @@ const GroupImage = styled.img`
     height: unset;
   }
 
-  @media (max-width: 480px) {
+  @media (max-width: 880px) {
     width: ${(props) => props.width || "95%"};
     height: unset;
   }
@@ -296,7 +296,7 @@ const BackButton = styled.button`
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  margin-top: 40px;
+  margin-top: 5rem;
 
   transition: background-color 0.8s;
 

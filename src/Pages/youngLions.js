@@ -13,13 +13,13 @@ const Container = styled.div`
   top: 0;
   left: 0;
   margin: 0; /* 清除 margin */
-  padding: 0 3vw;
+  // padding: 0 3vw;
   box-sizing: border-box;
   flex: 1;
 
-  // @media (max-width: 480px) {
-  //   padding-bottom: 8vh;
-  // }
+  @media (max-width: 880px) {
+    padding: 0 3vw;
+  }
 `;
 
 const Header = styled.header`
@@ -50,13 +50,21 @@ const SubTitle = styled.div`
 const Image = styled.img`
   width: ${(props) => props.width || "70%"};
 
-  @media (max-width: 480px) {
+  // @media (max-width: 880px) {
+  //   width: ${(props) => props.width || "80%"};
+  // }
+
+  @media (max-width: 880px) {
     width: ${(props) => props.width || "95%"};
   }
 `;
 
 const LaptopImage = styled.img`
-  width: ${(props) => props.width || "70%"};
+  width: ${(props) => props.width || "80%"};
+
+  @media (max-width: 880px) {
+    width: ${(props) => props.width || "95%"};
+  }
 
   @media (max-width: 480px) {
     display: none;
@@ -78,7 +86,7 @@ const TabletImage = styled.img`
 
   @media (max-width: 1024px) {
     display: initial;
-    width: 95%;
+    width: 100%;
   }
 `;
 
@@ -88,6 +96,10 @@ const ImageWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: 0 auto;
+
+  @media (max-width: 880px) {
+    width: ${(props) => props.width || "95%"};
+  }
 
   @media (max-width: 480px) {
     flex-direction: column;
@@ -108,7 +120,7 @@ const LaptopImageWrapper = styled.div`
 `;
 
 const ContentImage = styled.img`
-  max-width: 33.3%;
+  width: calc(100% / 3); 
   display: flex;
 
   @media (max-width: 480px) {
@@ -156,8 +168,8 @@ const Text = styled.div`
   width: 70%;
   text-align: justify;
 
-  @media (max-width: 480px) {
-    width: 85%;
+  @media (max-width: 880px) {
+    width: 95%;
   }
 `;
 
@@ -214,9 +226,10 @@ const Video = styled.iframe`
   margin: 40px 0;
   width: 70%;
   aspect-ratio: 16 / 9;
+  border-radius: 12px;
 
-  @media (max-width: 480px) {
-    width: 100%;
+  @media (max-width: 880px) {
+    width: 95%;
   }
 `;
 
@@ -233,7 +246,7 @@ const BackButton = styled.button`
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  margin-top: 40px;
+  margin-top: 5rem;
 
   transition: background-color 0.8s;
 
@@ -318,7 +331,6 @@ const YoungLions = () => {
         <LaptopImage
           src="/younglions/people.png"
           alt="Psychology"
-          width="80%"
         />
         <ImageWrapper width="90%" style={{ gap: "1rem", marginTop: "2rem" }}>
           <MobileImage
@@ -360,13 +372,12 @@ const YoungLions = () => {
             // gap: "1rem",
           }}
         >
-          <Image src="/younglions/think.png" alt="think" width="5rem" />
+          <Image src="/younglions/think.png" alt="think" width="5rem" style={{marginBottom: "2rem"}}/>
           <LaptopImage
             src="/younglions/insight.png"
             alt="insight"
-            width="80%"
           />
-          <ImageWrapper style={{gap:'1rem', marginTop:'1rem'}}>
+          <ImageWrapper >
             <MobileImage src="/younglions/insight-1-m.png" alt="insight" />
             <MobileImage src="/younglions/insight-2-m.png" alt="insight" />
           </ImageWrapper>
@@ -480,13 +491,11 @@ const YoungLions = () => {
         <LaptopImage
           src="/younglions/flow.png"
           alt="think"
-          width="80%"
           style={{ marginTop: "2rem" }}
         />
         <MobileImage
           src="/younglions/flow-m.png"
           alt="think"
-          width="95%"
           style={{ marginTop: "2rem" }}
         />
       </section>
@@ -496,7 +505,6 @@ const YoungLions = () => {
         <LaptopImage
           src="/younglions/result.png"
           alt="think"
-          width="80%"
           style={{ marginTop: "2rem" }}
         />
         <MobileImage
