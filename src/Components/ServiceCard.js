@@ -2,7 +2,8 @@ import React, { useEffect, useRef } from "react";
 import styled from "styled-components";
 
 const ServiceCard = styled.div`
-  background-color: #333333;
+  background-color: #E2E2E2;
+  border: 1.5px solid rgba(51, 51, 51, 1);
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   width: 100%;
@@ -15,19 +16,24 @@ const ServiceCard = styled.div`
   transition: background-color 0.2s ease-in;
   flex-grow: 1;
   box-sizing: border-box;
+  color: #333;
 
   /* hover class style */
   &.hover {
-    background-color: ${(props) => props.hoverColor || "#000fff"};
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
+    background-color: #333;
+    color: #f2f2f2;
   }
 
   @media (max-width: 480px) {
     width: 100%;
-    box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    z-index: ${(props) => props.zIndex || 1};
   }
 `;
 
-const ServiceCardComponent = ({ children, hoverColor }) => {
+const ServiceCardComponent = ({ children, hoverColor, zIndex }) => {
   const cardRef = useRef(null);
 
   useEffect(() => {
@@ -59,7 +65,7 @@ const ServiceCardComponent = ({ children, hoverColor }) => {
   }, []);
 
   return (
-    <ServiceCard ref={cardRef} hoverColor={hoverColor}>
+    <ServiceCard ref={cardRef} hoverColor={hoverColor} zIndex={zIndex}>
       {children}
     </ServiceCard>
   );

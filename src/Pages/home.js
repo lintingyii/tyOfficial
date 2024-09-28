@@ -94,9 +94,7 @@ function MyComponent(props) {
       subtitle: "SaaS product design",
       description:
         "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
-      tags: [
-        { name: "UI/UX design", color: "#7D8991" },
-      ],
+      tags: [{ name: "UI/UX design", color: "#7D8991" }],
       subtags: [{ name: "SaaS", color: "#7D8991" }],
       link: "/work/HiveBee",
       openInNewTab: false,
@@ -172,11 +170,11 @@ function MyComponent(props) {
 
         <TextWrapper3>
           <p>
-            Hello👋🏻, I am Ting-yi Lin, you can call me Morgan, a creative and multidisciplinary designer. Venturing into{" "}
-            <Span>UI / UX</Span>, my understanding of{" "}
-            <Span>front-end skills</Span> emphasizes a practical approach to
-            design, blending aesthetics and creativity with{" "}
-            <Span>user-centric</Span> solutions.
+            Hello👋🏻, I am Ting-yi Lin, you can call me Morgan, a creative and
+            multidisciplinary designer. Venturing into <Span>UI / UX</Span>, my
+            understanding of <Span>front-end skills</Span> emphasizes a
+            practical approach to design, blending aesthetics and creativity
+            with <Span>user-centric</Span> solutions.
           </p>
         </TextWrapper3>
       </div>
@@ -326,10 +324,10 @@ function MyComponent(props) {
         </Marqueetext>
       </Marquee>
 
-      <Section>
+      {/* <Section>
         <SectionTitle>
           <div style={{ display: "flex" }}>
-            Strength
+            Service
             <span
               style={{
                 fontFamily: "serif",
@@ -352,8 +350,9 @@ function MyComponent(props) {
             glance
           </div>
         </SectionTitle>
+        
         <CardsContainer>
-          <ServiceCardComponent hoverColor="#D58CFE">
+          <ServiceCardComponent zIndex={1}>
             <creattie-embed
               src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/98509/YUwgGNKFpKppqKV4.json"
               delay="1"
@@ -367,12 +366,13 @@ function MyComponent(props) {
                 display: "flex",
               }}
             ></creattie-embed>
-            <ServiceContent>Branding</ServiceContent>
+            <ServiceContent>Visual Communication</ServiceContent>
             <ServiceDes>
-              Logo Design • Visual Identity Design • Brand Guidelines
+              Visual Identity Design • Design for Print • Packaging • Illustration
             </ServiceDes>
           </ServiceCardComponent>
-          <ServiceCardComponent hoverColor="#ff6434">
+
+          <ServiceCardComponent zIndex={2}>
             <creattie-embed
               src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/98509/Wj56MkmSXUliw7Th.json"
               delay="0"
@@ -386,14 +386,13 @@ function MyComponent(props) {
                 display: "flex",
               }}
             ></creattie-embed>
-            <ServiceContent>Web Design</ServiceContent>
+            <ServiceContent>Digital Content</ServiceContent>
             <ServiceDes>
-              Digital Experience Design • Web Development • Responsive Design
+              Digital Experience Design • Web Design & Development • Responsive Design
             </ServiceDes>
           </ServiceCardComponent>
-        </CardsContainer>
-        <CardsContainer>
-          <ServiceCardComponent hoverColor="#F4790D">
+
+          <ServiceCardComponent zIndex={3}>
             <creattie-embed
               src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/98509/GiAN4lbwlxqpC71u.json"
               delay="0"
@@ -407,33 +406,15 @@ function MyComponent(props) {
                 display: "flex",
               }}
             ></creattie-embed>
-            <ServiceContent>UI / UX Design</ServiceContent>
+            <ServiceContent>UI / UX</ServiceContent>
             <ServiceDes>
-              Digital Product • Design Systems • User Journeys • Prototyping
-            </ServiceDes>
-          </ServiceCardComponent>
-          <ServiceCardComponent hoverColor="#7d8991">
-            <creattie-embed
-              src="https://d1jj76g3lut4fe.cloudfront.net/saved_colors/98509/aftFSGuhoSA7pabt.json"
-              delay="0"
-              speed="100"
-              frame_rate="24"
-              stroke_width="10.5"
-              trigger="loop"
-              style={{
-                width: embedWidth,
-                zIndex: "999",
-                display: "flex",
-              }}
-            ></creattie-embed>
-            <ServiceContent>Graphic Design</ServiceContent>
-            <ServiceDes>
-              Design for Print • Packaging • Marketing Design • Illustration
+              User Interface Design • User Research • Design System • Interactive Prototype
             </ServiceDes>
           </ServiceCardComponent>
         </CardsContainer>
-      </Section>
-      <div
+      </Section> */}
+
+      {/* <div
         style={{
           width: "100%",
           display: "flex",
@@ -453,9 +434,9 @@ function MyComponent(props) {
         <Flower stroke="#000fff" viewBox="0 0 24 24">
           <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
         </Flower>
-      </div>
+      </div> */}
 
-      <Section style={{ paddingTop: "0rem" }}>
+      <Section>
         <SectionTitle
           style={{ flexDirection: "row", justifyContent: "center" }}
         >
@@ -910,6 +891,7 @@ const UIUXProject = styled.div`
   line-height: 46.4px;
   position: absolute;
   top: 240px;
+  white-space: nowrap;
 `;
 
 const UIUXProject1 = styled(UIUXProject)`
@@ -1204,7 +1186,7 @@ const Section = styled.div`
 `;
 
 const CardsContainer = styled.div`
-  width: 80%;
+  width: 90%;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -1216,6 +1198,7 @@ const CardsContainer = styled.div`
     flex-direction: column;
     gap: 24px;
     width: 90%;
+    position: relative;
   }
 `;
 
@@ -1246,7 +1229,7 @@ const SectionTitle = styled.div`
 `;
 
 const ServiceContent = styled.div`
-  color: #fff;
+  // color: #fff;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   width: 100%;
@@ -1266,7 +1249,7 @@ const ServiceContent = styled.div`
 
 const ServiceDes = styled.div`
   margin-top: 0.6rem;
-  color: #fff;
+  // color: #fff;
   font-family: serif;
   font-size: 1.2rem;
   text-align: center;

@@ -20,6 +20,7 @@ import Footer from "./Components/footer";
 import { createGlobalStyle } from "styled-components";
 import "./App.css";
 import LoadingSpinner from "./Components/LoadingSpinner";
+import { ReactLenis, useLenis } from 'lenis/react';
 
 const GlobalStyle = createGlobalStyle`
   body, * {
@@ -112,16 +113,6 @@ const SpecialNavItem = styled(Link)`
   }
 `;
 
-const ScrollToTop = () => {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-};
-
 function PageWithLoading() {
   const location = useLocation(); // 监听路径变化
   const [loading, setLoading] = useState(true); // 管理加载状态
@@ -177,7 +168,23 @@ const Main = styled.div`
 `;
 
 function App() {
+
+  const lenis = useLenis(({ scroll }) => {
+    // called every scroll
+  })
+
+  const ScrollToTop = () => {
+    const { pathname } = useLocation();
+  
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
+  
+    return null;
+  };
+
   return (
+    <ReactLenis root>
     <Main>
       <CustomCursor />
       <GlobalStyle />
@@ -200,6 +207,7 @@ function App() {
         <Footer />
       </Router>
     </Main>
+    </ReactLenis>
   );
 }
 
