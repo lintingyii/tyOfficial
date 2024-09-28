@@ -1,9 +1,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
-import { Link } from "react-router-dom";
 import Marquee from "react-fast-marquee";
 import Footer from "../Components/footer";
-import { color } from "framer-motion";
 import ServiceCardComponent from "../Components/ServiceCard";
 import { LargeProjectCard } from "../Components/ProjectCard";
 
@@ -174,8 +172,7 @@ function MyComponent(props) {
 
         <TextWrapper3>
           <p>
-            Hello👋🏻, I'm Ting-yi Lin, you can call me Morgan, a creative
-            designer graduate from National Chengchi University. Venturing into{" "}
+            Hello👋🏻, I am Ting-yi Lin, you can call me Morgan, a creative and multidisciplinary designer. Venturing into{" "}
             <Span>UI / UX</Span>, my understanding of{" "}
             <Span>front-end skills</Span> emphasizes a practical approach to
             design, blending aesthetics and creativity with{" "}

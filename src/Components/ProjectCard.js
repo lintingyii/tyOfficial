@@ -73,7 +73,7 @@ const Description = styled.p`
 const TagsContainer = styled.div`
   display: flex;
   gap: 10px;
-  flex-wrap: pre-wrap;
+  flex-wrap: wrap;
 `;
 
 const Tag = styled.div`
@@ -88,6 +88,7 @@ const Tag = styled.div`
   line-height: 1rem;
   cursor: pointer;
   transition: background-color 0.3s ease-in;
+  white-space: nowrap;
 `;
 
 const SubTag = styled.div`
