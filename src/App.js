@@ -170,19 +170,26 @@ const Main = styled.div`
 
 function App() {
 
-  const lenisRef = useRef()
+  const lenisRef = useRef(null);
   
-  useEffect(() => {
-    function update(time) {
-      lenisRef.current?.lenis?.raf(time * 1000)
+  let lastUpdate = 0;
+
+useEffect(() => {
+  function update(time) {
+    if (time - lastUpdate > 16) { // 大约每 16 毫秒更新一次
+      lastUpdate = time;
+      if (lenisRef.current) {
+        lenisRef.current.lenis.raf(time * 1000);
+      }
     }
+  }
+
+  gsap.ticker.add(update);
   
-    gsap.ticker.add(update)
-  
-    return () => {
-      gsap.ticker.remove(update)
-    }
-  })
+  return () => {
+    gsap.ticker.remove(update);
+  };
+}, []);
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();

@@ -13,8 +13,6 @@ const CardContainer = styled.div`
   border: 1.5px solid rgba(217, 217, 217, 1);
   border-radius: 12px;
   transform: rotate(${(props) => props.rotateX || '0deg'});
-  max-height: 100vh;  // 限制最大高度
-  overflow-y: auto;
 
   img {
     width: 100%; /* 圖片寬度充滿容器 */
