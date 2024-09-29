@@ -364,14 +364,6 @@ function MyComponent(props) {
             person="Ethan Deng, Product Design Lead @Futurenest" 
             rotate="-2deg"
           />
-          <TestimonialCard
-            zIndex={3}
-            bgImage="./testimonial-2.png"
-            content="She integrates insights to propose innovative solutions. Her skill in clarifying user and market needs during prototyping leads to streamlined processes and effective interface designs. With a collaborative spirit, Ting-yi excels in enhancing team dynamics, making her a valuable asset in cross-functional team."
-            color="#D58CFE"
-            person="Ethan Deng, Product Design Lead @Futurenest" 
-            rotate="-2deg"
-          />
         </CardsContainer>
       </Section>
       {/* <Section>
@@ -1242,7 +1234,7 @@ const CardsContainer = styled.div`
   gap: 1.5rem;
   // flex-wrap: wrap;
   flex-direction: column;
-  position: relative;
+  // position: relative;
   padding: 1rem 0;
 
   @media (max-width: 480px) {
