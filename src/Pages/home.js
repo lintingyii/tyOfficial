@@ -356,14 +356,14 @@ function MyComponent(props) {
             color="#F7883D"
             person="Mike Lin, Frontend Developer"
           />
-          <TestimonialCard
+          {/* <TestimonialCard
             zIndex={3}
             bgImage="./testimonial-2.png"
             content="She integrates insights to propose innovative solutions. Her skill in clarifying user and market needs during prototyping leads to streamlined processes and effective interface designs. With a collaborative spirit, Ting-yi excels in enhancing team dynamics, making her a valuable asset in cross-functional team."
             color="#D58CFE"
             person="Ethan Deng, Product Design Lead @Futurenest" 
             rotate="-2deg"
-          />
+          /> */}
         </CardsContainer>
       </Section>
       {/* <Section>
