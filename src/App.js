@@ -115,11 +115,11 @@ const SpecialNavItem = styled(Link)`
 `;
 
 function PageWithLoading() {
-  const location = useLocation(); // 监听路径变化
-  const [loading, setLoading] = useState(true); // 管理加载状态
+  const location = useLocation(); 
+  const [loading, setLoading] = useState(true); 
 
   useEffect(() => {
-    // 每次页面路径变化时触发
+    
     setLoading(true); // 页面变化时显示 loading
     const timer = setTimeout(() => {
       setLoading(false); // 2 秒后关闭 loading
