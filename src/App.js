@@ -22,8 +22,6 @@ import "./App.css";
 import LoadingSpinner from "./Components/LoadingSpinner";
 import { ReactLenis, useLenis } from 'lenis/react';
 import LocomotiveScroll from 'locomotive-scroll';
-// import 'locomotive-scroll/src/locomotive-scroll.css';
-
 
 const GlobalStyle = createGlobalStyle`
   body, * {
