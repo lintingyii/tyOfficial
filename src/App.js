@@ -188,7 +188,7 @@ function App() {
     const scroll = new LocomotiveScroll({
       el: scrollRef.current, // 绑定需要平滑滚动的容器
       smooth: true, // 启用平滑滚动
-      multiplier: 1.2, // 滚动速度的倍数，值越大滚动越快
+      multiplier: 0.5, // 滚动速度的倍数，值越大滚动越快
     });
 
     return () => {
