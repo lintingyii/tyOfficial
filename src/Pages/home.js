@@ -1234,7 +1234,7 @@ const CardsContainer = styled.div`
   gap: 1.5rem;
   // flex-wrap: wrap;
   flex-direction: column;
-  // position: relative;
+  position: relative;
   padding: 1rem 0;
 
   @media (max-width: 480px) {

@@ -7,7 +7,7 @@ const CardContainer = styled.div`
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   width: calc(100% / 3);
   box-sizing: border-box;
-//   position: sticky;
+  position: sticky;
   top: 22vh;
   z-index: ${(props) => props.zIndex || 1};
   border: 1.5px solid rgba(217, 217, 217, 1);
