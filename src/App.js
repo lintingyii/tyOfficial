@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import gsap from 'gsap';
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,6 +21,9 @@ import { createGlobalStyle } from "styled-components";
 import "./App.css";
 import LoadingSpinner from "./Components/LoadingSpinner";
 import { ReactLenis, useLenis } from 'lenis/react';
+import LocomotiveScroll from 'locomotive-scroll';
+// import 'locomotive-scroll/src/locomotive-scroll.css';
+
 
 const GlobalStyle = createGlobalStyle`
   body, * {
@@ -170,10 +172,6 @@ const Main = styled.div`
 
 function App() {
 
-  const lenis = useLenis(({ scroll }) => {
-    // called every scroll
-  })
-
   const ScrollToTop = () => {
     const { pathname } = useLocation();
   
@@ -184,9 +182,23 @@ function App() {
     return null;
   };
 
+  const scrollRef = useRef(null);
+
+  useEffect(() => {
+    const scroll = new LocomotiveScroll({
+      el: scrollRef.current, // 绑定需要平滑滚动的容器
+      smooth: true, // 启用平滑滚动
+      multiplier: 1.2, // 滚动速度的倍数，值越大滚动越快
+    });
+
+    return () => {
+      scroll.destroy(); // 组件卸载时销毁实例
+    };
+  }, []);
+
   return (
     // <ReactLenis root>
-    <Main>
+    <Main id="data-scroll-container">
       <CustomCursor />
       <GlobalStyle />
       <Router>
