@@ -3,6 +3,7 @@ import styled, { keyframes, css } from "styled-components";
 import Marquee from "react-fast-marquee";
 import Footer from "../Components/footer";
 import ServiceCardComponent from "../Components/ServiceCard";
+import TestimonialCard from "../Components/TestimonialCard";
 import { LargeProjectCard } from "../Components/ProjectCard";
 
 function MyComponent(props) {
@@ -324,6 +325,47 @@ function MyComponent(props) {
         </Marqueetext>
       </Marquee>
 
+      <Section>
+        <CardsContainer>
+          <SectionTitleSticky>
+            <div style={{ display: "flex" }}>
+              Voice
+              <span
+                style={{
+                  fontFamily: "serif",
+                  fontStyle: "italic",
+                }}
+              >
+                (s)
+              </span>
+            </div>
+            <div style={{ display: "flex", gap: "16px" }}>of Trust</div>
+          </SectionTitleSticky>
+          <TestimonialCard
+            zIndex={1}
+            bgImage="./testimonial-1.png"
+            content="Ting-yi has excellent communication skills. During interviews, her keen perception consistently guides the conversation, helping us quickly pinpoint key insights from users. She is a great asset to any team."
+            color="#000fff"
+            person="Temu Chen, Project Manager @KOL.Tech"
+            rotate="2deg"
+          />
+          <TestimonialCard
+            zIndex={2}
+            bgImage="./testimonial-3.png"
+            content="Ting-yi has a high standard for visual aesthetics and is well-versed in front-end programming languages. This enables her designs to be both thoughtfully crafted and effectively implemented in development, making collaboration a truly enjoyable experience."
+            color="#F7883D"
+            person="Mike Lin, Frontend Developer"
+          />
+          <TestimonialCard
+            zIndex={3}
+            bgImage="./testimonial-2.png"
+            content="She integrates insights to propose innovative solutions. Her skill in clarifying user and market needs during prototyping leads to streamlined processes and effective interface designs. With a collaborative spirit, Ting-yi excels in enhancing team dynamics, making her a valuable asset in cross-functional team."
+            color="#D58CFE"
+            person="Ethan Deng, Product Design Lead @Futurenest" 
+            rotate="-2deg"
+          />
+        </CardsContainer>
+      </Section>
       {/* <Section>
         <SectionTitle>
           <div style={{ display: "flex" }}>
@@ -414,7 +456,7 @@ function MyComponent(props) {
         </CardsContainer>
       </Section> */}
 
-      {/* <div
+      <div
         style={{
           width: "100%",
           display: "flex",
@@ -434,9 +476,9 @@ function MyComponent(props) {
         <Flower stroke="#000fff" viewBox="0 0 24 24">
           <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
         </Flower>
-      </div> */}
+      </div>
 
-      <Section>
+      <Section style={{ paddingTop: "2rem" }}>
         <SectionTitle
           style={{ flexDirection: "row", justifyContent: "center" }}
         >
@@ -1177,28 +1219,27 @@ const Section = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  padding-top: 4rem;
+  padding-top: 5rem;
 
   @media (max-width: 480px) {
     gap: 24px;
-    padding-top: 3rem;
   }
 `;
 
 const CardsContainer = styled.div`
-  width: 90%;
+  width: 100%;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   gap: 1.5rem;
   // flex-wrap: wrap;
-  flex-direction: row;
+  flex-direction: column;
+  position: relative;
+  padding: 1rem 0;
 
   @media (max-width: 480px) {
-    flex-direction: column;
     gap: 24px;
     width: 90%;
-    position: relative;
   }
 `;
 
@@ -1224,6 +1265,35 @@ const SectionTitle = styled.div`
     align-items: left;
     text-align: left;
     gap: 0px;
+    line-height: 1.1;
+  }
+`;
+
+const SectionTitleSticky = styled.div`
+  color: #333333;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-size: 3rem;
+  font-weight: 700;
+  width: 90%;
+  font-size: 48px;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  position: sticky;
+  top: 12vh;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    font-size: 2.5rem;
+    top: 8vh;
+    justify-content: center;
+    align-items: left;
+    text-align: left;
+    gap: 16px;
     line-height: 1.1;
   }
 `;
