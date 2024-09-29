@@ -170,29 +170,9 @@ const Main = styled.div`
 
 function App() {
 
-  const lenisRef = useRef(null);
-  const lenis = useLenis();
-
-  useEffect(() => {
-    lenisRef.current = { lenis }; // 初始化 lenisRef
-
-    let lastUpdate = 0;
-
-    function update(time) {
-      if (time - lastUpdate > 16) { // 大约每 16 毫秒更新一次
-        lastUpdate = time;
-        if (lenisRef.current) {
-          lenisRef.current.lenis.raf(time * 1000);
-        }
-      }
-    }
-
-    gsap.ticker.add(update);
-
-    return () => {
-      gsap.ticker.remove(update);
-    };
-  }, [lenis]);
+  const lenis = useLenis(({ scroll }) => {
+    // called every scroll
+  })
 
   const ScrollToTop = () => {
     const { pathname } = useLocation();
