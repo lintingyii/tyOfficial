@@ -20,9 +20,13 @@ const CardContainer = styled.div`
     border-radius: inherit; /* 圖片繼承容器的圓角設置 */
   }
 
-  @media (max-width: 880px) {
-    width: 70%;
+  @media (max-width: 1024px) {
+    width: 60%;
   }
+
+  // @media (max-width: 820px) {
+  //   width: 60%;
+  // }
 
   @media (max-width: 480px) {
     width: 100%;

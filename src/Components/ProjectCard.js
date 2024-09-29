@@ -190,7 +190,7 @@ const LargeImageContainer = styled(ImageContainer)`
   width: auto;
   margin: 0;
 
-  @media (max-width: 800px) {
+  @media (max-width: 820px) {
     max-width: 100%;
   }
 `;
@@ -257,7 +257,7 @@ const LargeCardContainer = styled(CardContainer)`
     transform: translateX(0); /* 滑入畫面 */
   }
 
-  @media (max-width: 800px) {
+  @media (max-width: 820px) {
     flex-direction: column;
     width: 100%;
     animation: slideIn 1s ease;

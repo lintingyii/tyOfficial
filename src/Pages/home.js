@@ -173,9 +173,10 @@ function MyComponent(props) {
           <p>
             Hello👋🏻, I am Ting-yi Lin, you can call me Morgan, a creative and
             multidisciplinary designer. Venturing into <Span>UI / UX</Span>, my
-            understanding of <Span>front-end skills</Span> emphasizes a
-            practical approach to design, blending aesthetics and creativity
-            with <Span>user-centric</Span> solutions.
+            understanding of <Span>front-end skills</Span> combined with keen 
+            observational insights, emphasizes a practical approach to design,
+            blending aesthetics and creativity with <Span>user-centric</Span>{" "}
+            solutions.
           </p>
         </TextWrapper3>
       </div>
@@ -213,7 +214,7 @@ function MyComponent(props) {
               />
               <UIUXProject>UI / UX Design</UIUXProject>
               <UIUXProject1>
-                As a UI/UX designer, I harmonize form and function to create
+                As an UI/UX designer, I harmonize form and function to create
                 visually captivating interfaces that guide users through
                 purposeful journeys.
                 <br />
@@ -361,7 +362,7 @@ function MyComponent(props) {
             bgImage="./testimonial-2.png"
             content="She integrates insights to propose innovative solutions. Her skill in clarifying user and market needs during prototyping leads to streamlined processes and effective interface designs. With a collaborative spirit, Ting-yi excels in enhancing team dynamics, making her a valuable asset in cross-functional team."
             color="#D58CFE"
-            person="Ethan Deng, Product Design Lead @Futurenest" 
+            person="Ethan Deng, Product Design Lead @Futurenest"
             rotate="-2deg"
           />
         </CardsContainer>

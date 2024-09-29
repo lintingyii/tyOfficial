@@ -26,6 +26,7 @@ import LoadingSpinner from "./Components/LoadingSpinner";
 const GlobalStyle = createGlobalStyle`
   body, * {
   user-select: none;
+  scroll-behavior: initial; /* 使用平滑滾動 */
  }
 `;
 
