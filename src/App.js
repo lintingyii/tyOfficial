@@ -185,7 +185,7 @@ function App() {
   };
 
   return (
-    <ReactLenis root>
+    // <ReactLenis root>
     <Main>
       <CustomCursor />
       <GlobalStyle />
@@ -208,7 +208,7 @@ function App() {
         <Footer />
       </Router>
     </Main>
-   </ReactLenis>
+   {/* </ReactLenis> */}
   );
 }
 
