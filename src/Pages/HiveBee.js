@@ -629,7 +629,7 @@ const HiveBee = () => {
           loop
           muted
           playsInline
-          style={{border: "1px solid rgba(0, 0, 0, 0.1)"}}
+          style={{ border: "1px solid rgba(0, 0, 0, 0.1)" }}
         />
 
         <SubTitle>
@@ -946,20 +946,20 @@ const HiveBee = () => {
           <BlockTitle>Step.3</BlockTitle>
           <BlockHeader>Wireframe & Lo-fi Prototype</BlockHeader>
           <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
-            為了更深入了解並釐清用戶在系統操作上的邏輯與流程，我基於已確立的資訊架構，思考操作邏輯，並繪製用戶流程圖。這些流程圖成為與開發團隊討論的重要工具，幫助我們共同理解各種狀態的運作方式，並作為繪製
-            Wireframe
-            的依據之一，以此確保用戶體驗完善、頁面之間的連結關係清晰，且所有功能需求皆完整。
+            將用戶流程圖轉化為具體的視覺設計，先針對各個頁面的基本佈局進行規劃，確定元件的位置與比例，並梳理不同頁面間的關聯與邏輯，Wire-flow
+            幫助我們迅速檢視功能的可行性，並評估開發工作量，同時便於快速進行調整。接著轉換為Lo-fi
+            Prototype，模擬用戶實際操作，確保每個用戶流程都被妥善規劃，以便進行初步內部測試和團隊溝通。
           </Text>
           <Text style={{ marginTop: "0rem" }}>
-            To gain a deeper understanding and clarify the user's logic and flow
-            within the system, I built on the established information
-            architecture and mapped out the operational logic through user flow
-            diagrams. These diagrams became essential tools for discussions with
-            the development team, helping us mutually understand how various
-            states function. They also served as one of the key references for
-            wireframe design, ensuring a seamless user experience, clear
-            page-to-page relationships, and the completeness of all necessary
-            features.
+            The user flow is then transformed into concrete visual
+            design. First, the basic layout of each page is planned, determining
+            the position and proportion of elements, while organizing the
+            connections and logic between pages. Wire-flow helps us quickly
+            assess the feasibility of features and evaluate development
+            workload, allowing for rapid adjustments. Afterward, it's converted
+            into a Lo-fi Prototype, simulating user interactions to ensure every
+            flow is well-planned, facilitating initial internal testing and team
+            communication.
           </Text>
 
           <Image
