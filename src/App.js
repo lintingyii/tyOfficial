@@ -184,7 +184,15 @@ function App() {
   };
 
   return (
-    <ReactLenis root>
+    <ReactLenis 
+    options={{
+      smooth: true,
+      infinite: false, // 是否無限滾動
+      direction: "vertical", // 垂直滾動
+      smoothTouch: true, // 啟用觸控滾動的平滑效果
+      touchMultiplier: 1.5, // 調整觸控板的滾動速度
+    }}
+    root>
     <Main>
       <CustomCursor />
       <GlobalStyle />
