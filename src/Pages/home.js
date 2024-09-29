@@ -5,7 +5,6 @@ import Footer from "../Components/footer";
 import ServiceCardComponent from "../Components/ServiceCard";
 import TestimonialCard from "../Components/TestimonialCard";
 import { LargeProjectCard } from "../Components/ProjectCard";
-import LocomotiveScroll from 'locomotive-scroll';
 
 function MyComponent(props) {
   // useEffect(() => {
@@ -87,19 +86,6 @@ function MyComponent(props) {
   //     document.body.removeChild(script);
   //   };
   // }, []);
-  const scrollRef = useRef(null);
-
-  useEffect(() => {
-    const scroll = new LocomotiveScroll({
-      el: scrollRef.current, // 绑定需要平滑滚动的容器
-      smooth: true, // 启用平滑滚动
-      multiplier: 0.5, // 滚动速度的倍数，值越大滚动越快
-    });
-
-    return () => {
-      scroll.destroy(); // 组件卸载时销毁实例
-    };
-  }, []);
 
   const Projects = [
     {
@@ -340,7 +326,7 @@ function MyComponent(props) {
       </Marquee>
 
       <Section>
-        <CardsContainer id="data-scroll-container">
+        <CardsContainer>
           <SectionTitleSticky>
             <div style={{ display: "flex" }}>
               Voice
@@ -1248,7 +1234,7 @@ const CardsContainer = styled.div`
   // flex-wrap: wrap;
   flex-direction: column;
   position: relative;
-  // padding: 1rem 0;
+  padding: 1rem 0;
 
   @media (max-width: 480px) {
     gap: 24px;

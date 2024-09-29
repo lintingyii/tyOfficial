@@ -20,8 +20,8 @@ import Footer from "./Components/footer";
 import { createGlobalStyle } from "styled-components";
 import "./App.css";
 import LoadingSpinner from "./Components/LoadingSpinner";
-import { ReactLenis, useLenis } from 'lenis/react';
-import LocomotiveScroll from 'locomotive-scroll';
+// import { ReactLenis, useLenis } from 'lenis/react';
+// import LocomotiveScroll from 'locomotive-scroll';
 
 const GlobalStyle = createGlobalStyle`
   body, * {
@@ -180,23 +180,25 @@ function App() {
     return null;
   };
 
-  const scrollRef = useRef(null);
+  // const scrollRef = useRef(null);
 
-  useEffect(() => {
-    const scroll = new LocomotiveScroll({
-      el: scrollRef.current, // 绑定需要平滑滚动的容器
-      smooth: true, // 启用平滑滚动
-      multiplier: 0.5, // 滚动速度的倍数，值越大滚动越快
-    });
+  // useEffect(() => {
+  //   const scroll = new LocomotiveScroll({
+  //     el: scrollRef.current, // 绑定需要平滑滚动的容器
+  //     smooth: true, // 启用平滑滚动
+  //     multiplier: 0.5, // 滚动速度的倍数，值越大滚动越快
+  //   });
 
-    return () => {
-      scroll.destroy(); // 组件卸载时销毁实例
-    };
-  }, []);
+  //   return () => {
+  //     scroll.destroy(); // 组件卸载时销毁实例
+  //   };
+  // }, []);
 
   return (
     // <ReactLenis root>
-    <Main id="data-scroll-container">
+    <Main 
+    // id="data-scroll-container"
+    >
       <CustomCursor />
       <GlobalStyle />
       <Router>
