@@ -208,7 +208,7 @@ function App() {
         <Footer />
       </Router>
     </Main>
-    </ReactLenis>
+   </ReactLenis>
   );
 }
 

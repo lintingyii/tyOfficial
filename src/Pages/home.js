@@ -7,85 +7,85 @@ import TestimonialCard from "../Components/TestimonialCard";
 import { LargeProjectCard } from "../Components/ProjectCard";
 
 function MyComponent(props) {
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
-    script.defer = true;
-    script.id = "creattie-script";
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
+  //   script.defer = true;
+  //   script.id = "creattie-script";
 
-    script.onload = () => {
-      // 这时脚本加载完成，可以进行其他操作
-    };
+  //   script.onload = () => {
+  //     // 这时脚本加载完成，可以进行其他操作
+  //   };
 
-    document.body.appendChild(script);
+  //   document.body.appendChild(script);
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
 
-  const [embedWidth, setEmbedWidth] = useState("8rem");
+  // const [embedWidth, setEmbedWidth] = useState("8rem");
 
-  useEffect(() => {
-    const handleResize = () => {
-      if (window.innerWidth <= 480) {
-        setEmbedWidth("6rem");
-      } else {
-        setEmbedWidth("8rem");
-      }
-    };
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (window.innerWidth <= 480) {
+  //       setEmbedWidth("6rem");
+  //     } else {
+  //       setEmbedWidth("8rem");
+  //     }
+  //   };
 
-    window.addEventListener("resize", handleResize);
+  //   window.addEventListener("resize", handleResize);
 
-    handleResize();
+  //   handleResize();
 
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  //   return () => window.removeEventListener("resize", handleResize);
+  // }, []);
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
-    script.defer = true;
-    script.id = "creattie-script";
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
+  //   script.defer = true;
+  //   script.id = "creattie-script";
 
-    script.onload = () => {};
+  //   script.onload = () => {};
 
-    document.body.appendChild(script);
+  //   document.body.appendChild(script);
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
-    script.defer = true;
-    script.id = "creattie-script";
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
+  //   script.defer = true;
+  //   script.id = "creattie-script";
 
-    script.onload = () => {};
+  //   script.onload = () => {};
 
-    document.body.appendChild(script);
+  //   document.body.appendChild(script);
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
-    script.defer = true;
-    script.id = "creattie-script";
+  // useEffect(() => {
+  //   const script = document.createElement("script");
+  //   script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
+  //   script.defer = true;
+  //   script.id = "creattie-script";
 
-    script.onload = () => {};
+  //   script.onload = () => {};
 
-    document.body.appendChild(script);
+  //   document.body.appendChild(script);
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  //   return () => {
+  //     document.body.removeChild(script);
+  //   };
+  // }, []);
 
   const Projects = [
     {
@@ -519,7 +519,6 @@ function MyComponent(props) {
           </ViewMoreButton>
         </a>
       </Section>
-      {/* <Footer /> */}
     </Div>
   );
 }
