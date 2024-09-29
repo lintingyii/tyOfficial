@@ -12,6 +12,9 @@ export const Footer = ({ color }) => {
     case "/work/sports_win":
       footerColor = "#fff"; // sports_win 頁面的顏色
       break;
+    case "/work/PufferVerse":
+      footerColor = "#47495A"; // PufferVerse 頁面的顏色
+      break;
     default:
       footerColor = "#f2f2f2"; // 默認顏色
   }

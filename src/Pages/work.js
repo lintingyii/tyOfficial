@@ -65,7 +65,7 @@ export const Work = () => {
         { name: "Creative Campaign", color: "#86C5CE" },
         { name: "Graphic design", color: "#D58CFE" },
       ],
-      link: "https://tome.app/tingyilin/niqlo-pufferverse-cm0l048t70ob76j1jun5bx1iq",
+      link: "/work/PufferVerse",
       openInNewTab: false,
     },
     {

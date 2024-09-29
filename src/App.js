@@ -14,6 +14,7 @@ import YoungLions from "./Pages/youngLions";
 import MegaBankRedesign from "./Pages/MegaBankRedesign";
 import SportsWin from "./Pages/sportsWin";
 import HiveBee from "./Pages/HiveBee";
+import PufferVerse from "./Pages/PufferVerse";
 import styled from "styled-components";
 import CustomCursor from "./Components/CustomCursor";
 import Footer from "./Components/footer";
@@ -115,38 +116,6 @@ const SpecialNavItem = styled(Link)`
   }
 `;
 
-function PageWithLoading() {
-  const location = useLocation(); 
-  const [loading, setLoading] = useState(true); 
-
-  useEffect(() => {
-    
-    setLoading(true); // 页面变化时显示 loading
-    const timer = setTimeout(() => {
-      setLoading(false); // 2 秒后关闭 loading
-    }, 2000);
-
-    return () => clearTimeout(timer); // 清除定时器，避免内存泄漏
-  }, [location]); // location 变化时重新运行
-
-  // 页面加载时显示 Loading 组件
-  if (loading) {
-    return <LoadingSpinner />;
-  }
-
-  return (
-    <Routes>
-      <Route path="/" element={<Navigate to="/home" />} />
-      <Route path="/home" element={<MyComponent />} />
-      <Route path="/resume" element={<Resume />} />
-      <Route path="/work" element={<Work />} />
-      <Route path="/work/youngLions" element={<YoungLions />} />
-      <Route path="/work/MegaBank_Redesign" element={<MegaBankRedesign />} />
-      <Route path="/work/sports_win" element={<SportsWin />} />
-    </Routes>
-  );
-}
-
 const ProgressBar = styled.div`
   position: fixed;
   top: 0;
@@ -216,6 +185,7 @@ function App() {
           />
           <Route path="/work/sports_win" element={<SportsWin />} />
           <Route path="/work/HiveBee" element={<HiveBee />} />
+          <Route path="/work/PufferVerse" element={<PufferVerse />} />
         </Routes>
         <NavigationBar />
         <Footer />
