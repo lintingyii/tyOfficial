@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import gsap from 'gsap';
 import {
   BrowserRouter as Router,
   Routes,
@@ -169,8 +170,18 @@ const Main = styled.div`
 
 function App() {
 
-  const lenis = useLenis(({ scroll }) => {
-    // called every scroll
+  const lenisRef = useRef()
+  
+  useEffect(() => {
+    function update(time) {
+      lenisRef.current?.lenis?.raf(time * 1000)
+    }
+  
+    gsap.ticker.add(update)
+  
+    return () => {
+      gsap.ticker.remove(update)
+    }
   })
 
   const ScrollToTop = () => {
@@ -184,15 +195,7 @@ function App() {
   };
 
   return (
-    <ReactLenis 
-    options={{
-      smooth: true,
-      infinite: false, // 是否無限滾動
-      direction: "vertical", // 垂直滾動
-      smoothTouch: true, // 啟用觸控滾動的平滑效果
-      touchMultiplier: 1.5, // 調整觸控板的滾動速度
-    }}
-    root>
+    <ReactLenis root>
     <Main>
       <CustomCursor />
       <GlobalStyle />
