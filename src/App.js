@@ -15,6 +15,7 @@ import MegaBankRedesign from "./Pages/MegaBankRedesign";
 import SportsWin from "./Pages/sportsWin";
 import HiveBee from "./Pages/HiveBee";
 import PufferVerse from "./Pages/PufferVerse";
+import MangoOnTree from "./Pages/MangoOnTree";
 import styled from "styled-components";
 import CustomCursor from "./Components/CustomCursor";
 import Footer from "./Components/footer";
@@ -186,6 +187,7 @@ function App() {
           <Route path="/work/sports_win" element={<SportsWin />} />
           <Route path="/work/HiveBee" element={<HiveBee />} />
           <Route path="/work/PufferVerse" element={<PufferVerse />} />
+          <Route path="/work/MangoOnTree" element={<MangoOnTree />} />
         </Routes>
         <NavigationBar />
         <Footer />

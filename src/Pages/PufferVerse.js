@@ -116,7 +116,7 @@ const LinkButton = ({ imageSrc, imageWidth, href, children }) => (
 export const PufferVerse = () => {
   return (
     <Container>
-      <Image src="/pufferverse.jpg" alt="MegaBank_redesign" />
+      <Image loading="lazy" src="/pufferverse.jpg" alt="MegaBank_redesign" />
       <SectionTitle>More information</SectionTitle>
       <ButtonGroup>
         <LinkButton

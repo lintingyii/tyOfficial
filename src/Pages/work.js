@@ -39,7 +39,7 @@ export const Work = () => {
         "VIS design for a local mango smallholder farmer in Kaohsiung, Taiwan.",
       tags: [{ name: "Graphic design", color: "#D58CFE" }],
       subtags: [{ name: "Branding", color: "#D58CFE" }],
-      link: "https://tome.app/tingyilin/brand-guidelines-copy-cm0xur3fw082h8d3gyahzjrak",
+      link: "/work/MangoOnTree",
       openInNewTab: false,
     },
     {

@@ -98,7 +98,7 @@ const LinkButton = ({ imageSrc, imageWidth, href, children }) => (
 export const MegaBankRedesign = () => {
   return (
     <Container>
-      <Image src="/megabank.jpg" alt="MegaBank_redesign" />
+      <Image loading="lazy" src="/megabank.jpg" alt="MegaBank_redesign" />
       <LinkButton
         imageSrc="/mega.png"
         href="https://www.figma.com/proto/EF36FvpfiARyTCxh68FFTg/mega-bank?page-id=0%3A1&node-id=14-37&node-type=canvas&viewport=419%2C368%2C0.05&t=il7Oa4MRE3tHWUDE-1&scaling=scale-down&content-scaling=fixed&starting-point-node-id=14%3A37"
