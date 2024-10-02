@@ -835,6 +835,31 @@ const HiveBee = () => {
               </DisText>
             </TextWrapperContainer>
           </DiscriptionWrapper>
+          <DiscriptionWrapper>
+            <TextWrapperContainer>
+              <DisImage src="/hivebee/old-ui-4.png" alt="discription" />
+              <CardHeader>
+                <ContentText style={{ border: "none" }}>
+                  Challenge 03
+                </ContentText>
+                <DisTextTitle>Poor responsive design</DisTextTitle>
+              </CardHeader>
+              <DisText style={{ marginTop: ".5rem" }}>
+                我們的產品主要有兩類使用者——直播者與贊助者，對應兩種不同的使用情境：直播者需設置互動內容，贊助者則透過手機或電腦觀看直播並進行打賞，我們的系統則劃分為給直播者使用的「後台」與給贊助者使用的「前台」。原有的前、後台僅針對桌面版進行設計，忽略了用戶跨平台使用的需求。由於直播者通常使用電腦進行設定，而贊助者除了電腦外，多數使用手機觀看直播，這導致系統無法提供良好的響應式操作體驗。
+              </DisText>
+              <DisText>
+                Our product primarily serves two types of users: streamers and
+                sponsors, each corresponding to different use cases. Streamers
+                need to set up interactive content, while sponsors watch live
+                streams and donate via mobile or desktop devices. The system is
+                divided into a "backstage" for streamers and a "frontstage" for
+                sponsors. The original design only catered to desktop versions,
+                neglecting the cross-platform needs of users. Since streamers
+                typically use desktops and sponsors often use mobile devices,
+                the system failed to provide an optimal responsive experience.
+              </DisText>
+            </TextWrapperContainer>
+          </DiscriptionWrapper>
         </section>
 
         <CircleWrapper>
@@ -951,9 +976,9 @@ const HiveBee = () => {
             Prototype，模擬用戶實際操作，確保每個用戶流程都被妥善規劃，以便進行初步內部測試和團隊溝通。
           </Text>
           <Text style={{ marginTop: "0rem" }}>
-            The user flow is then transformed into concrete visual
-            design. First, the basic layout of each page is planned, determining
-            the position and proportion of elements, while organizing the
+            The user flow is then transformed into concrete visual design.
+            First, the basic layout of each page is planned, determining the
+            position and proportion of elements, while organizing the
             connections and logic between pages. Wire-flow helps us quickly
             assess the feasibility of features and evaluate development
             workload, allowing for rapid adjustments. Afterward, it's converted
@@ -1009,6 +1034,29 @@ const HiveBee = () => {
             alt="affinity diagram"
             style={{ marginTop: "1rem" }}
           />
+        </section>
+
+        <Divider
+          margin="4rem"
+          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
+        />
+
+        <section>
+          <BlockTitle>Step.5</BlockTitle>
+          <BlockHeader>Responsive Hi-Fi prototype</BlockHeader>
+          <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
+            考量不同用戶在跨平台的使用需求與情境，直播者後台由於需與OBS系統搭配，因此介面設計仍以桌面版為主。而贊助者前台則採用響應式設計，確保粉絲無論透過手機或電腦觀看直播，都能享有與桌面版相同的良好互動體驗，提升贊助操作的靈活便捷性。
+          </Text>
+          <Text style={{ marginTop: "0rem" }}>
+            Considering the cross-platform needs and scenarios of different
+            users, the streamers' backstage interface remains desktop-focused
+            due to its integration with the OBS system. However, the sponsors'
+            frontstage is designed responsively, ensuring that fans can enjoy an
+            equally seamless interaction experience on both mobile and desktop
+            when watching live streams and making donations.
+          </Text>
+
+          <Image src="/hivebee/result-2.png" alt="affinity diagram" />
         </section>
 
         <section style={{ marginTop: "5rem" }}>
