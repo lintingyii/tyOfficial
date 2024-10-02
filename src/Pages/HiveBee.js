@@ -1059,6 +1059,13 @@ const HiveBee = () => {
           <Image src="/hivebee/result-2.png" alt="affinity diagram" />
         </section>
 
+        <CircleWrapper>
+          <Circle color="#EDDDFF" />
+          <Circle color="#D9B9FF" />
+          <Circle color="#BA87F4" />
+          <Circle color="#C5006C" />
+        </CircleWrapper>
+
         <section style={{ marginTop: "5rem" }}>
           <SectionTitle>Key Feature Highlights</SectionTitle>
           <InfoCard>
