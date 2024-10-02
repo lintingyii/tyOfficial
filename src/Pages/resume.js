@@ -277,7 +277,7 @@ export const Resume = () => {
             <ViewMoreButton>View More</ViewMoreButton>
             </a>
           </div>
-          <Div31>Website Design ｜ <a href="https://www.steps.com.tw/" target="_blank" style={{textDecoration:'none', color:'#888'}}>智新資通</a></Div31>
+          <Div31>Website Design ｜ <a href="https://www.steps.com.tw/" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'#888'}}>智新資通</a></Div31>
           <Div33>Aug 2024</Div33>
         </div>
         <div>
@@ -303,7 +303,7 @@ export const Resume = () => {
               <ViewMoreButton>View More</ViewMoreButton>
             </a>
           </div>
-          <Div31>Website Design ｜ <a href="https://www.steps.com.tw/" target="_blank" style={{textDecoration:'none', color:'#888'}}>智新資通</a></Div31>
+          <Div31>Website Design ｜ <a href="https://www.steps.com.tw/" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'#888'}}>智新資通</a></Div31>
           <Div33>Jun 2024</Div33>
         </div>
         <div>
@@ -329,7 +329,7 @@ export const Resume = () => {
               <ViewMoreButton>View More</ViewMoreButton>
             </a>
           </div>
-          <Div31>Website Design ｜ <a href="https://futurenest.ai/index.html" target="_blank" style={{textDecoration:'none', color:'#888'}}>未來巢科技股份有限公司</a></Div31>
+          <Div31>Website Design ｜ <a href="https://futurenest.ai/index.html" target="_blank" rel="noopener noreferrer" style={{textDecoration:'none', color:'#888'}}>未來巢科技股份有限公司</a></Div31>
           <Div33>Nov 2023</Div33>
         </div>
 
