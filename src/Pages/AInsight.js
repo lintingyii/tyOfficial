@@ -95,6 +95,10 @@ const LaptopImage = styled.img`
   margin: 0 auto;
 
   @media (max-width: 880px) {
+    width: 95%;
+  }
+
+  @media (max-width: 480px) {
     display: none;
   }
 `;
@@ -102,7 +106,7 @@ const LaptopImage = styled.img`
 const MobileImage = styled.img`
   display: none;
 
-  @media (max-width: 880px) {
+  @media (max-width: 480px) {
     display: initial;
     width: ${(props) => props.width || "100%"};
   }
@@ -278,7 +282,7 @@ const ImageWrapper = styled.div`
   width: ${(props) => props.width || "70%"};
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   margin: 0 auto;
   margin-top: 2rem;
   box-sizing: border-box;
@@ -286,7 +290,7 @@ const ImageWrapper = styled.div`
 
   @media (max-width: 880px) {
     flex-direction: column;
-    width: ${(props) => props.width || "100%"};
+    width: 95%;
   }
 `;
 
@@ -312,7 +316,7 @@ const InfoCard = styled.div`
   margin: 0 auto;
   margin-top: 2rem;
 
-  @media (max-width: 800px) {
+  @media (max-width: 880px) {
     width: 95%;
   }
 `;
@@ -322,7 +326,6 @@ const SubInfoCard = styled.div`
   align-items: left;
   padding: 24px;
   width: calc((100% / 2) - (1rem / 2));
-  height: auto;
   background-color: #f9f9f9;
   box-shadow: 0px 3px 12px 0px rgba(21, 19, 99, 0.06);
   border: 1px solid rgba(166, 207, 255, 0.5);
@@ -330,8 +333,8 @@ const SubInfoCard = styled.div`
   box-sizing: border-box;
   margin: 0;
 
-  @media (max-width: 800px) {
-    width: 95%;
+  @media (max-width: 880px) {
+    width: 100%;
   }
 `;
 
@@ -598,6 +601,7 @@ const SpecialText = styled.div`
   z-index: 1;
   padding: 0 8px;
   // white-space: nowrap;
+  max-width: 90%;
 
   &::after {
     content: "";
@@ -983,7 +987,7 @@ const AInsight = () => {
                       width: "fit-content",
                       fontWeight: "600",
                       color: "#2B3990",
-                      textAlign: "right",
+                      textAlign: "center",
                       fontSize: "1.2rem",
                     }}
                   >
@@ -1021,7 +1025,7 @@ const AInsight = () => {
                       width: "fit-content",
                       fontWeight: "600",
                       color: "#2B3990",
-                      textAlign: "right",
+                      textAlign: "center",
                       fontSize: "1.2rem",
                     }}
                   >
@@ -1060,7 +1064,7 @@ const AInsight = () => {
                       width: "fit-content",
                       fontWeight: "600",
                       color: "#2B3990",
-                      textAlign: "right",
+                      textAlign: "center",
                       fontSize: "1.2rem",
                     }}
                   >
@@ -1123,7 +1127,7 @@ const AInsight = () => {
             <Circle color="#2B3990" />
           </CircleWrapper>
 
-          <DiscriptionWrapper>
+          {/* <DiscriptionWrapper>
             <TextWrapperContainer>
               <DisImage src="/hivebee/old-ui-1.png" alt="discription" />
               <CardHeader>
@@ -1214,46 +1218,54 @@ const AInsight = () => {
                 the system failed to provide an optimal responsive experience.
               </DisText>
             </TextWrapperContainer>
-          </DiscriptionWrapper>
+          </DiscriptionWrapper> */}
         </section>
 
-        <CircleWrapper>
+        {/* <CircleWrapper>
           <Circle color="#EDDDFF" />
           <Circle color="#D9B9FF" />
           <Circle color="#BA87F4" />
           <Circle color="#C5006C" />
-        </CircleWrapper>
+        </CircleWrapper> */}
 
         <section style={{ marginTop: "5rem" }}>
-          <SectionTitle>Solution</SectionTitle>
-          <InfoCard>
-            <InfoContent>
-              <SolutionIcon />
-              <HalfTextWrapper style={{ padding: "0px", gap: ".5rem" }}>
-                <DisText>
-                  在分析競品（Streamlabs &
-                  Toonation）之後，我們決定與視覺設計師合作，為產品打造活潑、年輕化的品牌識別系統，並將其命名為「HiveBee」，賦予產品全新的面貌與獨特的區隔性。針對新版本的視覺設計，我建立了完整的設計系統，確保產品畫面與品牌視覺的一致性。此外，我進一步優化了用戶流程和易用性，提升了整體的用戶體驗。
-                </DisText>
-                <DisText>
-                  After conducting a competitive analysis （such as Streamlabs &
-                  Toonation）, we decided to collaborate with a visual designer
-                  to create a vibrant and youthful brand identity for the
-                  product, which we named "HiveBee," giving it a fresh look and
-                  distinct features. For the new version's visuals, I developed
-                  a comprehensive design system to ensure consistency between
-                  the product interface and its visual identity. Additionally, I
-                  further optimized the user flow and usability to deliver an
-                  improved overall user experience.
-                </DisText>
-              </HalfTextWrapper>
-            </InfoContent>
-          </InfoCard>
-
-          <Image
-            src="/hivebee/stage.png"
+          <SectionTitle>Design processes</SectionTitle>
+          <LaptopImage
+            src="/ainsight/process.png"
             alt="affinity diagram"
-            style={{ marginTop: "2rem" }}
+            style={{ marginTop: "3rem" }}
           />
+
+          <MobileImage
+            src="/ainsight/process-m.png"
+            alt="affinity diagram"
+            style={{ marginTop: "1rem" }}
+          />
+          <DiscriptionWrapper>
+            <TextWrapperContainer>
+              <CardHeader>
+                <ContentText style={{ border: "none" }}>
+                  Challenge 03
+                </ContentText>
+                <DisTextTitle>Poor responsive design</DisTextTitle>
+              </CardHeader>
+              <DisImage src="/hivebee/old-ui-4.png" alt="discription" />
+              <DisText style={{ marginTop: ".5rem" }}>
+                我們的產品主要有兩類使用者——直播者與贊助者，對應兩種不同的使用情境：直播者需設置互動內容，贊助者則透過手機或電腦觀看直播並進行打賞，我們的系統則劃分為給直播者使用的「後台」與給贊助者使用的「前台」。原有的前、後台僅針對桌面版進行設計，忽略了用戶跨平台使用的需求。由於直播者通常使用電腦進行設定，而贊助者除了電腦外，多數使用手機觀看直播，這導致系統無法提供良好的響應式操作體驗。
+              </DisText>
+              <DisText>
+                Our product primarily serves two types of users: streamers and
+                sponsors, each corresponding to different use cases. Streamers
+                need to set up interactive content, while sponsors watch live
+                streams and donate via mobile or desktop devices. The system is
+                divided into a "backstage" for streamers and a "frontstage" for
+                sponsors. The original design only catered to desktop versions,
+                neglecting the cross-platform needs of users. Since streamers
+                typically use desktops and sponsors often use mobile devices,
+                the system failed to provide an optimal responsive experience.
+              </DisText>
+            </TextWrapperContainer>
+          </DiscriptionWrapper>
         </section>
 
         <Divider

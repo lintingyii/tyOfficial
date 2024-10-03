@@ -285,6 +285,9 @@ const ImageWrapper = styled.div`
   gap: 1rem;
 
   @media (max-width: 880px) {
+    width:95%;
+  }
+  @media (max-width: 480px) {
     flex-direction: column;
     width: ${(props) => props.width || "100%"};
   }
@@ -294,7 +297,7 @@ const ContentImage = styled.img`
   width: calc((100% / 3) - (2rem / 3));
   display: flex;
 
-  @media (max-width: 880px) {
+  @media (max-width: 480px) {
     max-width: fit-content;
     width: 95%;
   }
@@ -312,7 +315,7 @@ const InfoCard = styled.div`
   margin: 0 auto;
   margin-top: 2rem;
 
-  @media (max-width: 800px) {
+  @media (max-width: 880px) {
     width: 95%;
   }
 `;
@@ -1220,7 +1223,7 @@ const HiveBee = () => {
           </InfoCard>
           <ImageWrapper>
             <ContentImage src="/hivebee/result-1.png" alt="research" />
-            <ContentImage src="/hivebee/result-2.png" alt="research" />
+            <ContentImage src="/hivebee/result-4.png" alt="research" />
             <ContentImage src="/hivebee/result-3.png" alt="research" />
           </ImageWrapper>
         </section>
