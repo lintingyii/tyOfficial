@@ -5,7 +5,7 @@ const Container = styled.div`
   text-align: center;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #f2f2f2;
+  background-color: #f5f7fa;
   flex-direction: column;
   align-items: center;
   width: 100%;
@@ -277,7 +277,7 @@ const DisTextWrapper = styled.div`
 const ImageWrapper = styled.div`
   width: ${(props) => props.width || "70%"};
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   margin: 0 auto;
   margin-top: 2rem;
@@ -317,6 +317,24 @@ const InfoCard = styled.div`
   }
 `;
 
+const SubInfoCard = styled.div`
+  display: flex;
+  align-items: left;
+  padding: 24px;
+  width: calc((100% / 2) - (1rem / 2));
+  height: auto;
+  background-color: #f9f9f9;
+  box-shadow: 0px 3px 12px 0px rgba(21, 19, 99, 0.06);
+  border: 1px solid rgba(166, 207, 255, 0.5);
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin: 0;
+
+  @media (max-width: 800px) {
+    width: 95%;
+  }
+`;
+
 const InfoContent = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -329,13 +347,27 @@ const InfoContent = styled.div`
   }
 `;
 
+const SubInfoContent = styled.div`
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  display: flex;
+  align-items: left;
+  gap: 1rem;
+  flex-direction: column;
+  width: 100%;
+
+  @media (max-width: 880px) {
+    align-items: flex-start;
+  }
+`;
+
 const InfoIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#EAA700"
+    fill="#51BCEB"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",
@@ -344,6 +376,143 @@ const InfoIcon = () => (
     }}
   >
     <path d="M198.13,202.85A8,8,0,0,1,192,216H24a8,8,0,0,1-6.12-13.15c14.94-17.78,33.52-30.41,54.17-37.17a68,68,0,1,1,71.9,0C164.6,172.44,183.18,185.07,198.13,202.85ZM196.86,61.39a8,8,0,0,0-4.22,10.5,92.26,92.26,0,0,1,0,72.22,8,8,0,1,0,14.72,6.29,108.36,108.36,0,0,0,0-84.8A8,8,0,0,0,196.86,61.39Zm39.85-8.54a8,8,0,1,0-14.7,6.3,124.43,124.43,0,0,1,0,97.7,8,8,0,1,0,14.7,6.3,140.34,140.34,0,0,0,0-110.3Z" />{" "}
+  </svg>
+);
+
+const SelectIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20%"
+    height="auto"
+    viewBox="0 0 108 110"
+    fill="none"
+    style={{
+      maxWidth: "2rem",
+      minWidth: "1.5rem",
+      maxHeight: "2rem",
+      minHeight: "1.5rem",
+    }}
+  >
+    <path
+      d="M9 34.3748C9 19.8376 19.2106 10.129 33.4719 9.54346C38.9981 9.31656 45.7657 9.1665 54 9.1665C62.2343 9.1665 69.0019 9.31656 74.5281 9.54346C88.7893 10.129 99 19.8376 99 34.3748C99 48.912 88.7893 58.6207 74.5281 59.2062C69.0019 59.4331 62.2343 59.5832 54 59.5832C45.7657 59.5832 38.9981 59.4331 33.4719 59.2062C19.2107 58.6207 9 48.912 9 34.3748Z"
+      fill="#2B3990"
+    />
+    <path
+      d="M48.1818 41.98C48.3415 39.5529 49.7824 37.305 52.1577 36.8469C52.7259 36.7371 53.3138 36.6665 53.8853 36.6665C54.4806 36.6665 55.0938 36.7433 55.6839 36.8606C58.0181 37.3256 59.4511 39.5205 59.6604 41.9043C60.0622 46.4856 60.667 54.0041 60.667 57.7601C60.667 57.7601 69.0084 57.7601 77.1863 60.1119C82.4009 61.6113 85.6269 66.518 85.4962 71.9708C85.3702 77.2272 84.5699 84.3687 81.8663 91.8661C80.6254 95.3068 77.6847 97.7351 74.0649 98.1134C71.7766 98.3527 68.7114 98.5415 64.7359 98.5415C61.234 98.5415 58.4386 98.3951 56.2581 98.1966C51.9755 97.807 48.2218 95.5447 45.3767 92.3017C39.744 85.8814 35.2224 79.649 32.79 76.1393C31.482 74.2521 30.972 70.0302 32.1982 68.0885C34.6404 64.221 38.5317 66.1004 42.1639 68.8656C45.3265 71.2734 47.1036 73.0281 47.1036 73.0281C47.1036 60.2136 47.7849 48.0048 48.1818 41.98Z"
+      fill="#A6CFFF"
+    />
+  </svg>
+);
+
+const UseIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20%"
+    height="auto"
+    viewBox="0 0 108 110"
+    fill="none"
+    style={{
+      maxWidth: "2rem",
+      minWidth: "1.5rem",
+      maxHeight: "2rem",
+      minHeight: "1.5rem",
+    }}
+  >
+    <path
+      d="M26.9621 70.4859C27.087 69.3337 28.0703 68.7498 29.2421 68.7498H50.148C50.9208 78.765 51.5597 86.6 51.5597 86.6H58.4393C58.4393 86.6 59.0644 78.765 59.8243 68.7498H80.7605C81.9325 68.7498 82.9159 69.3337 83.0405 70.4859L85.9587 87.0831L93.9596 86.1169L92.1611 69.5195C91.5369 63.7585 86.6201 59.6798 80.7605 59.6798H60.51C60.999 53.1813 61.4849 46.3643 61.8543 41.2498H48.0951C48.4646 46.3643 48.9557 53.1813 49.4516 59.6798H29.2421C23.3825 59.6798 18.4656 63.7585 17.8414 69.5195L16.043 86.1169L24.0423 87.0831L26.9621 70.4859Z"
+      fill="#A6CFFF"
+    />
+    <path
+      d="M34.6835 39.8809C34.9234 43.8299 37.4928 46.8884 41.4159 47.4004C44.4444 47.7957 48.8212 48.1248 55 48.1248C61.1788 48.1248 65.5556 47.7957 68.5841 47.4004C72.5072 46.8884 75.0766 43.8299 75.3165 39.8809C75.4882 37.0565 75.625 33.0607 75.625 27.4998C75.625 21.9389 75.4882 17.943 75.3165 15.1186C75.0766 11.1696 72.5072 8.11111 68.5841 7.59911C65.5556 7.20384 61.1788 6.87476 55 6.87476C48.8212 6.87476 44.4444 7.20384 41.4159 7.59911C37.4928 8.11111 34.9234 11.1696 34.6835 15.1186C34.5118 17.943 34.375 21.9389 34.375 27.4998C34.375 33.0607 34.5118 37.0565 34.6835 39.8809Z"
+      fill="#2B3990"
+    />
+    <path
+      d="M77.9709 95.7824C78.0821 99.7371 80.6373 102.727 84.5851 102.984C85.9081 103.069 87.4912 103.125 89.3763 103.125C91.2614 103.125 92.8445 103.069 94.1675 102.984C98.1153 102.727 100.671 99.7371 100.782 95.7824C100.814 94.6217 100.835 93.2597 100.835 91.6663C100.835 90.0729 100.814 88.711 100.782 87.5503C100.671 83.5955 98.1153 80.6061 94.1675 80.3492C92.8445 80.2632 91.2614 80.208 89.3763 80.208C87.4912 80.208 85.9081 80.2632 84.5851 80.3492C80.6373 80.6061 78.0821 83.5955 77.9709 87.5503C77.9381 88.711 77.918 90.0729 77.918 91.6663C77.918 93.2597 77.9381 94.6217 77.9709 95.7824Z"
+      fill="#2B3990"
+    />
+    <path
+      d="M43.5959 95.7824C43.7071 99.7371 46.2623 102.727 50.2101 102.984C51.5331 103.069 53.1162 103.125 55.0013 103.125C56.8864 103.125 58.4695 103.069 59.7925 102.984C63.7403 102.727 66.2956 99.7371 66.4067 95.7824C66.4395 94.6217 66.4596 93.2597 66.4596 91.6663C66.4596 90.0729 66.4395 88.711 66.4067 87.5503C66.2956 83.5955 63.7403 80.6061 59.7925 80.3492C58.4695 80.2632 56.8864 80.208 55.0013 80.208C53.1162 80.208 51.5331 80.2632 50.2101 80.3492C46.2623 80.6061 43.7071 83.5955 43.5959 87.5503C43.5631 88.711 43.543 90.0729 43.543 91.6663C43.543 93.2597 43.5631 94.6217 43.5959 95.7824Z"
+      fill="#2B3990"
+    />
+    <path
+      d="M9.22086 95.7824C9.33214 99.7371 11.8872 102.727 15.8351 102.984C17.1581 103.069 18.7412 103.125 20.6263 103.125C22.5114 103.125 24.0945 103.069 25.4175 102.984C29.3653 102.727 31.9206 99.7371 32.0317 95.7824C32.0645 94.6217 32.0846 93.2597 32.0846 91.6663C32.0846 90.0729 32.0645 88.711 32.0317 87.5503C31.9206 83.5955 29.3653 80.6061 25.4175 80.3492C24.0945 80.2632 22.5114 80.208 20.6263 80.208C18.7412 80.208 17.1581 80.2632 15.8351 80.3492C11.8872 80.6061 9.33214 83.5955 9.22086 87.5503C9.1882 88.711 9.16797 90.0729 9.16797 91.6663C9.16797 93.2597 9.1882 94.6217 9.22086 95.7824Z"
+      fill="#2B3990"
+    />
+  </svg>
+);
+
+const CostIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20%"
+    height="auto"
+    viewBox="0 0 108 110"
+    fill="none"
+    style={{
+      maxWidth: "2rem",
+      minWidth: "1.5rem",
+      maxHeight: "2rem",
+      minHeight: "1.5rem",
+    }}
+  >
+    <path
+      opacity="0.35"
+      d="M96.8808 31.5802C95.3728 29.9402 93.2288 29.0002 90.9968 29.0002H28.1009L27.6609 25.6762C27.0009 20.7322 22.7409 17.0002 17.749 17.0002H15.001C12.789 17.0002 11.001 18.7882 11.001 21.0002C11.001 23.2122 12.789 25.0002 15.001 25.0002H17.749C18.749 25.0002 19.601 25.7482 19.733 26.7362L25.8809 72.8481C26.8009 79.7761 32.7649 85.0001 39.7529 85.0001H82.1408C89.3648 85.0001 95.4928 79.3641 96.0928 72.1641L98.9728 37.6602C99.1528 35.4362 98.3928 33.2202 96.8808 31.5802Z"
+      fill="#A6CFFF"
+    />
+    <path
+      d="M43.001 93.0002C47.4192 93.0002 51.0009 89.4185 51.0009 85.0002C51.0009 80.582 47.4192 77.0002 43.001 77.0002C38.5827 77.0002 35.001 80.582 35.001 85.0002C35.001 89.4185 38.5827 93.0002 43.001 93.0002Z"
+      fill="#2B3990"
+    />
+    <path
+      d="M79 93.0002C83.4182 93.0002 87 89.4185 87 85.0002C87 80.582 83.4182 77.0002 79 77.0002C74.5817 77.0002 71 80.582 71 85.0002C71 89.4185 74.5817 93.0002 79 93.0002Z"
+      fill="#2B3990"
+    />
+    <path
+      d="M71.0009 41C70.2569 41 51.745 41 51.001 41C48.793 41 47.001 42.792 47.001 45C47.001 47.208 48.793 49 51.001 49C51.745 49 70.2569 49 71.0009 49C73.2089 49 75.0009 47.208 75.0009 45C75.0009 42.792 73.2089 41 71.0009 41Z"
+      fill="#2B3990"
+    />
+  </svg>
+);
+
+const NeedIcon = () => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="20%"
+    height="auto"
+    viewBox="0 0 108 110"
+    fill="none"
+    style={{
+      maxWidth: "2rem",
+      minWidth: "1.5rem",
+      maxHeight: "2rem",
+      minHeight: "1.5rem",
+    }}
+  >
+    <path
+      d="M9.60652 77.1082C10.2062 74.3831 12.7976 73.1296 15.5371 72.9915C20.9997 72.7161 32.6224 72.333 54.9993 72.333C77.3763 72.333 88.999 72.7161 94.4616 72.9915C97.2011 73.1296 99.7925 74.3831 100.392 77.1082C100.651 78.2837 100.833 79.7805 100.833 81.6663C100.833 83.5521 100.651 85.049 100.392 86.2245C99.7925 88.9496 97.2011 90.2031 94.4616 90.3412C88.999 90.6165 77.3763 90.9997 54.9993 90.9997C32.6224 90.9997 20.9997 90.6165 15.5371 90.3412C12.7976 90.2031 10.2062 88.9496 9.60652 86.2245C9.34784 85.049 9.16602 83.5521 9.16602 81.6663C9.16602 79.7805 9.34784 78.2837 9.60652 77.1082Z"
+      fill="#A6CFFF"
+    />
+    <path
+      d="M41.25 102.667C52.6409 102.667 61.875 93.2645 61.875 81.6665C61.875 70.0685 52.6409 60.6665 41.25 60.6665C29.8591 60.6665 20.625 70.0685 20.625 81.6665C20.625 93.2645 29.8591 102.667 41.25 102.667Z"
+      fill="#2B3990"
+    />
+    <path
+      d="M41.25 88.6665C45.047 88.6665 48.125 85.5325 48.125 81.6665C48.125 77.8005 45.047 74.6665 41.25 74.6665C37.453 74.6665 34.375 77.8005 34.375 81.6665C34.375 85.5325 37.453 88.6665 41.25 88.6665Z"
+      fill="#A6CFFF"
+    />
+    <path
+      d="M100.392 25.7747C99.7925 23.0495 97.2011 21.7962 94.4616 21.6581C88.999 21.3828 77.3763 20.9995 54.9993 20.9995C32.6224 20.9995 20.9997 21.3828 15.5371 21.6581C12.7976 21.7962 10.2062 23.0495 9.60652 25.7747C9.34784 26.9502 9.16602 28.447 9.16602 30.3328C9.16602 32.2186 9.34784 33.7155 9.60652 34.891C10.2062 37.6161 12.7976 38.8696 15.5371 39.0077C20.9997 39.283 32.6224 39.6662 54.9993 39.6662C77.3763 39.6662 88.999 39.283 94.4616 39.0077C97.2011 38.8696 99.7925 37.6161 100.392 34.891C100.651 33.7155 100.833 32.2186 100.833 30.3328C100.833 28.447 100.651 26.9502 100.392 25.7747Z"
+      fill="#A6CFFF"
+    />
+    <path
+      d="M68.75 51.333C57.3591 51.333 48.125 41.931 48.125 30.333C48.125 18.735 57.3591 9.33301 68.75 9.33301C80.1409 9.33301 89.375 18.735 89.375 30.333C89.375 41.931 80.1409 51.333 68.75 51.333Z"
+      fill="#2B3990"
+    />
+    <path
+      d="M68.75 37.333C64.953 37.333 61.875 34.199 61.875 30.333C61.875 26.467 64.953 23.333 68.75 23.333C72.547 23.333 75.625 26.467 75.625 30.333C75.625 34.199 72.547 37.333 68.75 37.333Z"
+      fill="#A6CFFF"
+    />
   </svg>
 );
 
@@ -428,7 +597,7 @@ const SpecialText = styled.div`
   position: relative;
   z-index: 1;
   padding: 0 8px;
-  white-space: nowrap;
+  // white-space: nowrap;
 
   &::after {
     content: "";
@@ -437,7 +606,18 @@ const SpecialText = styled.div`
     left: 0;
     width: 100%;
     height: 15px;
-    background-color: #f6d671;
+    background-image: var(
+      --AInst-gradient,
+      linear-gradient(130deg, #43cbcb 0%, #4fa7ff 100%)
+    );
+    background-image: var(
+      --AInst-gradient,
+      linear-gradient(
+        130deg,
+        rgba(67, 203, 203, 0.5) 0%,
+        rgba(79, 167, 255, 0.5) 100%
+      )
+    );
     z-index: -1;
   }
 `;
@@ -445,7 +625,7 @@ const SpecialText = styled.div`
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #f8f8f8;
+  background-color: #f5f7fa;
   margin: 0 auto;
   margin-top: 3rem;
   padding: 24px;
@@ -467,7 +647,7 @@ const TextWrapper = styled.div`
 const TextWrapperSmall = styled.div`
   display: flex;
   flex-direction: row;
-  background-color: #f2f2f2;
+  background-color: #f9f9f9;
   width: 100%;
   margin: 0 auto;
   padding: 24px;
@@ -607,31 +787,42 @@ const BackButton = styled.button`
   }
 `;
 
-const HiveBee = () => {
+const AInsight = () => {
   return (
     <>
       <Container>
         <Header>
           <img
-            src="/hivebee/logo.svg"
+            src="/ainsight/logo.svg"
             alt="logo"
             width="70%"
             style={{ maxWidth: "400px" }}
           />
           <Title2>
-            ― We created unique event experiences that made interactions between
-            streamers and audiences more lively and engaging. ―
+            ― An AI-enhanced financial operations system, built by small and
+            medium-sized enterprises, for small and medium-sized businesses. ―
           </Title2>
         </Header>
 
-        <Video
-          src="/hivebee/demo.mov"
+        <Image
+          src="/ainsight/demo.png"
           alt="Kungfu Presentation"
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{ border: "1px solid rgba(0, 0, 0, 0.1)" }}
+          style={{
+            borderRadius: "10px",
+            boxShadow: "0px 2px 20px 0px rgba(0, 0, 0, 0.05)",
+            // border: "1px solid rgba(0, 0, 0, 0.1)",
+          }}
+        />
+
+        <Image
+          src="/ainsight/demo-2.png"
+          alt="Kungfu Presentation"
+          style={{
+            marginTop: "2rem",
+            borderRadius: "10px",
+            boxShadow: "0px 2px 20px 0px rgba(0, 0, 0, 0.05)",
+            // border: "1px solid rgba(0, 0, 0, 0.1)",
+          }}
         />
 
         <SubTitle>
@@ -645,11 +836,11 @@ const HiveBee = () => {
                   margin: "0",
                   width: "fit-content",
                   fontWeight: "600",
-                  color: "#AB005F",
+                  color: "#2B3990",
                   textAlign: "right",
                 }}
               >
-                KOL Tech CO. 群人行銷
+                Futurenest 未來巢科技股份有限公司
               </Text>
             </ContentWrapper>
             <ContentWrapper>
@@ -661,34 +852,40 @@ const HiveBee = () => {
                   margin: "0",
                   width: "fit-content",
                   fontWeight: "600",
-                  color: "#AB005F",
+                  color: "#2B3990",
                   textAlign: "right",
                 }}
               >
-                Product Designer
+                UIUX & Front-end Internship
               </Text>
             </ContentWrapper>
             <TextWrapperSmall>
               <ContentText>
                 <span style={{ fontWeight: "600", color: "#333" }}>
-                  User Experience Strategy
+                  User Experience Research
                 </span>
-                <br /># Competitor analysis <br /> # Contextual inquiry <br /> #
-                User Interview <br /># Functional mapping <br /> # User flow
+                <br /> # Contextual inquiry <br /> # User Interview <br />#
+                Persona <br /># Functional mapping <br /> # User flow
               </ContentText>
-              <ContentText style={{ border: "none" }}>
+              <ContentText>
                 <span style={{ fontWeight: "600", color: "#333" }}>
                   Interface Design Execution
                 </span>
                 <br /># Wireframe and Lo-fi Prototype <br /> # UI Kit <br /> #
-                Design system
-                <br /> # Hi-fi Prototype <br /> # Usability testing
+                Design and component system <br /> # A/B testing
+                <br /> # Hi-fi Prototype
+              </ContentText>
+              <ContentText style={{ border: "none" }}>
+                <span style={{ fontWeight: "600", color: "#333" }}>
+                  Frontend Development
+                </span>
+                <br /># Bootstrap visual-tuning <br /> # AntDesign visual-tuning{" "}
+                <br /> # React.js slicing
+                <br /> # Frontend prototype <br /> # UI & Frontend spec
               </ContentText>
             </TextWrapperSmall>
             <TextWrapperSmall>
-              <span style={{ fontWeight: "600", color: "#333" }}>
-                Tools
-              </span>
+              <span style={{ fontWeight: "600", color: "#333" }}>Tools</span>
 
               <Text
                 style={{
@@ -698,7 +895,7 @@ const HiveBee = () => {
                   textAlign: "right",
                 }}
               >
-                Figma | Miro
+                Figma | Miro | Notion | VS Code
               </Text>
             </TextWrapperSmall>
             <ContentWrapper style={{ border: "none" }}>
@@ -710,11 +907,11 @@ const HiveBee = () => {
                   margin: "0",
                   width: "fit-content",
                   fontWeight: "600",
-                  color: "#AB005F",
+                  color: "#2B3990",
                   textAlign: "right",
                 }}
               >
-                March to May 2024
+                May to October 2023
               </Text>
             </ContentWrapper>
           </TextWrapper>
@@ -724,66 +921,206 @@ const HiveBee = () => {
 
         <section>
           <SectionTitle>Background & Goal</SectionTitle>
-          <HalfWrapper>
-            <HalfTextWrapper>
-              <HalfText>
-                這是我入職公司後經手的第二個數位產品——直播贊助互動平台。產品的願景是打造一個讓直播主能與贊助者進行緊密、生動且有趣互動的直播生態，促進雙方的積極交流。
-              </HalfText>
-
-              <HalfText>
-                <SpecialText>幫助創作者產出更多豐富有趣的內容</SpecialText>
-                {/* <SpecialText>讓每一次的觀賞體驗都充滿樂趣</SpecialText> */}
-              </HalfText>
-
-              <HalfText style={{ textAlign: "left" }}>
-                This is the second digital product I worked on after joining the
-                company—a live stream sponsorship interaction platform. The
-                product aims to create a vibrant live streaming ecosystem where
-                streamers can engage in close, dynamic, and entertaining
-                interactions with their sponsors, fostering active exchanges.
-              </HalfText>
-
-              <HalfText>
-                <SpecialText>Encourages creators to produce </SpecialText>
-                <SpecialText>more engaging and diverse content</SpecialText>
-              </HalfText>
-            </HalfTextWrapper>
-            <HalfImage src="/hivebee/droping.gif" alt="animation" />
-          </HalfWrapper>
+          <Text>
+            未來巢是間專注於幫助中小企業進行數位轉型的新創公司。我們發現，對於小規模的公司來說，處理瑣碎的財務、會計等流程需要額外花大量人事及時間成本，而傳統龐大、複雜且高額的ERP系統導入對中小企業來說實施成本高，是個不小的負擔。
+            因此，我們團隊致力於開發一款專為中小企業打造的、由AI賦能的輕量化ERP財務管理系統，讓企業主可以專注在自己的核心業務，不再受制於繁瑣的財務工作。
+          </Text>
+          <SpecialText>重新定義中小企業的經營管理體驗，</SpecialText>
+          <SpecialText>透過AI強化財務系統最佳化營運效率。</SpecialText>
+          <Text>
+            Futurenest is a startup focused on helping small and medium-sized
+            businesses with digital transformation. We recognize that smaller
+            companies often face significant time and labor costs in handling
+            routine financial and accounting tasks. However, traditional ERP
+            systems are often too large, complex, and expensive for these
+            businesses to implement. Therefore, our team is dedicated to
+            developing an AI-powered, lightweight ERP financial management
+            system specifically designed for small businesses, allowing owners
+            to focus on their core operations without being bogged down by
+            tedious financial processes.
+          </Text>
+          <SpecialText>
+            Optimizing SME operations with AI-powered financial systems.
+          </SpecialText>
         </section>
 
         <section style={{ marginTop: "7rem" }}>
-          <SectionTitle>Problems</SectionTitle>
+          <SectionTitle>Challenges</SectionTitle>
           <InfoCard>
             <InfoContent>
               <InfoIcon />
               <HalfTextWrapper style={{ padding: "0px", gap: ".5rem" }}>
                 <DisText>
-                  當我初次接手該產品時，雖然產品已經上線了一段時間，但使用成效不如預期。因此，我首先針對兩大核心使用者群體——直播贊助者與直播主，分別進行了用戶訪談。通過這些訪談，我整理並歸納出使用上的痛點，並發掘了多個產品優化的機會點。
+                  數位轉型對中小企業而言並不陌生，然而背後常伴隨著隱形的擔憂。雖然「數位化」是大勢所趨，小型企業仍然在轉型過程中表現出一定程度的抗拒，而這種抗拒通常源自對未知和改變的焦慮感。
                 </DisText>
                 <DisText>
-                  When I first took over the product, it had already been live
-                  for some time, but its performance was below expectations. My
-                  initial step was to conduct user interviews with two key user
-                  groups—sponsors and streamers. Through these interviews, I
-                  identified several pain points in the user experience and
-                  uncovered multiple opportunities for product improvement.
+                  Digital transformation is a familiar concept for small and
+                  medium enterprises, but it often brings hidden concerns.
+                  Despite the trend toward digitization, small businesses may
+                  still resist the shift due to a fear of the unknown and
+                  uncertainty about managing the changes that come with it.
                 </DisText>
               </HalfTextWrapper>
             </InfoContent>
           </InfoCard>
 
-          <Image
-            src="/hivebee/pain-point.png"
-            alt="affinity diagram"
-            style={{ marginTop: "2rem" }}
-          />
+          <ImageWrapper>
+            <SubInfoCard>
+              <SubInfoContent>
+                <ContentWrapper
+                  style={{
+                    padding: "0px",
+                    paddingBottom: ".5rem",
+                    justifyContent: "flex-start",
+                    gap: ".8rem",
+                  }}
+                >
+                  <SelectIcon />
+
+                  <Text
+                    style={{
+                      margin: "0",
+                      width: "fit-content",
+                      fontWeight: "600",
+                      color: "#2B3990",
+                      textAlign: "right",
+                      fontSize: "1.2rem",
+                    }}
+                  >
+                    怎麼選? / How to select?
+                  </Text>
+                </ContentWrapper>
+                <HalfTextWrapper style={{ padding: "0px", gap: ".8rem" }}>
+                  <DisText>
+                    ERP系統太龐大且複雜 <br /> The ERP system is too large and
+                    complex.
+                  </DisText>
+                  <DisText>
+                    進銷存系統功能夠實用嗎？ <br /> Is the inventory management
+                    system practical to me?
+                  </DisText>
+                </HalfTextWrapper>
+              </SubInfoContent>
+            </SubInfoCard>
+
+            <SubInfoCard>
+              <SubInfoContent>
+                <ContentWrapper
+                  style={{
+                    padding: "0px",
+                    paddingBottom: ".5rem",
+                    justifyContent: "flex-start",
+                    gap: ".8rem",
+                  }}
+                >
+                  <UseIcon />
+
+                  <Text
+                    style={{
+                      margin: "0",
+                      width: "fit-content",
+                      fontWeight: "600",
+                      color: "#2B3990",
+                      textAlign: "right",
+                      fontSize: "1.2rem",
+                    }}
+                  >
+                    好用嗎? / Is it useful?
+                  </Text>
+                </ContentWrapper>
+                <HalfTextWrapper style={{ padding: "0px", gap: ".8rem" }}>
+                  <DisText>
+                    我的員工知道如何使用嗎？ <br /> Will my employees know how
+                    to use it?
+                  </DisText>
+                  <DisText>
+                    工具真的好上手嗎？ <br /> Is the tool really easy to use?
+                  </DisText>
+                </HalfTextWrapper>
+              </SubInfoContent>
+            </SubInfoCard>
+          </ImageWrapper>
+
+          <ImageWrapper style={{ marginTop: "1rem" }}>
+            <SubInfoCard>
+              <SubInfoContent>
+                <ContentWrapper
+                  style={{
+                    padding: "0px",
+                    paddingBottom: ".5rem",
+                    justifyContent: "flex-start",
+                    gap: ".8rem",
+                  }}
+                >
+                  <CostIcon />
+
+                  <Text
+                    style={{
+                      margin: "0",
+                      width: "fit-content",
+                      fontWeight: "600",
+                      color: "#2B3990",
+                      textAlign: "right",
+                      fontSize: "1.2rem",
+                    }}
+                  >
+                    成本高嗎? / Is the cost high?
+                  </Text>
+                </ContentWrapper>
+                <HalfTextWrapper style={{ padding: "0px", gap: ".8rem" }}>
+                  <DisText>
+                    要投入更多人力嗎？ <br /> Do I need more human resources?
+                  </DisText>
+                  <DisText>
+                    需要找數位轉型的專家嗎？ <br /> Do I need an expert?
+                  </DisText>
+                </HalfTextWrapper>
+              </SubInfoContent>
+            </SubInfoCard>
+
+            <SubInfoCard>
+              <SubInfoContent>
+                <ContentWrapper
+                  style={{
+                    padding: "0px",
+                    paddingBottom: ".5rem",
+                    justifyContent: "flex-start",
+                    gap: ".8rem",
+                  }}
+                >
+                  <NeedIcon />
+
+                  <Text
+                    style={{
+                      margin: "0",
+                      width: "fit-content",
+                      fontWeight: "600",
+                      color: "#2B3990",
+                      textAlign: "center",
+                      fontSize: "1.2rem",
+                    }}
+                  >
+                    符合需求嗎? / Does it meet my needs?
+                  </Text>
+                </ContentWrapper>
+                <HalfTextWrapper style={{ padding: "0px", gap: ".8rem" }}>
+                  <DisText>
+                    系統足夠彈性嗎？ <br /> Is the system flexible?
+                  </DisText>
+                  <DisText>
+                    可以符合我的特定需求嗎？ <br /> Can it adapt to my specific
+                    needs?
+                  </DisText>
+                </HalfTextWrapper>
+              </SubInfoContent>
+            </SubInfoCard>
+          </ImageWrapper>
 
           <CircleWrapper>
-            <Circle color="#EDDDFF" />
-            <Circle color="#D9B9FF" />
-            <Circle color="#BA87F4" />
-            <Circle color="#C5006C" />
+            <Circle color="#CFE8FF" />
+            <Circle color="#A6CFFF" />
+            <Circle color="#1575E5" />
+            <Circle color="#2B3990" />
           </CircleWrapper>
 
           <DiscriptionWrapper>
@@ -858,7 +1195,7 @@ const HiveBee = () => {
               <DisImage src="/hivebee/old-ui-4.png" alt="discription" />
               <CardHeader>
                 <ContentText style={{ border: "none" }}>
-                  Challenge 04
+                  Challenge 03
                 </ContentText>
                 <DisTextTitle>Poor responsive design</DisTextTitle>
               </CardHeader>
@@ -1237,4 +1574,4 @@ const HiveBee = () => {
   );
 };
 
-export default HiveBee;
+export default AInsight;

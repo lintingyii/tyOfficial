@@ -96,7 +96,10 @@ function MyComponent(props) {
       description:
         "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
       tags: [{ name: "UI/UX design", color: "#7D8991" }],
-      subtags: [{ name: "SaaS", color: "#7D8991" }],
+      subtags: [
+        { name: "SaaS", color: "#7D8991" },
+        { name: "RWD", color: "#7D8991" }
+      ],
       link: "/work/HiveBee",
       openInNewTab: false,
     },

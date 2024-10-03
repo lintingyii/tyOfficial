@@ -18,6 +18,9 @@ export const Footer = ({ color }) => {
     case "/work/MangoOnTree":
       footerColor = "#EFEBE5"; // MangoOnTree 頁面的顏色
       break;
+    case "/work/AInsight":  
+      footerColor = "#F5F7FA"; // MangoOnTree 頁面的顏色
+      break;
     default:
       footerColor = "#f2f2f2"; // 默認顏色
   }

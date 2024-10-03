@@ -13,6 +13,37 @@ import SortButton from "../Components/SortButton";
 export const Work = () => {
   const initialProjects = [
     {
+      date: "March, 2024",
+      image: "/hivebee/hb demo.png",
+      title: "Hive Bee - We made donations enjoyable",
+      subtitle: "SaaS product design",
+      description:
+        "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
+      tags: [
+        { name: "UI/UX design", color: "#7D8991" },
+      ],
+      subtags: [
+        { name: "SaaS", color: "#7D8991" },
+        { name: "RWD", color: "#7D8991" }
+      ],
+      link: "/work/HiveBee",
+      openInNewTab: false,
+    },
+    // {
+    //   date: "May, 2023",
+    //   image: "/ainsight/ainsight-main.png",
+    //   title: "AInsight⁺ - AI-Powered Finance",
+    //   subtitle: "SaaS product design",
+    //   description:
+    //     "Tailored for small and medium-sized businesses, our AI-enhanced financial system optimizes operational efficiency, leaving traditional accounting and bookkeeping behind.",
+    //   tags: [
+    //     { name: "UI/UX design", color: "#7D8991" },
+    //   ],
+    //   subtags: [{ name: "SaaS", color: "#7D8991" }],
+    //   link: "/work/AInsight",
+    //   openInNewTab: false,
+    // },
+    {
       date: "November, 2023",
       image: "/arron-nieh.png",
       title: "Aaron Nieh : Behind the Covers",
@@ -111,20 +142,6 @@ export const Work = () => {
       ],
       link: "https://simpletodos2024.netlify.app/",
       openInNewTab: true,
-    },
-    {
-      date: "March, 2024",
-      image: "/hivebee/hb demo.png",
-      title: "Hive Bee - We made donations enjoyable",
-      subtitle: "SaaS product design",
-      description:
-        "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
-      tags: [
-        { name: "UI/UX design", color: "#7D8991" },
-      ],
-      subtags: [{ name: "SaaS", color: "#7D8991" }],
-      link: "/work/HiveBee",
-      openInNewTab: false,
     },
   ];
 

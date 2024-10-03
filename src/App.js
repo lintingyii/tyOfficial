@@ -16,6 +16,7 @@ import SportsWin from "./Pages/sportsWin";
 import HiveBee from "./Pages/HiveBee";
 import PufferVerse from "./Pages/PufferVerse";
 import MangoOnTree from "./Pages/MangoOnTree";
+import AInsight from "./Pages/AInsight";
 import styled from "styled-components";
 import CustomCursor from "./Components/CustomCursor";
 import Footer from "./Components/footer";
@@ -188,6 +189,7 @@ function App() {
           <Route path="/work/HiveBee" element={<HiveBee />} />
           <Route path="/work/PufferVerse" element={<PufferVerse />} />
           <Route path="/work/MangoOnTree" element={<MangoOnTree />} />
+          <Route path="/work/AInsight" element={<AInsight />} />
         </Routes>
         <NavigationBar />
         <Footer />
