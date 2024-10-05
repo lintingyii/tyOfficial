@@ -189,9 +189,11 @@ const LargeImageContainer = styled(ImageContainer)`
   flex: 1;
   width: auto;
   margin: 0;
+  max-width: unset;
 
   @media (max-width: 820px) {
-    max-width: 100%;
+    width: 100%;
+    height: auto;
   }
 `;
 
@@ -203,8 +205,9 @@ const LargeTitle = styled.h3`
   margin-top: 24px;
   color: #333333;
   transition: color 0.3s ease-in;
+  width: 100%;
 
-  @media (max-width: 480px) {
+  @media (max-width: 820px) {
     font-size: 24px;
     margin-top: 12px;
   }
@@ -226,7 +229,7 @@ const TitleGroup = styled.div`
 `;
 
 const LargeContent = styled.div`
-  height: 250px;
+  height: fit-content;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -234,6 +237,7 @@ const LargeContent = styled.div`
   justify-content: space-around;
   padding: 0;
   margin: 0;
+  width: 100%;
 
   @media (max-width: 800px) {
     padding-left: 0;
@@ -246,7 +250,7 @@ const LargeCardContainer = styled(CardContainer)`
   align-items: center;
   padding: 20px;
   max-width: 100%;
-  height: auto;
+  height: fit-content;
   gap: 4%;
   opacity: 0; /* 初始為不可見 */
   transition: opacity 1.5s ease, transform 1.5s ease, background-color 0.8s ease;

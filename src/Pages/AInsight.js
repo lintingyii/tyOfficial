@@ -88,6 +88,7 @@ const HalfImage = styled.img`
 const DisImage = styled.img`
   width: ${(props) => props.width || "100%"};
   border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
 `;
 
 const LaptopImage = styled.img`
@@ -216,6 +217,42 @@ const ContentText = styled.div`
   }
 `;
 
+const ContentTextLarge = styled.div`
+  font-size: 1.5rem;
+  position: sticky;
+  top: 16vh;
+  margin: 0;
+  color: #2b3990;
+  font-weight: 700;
+  width: 40%;
+  // min-width: 280px;
+  height: fit-content;
+  white-space: nowrap;
+  text-align: left;
+
+  @media (max-width: 880px) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: none;
+    font-size: 1.5rem;
+    width: 102%;
+    top: 0vh;
+    background-color: #f5f7fa;
+    z-index: 10;
+    padding: 10vh 0 1vh 0;
+  }
+
+  @media (max-width: 480px) {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    border-right: none;
+    font-size: 1.5rem;
+    width: 102%;
+    top: 0;
+    background-color: #f5f7fa;
+    z-index: 10;
+    padding: 1.5rem 0 1vh 0;
+  }
+`;
+
 const DisText = styled.div`
   font-size: 1rem;
   margin: 0;
@@ -239,18 +276,37 @@ const DisTextTitle = styled.div`
   font-size: 1rem;
   margin: 0;
   color: #fff;
-  background-image: var(
-    --Gradient-style-gradient2,
-    linear-gradient(91deg, #eaa700 0%, #f6d671 100%)
-  );
+  background-image: linear-gradient(135deg, #43cbcb 1.67%, #4fa7ff 98.33%);
   width: fit-content;
-  align-self: flex-start;
   padding: 0.5rem 1rem;
   border-radius: 50px;
   white-space: nowrap;
 
   @media (max-width: 880px) {
     padding: 0.4rem 0.8rem;
+  }
+`;
+
+const DisTextTitleSticky = styled.div`
+  font-size: 1rem;
+  margin: 0;
+  color: #fff;
+  background-image: linear-gradient(135deg, #43cbcb 1.67%, #4fa7ff 98.33%);
+  width: fit-content;
+  padding: 0.5rem 1rem;
+  border-radius: 50px;
+  white-space: nowrap;
+  position: sticky;
+  z-index: ${(props) => props.zIndex || 1};
+  top: 16vh;
+
+  @media (max-width: 880px) {
+    padding: 0.4rem 0.8rem;
+    top: 16vh;
+  }
+  @media (max-width: 480px) {
+    padding: 0.4rem 0.8rem;
+    top: 12vh;
   }
 `;
 
@@ -335,6 +391,31 @@ const SubInfoCard = styled.div`
 
   @media (max-width: 880px) {
     width: 100%;
+  }
+`;
+
+const SubInfoCardLarge = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: left;
+  padding: 24px;
+  width: 100%;
+  background-color: #f9f9f9;
+  box-shadow: 0px 3px 12px 0px rgba(21, 19, 99, 0.06);
+  border: 1px solid rgba(166, 207, 255, 0.5);
+  border-radius: 12px;
+  box-sizing: border-box;
+  margin: 0;
+  top: 12rem;
+  position: sticky;
+  z-index: ${(props) => props.zIndex || 1};
+
+  @media (max-width: 880px) {
+    top: 22vh;
+  }
+  @media (max-width: 480px) {
+    top: 18vh;
   }
 `;
 
@@ -729,45 +810,65 @@ const TextWrapperContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 1rem;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 24px;
-  width: 100%;
+  // border: 1px solid rgba(0, 0, 0, 0.1);
+  // padding: 24px;
   box-sizing: border-box;
   margin: 0 auto;
-  margin-top: 1rem;
+  right: 0;
+  width: 100%;
+  max-width: 100%;
+  align-items: right;
   background-color: #f8f8f8;
 
   @media (max-width: 880px) {
     box-sizing: border-box;
-    padding: 1rem;
+    margin: 0 auto;
+    width: 100%;
   }
 `;
 
 const DiscriptionWrapper = styled.div`
   display: flex;
-  flex-direction: column;
+  position: relative;
+  flex-direction: row;
   justify-content: center;
-  align-items: center;
-  gap: 2rem;
+  align-items: stretch;
+  gap: 4rem;
   width: 70%;
   margin: 0 auto;
-  margin-top: 2rem;
+  margin-top: 5rem;
 
   @media (max-width: 880px) {
     width: 95%;
-    margin-top: 1rem;
+    margin-top: 3rem;
+    gap: 1.5rem;
+    align-items: unset;
     box-sizing: border-box;
     flex-direction: column;
   }
 `;
 
-const Hr = () => (
-  <div style={{ display: "flex", justifyContent: "center", margin: "9vh 0" }}>
+const DiscriptionWrapperSmall = styled.div`
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  width: 100%;
+  gap: 1rem;
+`;
+
+const Hr = ({ style }) => (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      margin: "9vh 0",
+      ...style,
+    }}
+  >
     <svg width="112" height="6" viewBox="0 0 112 6" fill="none">
       <path
         d="M9.24865 1.40299C11.1861 -0.467666 14.2571 -0.467663 16.1946 1.40299L17.8878 3.03785C19.0503 4.16024 20.8929 4.16024 22.0554 3.03785L23.777 1.403C25.7145 -0.467659 28.7855 -0.467659 30.723 1.403L32.4162 3.03785C33.5787 4.16025 35.4213 4.16025 36.5838 3.03785L38.277 1.403C40.2145 -0.467659 43.2855 -0.467656 45.223 1.403L46.9162 3.03786C48.0787 4.16025 49.9213 4.16025 51.0838 3.03786L52.7552 1.42402C52.7592 1.42024 52.7593 1.414 52.7555 1.41009C52.7517 1.40617 52.7519 1.39989 52.7558 1.39612C54.6936 -0.467659 57.7595 -0.465367 59.6946 1.403L61.3878 3.03785C62.5503 4.16025 64.3929 4.16025 65.5554 3.03785L67.2486 1.403C69.1861 -0.467662 72.2571 -0.467659 74.1946 1.403L75.8878 3.03785C77.0503 4.16025 78.8929 4.16025 80.0554 3.03785L81.777 1.403C83.7145 -0.467655 86.7855 -0.467655 88.723 1.403L90.4162 3.03786C91.5787 4.16025 93.4213 4.16025 94.5838 3.03786L96.277 1.403C98.2145 -0.467655 101.285 -0.467652 103.223 1.403L104.916 3.03786C106.079 4.16025 107.921 4.16025 109.084 3.03786L110.058 2.0976C110.455 1.71398 111.088 1.72509 111.472 2.1224C111.855 2.51972 111.844 3.15279 111.447 3.5364L110.473 4.47666C108.535 6.34732 105.464 6.34732 103.527 4.47666L101.834 2.84181C100.671 1.71941 98.8287 1.71941 97.6662 2.8418L95.973 4.47666C94.0355 6.34732 90.9645 6.34732 89.027 4.47666L87.3338 2.8418C86.1713 1.71941 84.3287 1.71941 83.1662 2.8418L81.4446 4.47665C79.5071 6.34731 76.4361 6.34731 74.4986 4.47665L72.8054 2.8418C71.6429 1.71941 69.8003 1.7194 68.6378 2.84179L66.9446 4.47665C65.0071 6.34731 61.9361 6.34731 59.9986 4.47665L58.3054 2.8418C57.1502 1.72643 55.3234 1.71945 54.1598 2.82085C54.1558 2.82459 54.1556 2.83085 54.1594 2.83476C54.1632 2.83865 54.1631 2.84485 54.1592 2.8486L52.473 4.47666C50.5355 6.34732 47.4645 6.34732 45.527 4.47666L43.8338 2.8418C42.6713 1.71941 40.8287 1.71941 39.6662 2.8418L37.973 4.47666C36.0355 6.34731 32.9645 6.34731 31.027 4.47666L29.3338 2.8418C28.1713 1.71941 26.3287 1.71941 25.1662 2.8418L23.4446 4.47665C21.5071 6.34731 18.4361 6.34731 16.4986 4.47665L14.8054 2.8418C13.6429 1.7194 11.8003 1.7194 10.6378 2.84179L8.94459 4.47665C7.00713 6.34731 3.93611 6.34731 1.99865 4.47665L1.02481 3.53639C0.627491 3.15278 0.616384 2.51971 0.999998 2.12239C1.38361 1.72508 2.01668 1.71397 2.41399 2.09759L3.38784 3.03785C4.55032 4.16024 6.39292 4.16024 7.5554 3.03785L9.24865 1.40299Z"
-        fill="#EAA700"
+        fill="#65e8fd"
       />
     </svg>
   </div>
@@ -868,7 +969,7 @@ const AInsight = () => {
                 <span style={{ fontWeight: "600", color: "#333" }}>
                   User Experience Research
                 </span>
-                <br /> # Contextual inquiry <br /> # User Interview <br />#
+                <br /> # User Interview <br /> # Value proposition <br />#
                 Persona <br /># Functional mapping <br /> # User flow
               </ContentText>
               <ContentText>
@@ -1120,13 +1221,6 @@ const AInsight = () => {
             </SubInfoCard>
           </ImageWrapper>
 
-          <CircleWrapper>
-            <Circle color="#CFE8FF" />
-            <Circle color="#A6CFFF" />
-            <Circle color="#1575E5" />
-            <Circle color="#2B3990" />
-          </CircleWrapper>
-
           {/* <DiscriptionWrapper>
             <TextWrapperContainer>
               <DisImage src="/hivebee/old-ui-1.png" alt="discription" />
@@ -1221,12 +1315,12 @@ const AInsight = () => {
           </DiscriptionWrapper> */}
         </section>
 
-        {/* <CircleWrapper>
-          <Circle color="#EDDDFF" />
-          <Circle color="#D9B9FF" />
-          <Circle color="#BA87F4" />
-          <Circle color="#C5006C" />
-        </CircleWrapper> */}
+        <CircleWrapper>
+          <Circle color="#CFE8FF" />
+          <Circle color="#A6CFFF" />
+          <Circle color="#1575E5" />
+          <Circle color="#2B3990" />
+        </CircleWrapper>
 
         <section style={{ marginTop: "5rem" }}>
           <SectionTitle>Design processes</SectionTitle>
@@ -1242,38 +1336,847 @@ const AInsight = () => {
             style={{ marginTop: "1rem" }}
           />
           <DiscriptionWrapper>
+            <ContentTextLarge style={{ border: "none" }}>
+              Stakeholder interviews —
+            </ContentTextLarge>
             <TextWrapperContainer>
-              <CardHeader>
-                <ContentText style={{ border: "none" }}>
-                  Challenge 03
-                </ContentText>
-                <DisTextTitle>Poor responsive design</DisTextTitle>
-              </CardHeader>
-              <DisImage src="/hivebee/old-ui-4.png" alt="discription" />
+              <DisTextTitle>Stakeholder map</DisTextTitle>
+              <DisImage src="/ainsight/stackholder.jpg" alt="discription" />
               <DisText style={{ marginTop: ".5rem" }}>
-                我們的產品主要有兩類使用者——直播者與贊助者，對應兩種不同的使用情境：直播者需設置互動內容，贊助者則透過手機或電腦觀看直播並進行打賞，我們的系統則劃分為給直播者使用的「後台」與給贊助者使用的「前台」。原有的前、後台僅針對桌面版進行設計，忽略了用戶跨平台使用的需求。由於直播者通常使用電腦進行設定，而贊助者除了電腦外，多數使用手機觀看直播，這導致系統無法提供良好的響應式操作體驗。
+                我們列出所有與產品相關的利害關係人，從直接到間接，並根據「主要決策者」、「重要影響者」、「產品使用者」這三個標籤進行分類。接著，依此分類羅列出具體的訪談名單，以確保能全面了解各個利害關係人日常的任務以及對產品的需求與期望。
               </DisText>
               <DisText>
-                Our product primarily serves two types of users: streamers and
-                sponsors, each corresponding to different use cases. Streamers
-                need to set up interactive content, while sponsors watch live
-                streams and donate via mobile or desktop devices. The system is
-                divided into a "backstage" for streamers and a "frontstage" for
-                sponsors. The original design only catered to desktop versions,
-                neglecting the cross-platform needs of users. Since streamers
-                typically use desktops and sponsors often use mobile devices,
-                the system failed to provide an optimal responsive experience.
+                We listed all stakeholders related to the product, from direct
+                to indirect, and categorized them using three labels: "Decision
+                Maker," "Heavy Influencer," and "Product User." Based on these
+                categories, we compiled a specific interview list to ensure a
+                comprehensive understanding of each stakeholder's daily tasks
+                and their needs and expectations for the product.
+              </DisText>
+              <DisText style={{ marginTop: ".5rem" }}>
+                接著，我們將受訪者依其背景和職業初步分為兩大類——「非財務背景用戶（例：中小企業主）」與「財會相關專業用戶（例：會計事務所、記帳士等）」。針對這兩類用戶分別設計適合的訪綱、進行用戶訪談。這樣的方式帶領我們從兩個不同角度去了解記帳與財務對於公司與政府法規的關係，進而拓展到產品使用目的及需求。
+              </DisText>
+              <DisText>
+                Next, we categorized the interviewees into two main groups based
+                on their backgrounds and professions: "non-financial users"
+                (e.g., small business owners) and "financial professionals"
+                (e.g., accounting firms, bookkeepers). We created tailored
+                interview guides for these two groups and conducted user
+                interviews. This approach allowed us to explore accounting and
+                financial regulations from two distinct perspectives, broadening
+                our understanding of the product’s use cases and the specific
+                needs of users in different sectors.
+              </DisText>
+            </TextWrapperContainer>
+          </DiscriptionWrapper>
+
+          <Divider
+            margin="4rem"
+            style={{ borderTop: "1px solid #65E8FD", width: "70%" }}
+          />
+
+          <DiscriptionWrapper>
+            <ContentTextLarge style={{ border: "none" }}>
+              Define and focus —
+              <br />
+              <span
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  color: "#B6B6B6",
+                  fontWeight: "bold",
+                  fontSize: ".8rem",
+                }}
+              >
+                ＊以核心用戶為例
+              </span>
+            </ContentTextLarge>
+            <TextWrapperContainer>
+              <DisTextTitle>Value proposition</DisTextTitle>
+              <DisImage src="/ainsight/value.jpg" alt="discription" />
+              <DisText style={{ marginTop: ".5rem" }}>
+                我們進行了超過 10
+                場深度訪談，對象涵蓋了中小企業主、中階主管、內部員工及會計師。這些訪談幫助我們深入了解不同用戶的需求差異，並具體掌握了他們的目標、日常任務及在工作中的痛點。我們將這些洞察作為產品優化的機會點，旨在開發能夠有效解決這些問題的功能和服務。
+              </DisText>
+              <DisText>
+                We conducted over 10 in-depth interviews with small business
+                owners, mid-level managers, internal staff, and accountants.
+                These interviews helped us gain a deeper understanding of the
+                differences in user needs and provided insight into their goals,
+                daily tasks, and pain points. We are using these insights as
+                opportunities to optimize our product by developing features and
+                services that effectively address these issues.
+              </DisText>
+              <DisTextTitle style={{ marginTop: "1rem" }}>Persona</DisTextTitle>
+              <DisImage src="/ainsight/Persona-1.jpg" alt="discription" />
+              <DisImage src="/ainsight/Persona-2.jpg" alt="discription" />
+              <DisText style={{ marginTop: ".5rem" }}>
+                我們根據利害關係人地圖中的直接利害關係人進行了一系列用戶調查，確認了兩個核心用戶群體——「中小企業主」與「公司財務主管」。通過分析他們的日常任務和目標，我們擬定了用戶故事
+                (User Story)，並設計了使用者畫像
+                (Persona)，以幫助團隊更加聚焦於用戶需求。
+              </DisText>
+              <DisText>
+                Based on the direct stakeholders identified in our stakeholder
+                map, we conducted a series of user research studies and
+                identified two core user groups: "small business owners" and
+                "corporate finance managers." By analyzing their daily tasks and
+                goals, we developed user stories and created personas to help
+                the team stay focused on user needs.
+              </DisText>
+            </TextWrapperContainer>
+          </DiscriptionWrapper>
+
+          <Divider
+            margin="4rem"
+            style={{ borderTop: "1px solid #65E8FD", width: "70%" }}
+          />
+
+          <DiscriptionWrapper>
+            <ContentTextLarge style={{ border: "none" }}>
+              User stories & insights —
+              <br />
+              <span
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  color: "#B6B6B6",
+                  fontWeight: "bold",
+                  fontSize: ".8rem",
+                }}
+              >
+                ＊以核心用戶為例
+              </span>
+            </ContentTextLarge>
+            <TextWrapperContainer>
+              <DiscriptionWrapperSmall>
+                <DisTextTitleSticky zIndex={1}>
+                  User stories for 李春成
+                </DisTextTitleSticky>
+                <SubInfoCardLarge zIndex={1}>
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    User Story 1 : 儀表板洞察
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      textAlign: "left",
+                      width: "100%",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      身為
+                    </span>{" "}
+                    一名小企業主，
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      我希望
+                    </span>{" "}
+                    擁有一個用戶友善的儀表板，提供關鍵的財務指標和摘要，
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "900",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      以便
+                    </span>{" "}
+                    我可以快速地一覽了然地了解我的企業的財務表現。
+                  </div>
+
+                  <Hr style={{ margin: "1rem" }} />
+
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    Acceptance Criteria / 驗收標準
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      lineHeight: "1.8",
+                      color: "#333",
+                    }}
+                  >
+                    1. 有儀表板顯示基本的財務指標，包括收入、費用和利潤。
+                    <br />
+                    2. 它應該可以在主屏幕上，透過單擊就可快速查看訪問。
+                    <br />
+                    3. 財務指標需實時或定期更新，以便掌握最新分析數據。
+                    <br />
+                    4. 儀表板彈性高，可以自定義重要的指標。
+                  </div>
+                </SubInfoCardLarge>
+
+                <SubInfoCardLarge zIndex={2}>
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    User Story 2 : 支出追蹤
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      textAlign: "left",
+                      width: "100%",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      身為
+                    </span>{" "}
+                    一名小企業主，
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      我希望
+                    </span>{" "}
+                    有一個可以追蹤公司內部所有大小支出的系統，
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "900",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      以便
+                    </span>{" "}
+                    我可以有效監控和控制成本，快速識別財務花費狀況以及可能節省成本的領域。
+                  </div>
+
+                  <Hr style={{ margin: "1rem" }} />
+
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    Acceptance Criteria / 驗收標準
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      lineHeight: "1.8",
+                      color: "#333",
+                    }}
+                  >
+                    1. 可以輕鬆記錄和分類所有的業務費用。
+                    <br />
+                    2.
+                    系統應提供費用隨時間變化的直觀視覺化表示，方便我快速掌握走勢。
+                    <br />
+                    3. 應該要能夠設定預算限制，並在費用接近限制時收到警示提醒。
+                    <br />
+                    4. 可以生成我所選擇的特定時間段的開支報告。
+                  </div>
+                </SubInfoCardLarge>
+
+                <SubInfoCardLarge zIndex={3}>
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    User Story 3 : 產線化的發票管理
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      textAlign: "left",
+                      width: "100%",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      身為
+                    </span>{" "}
+                    一名小企業主，
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      我希望
+                    </span>{" "}
+                    有一個簡化的發票管理工具，
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "900",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      以便
+                    </span>{" "}
+                    我可以輕鬆創建和管理發票，同時追蹤付款情況。
+                  </div>
+
+                  <Hr style={{ margin: "1rem" }} />
+
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    Acceptance Criteria / 驗收標準
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      lineHeight: "1.8",
+                      color: "#333",
+                    }}
+                  >
+                    1. 可以輕鬆地創建和自定義包括客戶詳細信息和明細費用的發票。
+                    <br />
+                    2.
+                    系統應自動追蹤每張發票的付款狀態，並於截止前給予適度的追款警示提醒。
+                    <br />
+                    3. 可以為常規客戶設置循環發票。
+                    <br />
+                    4. 可以直接從系統通過電子郵件發送發票。
+                  </div>
+                </SubInfoCardLarge>
+              </DiscriptionWrapperSmall>
+
+              <DiscriptionWrapperSmall style={{ marginTop: "4rem" }}>
+                <DisTextTitleSticky zIndex={1}>
+                  User stories for 陳雅琪
+                </DisTextTitleSticky>
+                <SubInfoCardLarge zIndex={1}>
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    User Story 1 : 高效的交易記錄
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      textAlign: "left",
+                      width: "100%",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      身為
+                    </span>{" "}
+                    公司內部會計師，
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      我希望
+                    </span>{" "}
+                    有可以簡便且快速數據輸入功能的系統。
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "900",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      以便
+                    </span>{" "}
+                    我可以簡化繁瑣的交易記錄流程並保持準確的財務金流記錄。
+                  </div>
+
+                  <Hr style={{ margin: "1rem" }} />
+
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    Acceptance Criteria / 驗收標準
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      lineHeight: "1.8",
+                      color: "#333",
+                    }}
+                  >
+                    1. 一個直觀且用戶友善的界面，讓我可以專注於記錄交易。
+                    <br />
+                    2. 可以記錄交易對象、金額、付款狀態等詳細交易明細。
+                    <br />
+                    3. 可以輕鬆地對交易進行分類以進行正確的會計分錄。
+                    <br />
+                    4.
+                    輸入的交易應實時或定時自動化地更新到財務報表、系統圖表中。
+                  </div>
+                </SubInfoCardLarge>
+
+                <SubInfoCardLarge zIndex={2}>
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    User Story 2 : 自動化流程導入
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      textAlign: "left",
+                      width: "100%",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      身為
+                    </span>{" "}
+                    公司內部會計師，
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      我希望
+                    </span>{" "}
+                    系統和科技可以自動化我的日常財務任務。
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "900",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      以便
+                    </span>{" "}
+                    我可以節省時間，降低人工銀行對賬和發票處理等任務中的錯誤風險。
+                  </div>
+
+                  <Hr style={{ margin: "1rem" }} />
+
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    Acceptance Criteria / 驗收標準
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      lineHeight: "1.8",
+                      color: "#333",
+                    }}
+                  >
+                    1. 系統通過將交易與銀行對賬單進行匹配來自動化銀行對賬。
+                    <br />
+                    2. 提供自動化的發票追蹤處理，包括發送逾期付款的警示。
+                    <br />
+                    3. 可以方便我輕鬆系統追蹤自動化任務的進度。
+                    <br />
+                    4. 依據日記帳生成符合金管會規格的會計三表。
+                  </div>
+                </SubInfoCardLarge>
+
+                <SubInfoCardLarge zIndex={3}>
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    User Story 3 : 提升會計技能
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      textAlign: "left",
+                      width: "100%",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      身為
+                    </span>{" "}
+                    公司內部會計師，
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      我希望
+                    </span>{" "}
+                    在系統內獲得會計支援和教育資源，
+                  </div>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      alignItems: "flex-start",
+                      justifyContent: "left",
+                      color: "#333",
+                    }}
+                  >
+                    <span
+                      style={{
+                        fontWeight: "900",
+                        display: "flex",
+                        marginRight: "10px",
+                        whiteSpace: "nowrap",
+                        color: "#2B3990",
+                      }}
+                    >
+                      以便
+                    </span>{" "}
+                    我可以隨著時間提升我的會計技能，並確保公司運作符合財務法規。
+                  </div>
+
+                  <Hr style={{ margin: "1rem" }} />
+
+                  <SpecialText
+                    style={{
+                      padding: "0px",
+                      margin: "0px",
+                      marginBottom: "12px",
+                    }}
+                  >
+                    Acceptance Criteria / 驗收標準
+                  </SpecialText>
+                  <div
+                    style={{
+                      display: "flex",
+                      width: "100%",
+                      textAlign: "left",
+                      lineHeight: "1.8",
+                      color: "#333",
+                    }}
+                  >
+                    1. 系統提供訪問會計指南、教程和文章的功能。
+                    <br />
+                    2. 教育內容彈性，與我的專業水平和公司的需求相關。
+                    <br />
+                    3. 提供有關會計最佳實踐的定期提示和更新。
+                    <br />
+                    4. 會計資源可以輕鬆從系統內部訪問，公開且透明。
+                  </div>
+                </SubInfoCardLarge>
+              </DiscriptionWrapperSmall>
+            </TextWrapperContainer>
+          </DiscriptionWrapper>
+
+          <Divider
+            margin="4rem"
+            style={{ borderTop: "1px solid #65E8FD", width: "70%" }}
+          />
+
+          <DiscriptionWrapper>
+            <ContentTextLarge style={{ border: "none" }}>
+              UX Strategies —
+              <br />
+              <span
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  color: "#B6B6B6",
+                  fontWeight: "bold",
+                  fontSize: ".8rem",
+                }}
+              >
+                ＊部分與商業機密相關的內容無法公開揭露
+              </span>
+            </ContentTextLarge>
+            <TextWrapperContainer>
+              <DisTextTitle>Information Architecture</DisTextTitle>
+              <DisImage src="/ainsight/stackholder.jpg" alt="discription" />
+              <DisText style={{ marginTop: ".5rem" }}>
+                我們列出所有與產品相關的利害關係人，從直接到間接，並根據「主要決策者」、「重要影響者」、「產品使用者」這三個標籤進行分類。接著，依此分類羅列出具體的訪談名單，以確保能全面了解各個利害關係人日常的任務以及對產品的需求與期望。
+              </DisText>
+              <DisText>
+                We listed all stakeholders related to the product, from direct
+                to indirect, and categorized them using three labels: "Decision
+                Maker," "Heavy Influencer," and "Product User." Based on these
+                categories, we compiled a specific interview list to ensure a
+                comprehensive understanding of each stakeholder's daily tasks
+                and their needs and expectations for the product.
+              </DisText>
+              <DisText style={{ marginTop: ".5rem" }}>
+                接著，我們將受訪者依其背景和職業初步分為兩大類——「非財務背景用戶（例：中小企業主）」與「財會相關專業用戶（例：會計事務所、記帳士等）」。針對這兩類用戶分別設計適合的訪綱、進行用戶訪談。這樣的方式帶領我們從兩個不同角度去了解記帳與財務對於公司與政府法規的關係，進而拓展到產品使用目的及需求。
+              </DisText>
+              <DisText>
+                Next, we categorized the interviewees into two main groups based
+                on their backgrounds and professions: "non-financial users"
+                (e.g., small business owners) and "financial professionals"
+                (e.g., accounting firms, bookkeepers). We created tailored
+                interview guides for these two groups and conducted user
+                interviews. This approach allowed us to explore accounting and
+                financial regulations from two distinct perspectives, broadening
+                our understanding of the product’s use cases and the specific
+                needs of users in different sectors.
               </DisText>
             </TextWrapperContainer>
           </DiscriptionWrapper>
         </section>
 
-        <Divider
-          margin="4rem"
-          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
-        />
-
-        <section>
+        {/* <section>
           <BlockTitle>Step.1</BlockTitle>
           <BlockHeader>Functional Map</BlockHeader>
           <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
@@ -1572,7 +2475,7 @@ const AInsight = () => {
             <ContentImage src="/hivebee/result-2.png" alt="research" />
             <ContentImage src="/hivebee/result-3.png" alt="research" />
           </ImageWrapper>
-        </section>
+        </section> */}
 
         <a
           href="/work"
