@@ -302,7 +302,7 @@ const DisTextTitleSticky = styled.div`
 
   @media (max-width: 880px) {
     padding: 0.4rem 0.8rem;
-    top: 16vh;
+    top: 20vh;
   }
   @media (max-width: 480px) {
     padding: 0.4rem 0.8rem;
@@ -402,7 +402,7 @@ const SubInfoCardLarge = styled.div`
   padding: 24px;
   width: 100%;
   background-color: #f9f9f9;
-  box-shadow: 0px 3px 12px 0px rgba(21, 19, 99, 0.06);
+  // box-shadow: 0px 3px 12px 0px rgba(21, 19, 99, 0.06);
   border: 1px solid rgba(166, 207, 255, 0.5);
   border-radius: 12px;
   box-sizing: border-box;
@@ -412,7 +412,7 @@ const SubInfoCardLarge = styled.div`
   z-index: ${(props) => props.zIndex || 1};
 
   @media (max-width: 880px) {
-    top: 22vh;
+    top: 28vh;
   }
   @media (max-width: 480px) {
     top: 18vh;
@@ -2120,6 +2120,27 @@ const AInsight = () => {
                   </div>
                 </SubInfoCardLarge>
               </DiscriptionWrapperSmall>
+              <DisText style={{ marginTop: ".5rem" }}>
+                此外，我們透過用戶路線圖（User
+                Roadmap）深入探討用戶在未來與產品的長期互動，重點在於產品發展、功能實現與用戶需求的長期願景結合。我們分析了用戶從實際場景如何與系統銜接，進而回到實際應用中，實現預期效益。
+              </DisText>
+              <DisText>
+                Additionally, through the User Roadmap, we conducted an in-depth
+                analysis of how users will interact with the product over the
+                long term. This roadmap focuses on the future development,
+                goals, and feature implementation aligned with users' long-term
+                needs. We examined how users transition from real-world contexts
+                to integrating our system, and how it returns to practical
+                application to achieve desired outcomes.
+              </DisText>
+              <DisTextTitle style={{ marginTop: ".5rem" }}>
+                User roadmap
+              </DisTextTitle>
+              <DisImage
+                src="/ainsight/roadmap.png"
+                alt="discription"
+                style={{ border: "none", borderRadius: "0px" }}
+              />
             </TextWrapperContainer>
           </DiscriptionWrapper>
 
@@ -2146,34 +2167,149 @@ const AInsight = () => {
             </ContentTextLarge>
             <TextWrapperContainer>
               <DisTextTitle>Information Architecture</DisTextTitle>
-              <DisImage src="/ainsight/stackholder.jpg" alt="discription" />
+              <DisImage src="/ainsight/information.png" alt="discription" />
               <DisText style={{ marginTop: ".5rem" }}>
-                我們列出所有與產品相關的利害關係人，從直接到間接，並根據「主要決策者」、「重要影響者」、「產品使用者」這三個標籤進行分類。接著，依此分類羅列出具體的訪談名單，以確保能全面了解各個利害關係人日常的任務以及對產品的需求與期望。
+                在產品功能發想階段，我們透過功能地圖和資料結構來探索與規劃系統。系統模組化設計的導入，使其能夠靈活適應企業不同部門的需求和職責分工。最終，產品架構被劃分為四大核心功能和五個主要模組。
               </DisText>
               <DisText>
-                We listed all stakeholders related to the product, from direct
-                to indirect, and categorized them using three labels: "Decision
-                Maker," "Heavy Influencer," and "Product User." Based on these
-                categories, we compiled a specific interview list to ensure a
-                comprehensive understanding of each stakeholder's daily tasks
-                and their needs and expectations for the product.
+                During the product ideation phase, we explored and planned the
+                system through a functional map and data structure. The
+                introduction of a modular design allows the system to flexibly
+                adapt to the needs and responsibilities of different departments
+                within the company. Ultimately, the product architecture was
+                divided into four core functions and five main modules.
               </DisText>
+              <DisImage
+                src="/ainsight/function.png"
+                alt="discription"
+                style={{ border: "none", borderRadius: "0px" }}
+              />
               <DisText style={{ marginTop: ".5rem" }}>
-                接著，我們將受訪者依其背景和職業初步分為兩大類——「非財務背景用戶（例：中小企業主）」與「財會相關專業用戶（例：會計事務所、記帳士等）」。針對這兩類用戶分別設計適合的訪綱、進行用戶訪談。這樣的方式帶領我們從兩個不同角度去了解記帳與財務對於公司與政府法規的關係，進而拓展到產品使用目的及需求。
+                接著，我們針對各模組的使用情境繪製了用戶流程圖，確保系統能簡化傳統ERP的繁瑣流程，讓用戶在每個操作階段都清楚了解下一步的行動，提升操作體驗的流暢度。
               </DisText>
               <DisText>
-                Next, we categorized the interviewees into two main groups based
-                on their backgrounds and professions: "non-financial users"
-                (e.g., small business owners) and "financial professionals"
-                (e.g., accounting firms, bookkeepers). We created tailored
-                interview guides for these two groups and conducted user
-                interviews. This approach allowed us to explore accounting and
-                financial regulations from two distinct perspectives, broadening
-                our understanding of the product’s use cases and the specific
-                needs of users in different sectors.
+                Next, we mapped out user flows based on different module usage
+                scenarios, ensuring that the system simplifies the traditional
+                ERP's complex processes. This approach helps users clearly
+                understand what steps to take at each stage of operation,
+                improving the overall ease of use and user experience.
+              </DisText>
+              <DisTextTitle style={{ marginTop: ".5rem" }}>
+                User Flows
+              </DisTextTitle>
+              <span
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  color: "#B6B6B6",
+                  fontSize: ".8rem",
+                }}
+              >
+                ＊以財務模組為例
+              </span>
+              <DisImage
+                src="/ainsight/user-flow.png"
+                alt="discription"
+                style={{ border: "none" }}
+              />
+            </TextWrapperContainer>
+          </DiscriptionWrapper>
+
+          <Divider
+            margin="4rem"
+            style={{ borderTop: "1px solid #65E8FD", width: "70%" }}
+          />
+
+          <DiscriptionWrapper>
+            <ContentTextLarge style={{ border: "none" }}>
+              Design execution —
+              <br />
+              <span
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  color: "#B6B6B6",
+                  fontWeight: "bold",
+                  fontSize: ".8rem",
+                }}
+              >
+                ＊部分與商業機密相關的內容無法公開揭露
+              </span>
+            </ContentTextLarge>
+            <TextWrapperContainer>
+              <DisTextTitle>Design System</DisTextTitle>
+              <DisImage
+                src="/ainsight/design sysem.png"
+                alt="discription"
+                style={{ border: "none" }}
+              />
+              <DisImage
+                src="/ainsight/atomic.png"
+                alt="discription"
+                style={{ border: "none" }}
+              />
+              <DisText style={{ marginTop: ".5rem" }}>
+                我們導入原子設計（Atomic
+                Design）概念，將設計系統化，建立分層、有結構和計畫性的介面系統，並發展成一套可重複利用的元件系統（Component
+                System），在 Notion 上打造了專屬於 AInsight⁺的 UI 設計系統
+                Wiki，從設計系統的定義與使用規範，到交付給前端工程師的協作流程，提供了清晰的標準，大大提高了產品開發效率。
+              </DisText>
+              <DisText>
+                We implemented the Atomic Design concept to systematize our
+                design process, establishing a layered, structured, and
+                well-planned interface system. This evolved into a reusable
+                component system. We also built a dedicated UI_Design System
+                Wiki on Notion, covering everything from design system
+                definitions and usage guidelines to the collaboration process
+                with frontend engineers. This clear set of standards has greatly
+                improved the efficiency of our product development.
+              </DisText>
+              <DisTextTitle>Design System Wiki</DisTextTitle>
+              <DisImage
+                src="/ainsight/wiki.png"
+                alt="discription"
+                style={{ border: "none" }}
+              />
+              <DisTextTitle>A/B Testing</DisTextTitle>
+              <span
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  color: "#B6B6B6",
+                  fontSize: ".8rem",
+                }}
+              >
+                ＊總覽頁面目標：重要、關鍵的資訊可以被快速查看
+              </span>
+              <DisImage
+                src="/ainsight/ab.png"
+                alt="discription"
+                style={{ border: "none" }}
+              />
+              <DisText style={{ marginTop: ".5rem" }}>
+                在部分頁面設計中，我們針對頁面的核心價值設計了兩種不同的佈局與內容，並與核心用戶進行
+                A/B 版測試。通過用戶反饋，我們調整並最終確定設計方案，確保產品更好地貼合用戶需求。
+              </DisText>
+              <DisText>
+                For certain pages, we design two different layouts and content
+                options based on the core value of the page. We conduct A/B
+                testing with key users, gather feedback, and use it as a
+                reference for the final design to ensure the product better
+                aligns with user needs.
               </DisText>
             </TextWrapperContainer>
           </DiscriptionWrapper>
+        </section>
+
+        <CircleWrapper>
+          <Circle color="#CFE8FF" />
+          <Circle color="#A6CFFF" />
+          <Circle color="#1575E5" />
+          <Circle color="#2B3990" />
+        </CircleWrapper>
+
+        <section>
+          <SectionTitle>Features</SectionTitle>
         </section>
 
         {/* <section>

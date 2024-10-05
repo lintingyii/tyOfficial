@@ -189,11 +189,12 @@ const LargeImageContainer = styled(ImageContainer)`
   flex: 1;
   width: auto;
   margin: 0;
-  max-width: unset;
+  // max-width: unset;
 
   @media (max-width: 820px) {
     width: 100%;
     height: auto;
+    max-width: unset;
   }
 `;
 
@@ -220,7 +221,11 @@ const TitleGroup = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  @media (max-width: 800px) {
+  @media (max-width: 820px) {
+    margin-top: 0.8rem;
+  }
+
+  @media (max-width: 480px) {
     flex-direction: column;
     align-items: unset;
     justify-content: unset;
@@ -229,18 +234,18 @@ const TitleGroup = styled.div`
 `;
 
 const LargeContent = styled.div`
-  height: fit-content;
+  height: 100%;
+  min-height: 240px;
   flex: 1;
   display: flex;
   flex-direction: column;
-  align-items: left;
-  justify-content: space-around;
+  justify-content: space-between;
   padding: 0;
   margin: 0;
   width: 100%;
 
   @media (max-width: 800px) {
-    padding-left: 0;
+    min-height: unset;
   }
 `;
 
@@ -248,6 +253,7 @@ const LargeCardContainer = styled(CardContainer)`
   display: flex;
   flex-direction: row;
   align-items: center;
+  justify-content: space-between;
   padding: 20px;
   max-width: 100%;
   height: fit-content;
