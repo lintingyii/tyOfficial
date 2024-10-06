@@ -882,7 +882,7 @@ const BackButton = styled.button`
   border: none;
   border-radius: 50px;
   cursor: pointer;
-  margin-top: 5rem;
+  margin-top: 8rem;
 
   transition: background-color 0.8s;
 
@@ -2248,6 +2248,117 @@ const AInsight = () => {
             muted
             playsInline
           />
+          <DiscriptionWrapper>
+            <ContentTextLarge style={{ border: "none" }}>
+              Key Achievements —
+              <br />
+              <span
+                style={{
+                  width: "100%",
+                  textAlign: "left",
+                  color: "#B6B6B6",
+                  fontWeight: "bold",
+                  fontSize: ".8rem",
+                }}
+              >
+                ＊部分與商業機密相關的內容無法公開揭露
+              </span>
+            </ContentTextLarge>
+            <TextWrapperContainer>
+              <DisText
+                style={{
+                  color: "#2B3990",
+                  fontWeight: "bold",
+                  fontSize: "1.5rem",
+                }}
+              >
+                To our users
+              </DisText>
+              <DisTextTitle>Simple but Powerful</DisTextTitle>
+              <DisText>
+                我們透過簡化傳統ERP系統中「多功能混雜」帶來的畫面複雜性，並通過直觀的設計引導用戶操作，將繁瑣的流程優化。這種直覺易用的介面，讓用戶能專注於當前任務，大幅提升工作效率。
+              </DisText>
+              <DisText>
+                We simplified the complexity of traditional ERP systems, which
+                often suffer from an overload of features, by creating intuitive
+                design guides that streamline intricate processes. This
+                user-friendly interface allows users to focus on their current
+                tasks, significantly boosting work efficiency.
+              </DisText>
+
+              <DisTextTitle style={{ marginTop: ".5rem" }}>
+                Data Visualization
+              </DisTextTitle>
+              <DisText>
+                我們打造數據導向的產品介面，將資料和分析結果可視化，幫助用戶快速掌握關鍵資訊的變化與趨勢。透過這些即時洞察，企業能更精準地做出決策，提升競爭力和運營效率。
+              </DisText>
+              <DisText>
+                We developed data-driven product interfaces that visualize key
+                data and analytics, enabling users to quickly grasp information
+                trends and changes. With these real-time insights, businesses
+                can make more informed decisions, boosting both competitiveness
+                and operational efficiency.
+              </DisText>
+
+              <DisTextTitle style={{ marginTop: ".5rem" }}>
+                Needs-Based
+              </DisTextTitle>
+              <DisText>
+                透過深入了解並聆聽用戶的需求與目標，我們為其構建了高度貼合的數位工作生態系統，大幅降低數位轉型所帶來的衝擊。這種模式使科技成為簡化問題、提升效率的有力工具，幫助用戶輕鬆過渡至數位化。
+              </DisText>
+              <DisText>
+                By closely understanding and listening to users' needs and
+                goals, we created a tailored digital work ecosystem that
+                significantly reduces the impact of digital transformation. This
+                approach turns technology into a powerful tool for simplifying
+                challenges and improving efficiency, easing the transition to a
+                digitalized workflow.
+              </DisText>
+
+              <Hr style={{ margin: "3rem" }} />
+
+              <DisText
+                style={{
+                  color: "#2B3990",
+                  fontWeight: "bold",
+                  fontSize: "1.5rem",
+                }}
+              >
+                To our teams
+              </DisText>
+              <DisTextTitle>Design Efficiency</DisTextTitle>
+              <DisText>
+                我們在 Notion 上創建了
+                Product_UX&UI_Wiki，為設計團隊提供清晰的架構和指引，確保他們能夠快速理解並遵循
+                AInsight⁺ 的設計框架，從而進行產品的迭代設計。這個 Wiki
+                也為跨團隊、跨部門的協作打下了堅實的溝通基礎，促進了高效的工作流程。
+              </DisText>
+              <DisText>
+                We created a Product_UX&UI_Wiki on Notion to provide the design
+                team with clear structures and guidelines, ensuring they quickly
+                understand and follow the AInsight⁺ framework for iterative
+                product design. This Wiki also establishes a solid communication
+                foundation for cross-team and cross-department collaboration,
+                enhancing workflow efficiency.
+              </DisText>
+
+              <DisTextTitle style={{ marginTop: ".5rem" }}>
+                Develop-Friendly
+              </DisTextTitle>
+              <DisText>
+                作為一名具備前端知識的設計師，我與團隊導入了 Design Tokens
+                的設計概念，將視覺語言與程式語言無縫對接，顯著提高了設計與開發之間的轉換效率。同時，這種做法大幅增強了設計師與開發者之間的溝通，從而讓產品開發流程更加順暢。
+              </DisText>
+              <DisText>
+                As a designer with frontend knowledge, I introduced the Design
+                Tokens concept to our team, seamlessly aligning visual language
+                with programming code. This significantly boosted the efficiency
+                of design-to-development handoffs and enhanced communication
+                between designers and developers, leading to a smoother product
+                development process.
+              </DisText>
+            </TextWrapperContainer>
+          </DiscriptionWrapper>
         </section>
 
         <a
