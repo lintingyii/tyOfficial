@@ -105,6 +105,20 @@ function MyComponent(props) {
     },
     {
       date: "May, 2023",
+      image: "/ainsight/ainsight-main.png",
+      title: "AInsight⁺ - AI-Powered Finance",
+      subtitle: "SaaS product design",
+      description:
+        "Tailored for small and medium-sized businesses, our AI-enhanced financial system optimizes operational efficiency, leaving traditional accounting and bookkeeping behind.",
+      tags: [
+        { name: "UI/UX design", color: "#7D8991" },
+      ],
+      subtags: [{ name: "SaaS", color: "#7D8991" }],
+      link: "/work/AInsight",
+      openInNewTab: false,
+    },
+    {
+      date: "May, 2023",
       image: "/megabank.png",
       title: "Redesign deliverables-Mega Bank",
       subtitle: "User interface and user experience redesign",
@@ -113,21 +127,6 @@ function MyComponent(props) {
       tags: [{ name: "UI/UX design", color: "#7D8991" }],
       subtags: [{ name: "APP", color: "#7D8991" }],
       link: "/work/MegaBank_Redesign",
-      openInNewTab: false,
-    },
-    {
-      date: "September, 2024",
-      image: "/有球必In CaseBoard.jpg",
-      title: "Sports Win",
-      subtitle: "Taipei CodeFest Hackathon - Honorable Mention",
-      description:
-        "A microservice for booking Taipei sports venues, incorporating team-building to maximize venue usage.",
-      tags: [
-        { name: "UI/UX design", color: "#7D8991" },
-        { name: "Frontend coding", color: "#F7883D" },
-      ],
-      subtags: [{ name: "APP", color: "#7D8991" }],
-      link: "/work/sports_win",
       openInNewTab: false,
     },
   ];

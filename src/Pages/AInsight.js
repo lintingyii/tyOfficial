@@ -1220,99 +1220,6 @@ const AInsight = () => {
               </SubInfoContent>
             </SubInfoCard>
           </ImageWrapper>
-
-          {/* <DiscriptionWrapper>
-            <TextWrapperContainer>
-              <DisImage src="/hivebee/old-ui-1.png" alt="discription" />
-              <CardHeader>
-                <ContentText style={{ border: "none" }}>
-                  Challenge 01
-                </ContentText>
-                <DisTextTitle>Outdated design system</DisTextTitle>
-              </CardHeader>
-              <DisText style={{ marginTop: ".5rem" }}>
-                由於開發團隊缺乏 UI/UX
-                設計背景，介面設計相對粗糙、直接且缺乏美感。該工具的「用戶設定流程」過於繁瑣且高度複雜，舊版介面多以表單形式呈現，這讓用戶在面對大量資訊時感到負擔沉重，體驗不佳。
-              </DisText>
-              <DisText>
-                Due to the development team's lack of UI/UX expertise, the
-                interface design was rather rough, straightforward, and visually
-                unappealing. The tool featured a complex and tedious "user setup
-                process," with most of the previous version's interface being
-                heavily form-based. This resulted in users feeling overwhelmed
-                by the excessive information and having a poor overall
-                experience.
-              </DisText>
-            </TextWrapperContainer>
-          </DiscriptionWrapper>
-          <DiscriptionWrapper>
-            <TextWrapperContainer>
-              <DisImage src="/hivebee/old-ui-21.png" alt="discription" />
-              <CardHeader>
-                <ContentText style={{ border: "none" }}>
-                  Challenge 02
-                </ContentText>
-                <DisTextTitle>Chaotic information and hierarchy</DisTextTitle>
-              </CardHeader>
-              <DisText style={{ marginTop: ".5rem" }}>
-                設計上缺乏完善的 UI Kit
-                和設計系統，且未導入可重用元件的概念，導致畫面缺乏一致性，進而使資訊和視覺層級雜亂，降低了排版的清晰度和操作的易用性。
-              </DisText>
-              <DisText>
-                The design lacked a proper UI Kit and design system, with no
-                implementation of reusable components. This resulted in
-                inconsistent visuals and contributed to disorganized information
-                and visual hierarchy, ultimately reducing the clarity of the
-                layout and diminishing overall usability.
-              </DisText>
-            </TextWrapperContainer>
-          </DiscriptionWrapper>
-          <DiscriptionWrapper>
-            <TextWrapperContainer>
-              <DisImage src="/hivebee/old-ui-3.jpg" alt="discription" />
-              <CardHeader>
-                <ContentText style={{ border: "none" }}>
-                  Challenge 03
-                </ContentText>
-                <DisTextTitle>Low usability experience</DisTextTitle>
-              </CardHeader>
-              <DisText style={{ marginTop: ".5rem" }}>
-                除了畫面設計上的問題，不即時的使用回饋也導致用戶在每一個操作階段都感到不知所措。而不夠流暢的用戶流程規劃，進一步降低了用戶的使用意願。
-              </DisText>
-              <DisText>
-                Aside from the issues with the visual design, the lack of
-                real-time user feedback left users feeling uncertain at every
-                stage of interaction. Additionally, the poorly structured user
-                flow further diminished the overall user experience,
-                discouraging continued engagement.
-              </DisText>
-            </TextWrapperContainer>
-          </DiscriptionWrapper>
-          <DiscriptionWrapper>
-            <TextWrapperContainer>
-              <DisImage src="/hivebee/old-ui-4.png" alt="discription" />
-              <CardHeader>
-                <ContentText style={{ border: "none" }}>
-                  Challenge 03
-                </ContentText>
-                <DisTextTitle>Poor responsive design</DisTextTitle>
-              </CardHeader>
-              <DisText style={{ marginTop: ".5rem" }}>
-                我們的產品主要有兩類使用者——直播者與贊助者，對應兩種不同的使用情境：直播者需設置互動內容，贊助者則透過手機或電腦觀看直播並進行打賞，我們的系統則劃分為給直播者使用的「後台」與給贊助者使用的「前台」。原有的前、後台僅針對桌面版進行設計，忽略了用戶跨平台使用的需求。由於直播者通常使用電腦進行設定，而贊助者除了電腦外，多數使用手機觀看直播，這導致系統無法提供良好的響應式操作體驗。
-              </DisText>
-              <DisText>
-                Our product primarily serves two types of users: streamers and
-                sponsors, each corresponding to different use cases. Streamers
-                need to set up interactive content, while sponsors watch live
-                streams and donate via mobile or desktop devices. The system is
-                divided into a "backstage" for streamers and a "frontstage" for
-                sponsors. The original design only catered to desktop versions,
-                neglecting the cross-platform needs of users. Since streamers
-                typically use desktops and sponsors often use mobile devices,
-                the system failed to provide an optimal responsive experience.
-              </DisText>
-            </TextWrapperContainer>
-          </DiscriptionWrapper> */}
         </section>
 
         <CircleWrapper>
@@ -2288,7 +2195,8 @@ const AInsight = () => {
               />
               <DisText style={{ marginTop: ".5rem" }}>
                 在部分頁面設計中，我們針對頁面的核心價值設計了兩種不同的佈局與內容，並與核心用戶進行
-                A/B 版測試。通過用戶反饋，我們調整並最終確定設計方案，確保產品更好地貼合用戶需求。
+                A/B
+                版測試。通過用戶反饋，我們調整並最終確定設計方案，確保產品更好地貼合用戶需求。
               </DisText>
               <DisText>
                 For certain pages, we design two different layouts and content
@@ -2309,241 +2217,31 @@ const AInsight = () => {
         </CircleWrapper>
 
         <section>
-          <SectionTitle>Features</SectionTitle>
-        </section>
-
-        {/* <section>
-          <BlockTitle>Step.1</BlockTitle>
-          <BlockHeader>Functional Map</BlockHeader>
-          <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
-            為了解決產品功能過多導致資訊混亂的問題，我重新規劃了功能和資訊架構，協助團隊釐清產品脈絡，並清楚定義功能模組，分類與組織訊息、優化層級規劃，透過繪製功能地圖，進一步理清了操作流程的細節。
-          </Text>
-          <Text style={{ marginTop: "0rem" }}>
-            To solve the problem of information overload caused by too many
-            product features, I restructured the functionality and information
-            architecture. I helped the team clarify the product’s framework,
-            clearly defined feature modules, categorized and organized
-            information, and optimized the hierarchical structure. By creating a
-            functional map, we refined the operational workflow and details.
-          </Text>
-
+          <SectionTitle style={{ marginBottom: "2rem" }}>Features</SectionTitle>
           <Image
-            src="/hivebee/IA.png"
-            alt="affinity diagram"
-            // width={"80%"}
-            style={{ marginTop: "1rem" }}
+            src="/ainsight/demo-1.png"
+            alt="Kungfu Presentation"
+            style={{
+              borderRadius: "10px",
+            }}
           />
-        </section>
-
-        <Divider
-          margin="4rem"
-          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
-        />
-
-        <section>
-          <BlockTitle>Step.2</BlockTitle>
-          <BlockHeader>User Flow</BlockHeader>
-          <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
-            為了更深入了解並釐清用戶在系統操作上的邏輯與流程，我基於已確立的資訊架構，思考操作邏輯，並繪製用戶流程圖。這些流程圖成為與開發團隊討論的重要工具，幫助我們共同理解各種狀態的運作方式，並作為繪製
-            Wireframe
-            的依據之一，以此確保用戶體驗完善、頁面之間的連結關係清晰，且所有功能需求皆完整。
-          </Text>
-          <Text style={{ marginTop: "0rem" }}>
-            To gain a deeper understanding and clarify the user's logic and flow
-            within the system, I built on the established information
-            architecture and mapped out the operational logic through user flow
-            diagrams. These diagrams became essential tools for discussions with
-            the development team, helping us mutually understand how various
-            states function. They also served as one of the key references for
-            wireframe design, ensuring a seamless user experience, clear
-            page-to-page relationships, and the completeness of all necessary
-            features.
-          </Text>
-
           <Image
-            src="/hivebee/flow.png"
-            alt="affinity diagram"
-            // width={"80%"}
-            style={{ marginTop: "1rem" }}
+            src="/ainsight/demo-2.1.png"
+            alt="Kungfu Presentation"
+            style={{
+              borderRadius: "10px",
+            }}
           />
-        </section>
-
-        <Divider
-          margin="4rem"
-          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
-        />
-
-        <section>
-          <BlockTitle>Step.3</BlockTitle>
-          <BlockHeader>Wireframe & Lo-fi Prototype</BlockHeader>
-          <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
-            將用戶流程圖轉化為具體的視覺設計，先針對各個頁面的基本佈局進行規劃，確定元件的位置與比例，並梳理不同頁面間的關聯與邏輯，Wire-flow
-            幫助我們迅速檢視功能的可行性，並評估開發工作量，同時便於快速進行調整。接著轉換為Lo-fi
-            Prototype，模擬用戶實際操作，確保每個用戶流程都被妥善規劃，以便進行初步內部測試和團隊溝通。
-          </Text>
-          <Text style={{ marginTop: "0rem" }}>
-            The user flow is then transformed into concrete visual design.
-            First, the basic layout of each page is planned, determining the
-            position and proportion of elements, while organizing the
-            connections and logic between pages. Wire-flow helps us quickly
-            assess the feasibility of features and evaluate development
-            workload, allowing for rapid adjustments. Afterward, it's converted
-            into a Lo-fi Prototype, simulating user interactions to ensure every
-            flow is well-planned, facilitating initial internal testing and team
-            communication.
-          </Text>
-
-          <Image
-            src="/hivebee/wireframe.png"
-            alt="affinity diagram"
-            // width={"80%"}
-            style={{ marginTop: "1rem" }}
-          />
-        </section>
-
-        <Divider
-          margin="4rem"
-          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
-        />
-
-        <section>
-          <BlockTitle>Step.4</BlockTitle>
-          <BlockHeader>UI Kit & Design System</BlockHeader>
-          <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
-            我與視覺設計師合作，開發了全新的色彩系統。此次更新引入了淺色與深色模式，並透過調整色彩明度，確保用戶在不同模式下均能享受一致且舒適的視覺體驗。在元件設計中引入圓角元素，使整體介面更具活潑、親和且年輕化的特質。同時，建立了完善的元件系統
-            (Component
-            System)，確保設計與前端開發能高效協作，實現統一且一致的使用體驗。
-          </Text>
-          <Text style={{ marginTop: "0rem" }}>
-            I collaborated with the visual designer to develop a new color
-            system. This update introduced both light and dark modes, ensuring a
-            consistent and comfortable visual experience for users by adjusting
-            brightness levels across modes. We incorporated rounded corners into
-            the component designs, aligning the interface with the product's
-            lively, approachable, and youthful tone. Additionally, we
-            established a comprehensive component system to ensure efficient
-            collaboration between design and frontend development, resulting in
-            a cohesive and consistent user experience.
-          </Text>
-
-          <Image src="/hivebee/color.png" alt="affinity diagram" />
-
-          <LaptopImage
-            src="/hivebee/ui kit.png"
-            alt="affinity diagram"
-            width={"100%"}
-            style={{ marginTop: "0rem" }}
-          />
-
-          <MobileImage
-            src="/hivebee/ui kit-m.png"
-            alt="affinity diagram"
-            style={{ marginTop: "1rem" }}
-          />
-        </section>
-
-        <Divider
-          margin="4rem"
-          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
-        />
-
-        <section>
-          <BlockTitle>Step.5</BlockTitle>
-          <BlockHeader>Responsive Hi-Fi prototype</BlockHeader>
-          <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
-            考量不同用戶在跨平台的使用需求與情境，直播者後台由於需與OBS系統搭配，因此介面設計仍以桌面版為主。而贊助者前台則採用響應式設計，確保粉絲無論透過手機或電腦觀看直播，都能享有與桌面版相同的良好互動體驗，提升贊助操作的靈活便捷性。
-          </Text>
-          <Text style={{ marginTop: "0rem" }}>
-            Considering the cross-platform needs and scenarios of different
-            users, the streamers' backstage interface remains desktop-focused
-            due to its integration with the OBS system. However, the sponsors'
-            frontstage is designed responsively, ensuring that fans can enjoy an
-            equally seamless interaction experience on both mobile and desktop
-            when watching live streams and making donations.
-          </Text>
-
-          <Image src="/hivebee/result-2.png" alt="affinity diagram" />
-        </section>
-
-        <CircleWrapper>
-          <Circle color="#EDDDFF" />
-          <Circle color="#D9B9FF" />
-          <Circle color="#BA87F4" />
-          <Circle color="#C5006C" />
-        </CircleWrapper>
-
-        <section style={{ marginTop: "5rem" }}>
-          <SectionTitle>Key Feature Highlights</SectionTitle>
-          <InfoCard>
-            <InfoContent>
-              <DesignIcon />
-              <HalfTextWrapper style={{ padding: "0px", gap: ".5rem" }}>
-                <DisText>
-                  除了在視覺上進行優化，讓 HiveBee
-                  擁有獨特且符合目標受眾喜好的識別，與競品形成鮮明對比之外，我同樣重視用戶體驗的提升與操作流程的優化，簡化了繁瑣的設置，並融入了一些亮點設計，以增強整體的使用體驗。
-                </DisText>
-                <DisText>
-                  In addition to the visual optimizations that give HiveBee a
-                  distinctive identity tailored to the preferences of our target
-                  audience, setting it apart from competitors, I also focused on
-                  enhancing the user experience and streamlining the workflow,
-                  simplified complex settings and incorporated standout design
-                  elements to elevate the overall user experience.
-                </DisText>
-              </HalfTextWrapper>
-            </InfoContent>
-          </InfoCard>
-        </section>
-
-        <section style={{ marginTop: "4rem" }}>
-          <BlockTitle>Enhancement of User Experience</BlockTitle>
-          <BlockHeader style={{ color: "#EAA700" }}>
-            Feedback and Feedforward
-          </BlockHeader>
-          <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
-            透過文字、圖示、彈跳視窗和狀態說明等方式，有效傳達清晰的 Feedback 和
-            Feedforward。此外，提供「常見問題」頁面，預防並解決用戶在操作過程中的困惑或失誤，從而減少用戶摸索與試錯的時間，大幅提升了產品的易用性。
-          </Text>
-          <Text style={{ marginTop: "0rem" }}>
-            Using text, icons, pop-up windows, and status messages to
-            effectively communicate clear feedback and feedforward. An FAQ
-            section was also provided to proactively address and resolve any
-            user difficulties or errors during operation, reducing the time
-            spent on trial and error and significantly enhancing the product’s
-            usability.
-          </Text>
-          <Image
-            src="/hivebee/feature-1.png"
-            alt="affinity diagram"
-            // width={"80%"}
-            style={{ marginTop: "1rem" }}
-          />
-        </section>
-
-        <Divider
-          margin="4rem"
-          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
-        />
-
-        <section style={{ marginTop: "4rem" }}>
-          <BlockTitle>Innovation in User Interface</BlockTitle>
-          <BlockHeader style={{ color: "#EAA700" }}>
-            Light and Dark Mode
-          </BlockHeader>
-          <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
-            據統計，有 85% 的用戶偏好深色模式，因此我設計了 Light-mode 和
-            Dark-mode
-            兩種模式，以滿足不同用戶的喜好。兩種模式下的色彩與文字對比都經過精心調整，既確保了高可讀性，也融入了設計的巧思。
-          </Text>
-          <Text style={{ marginTop: "0rem" }}>
-            According to statistics, 85% of users prefer dark mode, so I
-            designed both Light-mode and Dark-mode to cater to different user
-            preferences. The color and text contrast in both modes have been
-            carefully adjusted to ensure high readability while incorporating
-            thoughtful design elements.
-          </Text>
           <Video
-            src="/hivebee/mode.mov"
+            src="/ainsight/demo-3.mov"
+            alt="Kungfu Presentation"
+            autoPlay
+            loop
+            muted
+            playsInline
+          />
+          <Video
+            src="/ainsight/demo-4.mov"
             alt="Kungfu Presentation"
             autoPlay
             loop
@@ -2551,67 +2249,6 @@ const AInsight = () => {
             playsInline
           />
         </section>
-
-        <Divider
-          margin="4rem"
-          style={{ borderTop: "1px solid #F6D671", width: "70%" }}
-        />
-
-        <section style={{ marginTop: "4rem" }}>
-          <BlockTitle>Key Functions</BlockTitle>
-          <BlockHeader style={{ color: "#EAA700" }}>
-            Interaction Boxes
-          </BlockHeader>
-          <Text style={{ marginTop: "2rem", marginBottom: ".8rem" }}>
-            有別於舊版將所有互動內容集中在同一頁面，我重新設計了互動遊戲箱與互動工具箱，將直播遊戲與直播畫面的互動效果分開處理，讓直播主能依據不同情境進行獨立設定。此外，還新增了預覽動畫，讓用戶能快速掌握設定效果。
-          </Text>
-          <Text style={{ marginTop: "0rem" }}>
-            Unlike the previous version, which consolidated all interactive
-            content on a single page, I redesigned the Interactive Game Box and
-            Interactive Toolbox to separate the interactive effects of live
-            games from the live broadcast interface. This allows streamers to
-            make individual settings based on different scenarios. Additionally,
-            I introduced a preview animation feature to help users quickly
-            understand the effects of their settings.
-          </Text>
-          <Video
-            src="/hivebee/box.mov"
-            alt="Kungfu Presentation"
-            width="100%"
-            autoPlay
-            loop
-            muted
-            playsInline
-          />
-        </section>
-
-        <Hr />
-
-        <section style={{ marginTop: "5rem" }}>
-          <SectionTitle>Design Achievements</SectionTitle>
-          <InfoCard>
-            <InfoContent>
-              <WinIcon />
-              <HalfTextWrapper style={{ padding: "0px", gap: ".5rem" }}>
-                <DisText>
-                  全新改版的HiveBee在易用性測試和用戶訪談後獲得了正面的反饋，顯著提升了新舊用戶的使用意願，使產品逐漸在直播市場中佔有一席之地。
-                </DisText>
-                <DisText>
-                  The revamped HiveBee received positive feedback following
-                  usability testing and user interviews, significantly enhancing
-                  the willingness of both new and existing users to engage with
-                  the product, and gradually establishing its presence in the
-                  live streaming market.
-                </DisText>
-              </HalfTextWrapper>
-            </InfoContent>
-          </InfoCard>
-          <ImageWrapper>
-            <ContentImage src="/hivebee/result-1.png" alt="research" />
-            <ContentImage src="/hivebee/result-2.png" alt="research" />
-            <ContentImage src="/hivebee/result-3.png" alt="research" />
-          </ImageWrapper>
-        </section> */}
 
         <a
           href="/work"
