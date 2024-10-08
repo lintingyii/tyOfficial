@@ -2073,7 +2073,7 @@ const AInsight = () => {
               </span>
             </ContentTextLarge>
             <TextWrapperContainer>
-              <DisTextTitle>Information Architecture</DisTextTitle>
+              <DisTextTitle>Functional Map</DisTextTitle>
               <DisImage src="/ainsight/information.png" alt="discription" />
               <DisText style={{ marginTop: ".5rem" }}>
                 在產品功能發想階段，我們透過功能地圖和資料結構來探索與規劃系統。系統模組化設計的導入，使其能夠靈活適應企業不同部門的需求和職責分工。最終，產品架構被劃分為四大核心功能和五個主要模組。
