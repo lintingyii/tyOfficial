@@ -812,7 +812,7 @@ const AB = styled.div`
   background-color: #f9f9f9;
   border: 1px solid rgba(166, 207, 255, 0.5);
   border-radius: 12px;
-  color: #B6B6B6;
+  // color: #B6B6B6;
 
   @media (max-width: 880px) {
     width: 90%;
