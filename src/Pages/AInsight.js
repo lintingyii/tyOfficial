@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import ModalImage from "react-modal-image";
 
 const Container = styled.div`
   text-align: center;
@@ -87,6 +88,11 @@ const HalfImage = styled.img`
 
 const DisImage = styled.img`
   width: ${(props) => props.width || "100%"};
+  border-radius: 10px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+`;
+
+const StyledModalImage = styled(ModalImage)`
   border-radius: 10px;
   border: 1px solid rgba(0, 0, 0, 0.1);
 `;
@@ -781,6 +787,33 @@ const ContentWrapper = styled.div`
   }
 `;
 
+const ContentWrapperAB = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: .5rem;
+  padding: 0;
+  gap: 1rem;
+  box-sizing: border-box;
+
+  @media (max-width: 880px) {
+    width: 100%;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+const AB = styled.div`
+  width: 50%;
+
+  @media (max-width: 880px) {
+    width: 90%;
+  }
+`;
+
 const HalfWrapper = styled.div`
   display: flex;
   width: 70%;
@@ -834,7 +867,7 @@ const DiscriptionWrapper = styled.div`
   justify-content: center;
   align-items: stretch;
   gap: 4rem;
-  width: 70%;
+  width: 80%;
   margin: 0 auto;
   margin-top: 5rem;
 
@@ -1028,7 +1061,7 @@ const AInsight = () => {
           <SectionTitle>Background & Goal</SectionTitle>
           <Text>
             未來巢是間專注於幫助中小企業進行數位轉型的新創公司。我們發現，對於小規模的公司來說，處理瑣碎的財務、會計等流程需要額外花大量人事及時間成本，而傳統龐大、複雜且高額的ERP系統導入對中小企業來說實施成本高，是個不小的負擔。
-            因此，我們團隊致力於開發一款專為中小企業打造的、由AI賦能的輕量化ERP財務管理系統，讓企業主可以專注在自己的核心業務，不再受制於繁瑣的財務工作。
+            因此，我們團隊致力於開發一款專為中小企業打造的、由AI賦能的輕量化ERP財務管理系統，讓用戶可以擺脫傳統ERP系統操作使用上的壓迫感，以高效的速度、較低的使用門檻解決企業財會問題、優化決策過程。
           </Text>
           <SpecialText>重新定義中小企業的經營管理體驗，</SpecialText>
           <SpecialText>透過AI強化財務系統最佳化營運效率。</SpecialText>
@@ -1040,9 +1073,10 @@ const AInsight = () => {
             systems are often too large, complex, and expensive for these
             businesses to implement. Therefore, our team is dedicated to
             developing an AI-powered, lightweight ERP financial management
-            system specifically designed for small businesses, allowing owners
-            to focus on their core operations without being bogged down by
-            tedious financial processes.
+            system specifically designed for small businesses, Allow users to
+            overcome the oppressive feeling of operating traditional ERP
+            systems, efficiently resolving financial and accounting issues and
+            optimizing the decision-making process with lower usage thresholds.
           </Text>
           <SpecialText>
             Optimizing SME operations with AI-powered financial systems.
@@ -1250,29 +1284,33 @@ const AInsight = () => {
               <DisTextTitle>Stakeholder map</DisTextTitle>
               <DisImage src="/ainsight/stackholder.jpg" alt="discription" />
               <DisText style={{ marginTop: ".5rem" }}>
-                我們列出所有與產品相關的利害關係人，從直接到間接，並根據「主要決策者」、「重要影響者」、「產品使用者」這三個標籤進行分類。接著，依此分類羅列出具體的訪談名單，以確保能全面了解各個利害關係人日常的任務以及對產品的需求與期望。
+                我列出與產品相關的利害關係人，從直接到間接，並根據「主要決策者」、「重要影響者」、「產品使用者」這三個標籤進行分類。接著，依此分類羅列出具體的訪談名單，以確保能全面了解各個利害關係人日常的任務以及對產品的需求與期望。
               </DisText>
               <DisText>
-                We listed all stakeholders related to the product, from direct
-                to indirect, and categorized them using three labels: "Decision
+                I listed all stakeholders related to the product, from direct to
+                indirect, and categorized them using three labels: "Decision
                 Maker," "Heavy Influencer," and "Product User." Based on these
                 categories, we compiled a specific interview list to ensure a
                 comprehensive understanding of each stakeholder's daily tasks
                 and their needs and expectations for the product.
               </DisText>
+              <DisTextTitle style={{ marginTop: ".5rem" }}>
+                Interview outline
+              </DisTextTitle>
+              <DisImage src="/ainsight/interview.png" alt="discription" />
               <DisText style={{ marginTop: ".5rem" }}>
-                接著，我們將受訪者依其背景和職業初步分為兩大類——「非財務背景用戶（例：中小企業主）」與「財會相關專業用戶（例：會計事務所、記帳士等）」。針對這兩類用戶分別設計適合的訪綱、進行用戶訪談。這樣的方式帶領我們從兩個不同角度去了解記帳與財務對於公司與政府法規的關係，進而拓展到產品使用目的及需求。
+                接著，我與團隊將受訪者依其背景和職業初步分為兩大類——「非財務背景用戶（例：中小企業主）」與「財會相關專業用戶（例：會計事務所、記帳士等）」。針對這兩類用戶分別設計適合的訪綱、進行用戶訪談。這樣的方式帶領我從兩個不同角度去了解記帳與財務對於公司與政府法規的關係，進而拓展到產品使用目的及需求。
               </DisText>
               <DisText>
-                Next, we categorized the interviewees into two main groups based
-                on their backgrounds and professions: "non-financial users"
-                (e.g., small business owners) and "financial professionals"
-                (e.g., accounting firms, bookkeepers). We created tailored
-                interview guides for these two groups and conducted user
-                interviews. This approach allowed us to explore accounting and
-                financial regulations from two distinct perspectives, broadening
-                our understanding of the product’s use cases and the specific
-                needs of users in different sectors.
+                Together with my team, we categorized the interviewees into two
+                main groups based on their backgrounds and professions:
+                "non-financial users" (e.g., small business owners) and
+                "financial professionals" (e.g., accounting firms, bookkeepers).
+                We created tailored interview guides for these two groups and
+                conducted user interviews. This approach allowed me to explore
+                accounting and financial regulations from two distinct
+                perspectives, broadening our understanding of the product’s use
+                cases and the specific needs of users in different sectors.
               </DisText>
             </TextWrapperContainer>
           </DiscriptionWrapper>
@@ -1314,21 +1352,48 @@ const AInsight = () => {
                 opportunities to optimize our product by developing features and
                 services that effectively address these issues.
               </DisText>
+              <DisImage
+                style={{ marginTop: ".5rem" }}
+                src="/ainsight/task.png"
+                alt="discription"
+              />
+              <DisText style={{ marginTop: ".5rem" }}>
+                透過用戶訪查與價值主張分析，團隊發現中小企業中常見的現象是，財務工作不一定由具備專業背景的專家處理。實際上，許多情況下是由公司老闆或隨便的一名員工來負責。這樣的情況不僅增加了負責人的壓力，還因缺乏專業知識而導致工作效率低下。
+              </DisText>
+              <DisText>
+                Through user interviews and value proposition analysis, the team
+                discovered a common phenomenon in small and medium-sized
+                enterprises: financial tasks are not necessarily handled by
+                experts with a financial background. In many cases, these
+                responsibilities fall on the company owner or an arbitrary
+                employee. This situation not only increases the pressure on the
+                responsible party but also leads to decreased efficiency due to
+                a lack of expertise.
+              </DisText>
               <DisTextTitle style={{ marginTop: "1rem" }}>Persona</DisTextTitle>
+              {/* <StyledModalImage
+                small="/ainsight/Persona-1.jpg" // 小圖的 URL
+                medium="/ainsight/Persona-1.jpg" // 大圖的 URL
+                // alt="description"
+                hideDownload={true} // 隱藏下載按鈕
+                imageBackgroundColor="#000fff" // 背景色
+                children={
+                  <DisImage src="/ainsight/Persona-1.jpg" alt="description" style={{ width: "60%" }}/>
+                } // 使用 DisImage 作為子組件
+              /> */}
               <DisImage src="/ainsight/Persona-1.jpg" alt="discription" />
               <DisImage src="/ainsight/Persona-2.jpg" alt="discription" />
               <DisText style={{ marginTop: ".5rem" }}>
-                我們根據利害關係人地圖中的直接利害關係人進行了一系列用戶調查，確認了兩個核心用戶群體——「中小企業主」與「公司財務主管」。通過分析他們的日常任務和目標，我們擬定了用戶故事
-                (User Story)，並設計了使用者畫像
-                (Persona)，以幫助團隊更加聚焦於用戶需求。
+                在一系列用戶調查後，團隊確認了兩個核心用戶群體——「中小企業主」與「公司財務主管」。通過分析他們的日常任務和目標，我設計了使用者畫像
+                (Persona)，並擬定了用戶故事 (User
+                Story)，以幫助團隊更加聚焦於用戶需求。
               </DisText>
               <DisText>
-                Based on the direct stakeholders identified in our stakeholder
-                map, we conducted a series of user research studies and
+                After conducting a series of user research studies, we
                 identified two core user groups: "small business owners" and
                 "corporate finance managers." By analyzing their daily tasks and
-                goals, we developed user stories and created personas to help
-                the team stay focused on user needs.
+                goals, I developed personas and created user stories to help the
+                team stay focused on user needs.
               </DisText>
             </TextWrapperContainer>
           </DiscriptionWrapper>
@@ -2028,17 +2093,17 @@ const AInsight = () => {
                 </SubInfoCardLarge>
               </DiscriptionWrapperSmall>
               <DisText style={{ marginTop: ".5rem" }}>
-                此外，我們透過用戶路線圖（User
-                Roadmap）深入探討用戶在未來與產品的長期互動，重點在於產品發展、功能實現與用戶需求的長期願景結合。我們分析了用戶從實際場景如何與系統銜接，進而回到實際應用中，實現預期效益。
+                此外，我透過用戶路線圖（User
+                Roadmap）與團隊深入探討用戶在未來與產品的長期互動，重點在於產品發展、功能實現與用戶需求的長期願景結合。我們分析並規劃了用戶從實際場景如何與系統銜接，進而回到實際應用中，實現預期效益。
               </DisText>
               <DisText>
-                Additionally, through the User Roadmap, we conducted an in-depth
+                Additionally, through the User Roadmap, I conducted an in-depth
                 analysis of how users will interact with the product over the
                 long term. This roadmap focuses on the future development,
                 goals, and feature implementation aligned with users' long-term
-                needs. We examined how users transition from real-world contexts
-                to integrating our system, and how it returns to practical
-                application to achieve desired outcomes.
+                needs. Our team examined how users transition from real-world
+                contexts to integrating our system, and how it returns to
+                practical application to achieve desired outcomes.
               </DisText>
               <DisTextTitle style={{ marginTop: ".5rem" }}>
                 User roadmap
@@ -2076,10 +2141,10 @@ const AInsight = () => {
               <DisTextTitle>Functional Map</DisTextTitle>
               <DisImage src="/ainsight/information.png" alt="discription" />
               <DisText style={{ marginTop: ".5rem" }}>
-                在產品功能發想階段，我們透過功能地圖和資料結構來探索與規劃系統。系統模組化設計的導入，使其能夠靈活適應企業不同部門的需求和職責分工。最終，產品架構被劃分為四大核心功能和五個主要模組。
+                在產品功能發想階段，我透過功能地圖和資料結構來探索與規劃系統。系統模組化設計的導入，使其能夠靈活適應企業不同部門的需求和職責分工。最終，產品架構被劃分為四大核心功能和五個主要模組。
               </DisText>
               <DisText>
-                During the product ideation phase, we explored and planned the
+                During the product ideation phase, I explored and planned the
                 system through a functional map and data structure. The
                 introduction of a modular design allows the system to flexibly
                 adapt to the needs and responsibilities of different departments
@@ -2092,10 +2157,10 @@ const AInsight = () => {
                 style={{ border: "none", borderRadius: "0px" }}
               />
               <DisText style={{ marginTop: ".5rem" }}>
-                接著，我們針對各模組的使用情境繪製了用戶流程圖，確保系統能簡化傳統ERP的繁瑣流程，讓用戶在每個操作階段都清楚了解下一步的行動，提升操作體驗的流暢度。
+                接著，我針對各模組的使用情境繪製了用戶流程圖，確保系統能簡化傳統ERP的繁瑣流程，讓用戶在每個操作階段都清楚了解下一步的行動，提升操作體驗的流暢度。
               </DisText>
               <DisText>
-                Next, we mapped out user flows based on different module usage
+                Next, I mapped out user flows based on different module usage
                 scenarios, ensuring that the system simplifies the traditional
                 ERP's complex processes. This approach helps users clearly
                 understand what steps to take at each stage of operation,
@@ -2156,28 +2221,49 @@ const AInsight = () => {
                 style={{ border: "none" }}
               />
               <DisText style={{ marginTop: ".5rem" }}>
-                我們導入原子設計（Atomic
-                Design）概念，將設計系統化，建立分層、有結構和計畫性的介面系統，並發展成一套可重複利用的元件系統（Component
-                System），在 Notion 上打造了專屬於 AInsight⁺的 UI 設計系統
-                Wiki，從設計系統的定義與使用規範，到交付給前端工程師的協作流程，提供了清晰的標準，大大提高了產品開發效率。
+                相較於傳統設計系統過於集中、著重於成品或較大組件的特點，我們導入了原子設計（Atomic
+                Design）的概念，將設計系統化，建立了一套分層、強調結構與計畫性的介面系統，便於日後維護和擴展。此系統發展為可重複利用的元件系統（Component
+                System），並在 Notion 上打造了專屬於 AInsight⁺ 的 UI 設計系統
+                Wiki，涵蓋了設計系統的定義與使用規範，以及交付給前端工程師的協作流程，提供清晰標準，大幅提升產品開發效率。
               </DisText>
               <DisText>
-                We implemented the Atomic Design concept to systematize our
-                design process, establishing a layered, structured, and
-                well-planned interface system. This evolved into a reusable
-                component system. We also built a dedicated UI_Design System
-                Wiki on Notion, covering everything from design system
-                definitions and usage guidelines to the collaboration process
-                with frontend engineers. This clear set of standards has greatly
-                improved the efficiency of our product development.
+                Compared to traditional design systems that tend to be overly
+                centralized and focused on larger components, we adopted the
+                concept of Atomic Design to systematize our design process. This
+                approach established a layered, structured, and planned
+                interface system that facilitates future maintenance and
+                expansion. This system evolved into a reusable component system,
+                and we created a dedicated UI design system wiki for AInsight⁺
+                in Notion. It covers the definitions and usage guidelines of the
+                design system, as well as collaboration processes for frontend
+                engineers, providing clear standards and significantly improving
+                product development efficiency.
               </DisText>
-              <DisTextTitle>Design System Wiki</DisTextTitle>
+              <DisTextTitle style={{ marginTop: ".5rem" }}>
+                Design System Wiki
+              </DisTextTitle>
               <DisImage
                 src="/ainsight/wiki.png"
                 alt="discription"
                 style={{ border: "none" }}
               />
-              <DisTextTitle>A/B Testing</DisTextTitle>
+              <DisText style={{ marginTop: ".5rem" }}>
+                在進行畫面設計階段，當我無法確定哪種資訊呈現方式對用戶最具效益時，我會基於頁面的核心價值設計兩種不同的佈局和內容進行對比，並透過核心用戶進行
+                A/B
+                測試。根據用戶反饋，進行反覆調整，最終確定最佳設計方案，確保產品能更準確地滿足用戶需求。
+              </DisText>
+              <DisText>
+                During the interface design phase, when uncertain about which
+                information layout would be most effective for users, I create
+                two different layouts and content variations based on the core
+                value of the page. These versions are then tested with key users
+                through A/B testing. By collecting and analyzing user feedback,
+                I iteratively refine and finalize the design, ensuring the
+                product aligns more closely with user needs and expectations.
+              </DisText>
+              <DisTextTitle style={{ marginTop: ".5rem" }}>
+                A/B Testing
+              </DisTextTitle>
               <span
                 style={{
                   width: "100%",
@@ -2193,17 +2279,95 @@ const AInsight = () => {
                 alt="discription"
                 style={{ border: "none" }}
               />
-              <DisText style={{ marginTop: ".5rem" }}>
-                在部分頁面設計中，我們針對頁面的核心價值設計了兩種不同的佈局與內容，並與核心用戶進行
-                A/B
-                版測試。通過用戶反饋，我們調整並最終確定設計方案，確保產品更好地貼合用戶需求。
-              </DisText>
               <DisText>
-                For certain pages, we design two different layouts and content
-                options based on the core value of the page. We conduct A/B
-                testing with key users, gather feedback, and use it as a
-                reference for the final design to ensure the product better
-                aligns with user needs.
+                <p>
+                  以「總覽」頁面為例，針對用戶「快速瀏覽關鍵資訊」的需求，我設計了兩種不同的界面方案，並與用戶和開發團隊共同討論，以確保介面能有效滿足用戶需求並符合技術可行性。
+                </p>
+                <p>
+                  Using the "Overview" page as an example, to address the user’s
+                  primary need for "quickly viewing essential information," I
+                  designed two different interface options and discussed them
+                  with both users and the development team. This collaborative
+                  approach ensures that the interface ef
+                </p>
+                <ContentWrapperAB
+                >
+                  <AB
+                    style={{
+                      marginTop: ".5rem",
+                      padding: "20px",
+                      border: "1px solid rgba(0, 0, 0, 0.1)",
+                      borderRadius: "12px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "#2B3990",
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      Version A：
+                    </span>
+                    <p style={{ margin: ".5rem" }}>
+                      •
+                      將「待辦提醒」收在頂端導航欄中，讓畫面專注在呈現各項指標與數據，並提供搜尋欄功能。
+                    </p>
+                    <p style={{ margin: ".5rem" }}>
+                      • Move the 'To-do Reminders' to the top navigation bar,
+                      allowing the screen to focus on displaying key metrics and
+                      data. Additionally, include a search bar feature for
+                      enhanced usability.
+                    </p>
+                    <Divider
+                      style={{ marginTop: ".8rem", marginBottom: ".8rem" }}
+                    />
+                    <p style={{ margin: ".5rem" }}>
+                      • 提供以「日」為單位的日期篩選功能
+                    </p>
+                    <p style={{ margin: ".5rem" }}>
+                      • Provide a time picker function based on the 'day' unit.
+                    </p>
+                  </AB>
+                  <AB
+                    style={{
+                      marginTop: ".5rem",
+                      padding: "20px",
+                      border: "1px solid rgba(0, 0, 0, 0.1)",
+                      borderRadius: "12px",
+                    }}
+                  >
+                    <span
+                      style={{
+                        color: "#2B3990",
+                        fontWeight: "bold",
+                        display: "flex",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      Version B：
+                    </span>
+                    <p style={{ margin: ".5rem" }}>
+                      •
+                      將「待辦提醒」以區塊形式固定在總覽畫面上，讓用戶可以釘選各項目，並快速點擊連結查看項目進度頁面。
+                    </p>
+                    <p style={{ margin: ".5rem" }}>
+                      • Set the 'To-Do Reminders' as a block on the overview
+                      page, allowing users to pin tasks and quickly click links
+                      to view the task progress page.
+                    </p>
+                    <Divider
+                      style={{ marginTop: ".8rem", marginBottom: ".8rem" }}
+                    />
+                    <p style={{ margin: ".5rem" }}>
+                      • 提供以「月」為單位的日期篩選功能，以及讓用戶可以下載總覽表單。
+                    </p>
+                    <p style={{ margin: ".5rem" }}>
+                      • Provide a time picker function based on the 'month' unit and allow users to download the overview form.
+                    </p>
+                  </AB>
+                </ContentWrapperAB>
               </DisText>
             </TextWrapperContainer>
           </DiscriptionWrapper>

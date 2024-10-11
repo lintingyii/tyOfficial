@@ -39,7 +39,7 @@ const Container = styled.div`
   top: 0px;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 9999;
+  z-index: 9998;
   justify-content: space-between;
   display: flex;
   width: 100%;
