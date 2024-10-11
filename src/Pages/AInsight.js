@@ -408,7 +408,6 @@ const SubInfoCardLarge = styled.div`
   padding: 24px;
   width: 100%;
   background-color: #f9f9f9;
-  // box-shadow: 0px 3px 12px 0px rgba(21, 19, 99, 0.06);
   border: 1px solid rgba(166, 207, 255, 0.5);
   border-radius: 12px;
   box-sizing: border-box;
@@ -792,7 +791,7 @@ const ContentWrapperAB = styled.div`
   width: 100%;
   justify-content: space-between;
   margin: 0 auto;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   padding: 0;
   gap: 1rem;
   box-sizing: border-box;
@@ -808,6 +807,12 @@ const ContentWrapperAB = styled.div`
 
 const AB = styled.div`
   width: 50%;
+  margin-top: 0.5rem;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border: 1px solid rgba(166, 207, 255, 0.5);
+  border-radius: 12px;
+  color: #B6B6B6;
 
   @media (max-width: 880px) {
     width: 90%;
@@ -2141,15 +2146,20 @@ const AInsight = () => {
               <DisTextTitle>Functional Map</DisTextTitle>
               <DisImage src="/ainsight/information.png" alt="discription" />
               <DisText style={{ marginTop: ".5rem" }}>
-                在產品功能發想階段，我透過功能地圖和資料結構來探索與規劃系統。系統模組化設計的導入，使其能夠靈活適應企業不同部門的需求和職責分工。最終，產品架構被劃分為四大核心功能和五個主要模組。
+                在產品功能構思階段，我透過功能地圖和資料結構來探索和規劃系統。引入模組化設計使
+                AInsight⁺
+                能夠靈活適應企業不同部門的需求與分工。最終，系統架構被分為四大核心功能和五個主要模組。我們設計的核心功能旨在滿足用戶對「效率」、「便利」和「易用性」的主要需求，並透過五大模組進一步為產品增值。
               </DisText>
               <DisText>
-                During the product ideation phase, I explored and planned the
-                system through a functional map and data structure. The
-                introduction of a modular design allows the system to flexibly
-                adapt to the needs and responsibilities of different departments
-                within the company. Ultimately, the product architecture was
-                divided into four core functions and five main modules.
+                During the product ideation phase, I utilized feature mapping
+                and data structures to explore and design the system. By
+                introducing modular design, AInsight⁺ became highly adaptable to
+                the diverse needs and workflows of various departments. In the
+                end, the system architecture was divided into four core
+                functions and five main modules. The core functions were
+                designed to meet users' primary needs for "efficiency,"
+                "convenience," and "ease of use," while the five modules added
+                further value to the product.
               </DisText>
               <DisImage
                 src="/ainsight/function.png"
@@ -2215,11 +2225,11 @@ const AInsight = () => {
                 alt="discription"
                 style={{ border: "none" }}
               />
-              <DisImage
+              {/* <DisImage
                 src="/ainsight/atomic.png"
                 alt="discription"
                 style={{ border: "none" }}
-              />
+              /> */}
               <DisText style={{ marginTop: ".5rem" }}>
                 相較於傳統設計系統過於集中、著重於成品或較大組件的特點，我們導入了原子設計（Atomic
                 Design）的概念，將設計系統化，建立了一套分層、強調結構與計畫性的介面系統，便於日後維護和擴展。此系統發展為可重複利用的元件系統（Component
@@ -2281,25 +2291,17 @@ const AInsight = () => {
               />
               <DisText>
                 <p>
-                  以「總覽」頁面為例，針對用戶「快速瀏覽關鍵資訊」的需求，我設計了兩種不同的界面方案，並與用戶和開發團隊共同討論，以確保介面能有效滿足用戶需求並符合技術可行性。
+                  以「總覽」頁面為例，針對用戶「瀏覽關鍵資訊」的需求，我設計了兩種不同的界面方案，並與用戶和開發團隊共同討論，以確保介面能有效滿足用戶需求並符合技術可行性。
                 </p>
                 <p>
                   Using the "Overview" page as an example, to address the user’s
-                  primary need for "quickly viewing essential information," I
-                  designed two different interface options and discussed them
-                  with both users and the development team. This collaborative
-                  approach ensures that the interface ef
+                  primary need for "viewing essential information," I designed
+                  two different interface options and discussed them with both
+                  users and the development team. This collaborative approach
+                  ensures that the interface ef
                 </p>
-                <ContentWrapperAB
-                >
-                  <AB
-                    style={{
-                      marginTop: ".5rem",
-                      padding: "20px",
-                      border: "1px solid rgba(0, 0, 0, 0.1)",
-                      borderRadius: "12px",
-                    }}
-                  >
+                <ContentWrapperAB>
+                  <AB>
                     <span
                       style={{
                         color: "#2B3990",
@@ -2321,7 +2323,7 @@ const AInsight = () => {
                       enhanced usability.
                     </p>
                     <Divider
-                      style={{ marginTop: ".8rem", marginBottom: ".8rem" }}
+                      style={{ marginTop: ".8rem", marginBottom: ".8rem", borderColor: "#51BCEB"  }}
                     />
                     <p style={{ margin: ".5rem" }}>
                       • 提供以「日」為單位的日期篩選功能
@@ -2330,14 +2332,7 @@ const AInsight = () => {
                       • Provide a time picker function based on the 'day' unit.
                     </p>
                   </AB>
-                  <AB
-                    style={{
-                      marginTop: ".5rem",
-                      padding: "20px",
-                      border: "1px solid rgba(0, 0, 0, 0.1)",
-                      borderRadius: "12px",
-                    }}
-                  >
+                  <AB>
                     <span
                       style={{
                         color: "#2B3990",
@@ -2350,24 +2345,64 @@ const AInsight = () => {
                     </span>
                     <p style={{ margin: ".5rem" }}>
                       •
-                      將「待辦提醒」以區塊形式固定在總覽畫面上，讓用戶可以釘選各項目，並快速點擊連結查看項目進度頁面。
+                      將「待辦提醒」以區塊形式固定在總覽畫面上，讓用戶可以釘選各項目，並一覽項目進度。
                     </p>
                     <p style={{ margin: ".5rem" }}>
-                      • Set the 'To-Do Reminders' as a block on the overview
-                      page, allowing users to pin tasks and quickly click links
-                      to view the task progress page.
+                      • Set the 'To-Do Reminders' as a fixed block on the
+                      overview page, allowing users to pin specific tasks and
+                      view their progress at a glance.
                     </p>
                     <Divider
-                      style={{ marginTop: ".8rem", marginBottom: ".8rem" }}
+                      style={{ marginTop: ".8rem", marginBottom: ".8rem",borderColor: "#51BCEB" }}
                     />
                     <p style={{ margin: ".5rem" }}>
-                      • 提供以「月」為單位的日期篩選功能，以及讓用戶可以下載總覽表單。
+                      •
+                      提供以「月」為單位的日期篩選功能，以及讓用戶可以下載總覽表單。
                     </p>
                     <p style={{ margin: ".5rem" }}>
-                      • Provide a time picker function based on the 'month' unit and allow users to download the overview form.
+                      • Provide a time picker function based on the 'month' unit
+                      and allow users to download the overview form.
                     </p>
                   </AB>
                 </ContentWrapperAB>
+              </DisText>
+              <DisText style={{ marginTop: ".5rem" }}>
+                在與用戶進行訪談和測試後，我發現了幾個關鍵點：
+                <span style={{ color: "#B6B6B6" }}>
+                <br />
+                1.
+                「小鈴鐺」樣式的待辦提醒更符合用戶需求，因為待辦事項不需要時刻檢查，僅在緊急時自動通知即可。
+                <br />
+                2.
+                用戶希望能夠在系統中「快速搜尋」所需數據，而不必翻遍所有頁面。
+                <br />
+                3.
+                查看關鍵績效指標（KPI）時，通常以「月」為單位，而非「日」，因此日篩選並不合適。
+                </span>
+              </DisText>
+              <DisText>
+                After conducting user interviews and testing, I identified
+                several key insights:
+                <span style={{ color: "#B6B6B6" }}>
+                <br />
+                1. A "bell" style notification for reminders better suits user
+                needs, as tasks don’t require constant monitoring and can simply
+                trigger an alert when urgent.
+                <br />
+                2. Users desire a "quicker search-bar" feature to find specific
+                data rather than navigating through multiple pages.
+                <br />
+                3. Key Performance Indicators (KPIs) are typically reviewed on a
+                monthly basis rather than daily, making a daily filter
+                unnecessary.
+                </span>
+              </DisText>
+              <DisText>
+              最終總覽頁的設計融合了A版和B版的優點，打造了更符合用戶需求的介面。
+              </DisText>
+              <DisText>
+              The final design for the dashboard integrates the strengths of
+              both version A and version B to create a user-centric interface.
               </DisText>
             </TextWrapperContainer>
           </DiscriptionWrapper>
