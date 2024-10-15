@@ -412,7 +412,7 @@ const SubInfoCardLarge = styled.div`
   border-radius: 12px;
   box-sizing: border-box;
   margin: 0;
-  top: 12rem;
+  top: 23vh;
   position: sticky;
   z-index: ${(props) => props.zIndex || 1};
 
