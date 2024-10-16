@@ -324,6 +324,7 @@ function MyComponent(props) {
           something <MarqueeSpan>cool</MarqueeSpan> · Let's make something{" "}
           <MarqueeSpan>cool</MarqueeSpan> · Let's make something{" "}
           <MarqueeSpan>cool</MarqueeSpan> · Let's make something{" "}
+          <MarqueeSpan>cool</MarqueeSpan> · Let's make something{" "}
           <MarqueeSpan>cool</MarqueeSpan> ·
         </Marqueetext>
       </Marquee>
@@ -886,9 +887,12 @@ const CircleContainer = styled.div`
 const IndexContainer = styled.div`
   background-color: #f2f2f2;
   display: flex;
-  flex-direction: row;
   justify-content: center;
-  width: 100%;
+  align-items: center; /* 讓內容垂直置中 */
+  width: 100vw; /* 確保始終佔滿視窗寬度 */
+  height: auto; /* 根據需要設置高度 */
+  margin: 0 auto;
+  position: relative;
 
   @media (max-width: 820px) {
     display: none;
@@ -896,10 +900,8 @@ const IndexContainer = styled.div`
 `;
 
 const OverlapGroupWrapper2 = styled.div`
-  background-color: #f2f2f2;
   height: 700px;
   overflow: hidden;
-  justify-content: center;
   width: 1450px;
 `;
 
@@ -907,6 +909,9 @@ const OverlapGroup2 = styled.div`
   background-color: #f2f2f2;
   height: 627px;
   position: relative;
+  display: flex;
+  justify-content: center;
+  padding-left: 50px;
   height: 100%;
   overflow-x: auto; /* 允許水平滾動 */
   overflow-y: hidden;
@@ -1341,8 +1346,9 @@ const Marqueetext = styled.div`
   padding: 24px;
   background-color: #000fff;
   color: #fff;
-  width: 100%;
+  width: 100vw;
   display: flex;
+  white-space: nowrap;
 
   @media (max-width: 480px) {
     font-size: 1.6rem;
