@@ -88,21 +88,21 @@ function MyComponent(props) {
   // }, []);
 
   const Projects = [
-    // {
-    //   date: "March, 2024",
-    //   image: "/hivebee/hb demo.png",
-    //   title: "Hive Bee - We made donations enjoyable",
-    //   subtitle: "SaaS product design",
-    //   description:
-    //     "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
-    //   tags: [{ name: "UI/UX design", color: "#7D8991" }],
-    //   subtags: [
-    //     { name: "SaaS", color: "#7D8991" },
-    //     { name: "RWD", color: "#7D8991" }
-    //   ],
-    //   link: "/work/HiveBee",
-    //   openInNewTab: false,
-    // },
+    {
+      date: "March, 2024",
+      image: "/hivebee/hb demo.png",
+      title: "Hive Bee - We made donations enjoyable",
+      subtitle: "SaaS product design",
+      description:
+        "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
+      tags: [{ name: "UI/UX design", color: "#7D8991" }],
+      subtags: [
+        { name: "SaaS", color: "#7D8991" },
+        { name: "RWD", color: "#7D8991" }
+      ],
+      link: "/work/HiveBee",
+      openInNewTab: false,
+    },
     {
       date: "May, 2023",
       image: "/ainsight/ainsight-main.png",
@@ -203,8 +203,8 @@ function MyComponent(props) {
             <Rectangle height={105} left={0} top={1} width={443} />
             <Rectangle height={105} left={497} top={530} width={495} />
             <Rectangle height={105} left={993} top={0} width={447} />
-            {/* <ColoredRectangle color="#ff6434" height={528} left={0} top={107} width={443} />
-          <ColoredRectangle color="#d58cfe" height={528} left={498} top={0} width={443} />
+            {/* <ColoredRectangle color="#D8984E" height={528} left={0} top={107} width={443} />
+          <ColoredRectangle color="#2A96B7" height={528} left={498} top={0} width={443} />
           <ColoredRectangle color="#7d8991" height={528} left={993} top={107} width={447} /> */}
             <HoverableDiv>
               <ColoredRectangle
@@ -231,7 +231,7 @@ function MyComponent(props) {
 
             <HoverableDiv>
               <ColoredRectangle
-                color="#d58cfe"
+                color="#2A96B7"
                 height={528}
                 left={498}
                 top={0}
@@ -251,7 +251,7 @@ function MyComponent(props) {
 
             <HoverableDiv>
               <ColoredRectangle
-                color="#ff6434"
+                color="#D8984E"
                 height={528}
                 left={0}
                 top={107}
@@ -309,12 +309,12 @@ function MyComponent(props) {
         <FlipCard
           title="Graphic Design"
           content="My journey in graphic design is driven by the belief that each pixel matters. From conceptualization to execution, I strive for a harmonious balance between form and function. Every color, typeface, and image is carefully chosen to convey a message, evoke emotions, and create a lasting impression."
-          bgColor="#D58CFE"
+          bgColor="#2A96B7"
         />
         <FlipCard
           title="Frontend Coding"
           content="I find joy in translating creative visions into seamless, interactive digital experiences. My coding journey is a continuous exploration of the ever-evolving web technologies. Proficient in HTML, CSS, and React.js, I thrive on the challenge of bringing design concepts to life while ensuring a user-friendly and visually appealing interface."
-          bgColor="#F7883D"
+          bgColor="#D8984E"
         />
       </Div6>
 
@@ -364,7 +364,7 @@ function MyComponent(props) {
             zIndex={3}
             bgImage="./testimonial-2.png"
             content="She integrates insights to propose innovative solutions. Her skill in clarifying user and market needs during prototyping leads to streamlined processes and effective interface designs. With a collaborative spirit, Ting-yi excels in enhancing team dynamics, making her a valuable asset in cross-functional team."
-            color="#D58CFE"
+            color="#2A96B7"
             person="Ethan Deng, Product Design Lead @Futurenest"
             rotate="-2deg"
           />
@@ -748,7 +748,7 @@ const TextWrapper = styled.div`
 
 const DivWrapper = styled.div`
   align-items: center;
-  background-color: #ff6434;
+  background-color: #D8984E;
   border-radius: 80px;
   display: inline-flex;
   gap: 10px;
@@ -765,7 +765,7 @@ const DivWrapper = styled.div`
 
 const DivWrapper2 = styled.div`
   align-items: center;
-  background-color: #d58cfe;
+  background-color: #2A96B7;
   filter: blur(1px);
   border-radius: 80px;
   display: inline-flex;
@@ -986,7 +986,7 @@ const TextWrapper2n1 = styled(UIUXProject)`
   top: 340px;
   width: 360px;
   white-space: pre-wrap;
-  color: #ff6439;
+  color: #D8984E;
   font-weight: 400;
 `;
 
@@ -1008,7 +1008,7 @@ const GraphicDesign1 = styled(UIUXProject)`
   top: 214px;
   width: 360px;
   white-space: pre-wrap;
-  color: #d58cfe;
+  color: #2A96B7;
   font-weight: 400;
 `;
 
@@ -1038,7 +1038,7 @@ const Div7 = styled.a`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   border-radius: 16px;
-  background-color: #ff6434;
+  background-color: #D8984E;
   margin-top: 24px;
   justify-content: center;
   align-items: center;
@@ -1056,7 +1056,7 @@ const Div8 = styled.a`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   border-radius: 16px;
-  background-color: #d58cfe;
+  background-color: #2A96B7;
   margin-top: 32px;
   justify-content: center;
   align-items: center;
