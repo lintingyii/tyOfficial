@@ -7,85 +7,53 @@ import TestimonialCard from "../Components/TestimonialCard";
 import { LargeProjectCard } from "../Components/ProjectCard";
 
 function MyComponent(props) {
-  // useEffect(() => {
-  //   const script = document.createElement("script");
-  //   script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
-  //   script.defer = true;
-  //   script.id = "creattie-script";
+  const pinRef = useRef(null);
+  const meRef = useRef(null);
+  const decoRef = useRef(null); // ← 新增
 
-  //   script.onload = () => {
-  //     // 这时脚本加载完成，可以进行其他操作
-  //   };
+  useEffect(() => {
+    const pin = pinRef.current;
+    const me = meRef.current;
+    const deco = decoRef.current;
+    if (!pin || !me || !deco) return;
+    let ticking = false;
 
-  //   document.body.appendChild(script);
+    const update = () => {
+      const total = pin.offsetHeight - window.innerHeight;
+      const scrolled = Math.min(
+        Math.max(-pin.getBoundingClientRect().top, 0),
+        total,
+      );
+      const progress = total > 0 ? Math.min(scrolled / (total * 0.8), 1) : 1;
 
-  //   return () => {
-  //     document.body.removeChild(script);
-  //   };
-  // }, []);
+      // 把 progress 換算成某一段區間內的 0~1（超出範圍就夾住）
+      const phase = (start, end) =>
+        Math.min(Math.max((progress - start) / (end - start), 0), 1);
 
-  // const [embedWidth, setEmbedWidth] = useState("8rem");
+      const reveal = (el, p) => {
+        el.style.opacity = p;
+        el.style.transform = `translateY(${(1 - p) * 40}px)`;
+      };
 
-  // useEffect(() => {
-  //   const handleResize = () => {
-  //     if (window.innerWidth <= 480) {
-  //       setEmbedWidth("6rem");
-  //     } else {
-  //       setEmbedWidth("8rem");
-  //     }
-  //   };
+      // 藍底圖不吃 scroll，改成載入後就淡入（見 BgWrap 的 animation）
+      // 這裡只負責：人物 → 白框（區間稍微重疊，銜接比較順）
+      reveal(me, phase(0, 0.55));
+      reveal(deco, phase(0.45, 1));
 
-  //   window.addEventListener("resize", handleResize);
+      ticking = false;
+    };
 
-  //   handleResize();
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(update);
+        ticking = true;
+      }
+    };
 
-  //   return () => window.removeEventListener("resize", handleResize);
-  // }, []);
-
-  // useEffect(() => {
-  //   const script = document.createElement("script");
-  //   script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
-  //   script.defer = true;
-  //   script.id = "creattie-script";
-
-  //   script.onload = () => {};
-
-  //   document.body.appendChild(script);
-
-  //   return () => {
-  //     document.body.removeChild(script);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   const script = document.createElement("script");
-  //   script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
-  //   script.defer = true;
-  //   script.id = "creattie-script";
-
-  //   script.onload = () => {};
-
-  //   document.body.appendChild(script);
-
-  //   return () => {
-  //     document.body.removeChild(script);
-  //   };
-  // }, []);
-
-  // useEffect(() => {
-  //   const script = document.createElement("script");
-  //   script.src = "https://creattie.com/js/embed.js?id=3f6954fde297cd31b441";
-  //   script.defer = true;
-  //   script.id = "creattie-script";
-
-  //   script.onload = () => {};
-
-  //   document.body.appendChild(script);
-
-  //   return () => {
-  //     document.body.removeChild(script);
-  //   };
-  // }, []);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    update();
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   const Projects = [
     {
@@ -98,7 +66,7 @@ function MyComponent(props) {
       tags: [{ name: "UI/UX design", color: "#7D8991" }],
       subtags: [
         { name: "SaaS", color: "#7D8991" },
-        { name: "RWD", color: "#7D8991" }
+        { name: "RWD", color: "#7D8991" },
       ],
       link: "/work/HiveBee",
       openInNewTab: false,
@@ -110,9 +78,7 @@ function MyComponent(props) {
       subtitle: "SaaS product design",
       description:
         "Tailored for small and medium-sized businesses, our AI-enhanced financial system optimizes operational efficiency, leaving traditional accounting and bookkeeping behind.",
-      tags: [
-        { name: "UI/UX design", color: "#7D8991" },
-      ],
+      tags: [{ name: "UI/UX design", color: "#7D8991" }],
       subtags: [{ name: "SaaS", color: "#7D8991" }],
       link: "/work/AInsight",
       openInNewTab: false,
@@ -133,10 +99,27 @@ function MyComponent(props) {
 
   return (
     <Div>
-      <Banner>
-        <source media="(max-width: 820px)" srcSet="./banner-2-mobile-1.png" />
-        <img src="./banner-2.png" alt="Main Page" />
-      </Banner>
+      <BannerPin ref={pinRef}>
+        <Banner>
+          <BgWrap>
+            <BgImg src="./banner-bg.png" alt="" aria-hidden="true" />
+          </BgWrap>
+          <picture ref={meRef}>
+            <source
+              media="(max-width: 820px)"
+              srcSet="./banner-2-mobile-1.png"
+            />
+            <img src="./banner-me.png" alt="Main Page" />
+          </picture>
+          <DecoImg
+            ref={decoRef}
+            src="./banner-deco.png"
+            alt=""
+            aria-hidden="true"
+          />
+          {/* ↑ 放在 picture 後面，DOM 順序也比較靠後 */}
+        </Banner>
+      </BannerPin>
 
       <div
         style={{
@@ -175,7 +158,7 @@ function MyComponent(props) {
           <p>
             Hello👋🏻, I am Ting-yi Lin, you can call me Morgan, a creative and
             multidisciplinary designer. Venturing into <Span>UI / UX</Span>, my
-            understanding of <Span>front-end skills</Span> combined with keen 
+            understanding of <Span>front-end skills</Span> combined with keen
             observational insights, emphasizes a practical approach to design,
             blending aesthetics and creativity with <Span>user-centric</Span>{" "}
             solutions.
@@ -349,7 +332,7 @@ function MyComponent(props) {
             zIndex={1}
             bgImage="./testimonial-1.png"
             content="Ting-yi has excellent communication skills. During interviews, her keen perception consistently guides the conversation, helping us quickly pinpoint key insights from users. She is a great asset to any team."
-            color="#000fff"
+            color="#2A96B7"
             person="Temu Chen, Project Manager @KOL.Tech"
             rotate="2deg"
           />
@@ -471,13 +454,13 @@ function MyComponent(props) {
           boxSizing: "border-box",
         }}
       >
-        <Flower stroke="#000fff" viewBox="0 0 24 24">
+        <Flower stroke="#2A96B7" viewBox="0 0 24 24">
           <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
         </Flower>
-        <Flower fill="#000fff" stroke="#000fff" viewBox="0 0 24 24">
+        <Flower fill="#2A96B7" stroke="#2A96B7" viewBox="0 0 24 24">
           <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
         </Flower>
-        <Flower stroke="#000fff" viewBox="0 0 24 24">
+        <Flower stroke="#2A96B7" viewBox="0 0 24 24">
           <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
         </Flower>
       </div>
@@ -541,30 +524,120 @@ const Div = styled.div`
   }
 `;
 
-const Banner = styled.picture`
+// const Banner = styled.picture`
+//   display: flex;
+//   justify-content: center;
+//   z-index: 0;
+//   overflow: hidden;
+//   position: sticky; /* 使用 sticky */
+//   top: 0;
+
+//   img {
+//     width: 100%;
+//     display: flex;
+//     justify-content: right;
+
+//     @media (max-width: 820px) {
+//       border: none;
+//       width: 100%;
+//       padding-top: 6vh;
+//     }
+//     @media (max-width: 480px) {
+//       padding-top: 0vh;
+//     }
+//   }
+// `;
+
+const BannerPin = styled.div`
+  position: relative;
+  height: 140vh; /* ← 釘選時長：越高，banner 被固定的時間越久。想短一點改 160vh 之類 */
+`;
+
+const Banner = styled.div`
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  z-index: 0;
   display: flex;
   justify-content: center;
-  z-index: 0;
+  align-items: flex-end;
   overflow: hidden;
-  position: sticky; /* 使用 sticky */
-  top: 0;
-  margin-bottom: 3vh;
 
-  img {
-    padding-top: 8vh;
+  picture {
+    position: relative;
+    z-index: 1;
     width: 100%;
     display: flex;
-    justify-content: right;
+    justify-content: center;
+    align-items: flex-end; /* picture 內也置底 */
+    opacity: 0; /* 交給 JS 控制浮現 */
+    transform: translateY(40px);
+    will-change: transform, opacity;
+  }
 
+  picture img {
+    width: 100%;
+    display: block;
     @media (max-width: 820px) {
-      border: none;
-      width: 100%;
       padding-top: 6vh;
     }
     @media (max-width: 480px) {
-      padding-top: 0vh;
+      padding-top: 0;
     }
   }
+`;
+const bgFadeIn = keyframes`
+  from { opacity: 0; transform: translateY(40px); }
+  to   { opacity: 1; transform: translateY(0); }
+`;
+
+const BgWrap = styled.div`
+  position: absolute;
+  inset: 0;                  /* 撐滿整個 Banner */
+  z-index: 0;                /* 底層 */
+  display: flex;
+  justify-content: center;   /* 圖片水平置中 */
+  align-items: center;       /* 圖片垂直置中 → 過高時上下留白 */
+  background-color: #2A96B7; /* 上下（含左右）補色 */
+  overflow: hidden;
+  /* 不等 scroll，載入後直接淡入 */
+  animation: ${bgFadeIn} 0.8s ease-out both;
+  will-change: transform, opacity;
+  pointer-events: none;
+`;
+
+const BgImg = styled.img`
+  width: 100%;     /* 撐滿寬度；圖比容器矮時上下露出底色 */
+  height: auto;    /* 維持原始比例 */
+  display: block;
+  object-fit: contain;
+`;
+// const BgImg = styled.img`
+//   position: absolute;
+//   bottom: 0;
+//   // left: 50%;
+//   // transform: translateX(-50%) translateY(40px);
+//   width: 100%;
+//   height: auto;
+//   object-fit: contain;
+//   z-index: 0;
+//   opacity: 0;
+//   will-change: transform, opacity;
+//   pointer-events: none;
+//   padding-top: 6vh;
+//   background-color: #2a96b7;
+// `;
+
+const DecoImg = styled.img`
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  z-index: 2;
+  opacity: 0;
+  will-change: transform, opacity;
+  pointer-events: none;
 `;
 
 const typing = keyframes`
@@ -576,9 +649,19 @@ const caret = keyframes`
 `;
 
 const Div11 = styled.div`
-  font: 700 20px system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: #0000ff;
+  font:
+    700 20px system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
+  color: #2A96B7;
   text-align: left;
   display: flex;
   position: absolute;
@@ -588,7 +671,9 @@ const Div11 = styled.div`
   height: 24px;
   overflow: hidden;
   border-right: 0.1em solid;
-  animation: ${typing} 5s steps(45), ${caret} 1s steps(1) infinite;
+  animation:
+    ${typing} 5s steps(45),
+    ${caret} 1s steps(1) infinite;
 
   @media (max-width: 772px) {
     margin-left: 0px;
@@ -681,8 +766,18 @@ const OverlapGroup = styled.div`
 
 const HeadingIAm = styled.div`
   color: #333333;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   font-size: 8rem;
   font-weight: 700;
   // height: 226px;
@@ -748,7 +843,7 @@ const TextWrapper = styled.div`
 
 const DivWrapper = styled.div`
   align-items: center;
-  background-color: #D8984E;
+  background-color: #d8984e;
   border-radius: 80px;
   display: inline-flex;
   gap: 10px;
@@ -765,7 +860,7 @@ const DivWrapper = styled.div`
 
 const DivWrapper2 = styled.div`
   align-items: center;
-  background-color: #2A96B7;
+  background-color: #2a96b7;
   filter: blur(1px);
   border-radius: 80px;
   display: inline-flex;
@@ -783,7 +878,7 @@ const DivWrapper2 = styled.div`
 const CircleContainer = styled.div`
   --circleSize: 50px;
   --spinSpeed: 5s;
-  --color1: #0000ff; /* 陰影顏色 */
+  --color1: #2A96B7; /* 陰影顏色 */
   --color2: #f2f2f2; /* 亮面顏色 */
 
   width: 100%; /* 覆盖整个屏幕宽度 */
@@ -930,8 +1025,18 @@ const Rectangle = styled.div`
 
 const UIUXProject = styled.div`
   color: #ffffff;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   font-size: 40px;
   font-weight: 700;
   height: 92px;
@@ -986,7 +1091,7 @@ const TextWrapper2n1 = styled(UIUXProject)`
   top: 340px;
   width: 360px;
   white-space: pre-wrap;
-  color: #D8984E;
+  color: #d8984e;
   font-weight: 400;
 `;
 
@@ -1008,7 +1113,7 @@ const GraphicDesign1 = styled(UIUXProject)`
   top: 214px;
   width: 360px;
   white-space: pre-wrap;
-  color: #2A96B7;
+  color: #2a96b7;
   font-weight: 400;
 `;
 
@@ -1025,8 +1130,18 @@ const Div6 = styled.div`
   padding-bottom: 32px;
   gap: 24px;
   font-size: 24px;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
 
   @media (max-width: 820px) {
     display: flex;
@@ -1034,11 +1149,23 @@ const Div6 = styled.div`
 `;
 
 const Div7 = styled.a`
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   border-radius: 16px;
-  background-color: #D8984E;
+  background-color: #d8984e;
   margin-top: 24px;
   justify-content: center;
   align-items: center;
@@ -1052,11 +1179,23 @@ const Div7 = styled.a`
 `;
 
 const Div8 = styled.a`
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   border-radius: 16px;
-  background-color: #2A96B7;
+  background-color: #2a96b7;
   margin-top: 32px;
   justify-content: center;
   align-items: center;
@@ -1070,9 +1209,21 @@ const Div8 = styled.a`
 `;
 
 const Div9 = styled.a`
-  font-feature-settings: "clig" off, "liga" off;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-feature-settings:
+    "clig" off,
+    "liga" off;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   border-radius: 16px;
   background-color: #7d8991;
   margin-top: 32px;
@@ -1093,8 +1244,18 @@ const TextWrapper3 = styled.div`
   width: 70%;
   max-width: 1040px;
   font-size: 1.25rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   color: #666666;
   text-align: center;
 
@@ -1205,8 +1366,18 @@ function FlipCard({ title, content, bgColor }) {
 }
 
 const ContentMob = styled.div`
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   font-size: 1rem;
   line-height: 1.6;
   padding: 16px;
@@ -1252,8 +1423,18 @@ const CardsContainer = styled.div`
 
 const SectionTitle = styled.div`
   color: #333333;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   font-size: 3rem;
   font-weight: 700;
   width: 90%;
@@ -1278,8 +1459,18 @@ const SectionTitle = styled.div`
 
 const SectionTitleSticky = styled.div`
   color: #333333;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   font-size: 3rem;
   font-weight: 700;
   width: 90%;
@@ -1307,8 +1498,18 @@ const SectionTitleSticky = styled.div`
 
 const ServiceContent = styled.div`
   // color: #fff;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   width: 100%;
   font-weight: 700;
   font-size: 2rem;
@@ -1344,7 +1545,7 @@ const Marqueetext = styled.div`
   font-size: 2rem;
   line-height: 1.6;
   padding: 24px;
-  background-color: #000fff;
+  background-color: #2A96B7;
   color: #fff;
   width: 100vw;
   display: flex;
@@ -1407,8 +1608,8 @@ const CardsContainerWrapper = styled.div`
 
 const ViewMoreButton = styled.button`
   height: 100%;
-  background-color: #e1cdff;
-  color: #000fff;
+  background-color: #d7f1f6;
+  color: #14607A;
   padding: 12px 24px;
   font-size: 1rem;
   border: none;
@@ -1417,8 +1618,18 @@ const ViewMoreButton = styled.button`
   cursor: pointer;
   display: flex;
   gap: 0.8rem;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  font-family:
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Oxygen,
+    Ubuntu,
+    Cantarell,
+    "Open Sans",
+    "Helvetica Neue",
+    sans-serif;
   transition: background-color 0.8s;
 
   &:hover {

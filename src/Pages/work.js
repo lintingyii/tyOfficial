@@ -51,11 +51,11 @@ export const Work = () => {
       description:
         'The key visual poster and event website for Aaron Nieh’s lecture, "Behind the Covers," at NCCU.',
       tags: [
-        { name: "Graphic design", color: "#D58CFE" },
+        { name: "Graphic design", color: "#2A96B7" },
         { name: "Frontend coding", color: "#F7883D" },
       ],
       subtags: [
-        { name: "Poster", color: "#D58CFE" },
+        { name: "Poster", color: "#2A96B7" },
         { name: "RWD", color: "#F7883D" },
       ],
       link: "https://mellifluous-brioche-700f0a.netlify.app/",
@@ -68,8 +68,8 @@ export const Work = () => {
       subtitle: "Branding",
       description:
         "VIS design for a local mango smallholder farmer in Kaohsiung, Taiwan.",
-      tags: [{ name: "Graphic design", color: "#D58CFE" }],
-      subtags: [{ name: "Branding", color: "#D58CFE" }],
+      tags: [{ name: "Graphic design", color: "#2A96B7" }],
+      subtags: [{ name: "Branding", color: "#2A96B7" }],
       link: "/work/MangoOnTree",
       openInNewTab: false,
     },
@@ -94,7 +94,7 @@ export const Work = () => {
       tags: [
         // { name: "UI/UX design", color: "#7D8991" },
         { name: "Creative Campaign", color: "#86C5CE" },
-        { name: "Graphic design", color: "#D58CFE" },
+        { name: "Graphic design", color: "#2A96B7" },
       ],
       link: "/work/PufferVerse",
       openInNewTab: false,
@@ -153,7 +153,7 @@ export const Work = () => {
           I'm a
           <span
             style={{
-              color: "#000fff",
+              color: "#2A96B7",
               margin: "0 4px",
               width: "fit-content",
               fontWeight: "500",
@@ -251,7 +251,7 @@ export const Work = () => {
             // positionX={0}
             color1="#809bd6"
             color2="#F7883D"
-            color3="#D58CFE"
+            color3="#2A96B7"
             grain="on"
             lightType="3d"
             grainBlending={0.2}
@@ -488,7 +488,7 @@ const DivWrapper = styled.div`
 
 const DivWrapper2 = styled.div`
   align-items: center;
-  background-color: #d58cfe;
+  background-color: #2A96B7;
   filter: blur(1px);
   border-radius: 80px;
   display: inline-flex;
@@ -582,7 +582,7 @@ const DefaultIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#000fff"
+    fill="#2A96B7"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",

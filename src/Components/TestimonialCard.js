@@ -72,7 +72,7 @@ const Source = styled.div`
   justify-content: center;
   white-space: wrap;
   line-height: 1.5;
-  color: ${(props) => props.color || "#000fff"};
+  color: ${(props) => props.color || "#2A96B7"};
 
   @media (max-width: 480px) {
     font-size: 1rem;

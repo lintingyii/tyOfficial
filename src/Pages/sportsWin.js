@@ -289,8 +289,8 @@ const GroupImage = styled.img`
 `;
 
 const BackButton = styled.button`
-  background-color: #e1cdff;
-  color: #0000ff;
+  background-color: #d7f1f6;
+  color: #14607A;
   padding: 8px 24px;
   font-size: 16px;
   border: none;

@@ -22,14 +22,14 @@ import styled from "styled-components";
 //     <Filter>
 //       <Tag
 //         onClick={() => handleTagClick("")}
-//         bgColor="#000fff"
+//         bgColor="#2A96B7"
 //         isActive={selectedTag === ""}
 //       >
 //         All
 //       </Tag>
 //       <Tag
 //         onClick={() => handleTagClick("Graphic design")}
-//         bgColor="#D58CFE"
+//         bgColor="#2A96B7"
 //         isActive={selectedTag === "Graphic design"}
 //       >
 //         Graphic Design
@@ -93,7 +93,7 @@ const ProjectFilter = ({
                 I'm a
                 <span
                   style={{
-                    color: "#000fff",
+                    color: "#2A96B7",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -117,7 +117,7 @@ const ProjectFilter = ({
                 As a graduate in
                 <span
                   style={{
-                    color: "#D58CFE",
+                    color: "#2A96B7",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -128,7 +128,7 @@ const ProjectFilter = ({
                 I enjoy exploring various design styles,
                 <span
                   style={{
-                    color: "#D58CFE",
+                    color: "#2A96B7",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -286,14 +286,14 @@ const ProjectFilter = ({
     <Filter>
       <Tag
         onClick={() => handleTagClick("")}
-        bgColor="#000fff"
+        bgColor="#2A96B7"
         isActive={selectedTag === ""}
       >
         All
       </Tag>
       <Tag
         onClick={() => handleTagClick("Graphic design")}
-        bgColor="#D58CFE"
+        bgColor="#2A96B7"
         isActive={selectedTag === "Graphic design"}
       >
         Graphic Design
@@ -383,7 +383,7 @@ const DefaultIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#000fff"
+    fill="#2A96B7"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",
@@ -401,7 +401,7 @@ const GraphicIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#D58CFE"
+    fill="#2A96B7"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",

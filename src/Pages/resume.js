@@ -430,8 +430,8 @@ export default Resume;
 const DownloadButton = styled.button`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #e1cdff;
-  color: #0000ff;
+  background-color: #d7f1f6;
+  color: #14607A;
   padding: 12px 24px;
   font-size: 1rem;
   border: none;
@@ -648,7 +648,7 @@ const Div9 = styled.div`
 `;
 
 const Div10 = styled.a`
-  color: #000fff;
+  color: #2A96B7;
   text-decoration-line: underline;
   margin-top: 8px;
   font: 400 17px/150% Assistant, sans-serif;
@@ -659,7 +659,7 @@ const Div10 = styled.a`
   opacity: 0;
 
   &:hover {
-    color: #000fff;
+    color: #2A96B7;
   }
 `;
 
@@ -740,7 +740,7 @@ const Img4 = styled.img`
 `;
 
 const Div12 = styled.div`
-  color: #000fff;
+  color: #2A96B7;
   margin-top: 3rem;
   font: 700 23px/150% Noto Sans TC, sans-serif;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -804,7 +804,7 @@ const Div16 = styled.div`
 `;
 
 const Div17 = styled.div`
-  color: #000fff;
+  color: #2A96B7;
   flex-grow: 1;
   font: 700 18px/150% Noto Sans TC, sans-serif;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -951,7 +951,7 @@ const Img9 = styled.img`
 `;
 
 const Div26 = styled.div`
-  color: #000fff;
+  color: #2A96B7;
   font: 700 23px/150% Noto Sans TC, sans-serif;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -1021,7 +1021,7 @@ const Div30 = styled.div`
 `;
 
 const Div31 = styled.div`
-  color: #000fff;
+  color: #2A96B7;
   margin-top: 9px;
   font: 18px/100% Noto Sans TC, sans-serif;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -1095,7 +1095,7 @@ const Div36 = styled.div`
 `;
 
 const Div37 = styled.div`
-  color: #000fff;
+  color: #2A96B7;
   font: 700 23px/150% Noto Sans TC, sans-serif;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -1114,7 +1114,7 @@ const Div38 = styled.div`
 `;
 
 const Div39 = styled.div`
-  border-top: 1.5px solid #e1cdff;
+  border-top: 1.5px solid #d7f1f6;
   margin-top: 12px;
   height: 1px;
 `;
@@ -1242,7 +1242,7 @@ const Div50 = styled.div`
 
 const ViewMoreButton = styled.button`
   height: 100%;
-  background-color: #e1cdff;
+  background-color: #d7f1f6;
   color: #333;
   padding: 8px 24px;
   font-size: 1rem;
@@ -1270,7 +1270,7 @@ const Hr = () => (
     <svg width="112" height="6" viewBox="0 0 112 6" fill="none">
       <path
         d="M9.24865 1.40299C11.1861 -0.467666 14.2571 -0.467663 16.1946 1.40299L17.8878 3.03785C19.0503 4.16024 20.8929 4.16024 22.0554 3.03785L23.777 1.403C25.7145 -0.467659 28.7855 -0.467659 30.723 1.403L32.4162 3.03785C33.5787 4.16025 35.4213 4.16025 36.5838 3.03785L38.277 1.403C40.2145 -0.467659 43.2855 -0.467656 45.223 1.403L46.9162 3.03786C48.0787 4.16025 49.9213 4.16025 51.0838 3.03786L52.7552 1.42402C52.7592 1.42024 52.7593 1.414 52.7555 1.41009C52.7517 1.40617 52.7519 1.39989 52.7558 1.39612C54.6936 -0.467659 57.7595 -0.465367 59.6946 1.403L61.3878 3.03785C62.5503 4.16025 64.3929 4.16025 65.5554 3.03785L67.2486 1.403C69.1861 -0.467662 72.2571 -0.467659 74.1946 1.403L75.8878 3.03785C77.0503 4.16025 78.8929 4.16025 80.0554 3.03785L81.777 1.403C83.7145 -0.467655 86.7855 -0.467655 88.723 1.403L90.4162 3.03786C91.5787 4.16025 93.4213 4.16025 94.5838 3.03786L96.277 1.403C98.2145 -0.467655 101.285 -0.467652 103.223 1.403L104.916 3.03786C106.079 4.16025 107.921 4.16025 109.084 3.03786L110.058 2.0976C110.455 1.71398 111.088 1.72509 111.472 2.1224C111.855 2.51972 111.844 3.15279 111.447 3.5364L110.473 4.47666C108.535 6.34732 105.464 6.34732 103.527 4.47666L101.834 2.84181C100.671 1.71941 98.8287 1.71941 97.6662 2.8418L95.973 4.47666C94.0355 6.34732 90.9645 6.34732 89.027 4.47666L87.3338 2.8418C86.1713 1.71941 84.3287 1.71941 83.1662 2.8418L81.4446 4.47665C79.5071 6.34731 76.4361 6.34731 74.4986 4.47665L72.8054 2.8418C71.6429 1.71941 69.8003 1.7194 68.6378 2.84179L66.9446 4.47665C65.0071 6.34731 61.9361 6.34731 59.9986 4.47665L58.3054 2.8418C57.1502 1.72643 55.3234 1.71945 54.1598 2.82085C54.1558 2.82459 54.1556 2.83085 54.1594 2.83476C54.1632 2.83865 54.1631 2.84485 54.1592 2.8486L52.473 4.47666C50.5355 6.34732 47.4645 6.34732 45.527 4.47666L43.8338 2.8418C42.6713 1.71941 40.8287 1.71941 39.6662 2.8418L37.973 4.47666C36.0355 6.34731 32.9645 6.34731 31.027 4.47666L29.3338 2.8418C28.1713 1.71941 26.3287 1.71941 25.1662 2.8418L23.4446 4.47665C21.5071 6.34731 18.4361 6.34731 16.4986 4.47665L14.8054 2.8418C13.6429 1.7194 11.8003 1.7194 10.6378 2.84179L8.94459 4.47665C7.00713 6.34731 3.93611 6.34731 1.99865 4.47665L1.02481 3.53639C0.627491 3.15278 0.616384 2.51971 0.999998 2.12239C1.38361 1.72508 2.01668 1.71397 2.41399 2.09759L3.38784 3.03785C4.55032 4.16024 6.39292 4.16024 7.5554 3.03785L9.24865 1.40299Z"
-        fill="#D58CFE"
+        fill="#2A96B7"
       />
     </svg>
   </div>

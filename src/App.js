@@ -101,7 +101,7 @@ const Wrapper = styled.div`
 const NavItem = styled(Link)`
   text-decoration: none;
   white-space: nowrap;
-  color: ${({ isActive }) => (isActive ? "#0000FF" : "#333333")};
+  color: ${({ isActive }) => (isActive ? "#2A96B7" : "#333333")};
 
   @media (max-width: 480px) {
     padding: 8px 12px;
@@ -111,7 +111,7 @@ const NavItem = styled(Link)`
 const SpecialNavItem = styled(Link)`
   text-decoration: none;
   white-space: nowrap;
-  color: ${({ isActive }) => (isActive ? "#D58CFE" : "#333")};
+  color: ${({ isActive }) => (isActive ? "#2A96B7" : "#333")};
 
   @media (max-width: 480px) {
     padding: 8px 12px;
@@ -124,7 +124,7 @@ const ProgressBar = styled.div`
   left: 0;
   height: 5px;
   display: none;
-  background-color: #d58cfe;
+  background-color: #2A96B7;
   width: ${(props) => props.scroll}; /* 透過 scroll 動態設置寬度 */
   z-index: 999;
   transition: width 0.25s ease; /* 平滑滾動效果 */

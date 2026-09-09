@@ -913,8 +913,8 @@ const Hr = ({ style }) => (
 );
 
 const BackButton = styled.button`
-  background-color: #e1cdff;
-  color: #0000ff;
+  background-color: #d7f1f6;
+  color: #14607A;
   padding: 8px 24px;
   font-size: 16px;
   border: none;
@@ -1381,7 +1381,7 @@ const AInsight = () => {
                 medium="/ainsight/Persona-1.jpg" // 大圖的 URL
                 // alt="description"
                 hideDownload={true} // 隱藏下載按鈕
-                imageBackgroundColor="#000fff" // 背景色
+                imageBackgroundColor="#2A96B7" // 背景色
                 children={
                   <DisImage src="/ainsight/Persona-1.jpg" alt="description" style={{ width: "60%" }}/>
                 } // 使用 DisImage 作為子組件

@@ -10,7 +10,7 @@ const ArrowIcon = () => (
 const CustomCursorDiv = styled.div`
   width: ${(props) => (props.isLink ? '60px' : '22px')};  /* 修改圆形大小 */
   height: ${(props) => (props.isLink ? '60px' : '22px')};  /* 修改圆形大小 */
-  background-color: ${(props) => (props.isLink ? '#000fff' : '#F5FF00')};  /* 保持背景颜色一致 */
+  background-color: ${(props) => (props.isLink ? '#2A96B7' : '#F5FF00')};  /* 保持背景颜色一致 */
   border-radius: 50%;  /* 无论是否是链接，都是圆形 */
   position: fixed;
   pointer-events: none;
