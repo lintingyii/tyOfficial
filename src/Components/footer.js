@@ -159,7 +159,7 @@ const Ending = styled.div`
   justify-content: center;
   margin-top: auto;
   z-index: 1;
-  color: #333;
+  color: #2A3133;
 `;
 
 const Text = styled.div`
@@ -167,7 +167,7 @@ const Text = styled.div`
   font-size: 1.2rem;
   display: flex;
   flex-direction: column;
-  color: #333;
+  color: #2A3133;
   justify-content: center;
   width: 100%;
   gap: 4vh;
@@ -179,7 +179,7 @@ const Span = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: #d7f1f6;
-  color: #333;
+  color: #2A3133;
   padding: 12px 24px;
   font-size: 1rem;
   border: none;
@@ -239,6 +239,8 @@ const BgIconContainer = styled.svg`
   bottom: 0px;
   z-index: 0;
   aspect-ratio: 1 / 1;
+  /* 這個浮水印圖示疊在 Footerwraper 的 #E2E2E2 底色上，兩者是圖與底的關係，
+     不能併成同一個灰（併掉就等於整個圖示消失）。 */
   fill: #dbdbdb;
 
   width: 30%;

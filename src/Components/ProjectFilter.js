@@ -43,7 +43,7 @@ import styled from "styled-components";
 //       </Tag>
 //       <Tag
 //         onClick={() => handleTagClick("UI/UX design")}
-//         bgColor="#7D8991"
+//         bgColor="#59656C"
 //         isActive={selectedTag === "UI/UX design"}
 //       >
 //         UI/UX Design
@@ -206,7 +206,7 @@ const ProjectFilter = ({
                 shapes the
                 <span
                   style={{
-                    color: "#7D8991",
+                    color: "#59656C",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "600",
@@ -221,7 +221,7 @@ const ProjectFilter = ({
                 of users, including
                 <span
                   style={{
-                    color: "#7D8991",
+                    color: "#59656C",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "600",
@@ -300,7 +300,7 @@ const ProjectFilter = ({
       </Tag>
       <Tag
         onClick={() => handleTagClick("UI/UX design")}
-        bgColor="#7D8991"
+        bgColor="#59656C"
         isActive={selectedTag === "UI/UX design"}
       >
         UI/UX Design
@@ -328,8 +328,8 @@ export default ProjectFilter;
 const Tag = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: ${(props) => (props.isActive ? "#fff" : props.bgColor || "#e0e0e0")};
-  background-color: ${(props) => (props.isActive ? "#333" : "#f2f2f2")};
+  color: ${(props) => (props.isActive ? "#fff" : props.bgColor || "#E2E2E2")};
+  background-color: ${(props) => (props.isActive ? "#2A3133" : "#f2f2f2")};
   border-radius: 50px;
   padding: 12px 16px;
   font-size: 1.2rem;
@@ -340,11 +340,11 @@ const Tag = styled.div`
   white-space: nowrap;
 
   &:hover {
-    background-color: ${(props) => (props.isActive ? "#333" : "#e0e0e0")};
+    background-color: ${(props) => (props.isActive ? "#2A3133" : "#E2E2E2")};
   }
 
   @media (max-width: 480px) {
-    background-color: ${(props) => (props.isActive ? "#333" : "#e0e0e0")};
+    background-color: ${(props) => (props.isActive ? "#2A3133" : "#E2E2E2")};
     font-size: 1rem;
   }
 `;
@@ -437,7 +437,7 @@ const UIUXIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#7D8991"
+    fill="#59656C"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",

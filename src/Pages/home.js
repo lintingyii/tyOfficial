@@ -10,11 +10,13 @@ function MyComponent(props) {
   const pinRef = useRef(null);
   const meRef = useRef(null);
   const decoRef = useRef(null); // ← 新增
+  const hintRef = useRef(null); // 未捲動時的向下捲動提示
 
   useEffect(() => {
     const pin = pinRef.current;
     const me = meRef.current;
     const deco = decoRef.current;
+    const hint = hintRef.current;
     if (!pin || !me || !deco) return;
     let ticking = false;
 
@@ -36,9 +38,19 @@ function MyComponent(props) {
       };
 
       // 藍底圖不吃 scroll，改成載入後就淡入（見 BgWrap 的 animation）
-      // 這裡只負責：人物 → 白框（區間稍微重疊，銜接比較順）
-      reveal(me, phase(0, 0.55));
-      reveal(deco, phase(0.45, 1));
+      // 這裡只負責：人物 → 白框。原本兩段重疊 0.10，改成中間留 0.12 的空檔，
+      // 人像先站定、隔一下白框才進來，兩個動作才分得開。
+      reveal(me, phase(0, 0.5));
+      reveal(deco, phase(0.62, 1));
+
+      /* 捲動提示：一動就淡出。用實際捲動距離（px）而不是 progress，
+         因為 progress 的分母是 140vh 的釘選長度，40px 只佔 5%，
+         換算成 phase() 會太不直覺。 */
+      if (hint) {
+        const hp = Math.min(Math.max(1 - scrolled / 40, 0), 1);
+        hint.style.opacity = hp;
+        hint.style.transform = `translateX(-50%) translateY(${(1 - hp) * 10}px)`;
+      }
 
       ticking = false;
     };
@@ -63,10 +75,10 @@ function MyComponent(props) {
       subtitle: "SaaS product design",
       description:
         "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
-      tags: [{ name: "UI/UX design", color: "#7D8991" }],
+      tags: [{ name: "UI/UX design", color: "#59656C" }],
       subtags: [
-        { name: "SaaS", color: "#7D8991" },
-        { name: "RWD", color: "#7D8991" },
+        { name: "SaaS", color: "#59656C" },
+        { name: "RWD", color: "#59656C" },
       ],
       link: "/work/HiveBee",
       openInNewTab: false,
@@ -78,8 +90,8 @@ function MyComponent(props) {
       subtitle: "SaaS product design",
       description:
         "Tailored for small and medium-sized businesses, our AI-enhanced financial system optimizes operational efficiency, leaving traditional accounting and bookkeeping behind.",
-      tags: [{ name: "UI/UX design", color: "#7D8991" }],
-      subtags: [{ name: "SaaS", color: "#7D8991" }],
+      tags: [{ name: "UI/UX design", color: "#59656C" }],
+      subtags: [{ name: "SaaS", color: "#59656C" }],
       link: "/work/AInsight",
       openInNewTab: false,
     },
@@ -90,8 +102,8 @@ function MyComponent(props) {
       subtitle: "User interface and user experience redesign",
       description:
         "Conduct user testing to refine the exchange process and interface, then finalize with testing.",
-      tags: [{ name: "UI/UX design", color: "#7D8991" }],
-      subtags: [{ name: "APP", color: "#7D8991" }],
+      tags: [{ name: "UI/UX design", color: "#59656C" }],
+      subtags: [{ name: "APP", color: "#59656C" }],
       link: "/work/MegaBank_Redesign",
       openInNewTab: false,
     },
@@ -102,21 +114,43 @@ function MyComponent(props) {
       <BannerPin ref={pinRef}>
         <Banner>
           <BgWrap>
-            <BgImg src="./banner-bg.png" alt="" aria-hidden="true" />
+            <BgImg src="/banner-bg.png" alt="" aria-hidden="true" />
           </BgWrap>
           <picture ref={meRef}>
             <source
               media="(max-width: 820px)"
-              srcSet="./banner-2-mobile-1.png"
+              srcSet="/banner-2-mobile-1.png"
             />
-            <img src="./banner-me.png" alt="Main Page" />
+            <img src="/banner-me.png" alt="Main Page" />
           </picture>
           <DecoImg
             ref={decoRef}
-            src="./banner-deco.png"
+            src="/banner-deco.png"
             alt=""
             aria-hidden="true"
           />
+          <ScrollHint ref={hintRef} aria-hidden="true">
+            <ScrollHintInner>
+              {/* 圖形是 Figma 匯出的原檔，只把寫死的色碼換成 --hint-color */}
+              <svg viewBox="0 0 53 53" fill="none">
+                <circle cx="26.5" cy="26.5" r="26" stroke="var(--hint-color)" />
+                <path
+                  d="M27.1667 43L28 10H25L25.8333 43H27.1667Z"
+                  fill="var(--hint-color)"
+                />
+                <path
+                  d="M12 30.0441C18.2143 30.0441 26.5 33.3598 26.5 43.2647"
+                  stroke="var(--hint-color)"
+                  strokeWidth="2"
+                />
+                <path
+                  d="M41 30.0441C34.7857 30.0441 26.5 33.3598 26.5 43.2647"
+                  stroke="var(--hint-color)"
+                  strokeWidth="2"
+                />
+              </svg>
+            </ScrollHintInner>
+          </ScrollHint>
           {/* ↑ 放在 picture 後面，DOM 順序也比較靠後 */}
         </Banner>
       </BannerPin>
@@ -175,23 +209,26 @@ function MyComponent(props) {
       <IndexContainer>
         <OverlapGroupWrapper2>
           <OverlapGroup2>
-            <Rectangle height={105} left={444} top={0} width={52} />
-            <Rectangle height={105} left={444} top={106} width={52} />
-            <Rectangle height={263} left={942} top={0} width={50} />
-            <Rectangle height={264} left={942} top={264} width={50} />
-            <Rectangle height={105} left={444} top={212} width={52} />
-            <Rectangle height={105} left={444} top={318} width={52} />
-            <Rectangle height={105} left={444} top={424} width={52} />
-            <Rectangle height={105} left={444} top={530} width={52} />
-            <Rectangle height={105} left={0} top={1} width={443} />
-            <Rectangle height={105} left={497} top={530} width={495} />
-            <Rectangle height={105} left={993} top={0} width={447} />
+            {/* 座標以共用邊界線為準：x 0 / 444 / 497 / 942 / 993 / 1440，
+                y 依各欄切分。每塊往右／往下多 1px，讓相鄰的兩條 1px 邊線完全重合，
+                看起來是一條共用線 —— 既沒有縫也不會變成 2px 粗。 */}
+            <Rectangle height={107} left={444} top={0} width={54} />
+            <Rectangle height={107} left={444} top={106} width={54} />
+            <Rectangle height={265} left={942} top={0} width={52} />
+            <Rectangle height={266} left={942} top={264} width={52} />
+            <Rectangle height={107} left={444} top={212} width={54} />
+            <Rectangle height={107} left={444} top={318} width={54} />
+            <Rectangle height={107} left={444} top={424} width={54} />
+            <Rectangle height={105} left={444} top={530} width={54} />
+            <Rectangle height={108} left={0} top={0} width={445} />
+            <Rectangle height={106} left={497} top={529} width={497} />
+            <Rectangle height={108} left={993} top={0} width={447} />
             {/* <ColoredRectangle color="#D8984E" height={528} left={0} top={107} width={443} />
           <ColoredRectangle color="#2A96B7" height={528} left={498} top={0} width={443} />
-          <ColoredRectangle color="#7d8991" height={528} left={993} top={107} width={447} /> */}
-            <HoverableDiv>
+          <ColoredRectangle color="#59656c" height={528} left={993} top={107} width={447} /> */}
+            <HoverableDiv ink="#59656c">
               <ColoredRectangle
-                color="#7d8991"
+                color="#59656c"
                 height={528}
                 left={993}
                 top={107}
@@ -212,13 +249,13 @@ function MyComponent(props) {
               </UIUXProject1>
             </HoverableDiv>
 
-            <HoverableDiv>
+            <HoverableDiv ink="#2A96B7">
               <ColoredRectangle
                 color="#2A96B7"
-                height={528}
-                left={498}
+                height={530}
+                left={497}
                 top={0}
-                width={443}
+                width={446}
               />
               <GraphicDesign>Graphic Design</GraphicDesign>
               <GraphicDesign1>
@@ -232,13 +269,13 @@ function MyComponent(props) {
               </GraphicDesign1>
             </HoverableDiv>
 
-            <HoverableDiv>
+            <HoverableDiv ink="#D8984E">
               <ColoredRectangle
                 color="#D8984E"
                 height={528}
                 left={0}
                 top={107}
-                width={443}
+                width={445}
               />
               <TextWrapper2>Frontend Coding</TextWrapper2>
               <TextWrapper2n1>
@@ -287,7 +324,7 @@ function MyComponent(props) {
         <FlipCard
           title="UI / UX Design"
           content="As a UI/UX designer, I harmonize form and function to create visually captivating interfaces that guide users through purposeful journeys. With extensive cross-industry research, I tailor solutions to diverse user needs. Collaborating with cross-functional teams, I prioritize user-centric design, informed by thorough research, seamlessly integrating experiences into users' lives."
-          bgColor="#7D8991"
+          bgColor="#59656C"
         />
         <FlipCard
           title="Graphic Design"
@@ -548,14 +585,31 @@ const Div = styled.div`
 //   }
 // `;
 
+/* 桌機的 banner 由三張同尺寸（4152×1977）的圖疊成，必須像素對齊。
+   用同一組 contain + bottom 規則：視窗矮就等比縮到裝得下（左右露出的底色與圖片邊緣同為
+   #2A96B7，看不出來），視窗高就靠底對齊，維持人物貼齊畫面底部的構圖。 */
+const bannerLayerFit = css`
+  @media (min-width: 821px) {
+    box-sizing: border-box;
+    padding-top: var(--banner-nav-gap, 58px); /* 讓出固定導覽列的高度，視窗矮時引言才不會被蓋住 */
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: bottom center;
+  }
+`;
+
 const BannerPin = styled.div`
   position: relative;
+  width: 100%; /* 外層是 column flex，寬度不能靠內容撐（picture 在桌機是絕對定位） */
   height: 140vh; /* ← 釘選時長：越高，banner 被固定的時間越久。想短一點改 160vh 之類 */
 `;
 
 const Banner = styled.div`
+  --banner-nav-gap: 58px; /* App.js 的固定導覽列高度 */
   position: sticky;
   top: 0;
+  width: 100%;
   height: 100vh;
   z-index: 0;
   display: flex;
@@ -578,11 +632,22 @@ const Banner = styled.div`
   picture img {
     width: 100%;
     display: block;
+    ${bannerLayerFit}
     @media (max-width: 820px) {
       padding-top: 6vh;
     }
     @media (max-width: 480px) {
       padding-top: 0;
+    }
+  }
+
+  @media (min-width: 821px) {
+    background-color: #2a96b7; /* 等比縮小後左右的補色 */
+
+    picture {
+      position: absolute;
+      inset: 0;
+      width: auto;
     }
   }
 `;
@@ -611,6 +676,7 @@ const BgImg = styled.img`
   height: auto;    /* 維持原始比例 */
   display: block;
   object-fit: contain;
+  ${bannerLayerFit}
 `;
 // const BgImg = styled.img`
 //   position: absolute;
@@ -634,10 +700,67 @@ const DecoImg = styled.img`
   width: 100%;
   height: auto;
   object-fit: contain;
+  ${bannerLayerFit}
+  @media (min-width: 821px) {
+    inset: 0;
+  }
   z-index: 2;
   opacity: 0;
   will-change: transform, opacity;
   pointer-events: none;
+`;
+
+/* ---- 未捲動時的「向下捲動」提示（依 Figma：圓框 + 弧線箭頭） ---- */
+const hintFadeIn = keyframes`
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+`;
+
+const hintFloat = keyframes`
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(6px); }
+`;
+
+const ScrollHint = styled.div`
+  --hint-color: #D8984E; /* 依 Figma 的橘色；與 resume 波浪線同一支 */
+
+  position: absolute;
+  left: 50%;
+  bottom: 18%; /* 壓在人像將要升起的位置下方，不跟引言擠在一起 */
+  transform: translateX(-50%);
+  z-index: 4; /* 在底圖與人像之上；白框浮現時它早就淡出了 */
+  pointer-events: none;
+  will-change: opacity, transform;
+
+  @media (max-width: 480px) {
+    bottom: 15%; /* 手機版導覽列在畫面下方，留一點餘裕不要疊到 */
+  }
+`;
+
+const ScrollHintInner = styled.div`
+  /* 進場延遲 0.9s，讓藍底圖的 bgFadeIn（0.8s）先跑完。
+     外層 opacity 由 scroll handler 控制、內層只管進場與浮動，
+     兩層相乘所以互不覆蓋（inline style 蓋不過 animation）。 */
+  animation:
+    ${hintFadeIn} 0.6s ease-out 0.9s both,
+    ${hintFloat} 2.4s ease-in-out 1.5s infinite;
+
+  @media (prefers-reduced-motion: reduce) {
+    animation: ${hintFadeIn} 0.01s linear both;
+  }
+
+  svg {
+    display: block;
+    width: 53px; /* Figma 原始尺寸 */
+    height: 53px;
+  }
+
+  @media (max-width: 480px) {
+    svg {
+      width: 44px;
+      height: 44px;
+    }
+  }
 `;
 
 const typing = keyframes`
@@ -650,7 +773,7 @@ const caret = keyframes`
 
 const Div11 = styled.div`
   font:
-    700 20px system-ui,
+    400 20px system-ui,
     -apple-system,
     BlinkMacSystemFont,
     "Segoe UI",
@@ -667,7 +790,7 @@ const Div11 = styled.div`
   position: absolute;
   margin-top: 24px;
   margin-left: 4px;
-  width: 488px;
+  width: 453px; /* 字重改 400 後文字實寬 450px；原本 488 是配 700 粗體的 */
   height: 24px;
   overflow: hidden;
   border-right: 0.1em solid;
@@ -678,7 +801,7 @@ const Div11 = styled.div`
   @media (max-width: 772px) {
     margin-left: 0px;
     font-size: 18px;
-    width: 448px;
+    width: 418px;
     height: 20px;
     border-right: 0.1em solid;
     margin-top: 16px;
@@ -686,7 +809,7 @@ const Div11 = styled.div`
   @media (max-width: 648px) {
     margin-left: 0px;
     font-size: 16px;
-    width: 405px;
+    width: 378px;
     height: 20px;
     border-right: 0.1em solid;
     margin-top: 16px;
@@ -716,7 +839,7 @@ const OverlapGroupWrapper = styled.div`
   margin-bottom: 15vh;
   padding-top: 10vh;
   border-top: 1.5px solid;
-  border-color: #333333;
+  border-color: #2A3133;
 
   @media (max-width: 1440px) {
     // max-height: 25vh;
@@ -765,7 +888,7 @@ const OverlapGroup = styled.div`
 `;
 
 const HeadingIAm = styled.div`
-  color: #333333;
+  color: #2A3133;
   font-family:
     system-ui,
     -apple-system,
@@ -811,7 +934,7 @@ const HeadingIAm = styled.div`
 
 const Frame = styled.div`
   align-items: center;
-  background-color: #7d8991;
+  background-color: #59656c;
   border-radius: 80px;
   display: inline-flex;
   gap: 10px;
@@ -878,7 +1001,7 @@ const DivWrapper2 = styled.div`
 const CircleContainer = styled.div`
   --circleSize: 50px;
   --spinSpeed: 5s;
-  --color1: #2A96B7; /* 陰影顏色 */
+  --color1: #2A96B7; /* 陰影顏色，由下方 cycleColor 輪替 */
   --color2: #f2f2f2; /* 亮面顏色 */
 
   width: 100%; /* 覆盖整个屏幕宽度 */
@@ -887,7 +1010,40 @@ const CircleContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  padding-bottom: 5vh;
+  padding: 80px 0; /* 上下呼吸空間，原本只有 padding-bottom: 5vh */
+
+  @media (max-width: 820px) {
+    padding: 72px 0;
+  }
+
+  /* 三色輪替：在「完全實心」的那一瞬間換色，一輪 15s（3 次翻面）。
+     翻面週期 5s 的相位：0s 亮面全覆蓋 → 1.25s 彩色面側轉看不見 →
+     2.5s 完全實心上色 → 3.75s 轉回亮面。
+     選 2.5s 是因為那一刻整顆球（:after 圓盤 + 外框 box-shadow）全都是 --color1，
+     底下的 :before 半圓完全被蓋住，所以換色是整顆一起換、不會出現半邊跳色。
+     15s 內的斷點：2.5s = 16.667%、7.5s = 50%、12.5s = 83.333%。
+     --color1 已在 App.css 用 @property 註冊成 <color> 才動得了；
+     成對的 keyframes 讓它硬切而不是漸變，維持色票乾淨。 */
+  animation: cycleColor calc(var(--spinSpeed) * 3) infinite;
+
+  @keyframes cycleColor {
+    0%,
+    16.666% {
+      --color1: #59656C;
+    }
+    16.667%,
+    49.999% {
+      --color1: #2A96B7;
+    }
+    50%,
+    83.332% {
+      --color1: #F7883D;
+    }
+    83.333%,
+    100% {
+      --color1: #59656C;
+    }
+  }
 
   .circle {
     height: var(--circleSize);
@@ -986,35 +1142,44 @@ const IndexContainer = styled.div`
   align-items: center; /* 讓內容垂直置中 */
   width: 100vw; /* 確保始終佔滿視窗寬度 */
   height: auto; /* 根據需要設置高度 */
-  margin: 0 auto;
+  margin: 0 auto 80px; /* 與下方跑馬燈拉開距離 */
   position: relative;
 
-  @media (max-width: 820px) {
+  /* 桌機畫布是等比縮放的，低於 1200px 內文會被縮到 13px 以下（834px 時只剩 9px），
+     這個範圍改用下面 Div6 的卡片版面。 */
+  @media (max-width: 1199px) {
     display: none;
   }
 `;
 
+/* 這一區是固定像素的絕對定位版型（每個方塊都寫死 left/top/width/height），
+   實際畫布是 1440×635（邊線用 border-box 算在尺寸內）。原本外層寫死 1450px，視窗比它窄就會出現
+   水平捲軸、右邊的卡片被切掉。改成等比縮放填滿容器寬度：
+   wrapper 用 aspect-ratio 撐出正確高度，內層維持原尺寸再用 transform 縮放，
+   這樣所有硬座標都不用動，版面比例也完全不變。 */
+const CANVAS_W = 1440;
+const CANVAS_H = 635;
+
 const OverlapGroupWrapper2 = styled.div`
-  height: 700px;
+  container-type: inline-size;
+  width: 100%;
+  aspect-ratio: ${CANVAS_W} / ${CANVAS_H};
   overflow: hidden;
-  width: 1450px;
 `;
 
 const OverlapGroup2 = styled.div`
   background-color: #f2f2f2;
-  height: 627px;
   position: relative;
-  display: flex;
-  justify-content: center;
-  padding-left: 50px;
-  height: 100%;
-  overflow-x: auto; /* 允許水平滾動 */
-  overflow-y: hidden;
+  width: ${CANVAS_W}px;
+  height: ${CANVAS_H}px;
+  transform-origin: top left;
+  transform: scale(calc(100cqw / ${CANVAS_W}px)); /* 長度÷長度＝純數字，scale() 才吃 */
 `;
 
 const Rectangle = styled.div`
-  border: 1.5px solid;
-  border-color: #333333;
+  box-sizing: border-box; /* 座標是 Figma 的外框尺寸，邊線要算在內才不會互相重疊 */
+  border: 1px solid;
+  border-color: #2A3133;
   border-radius: 16px;
   height: ${({ height }) => height}px;
   left: ${({ left }) => left}px;
@@ -1055,13 +1220,14 @@ const UIUXProject1 = styled(UIUXProject)`
   top: 340px;
   width: 360px;
   white-space: pre-wrap;
-  color: #7d8991;
+  color: var(--text-color, #59656c);
   font-weight: 400;
 `;
 
 const ColoredRectangle = styled.div`
-  border: 1.5px solid;
-  border-color: #333333;
+  box-sizing: border-box;
+  border: 1px solid;
+  border-color: #2A3133;
   border-radius: 16px;
   height: ${({ height }) => height}px;
   left: ${({ left }) => left}px;
@@ -1091,11 +1257,20 @@ const TextWrapper2n1 = styled(UIUXProject)`
   top: 340px;
   width: 360px;
   white-space: pre-wrap;
-  color: #d8984e;
+  color: var(--text-color, #d8984e);
   font-weight: 400;
 `;
 
 const HoverableDiv = styled.div`
+  /* 內文色平常等於卡片底色（刻意看不見），hover 時底色變 rgba(0,0,0,.8)
+     才浮現。浮現的底實際是 #303030，原色壓上去只有 2.2:1，所以同時提亮。
+     GraphicDesign1 定義在本元件之後，沒辦法用 component selector，改用 CSS 變數傳遞。 */
+  --text-color: ${(props) => props.ink};
+
+  &:hover {
+    --text-color: color-mix(in srgb, ${(props) => props.ink} 66%, white);
+  }
+
   &:hover ${ColoredRectangle} {
     background-color: rgba(0, 0, 0, 0.8);
   }
@@ -1113,7 +1288,7 @@ const GraphicDesign1 = styled(UIUXProject)`
   top: 214px;
   width: 360px;
   white-space: pre-wrap;
-  color: #2a96b7;
+  color: var(--text-color, #2a96b7);
   font-weight: 400;
 `;
 
@@ -1128,6 +1303,7 @@ const Div6 = styled.div`
   line-height: 46px;
   display: none;
   padding-bottom: 32px;
+  margin-bottom: 48px; /* 加上上面的 32px padding，與跑馬燈之間共 80px */
   gap: 24px;
   font-size: 24px;
   font-family:
@@ -1143,8 +1319,14 @@ const Div6 = styled.div`
     "Helvetica Neue",
     sans-serif;
 
-  @media (max-width: 820px) {
+  @media (max-width: 1199px) {
     display: flex;
+  }
+
+  /* 平板：三欄並排填滿寬度，不要拉成三條全寬長條 */
+  @media (min-width: 821px) and (max-width: 1199px) {
+    flex-direction: row;
+    align-items: stretch;
   }
 `;
 
@@ -1225,7 +1407,7 @@ const Div9 = styled.a`
     "Helvetica Neue",
     sans-serif;
   border-radius: 16px;
-  background-color: #7d8991;
+  background-color: #59656c;
   margin-top: 32px;
   justify-content: center;
   align-items: center;
@@ -1259,19 +1441,23 @@ const TextWrapper3 = styled.div`
   color: #666666;
   text-align: center;
 
-  padding-bottom: 8vh;
+  padding-bottom: 0; /* 下方留白改由球體區塊的 padding 提供，不再疊加 */
   line-height: 2.5rem;
+
+  p {
+    margin-bottom: 0; /* 移除 <p> 預設的 1em 下邊距 */
+  }
 
   @media (max-width: 1440px) {
     // font-size: 1rem;
     width: 90%;
     text-align: center;
-    padding-bottom: 5vh;
+    padding-bottom: 0;
   }
   @media (max-width: 1024px) {
     // font-size: 1rem;
     text-align: left;
-    padding-bottom: 5vh;
+    padding-bottom: 0;
   }
   @media (max-width: 480px) {
     display: flex;
@@ -1287,7 +1473,7 @@ const TextWrapper3 = styled.div`
 `;
 
 const Span = styled.span`
-  background-color: #333333;
+  background-color: #2A3133;
   border-radius: 50px;
   padding: 2px 8px;
   color: #ffffff;
@@ -1300,11 +1486,22 @@ const DivFlipCard = styled.div`
   align-items: center;
   max-width: 100%;
   // margin: 20px;
+
+  @media (min-width: 821px) and (max-width: 1199px) {
+    flex: 1;
+    min-width: 0; /* 讓 flex 子項可以縮到比內容窄 */
+  }
 `;
 
 const FlipCardInner = styled.div`
   // position: relative;
   height: 200px;
+
+  /* 三欄時每張只剩約 1/3 寬，背面的說明文字需要更多高度 */
+  @media (min-width: 821px) and (max-width: 1199px) {
+    height: 380px;
+  }
+
   text-align: left;
   transition: transform 0.8s;
   transform-style: preserve-3d;
@@ -1386,6 +1583,11 @@ const ContentMob = styled.div`
     font-size: 0.8rem;
     line-height: 1.4;
   }
+
+  /* 平板三欄時卡片只有 1/3 寬，字級不能跟著回到 1rem，否則背面文字會溢出 */
+  @media (min-width: 821px) and (max-width: 1199px) {
+    font-size: 0.875rem;
+  }
 `;
 
 const Section = styled.div`
@@ -1422,7 +1624,7 @@ const CardsContainer = styled.div`
 `;
 
 const SectionTitle = styled.div`
-  color: #333333;
+  color: #2A3133;
   font-family:
     system-ui,
     -apple-system,
@@ -1458,7 +1660,7 @@ const SectionTitle = styled.div`
 `;
 
 const SectionTitleSticky = styled.div`
-  color: #333333;
+  color: #2A3133;
   font-family:
     system-ui,
     -apple-system,
@@ -1579,7 +1781,7 @@ const Flower = styled.svg`
   width: 60px;
   height: 60px;
   fill: ${(props) => props.fill || "none"};
-  stroke: ${(props) => props.stroke || "#333"};
+  stroke: ${(props) => props.stroke || "#2A3133"};
   stroke-width: 0.6;
   animation: ${rotate} 8s linear infinite;
 `;

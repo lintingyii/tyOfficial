@@ -47,7 +47,7 @@ const SubTitle = styled.div`
   // margin: 20px 0;
   font-size: 1rem;
   line-height: 2;
-  color: #444;
+  color: #2A3133;
 `;
 
 const Image = styled.img`
@@ -96,7 +96,7 @@ const Divider = styled.hr`
 const SectionTitle = styled.h1`
   font-size: 2rem;
   margin: 10px 0;
-  color: #444;
+  color: #2A3133;
 `;
 
 const CircleWrapper = styled.div`
@@ -119,7 +119,7 @@ const Circle = styled.div`
 const Text = styled.div`
   font-size: 1rem;
   margin: 30px auto;
-  color: #444;
+  color: #2A3133;
   width: 70%;
   text-align: justify;
   line-height: 1.5;
@@ -133,7 +133,7 @@ const Text = styled.div`
 const DisText = styled.div`
   font-size: 1rem;
   margin: 0;
-  color: #444;
+  color: #2A3133;
   width: 90%;
   text-align: justify;
   border-left: 10px solid #e87cdc;

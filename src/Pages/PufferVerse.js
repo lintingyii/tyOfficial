@@ -44,7 +44,7 @@ const SpecialButton = styled.button`
 
   &:hover {
     color: #fff;
-    background-color: #000;
+    background-color: #2A3133;
   }
 `;
 

@@ -47,7 +47,7 @@ const SubTitle = styled.div`
   // margin: 20px 0;
   font-size: 1rem;
   line-height: 2;
-  color: #444;
+  color: #2A3133;
 `;
 
 const Image = styled.img`
@@ -120,7 +120,7 @@ const Divider = styled.hr`
 const SectionTitle = styled.h1`
   font-size: 2rem;
   margin: 10px 0;
-  color: #444;
+  color: #2A3133;
 `;
 
 const BlockTitle = styled.h3`
@@ -142,7 +142,7 @@ const BlockHeader = styled.h1`
   font-size: 1.8rem;
   margin: 0 auto;
   margin-top: 1rem;
-  color: #444;
+  color: #2A3133;
   width: 70%;
   text-align: left;
 
@@ -176,7 +176,7 @@ const Circle = styled.div`
 const Text = styled.div`
   font-size: 1rem;
   margin: 30px auto;
-  color: #444;
+  color: #2A3133;
   width: 70%;
   text-align: left;
   line-height: 1.5;
@@ -189,7 +189,7 @@ const Text = styled.div`
 const HalfText = styled.div`
   font-size: 1rem;
   margin: 0 auto;
-  color: #444;
+  color: #2A3133;
   width: 100%;
   text-align: justify;
 
@@ -215,7 +215,7 @@ const ContentText = styled.div`
 const DisText = styled.div`
   font-size: 1rem;
   margin: 0;
-  color: #444;
+  color: #2A3133;
   width: 100%;
   text-align: justify;
   box-sizing: border-box;
@@ -424,7 +424,7 @@ const SpecialText = styled.div`
   font-size: 1rem;
   font-weight: 700;
   margin: 10px auto;
-  color: #333333;
+  color: #2A3133;
   width: fit-content;
   height: fit-content;
   text-align: center;
@@ -448,7 +448,7 @@ const SpecialText = styled.div`
 const TextWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: #f8f8f8;
+  background-color: #F9F9F9;
   margin: 0 auto;
   margin-top: 3rem;
   padding: 24px;
@@ -555,7 +555,7 @@ const TextWrapperContainer = styled.div`
   box-sizing: border-box;
   margin: 0 auto;
   margin-top: 1rem;
-  background-color: #f8f8f8;
+  background-color: #F9F9F9;
 
   @media (max-width: 880px) {
     box-sizing: border-box;
@@ -673,14 +673,14 @@ const HiveBee = () => {
             </ContentWrapper>
             <TextWrapperSmall>
               <ContentText>
-                <span style={{ fontWeight: "600", color: "#333" }}>
+                <span style={{ fontWeight: "600", color: "#2A3133" }}>
                   User Experience Strategy
                 </span>
                 <br /># Competitor analysis <br /> # Contextual inquiry <br /> #
                 User Interview <br /># Functional mapping <br /> # User flow
               </ContentText>
               <ContentText style={{ border: "none" }}>
-                <span style={{ fontWeight: "600", color: "#333" }}>
+                <span style={{ fontWeight: "600", color: "#2A3133" }}>
                   Interface Design Execution
                 </span>
                 <br /># Wireframe and Lo-fi Prototype <br /> # UI Kit <br /> #
@@ -689,7 +689,7 @@ const HiveBee = () => {
               </ContentText>
             </TextWrapperSmall>
             <TextWrapperSmall>
-              <span style={{ fontWeight: "600", color: "#333" }}>
+              <span style={{ fontWeight: "600", color: "#2A3133" }}>
                 Tools
               </span>
 
