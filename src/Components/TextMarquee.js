@@ -81,9 +81,9 @@ const reduceMotion = css`
    字級的倍率是「看起來一樣大」而不是「數字一樣大」：書寫體的墨色高度遠小於
    字級，1em 直接排會比旁邊的襯線矮一截。1.55em 剛好讓它的上緣對齊襯線的
    大寫高度 —— 比襯線大一點點是靠字體本身的個性，不是靠字級撐出來的。 */
+/* 顏色跟著整行走，不另外指定 —— 這個字已經靠字體與字級在做區分了，
+   再加一個顏色是第三個訊號，重複標記反而像沒決定好。 */
 const Accent = styled.span`
-  /* 維持內文墨色。句子退成灰之後，這個字自然變成一行裡的視線落點。 */
-  color: #2a3133;
   font-family: "Luxurious Script", cursive;
   font-size: 1.55em;
   text-transform: none;
