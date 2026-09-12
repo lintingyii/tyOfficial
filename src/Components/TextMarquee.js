@@ -29,20 +29,20 @@ const reduceMotion = css`
   }
 `;
 
-/* 句子裡被挑出來的那個字，換成 Luxurious Script 的全大寫。
+/* 句子裡被挑出來的那個字，換成 Luxurious Script，維持小寫。
 
-   這支字的大寫是花體，字母之間不連筆但筆畫會互相伸進對方的字身框，
-   所以要給一點字距，不然會疊在一起。
+   字距必須是 0：小寫是連筆的，一拉開字距筆畫就斷了。
 
    字級的倍率是「看起來一樣大」而不是「數字一樣大」：書寫體的墨色高度遠小於
-   字級，1em 直接排會比旁邊的襯線矮一截。 */
+   字級，1em 直接排會比旁邊的襯線矮一截。小寫的墨色又比大寫更矮，所以這裡的
+   倍率比全大寫版本高。 */
 const Accent = styled.span`
   font-family: "Luxurious Script", cursive;
-  font-size: 1.5em;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 1.7em;
+  text-transform: none;
+  letter-spacing: 0;
   line-height: 1;
-  padding: 0 0.08em; /* 花體的起筆與收筆會往外伸，不留一點會黏到前後的字 */
+  padding: 0 0.06em; /* 書寫體的起筆與收筆會往外伸，不留一點會黏到前後的字 */
 `;
 
 const Unit = styled.span`
@@ -55,7 +55,7 @@ const Unit = styled.span`
      被挑出來的那個字靠字體與字級做區分，不靠全大寫。 */
   font-family: serif;
   font-size: clamp(24px, 4.5vw, 84px);
-  line-height: 1.8;
+  line-height: 1.95;
   letter-spacing: 0.005em;
   color: #2a3133;
 
