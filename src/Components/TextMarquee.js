@@ -73,8 +73,20 @@ const Unit = styled.span`
 /* 色塊拿掉之後，上下留白就是它跟前後區塊的分隔 —— 這段 padding 不是裝飾，
    是原本那條橫幅在做的事。上緣可以另外加大（work 頁接在作品列表後面，
    需要比首頁更多的距離），所以用 prop 而不是外層覆寫 padding 簡寫。 */
+/* 兩行之間要靠負 margin 拉近，不能只靠行高。
+
+   行高被 Accent 綁死了（行框必須裝得下比較高的那個字，否則跑馬燈容器會把
+   筆畫切掉），所以每一行的盒子上下各多出一截空氣。負 margin 把第二行往上拉，
+   讓「墨色之間」的距離回到正常的行距 —— 兩行的容器各自裁切自己的內容，
+   重疊不會互相切到。 */
+const SecondRow = styled.div`
+  margin-top: -0.62em;
+`;
+
 const Block = styled.div`
   width: 100%;
+  /* em 的基準要跟字一樣，SecondRow 的負 margin 才會跟著字級縮放 */
+  font-size: clamp(24px, 4.5vw, 84px);
   background-color: #f2f2f2;
   padding: ${({ $gapTop }) => $gapTop || "6vh"} 0 6vh;
 
@@ -83,6 +95,23 @@ const Block = styled.div`
   }
 `;
 
+const Line = ({ text, accent }) => (
+  <Unit>
+    {text}
+    {accent ? (
+      <>
+        {" "}
+        <Accent>{accent}</Accent>
+      </>
+    ) : null}
+    <Spark />
+  </Unit>
+);
+
+/* 兩行反向（上行往右、下行往左），照 Motto 的排法。
+
+   這不只是裝飾：色塊拿掉之後，單獨一行 64.8px 的字沒有足夠的量體去當
+   區塊之間的分隔，讀起來像一行漂在灰底上的孤字。兩行疊起來才重得起來。 */
 const TextMarquee = ({
   text,
   accent,
@@ -92,18 +121,14 @@ const TextMarquee = ({
   className,
 }) => (
   <Block className={className} $gapTop={gapTop} $gapTopSm={gapTopSm}>
-    <Marquee speed={speed} autoFill gradient={false}>
-      <Unit>
-        {text}
-        {accent ? (
-          <>
-            {" "}
-            <Accent>{accent}</Accent>
-          </>
-        ) : null}
-        <Spark />
-      </Unit>
+    <Marquee speed={speed} direction="right" autoFill gradient={false}>
+      <Line text={text} accent={accent} />
     </Marquee>
+    <SecondRow>
+      <Marquee speed={speed} autoFill gradient={false}>
+        <Line text={text} accent={accent} />
+      </Marquee>
+    </SecondRow>
   </Block>
 );
 
