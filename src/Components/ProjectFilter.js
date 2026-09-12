@@ -356,8 +356,26 @@ const Filter = styled.div`
   justify-content: center;
   gap: 8px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 820px) {
+    /* 維持單排橫向捲動，但改成滿版出血。
+
+       原本容器是 width: 90%（左右各留 20px），所以按鈕是在「畫面內側
+       20px 的地方」被切掉 —— 看起來像破版。改成滿版、用 padding 做出
+       同樣的 20px 起始邊距，裁切點就落在畫面邊緣，讀起來是「還有東西，
+       可以滑」而不是被容器切斷。
+
+       捲軸也隱藏：它會在按鈕下方留一條灰槓。 */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
     justify-content: flex-start;
+    scroll-padding-inline: 20px;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome / Safari */
+    }
   }
 `;
 

@@ -425,8 +425,12 @@ const GalleryRow = styled.div`
   }
 
   @media (max-width: 820px) {
-    flex-wrap: wrap;
-    gap: 8px;
+    /* 2×2。原本是 flex-wrap: wrap，但每一格是 flex: 1 1 0（basis 0、可縮），
+       四格永遠擠得進一行，所以從來不會換行 —— 才會變成一排四張小圖。
+       改用 grid 直接指定兩欄，才是真的兩排。 */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
 `;
 
@@ -435,7 +439,7 @@ const GalleryItem = styled.div`
   flex: 1 1 0;
   min-width: 0;
   aspect-ratio: 1 / 1;
-  border-radius: 24px;
+  border-radius: 12px; /* 與 footer 的 Footerwraper 一致 */
   overflow: hidden;
 `;
 

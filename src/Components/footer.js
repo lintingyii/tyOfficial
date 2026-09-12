@@ -70,7 +70,9 @@ export const Footer = ({ color }) => {
           </LinkGroup>
         </Text>
         <BgIcon />
-        <Ending>© Tingyi Lin | All rights reserved 2024</Ending>
+        <Ending>
+          © Tingyi Lin | All rights reserved {new Date().getFullYear()}
+        </Ending>
       </Footerwraper>
     </FooterContainer>
   );

@@ -360,6 +360,12 @@ const Header = styled.div`
   width: 100%;
   background-color: #2A3133; /* 深色 hero，靠像素轉場過渡到下方的淺色內容 */
   min-height: 85vh; /* hero 高度 */
+
+  @media (max-width: 820px) {
+    /* 手機版畫面窄，標題與三顆標籤佔的高度相對小很多，
+       85vh 會在內容下方留一大片空黑。 */
+    min-height: 70vh;
+  }
   align-items: center;
   /* 不裁切：像素格最後一列會超出 hero 下緣一點點，讓邊緣是完整方塊
      而不是被切成薄片。shader 漸層本身已經是 absolute inset:0，不受影響。 */
@@ -432,6 +438,10 @@ const TransitionGap = styled.div`
   width: 100%;
   height: 12vh;
   background-color: ${({ $dark }) => ($dark ? "#2A3133" : "#f2f2f2")};
+
+  @media (max-width: 820px) {
+    height: 6vh; /* 手機版 hero 本身已經縮短，這段再對半 */
+  }
 `;
 
 const OverlapGroupWrapper = styled.div`
@@ -456,12 +466,12 @@ const OverlapGroupWrapper = styled.div`
 
   @media (max-width: 480px) {
     padding-top: 15vh;
-    padding-bottom: 15vh;
+    padding-bottom: 9vh;
     height: auto;
   }
   @media (max-width: 375px) {
     padding-top: 15vh;
-    padding-bottom: 18vh;
+    padding-bottom: 10vh;
     height: auto;
   }
 `;
@@ -604,6 +614,19 @@ const CardsContainer = styled.div`
   z-index: 100;
   background-color: #f2f2f2;
   padding-top: 3rem;
+
+  @media (max-width: 820px) {
+    /* 往上疊進馬賽克畫布的下半段。
+
+       馬賽克是由下往上翻的，下半部很早就整片變成淺色 —— 內容排在畫布
+       後面的話，那片淺色就是使用者看到的一大塊空白。這一區是同色的
+       不透明區塊，疊上去剛好蓋掉，畫面上只會剩馬賽克的波前。
+
+       28vh 是算出來的：讓「篩選列剛進畫面」時，波前正好落在內容上緣。
+       position: relative 才能讓既有的 z-index 生效、蓋過畫布。 */
+    position: relative;
+    margin-top: -28vh;
+  }
   left: 0;
   gap: 3rem;
   width: 100%;

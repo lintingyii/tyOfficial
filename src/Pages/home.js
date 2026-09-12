@@ -5,6 +5,8 @@ import Footer from "../Components/footer";
 import ServiceCardComponent from "../Components/ServiceCard";
 import TestimonialCard from "../Components/TestimonialCard";
 import { LargeProjectCard } from "../Components/ProjectCard";
+import PixelScrollTransition from "../Components/PixelScrollTransition";
+import Typewriter from "../Components/Typewriter";
 
 function MyComponent(props) {
   const pinRef = useRef(null);
@@ -18,9 +20,26 @@ function MyComponent(props) {
     const deco = decoRef.current;
     const hint = hintRef.current;
     if (!pin || !me || !deco) return;
+    /* 只有桌機版做人像縮放（≤820px 的 picture 不是絕對定位，版面不同） */
+    const wideMQ = window.matchMedia("(min-width: 821px)");
     let ticking = false;
 
     const update = () => {
+      /* 先寫入 --portrait-reveal：BannerPin 的高度吃這個值，必須在讀
+         offsetHeight 之前設好，否則第一次算到的是舊高度。下面會用正確的
+         倍率再寫一次，這裡先給一個同量級的值讓首次量測不會差太多。 */
+      {
+        const w0 = wideMQ.matches;
+        const z0 = (w0 ? 0.246 : 0.78) * (4152 / 639);
+        const s0 = w0
+          ? 0
+          : window.innerHeight * 0.5 -
+            (window.innerHeight - 0.2767 * window.innerWidth);
+        pin.style.setProperty(
+          "--portrait-reveal",
+          `${Math.max(0, s0 + 0.2767 * window.innerWidth * (z0 - 1))}px`,
+        );
+      }
       const total = pin.offsetHeight - window.innerHeight;
       const scrolled = Math.min(
         Math.max(-pin.getBoundingClientRect().top, 0),
@@ -32,16 +51,47 @@ function MyComponent(props) {
       const phase = (start, end) =>
         Math.min(Math.max((progress - start) / (end - start), 0), 1);
 
-      const reveal = (el, p) => {
+      /* 人像／外框的大小與位置。
+
+         縮放原點在人像頭頂（見 PortraitLayer 的 transform-origin），所以
+         放大時頭頂不動、身體往下長出 100vh 之外 —— 那段溢出就是「視窗造成
+         的裁切」，也是要靠捲動找回來的距離，寫進 --portrait-reveal。
+
+         桌機與手機用同一套機制，只是目標值不同：直立手機上，contain 之後
+         人像只有畫面寬的 15.4%（等於 zoom 1），小到看不清楚，所以放大倍率
+         用「人像寬度要佔畫面多少」反推，而不是寫死一個倍率。
+           zoom = 目標寬度比 × 4152 / 639
+         桌機 0.246 → 1.60（維持原本的值），手機 0.78 → 5.07。
+
+         手機另外需要垂直位移：人像在未放大時腳底貼齊容器底、整個人只有
+         107px 高，頭頂會落在 87% 的位置，底下幾乎沒東西。HEAD_TARGET 把
+         頭頂拉到畫面高的 50%。桌機的 HEAD_TARGET 就取它原本的位置，
+         位移算出來是 0，行為完全不變。 */
+      const vw = window.innerWidth;
+      const vh = window.innerHeight;
+      const wide = wideMQ.matches;
+
+      const head0 = vh - 0.2767 * vw; // 未放大時的人像頭頂
+      const zoom = (wide ? 0.246 : 0.78) * (4152 / 639);
+      const shift = wide ? 0 : vh * 0.5 - head0; // 桌機不位移
+      const overflow = shift + 0.2767 * vw * (zoom - 1);
+
+      pin.style.setProperty("--portrait-reveal", `${Math.max(0, overflow)}px`);
+
+      /* slide = 進場時額外的位移，兩張都給 0 —— 往下的位移會讓圖沉到
+         banner 底下，跟「不要被裁切」牴觸。所以只淡入。 */
+      const reveal = (el, p, slide) => {
         el.style.opacity = p;
-        el.style.transform = `translateY(${(1 - p) * 40}px)`;
+        el.style.transform = `translateY(${(1 - p) * slide + shift}px) scale(${zoom})`;
       };
 
       // 藍底圖不吃 scroll，改成載入後就淡入（見 BgWrap 的 animation）
       // 這裡只負責：人物 → 白框。原本兩段重疊 0.10，改成中間留 0.12 的空檔，
       // 人像先站定、隔一下白框才進來，兩個動作才分得開。
-      reveal(me, phase(0, 0.5));
-      reveal(deco, phase(0.62, 1));
+      // pan / zoom 兩層共用（吃的是 progress 不是各自的 phase），才不會脫開。
+      // 兩段都落在「停住」的 320px 內：人像 0~180、deco 202~306
+      reveal(me, phase(0, 0.4), 0);
+      reveal(deco, phase(0.45, 0.68), 0);
 
       /* 捲動提示：一動就淡出。用實際捲動距離（px）而不是 progress，
          因為 progress 的分母是 140vh 的釘選長度，40px 只佔 5%，
@@ -63,8 +113,13 @@ function MyComponent(props) {
     };
 
     window.addEventListener("scroll", onScroll, { passive: true });
+    // 倍率是依視窗尺寸算的，改變視窗大小也要重算
+    window.addEventListener("resize", onScroll);
     update();
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   const Projects = [
@@ -114,21 +169,16 @@ function MyComponent(props) {
       <BannerPin ref={pinRef}>
         <Banner>
           <BgWrap>
-            <BgImg src="/banner-bg.png" alt="" aria-hidden="true" />
+            {/* 手機版換成直立版底圖（引言為直立畫面重新排過）；
+                桌機維持 2.10:1 的橫幅 */}
+            <picture>
+              <source
+                media="(max-width: 820px)"
+                srcSet="/banner-bg-mobile.png"
+              />
+              <BgImg src="/banner-bg.png" alt="" aria-hidden="true" />
+            </picture>
           </BgWrap>
-          <picture ref={meRef}>
-            <source
-              media="(max-width: 820px)"
-              srcSet="/banner-2-mobile-1.png"
-            />
-            <img src="/banner-me.png" alt="Main Page" />
-          </picture>
-          <DecoImg
-            ref={decoRef}
-            src="/banner-deco.png"
-            alt=""
-            aria-hidden="true"
-          />
           <ScrollHint ref={hintRef} aria-hidden="true">
             <ScrollHintInner>
               {/* 圖形是 Figma 匯出的原檔，只把寫死的色碼換成 --hint-color */}
@@ -152,28 +202,90 @@ function MyComponent(props) {
             </ScrollHintInner>
           </ScrollHint>
           {/* ↑ 放在 picture 後面，DOM 順序也比較靠後 */}
+
+          {/* 人像／外框：必須放在 Banner 內，定位參考才是 Banner，
+              才會跟著 Banner 的 sticky 一起移動／停住 */}
+          <PortraitLayer>
+            {/* 手機版與桌機版共用同一張人像（原本 ≤820px 會換成
+                banner-2-mobile-1.png，那是一整張烤好的舊版手機 hero） */}
+            <picture ref={meRef}>
+              <img src="/banner-me.png" alt="Main Page" />
+            </picture>
+            <DecoImg
+              ref={decoRef}
+              src="/banner-deco.png"
+              alt=""
+              aria-hidden="true"
+            />
+          </PortraitLayer>
         </Banner>
       </BannerPin>
 
-      <div
-        style={{
-          display: "flex",
-          width: "100%",
-          alignItems: "center",
-          justifyContent: "center",
-          flexDirection: "column",
-          backgroundColor: "#f2f2f2",
-          zIndex: "999",
-        }}
-      >
+      {/* 馬賽克轉場。關鍵是畫布「往上長進 banner 裡 30vh」：
+          - MosaicBlock 本身是實心藍、只佔 70vh 的版面高度
+          - 畫布用 absolute + top:-30vh 溢出到上方，蓋在人像下半身上
+          - colorA 設成 transparent，所以還沒翻色的格子是透明的：
+            疊在人像上的那 30vh 會透出人像本人，往下則透出 MosaicBlock 的藍
+          結果就是方格直接從人像身上長出來，沒有一條硬邊界。
+          direction top-bottom 讓最上面（人像那一排）先翻。 */}
+      <MosaicBlock>
+        <PixelScrollTransition
+          mode="inline"
+          height="100vh" /* 30vh 疊在人像上 + 70vh 區塊本身 */
+          colorA="transparent"
+          colorB="#f2f2f2"
+          /* 跟 work 頁同一組：單一方向、由下往上掃，只有一段波前。
+             （先前用 edges-last-y 讓中間先翻，上下緣最後才補 —— 邊界確實
+             變柔了，但中間會先翻成純淺色、上下各留一片沒翻的格子，
+             看起來就變成「兩段」。）
+
+             bottom-top 同時解掉兩個邊界：
+             · 下緣最先翻成淺色，而它正下方就是淺色內容區 —— 同色碰同色，
+               那條邊看不見
+             · 上緣最後才翻，而依 endAt 的算法，它翻完時已經離開畫面頂端 */
+          direction="bottom-top"
+          pattern="random"
+          patternIntensity={0.45}
+          easing="linear"
+          pixelSize={28}
+          /* 畫布正好 100vh，所以「上緣離開視窗頂部」與「下緣抵達視窗底部」
+             是同一瞬間（捲到 990）。endAt 調成 0.57，讓最後一格翻完的時機
+             正好壓在那一刻 —— 兩個邊界變整齊時都已經貼齊畫面邊緣，
+             畫面中間不會出現藍色色塊，也不會看到平切的邊。
+             （0.57 ≈ 0.5 ÷ 0.877，0.877 是 accentShare 造成的超衝後
+             全部格子翻完的進度點。） */
+          endAt={0.57}
+          accentShare={0.14}
+          accentColors={["#F7883D", "#D8984E", "#59656C", "#2A3133"]}
+          seed={20260911}
+          style={{ position: "absolute", left: 0, right: 0, top: "-30vh" }}
+        />
+      </MosaicBlock>
+
+      {/* 這裡原本還有一段 12vh 的實心淺灰。移除了 —— 馬賽克在捲到 990 就
+          翻完，之後那段淺灰跟畫布同色，看不出來只是多捲，主要內容因此
+          晚了一個多螢幕才出現。拿掉後畫布下緣＝內容上緣，馬賽克一結束
+          內容就接著進場；視覺上的喘息交給內容區自己的 padding-top。 */}
+
+      {/* 往上疊進馬賽克畫布的下半段。
+
+          畫布本身有 100vh，全部翻成淺色之後就是一整個螢幕的空白 ——
+          內容排在它後面的話，要等它整個捲完才會出現，中間就空了 100vh。
+          用負 margin 把內容往上拉 30vh，疊在畫布下半部（那一段在此時
+          早就翻成同色的淺灰了，看不出接縫），標題就會提早一個螢幕出現。
+
+          position: relative 是必要的 —— 原本只有 zIndex 沒有 position，
+          z-index 不會生效，內容會被 MosaicBlock（z-index 1）蓋住。 */}
+      <ContentSection>
         <OverlapGroupWrapper>
           <OverlapGroup>
             <HeadingIAm>
               HI 👋🏻
               <br />I am Ting-yi, Lin
-              <Div11>
-                © Multidisciplinary designer based in Taipei, Taiwan
-              </Div11>
+              <Div11
+                as={Typewriter}
+                phrases={["© Multidisciplinary designer based in Taipei, Taiwan"]}
+              />
             </HeadingIAm>
 
             <Frame>
@@ -198,7 +310,7 @@ function MyComponent(props) {
             solutions.
           </p>
         </TextWrapper3>
-      </div>
+      </ContentSection>
 
       <div style={{ width: "100%", backgroundColor: "#f2f2f2", zIndex: "999" }}>
         <CircleContainer>
@@ -377,14 +489,14 @@ function MyComponent(props) {
             zIndex={2}
             bgImage="./testimonial-3.png"
             content="Ting-yi has a high standard for visual aesthetics and is well-versed in front-end programming languages. This enables her designs to be both thoughtfully crafted and effectively implemented in development, making collaboration a truly enjoyable experience."
-            color="#F7883D"
+            color="#D8984E" /* 配合新背景圖的引號色 */
             person="Mike Lin, Frontend Developer"
           />
           <TestimonialCard
             zIndex={3}
             bgImage="./testimonial-2.png"
             content="She integrates insights to propose innovative solutions. Her skill in clarifying user and market needs during prototyping leads to streamlined processes and effective interface designs. With a collaborative spirit, Ting-yi excels in enhancing team dynamics, making her a valuable asset in cross-functional team."
-            color="#2A96B7"
+            color="#59656C" /* 配合新背景圖的引號色 */
             person="Ethan Deng, Product Design Lead @Futurenest"
             rotate="-2deg"
           />
@@ -588,69 +700,149 @@ const Div = styled.div`
 /* 桌機的 banner 由三張同尺寸（4152×1977）的圖疊成，必須像素對齊。
    用同一組 contain + bottom 規則：視窗矮就等比縮到裝得下（左右露出的底色與圖片邊緣同為
    #2A96B7，看不出來），視窗高就靠底對齊，維持人物貼齊畫面底部的構圖。 */
+/* 三層共用的貼合方式。原本只在 ≥821px 生效，手機版走另一套（圖片在流中、
+   height:auto），所以桌機版的分層 hero 在手機上完全沒作用。現在全寬度共用。 */
 const bannerLayerFit = css`
-  @media (min-width: 821px) {
-    box-sizing: border-box;
-    padding-top: var(--banner-nav-gap, 58px); /* 讓出固定導覽列的高度，視窗矮時引言才不會被蓋住 */
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    object-position: bottom center;
-  }
+  box-sizing: border-box;
+  padding-top: var(--banner-nav-gap, 58px); /* 讓出固定導覽列的高度，視窗矮時引言才不會被蓋住 */
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: bottom center;
 `;
 
 const BannerPin = styled.div`
   position: relative;
   width: 100%; /* 外層是 column flex，寬度不能靠內容撐（picture 在桌機是絕對定位） */
-  height: 140vh; /* ← 釘選時長：越高，banner 被固定的時間越久。想短一點改 160vh 之類 */
+  /* = hero 本身的高度（100vh + 人像溢出量）＋ 320px 的「停住」時間。
+     停住期間 hero 完全不動，人像與 deco 在這段時間內依序淡入；
+     320px 用完之後 hero 才開始往上移動。改這個數字就是改停住多久。 */
+  height: calc(100vh + var(--portrait-reveal, 0px) + 320px);
+`;
+
+/* 主要內容區。負 margin 讓它往上疊進馬賽克畫布的下半段 —— 畫布有 100vh，
+   全部翻成淺色之後就是一整個螢幕的空白，排在它後面的話要等它整個捲完
+   內容才出現。疊上去的那一段在當下早就翻成同色的淺灰，看不出接縫。
+
+   手機版拉得更多：畫面高度小，同樣的 30vh 只有 253px，而馬賽克是由下往上
+   翻的，下半部很早就整片變成淺色 —— 內容沒有填上去的話，那片淺色就是
+   使用者看到的「一整屏空白」。內容本身是同色的不透明區塊，疊上去剛好
+   把它蓋掉，畫面上只會剩馬賽克的波前。
+
+   position: relative 是必要的：只有 z-index 沒有 position 的話不會生效，
+   內容會被 MosaicBlock（z-index 1）蓋住。 */
+const ContentSection = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  background-color: #f2f2f2;
+  position: relative;
+  z-index: 2;
+  margin-top: -30vh;
+
+  @media (max-width: 820px) {
+    margin-top: -55vh;
+  }
+`;
+
+/* 馬賽克的版面容器：只佔 70vh，畫布靠 absolute 往上溢出到 banner 裡。
+   z-index 1 才蓋得過 sticky Banner 的 z-index 0；不設 overflow，
+   不然往上溢出的那 30vh 會被裁掉。底色是 banner 的藍，讓還沒翻色的
+   格子在人像以下的區段透出藍色。 */
+const MosaicBlock = styled.div`
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 70vh;
+  background-color: #2A96B7;
 `;
 
 const Banner = styled.div`
   --banner-nav-gap: 58px; /* App.js 的固定導覽列高度 */
+
+  @media (max-width: 480px) {
+    --banner-nav-gap: 0px; /* 手機版導覽列在畫面下方，頂端不用讓位 */
+  }
+
+  /* hero 比視窗高一截（高出來的就是人像被視窗裁掉的那段）。
+
+     sticky + top:0：一進頁面就黏住，維持你指定的參考取景不動 ——
+     人像在這段期間淡入、接著 deco 淡入。兩段淡入都跑完之後，
+     BannerPin 的高度用完，整塊 hero 才開始往上移，把人像下半身帶進畫面。
+     因為是「整塊一起移動」，人像相對背景永遠不動，不會自己往上爬。 */
   position: sticky;
   top: 0;
   width: 100%;
-  height: 100vh;
+  height: calc(100vh + var(--portrait-reveal, 0px));
   z-index: 0;
+
+  /* 只夾水平軸：人像放大後左右各溢出數百 px，不夾會撐寬文件造成爆版。
+     用 clip 不用 hidden —— hidden 會把垂直軸一起變成 auto。 */
+  overflow-x: clip;
+  overflow-y: visible;
+
+  /* hero 比視窗高（多出 --portrait-reveal 那段），而藍色其實是 BgWrap 給的，
+     它只有 100vh —— 多出來的那段沒有底色就會露出頁面的白，正好落在人像
+     腳底。所以底色要給 Banner 本身，而且不能只在桌機版生效。 */
+  background-color: #2a96b7;
+`;
+
+/* 人像／外框自成一層，和底圖分開。
+
+   關鍵：它不跟 Banner 一起釘死。放大後人像會往下長出 100vh 之外，
+   在畫面上就是「被視窗裁掉」—— 但那是視窗造成的，元件本身沒有裁切。
+   露出下半身的動作由 Banner 的 sticky 負責（整塊一起移動），
+   這一層本身不做任何捲動位移。 */
+const PortraitLayer = styled.div`
+  /* 固定貼在 hero 的上方 100vh —— 跟底圖同一個參考框，兩者一起被
+     Banner 的 sticky 帶動，所以人像相對背景永遠不動。
+     放大後人像往下長出這個框，落在 hero 多出來的那一段裡。 */
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;
+  z-index: 1; /* 疊在底圖（z-index 0）之上 */
+  pointer-events: none;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-  overflow: hidden;
+
+  /* 只夾水平軸。放大 1.54× 會讓 <picture> 左右各溢出約 389px，
+     若不夾住會把整份文件撐寬、出現水平捲軸，藍色 banner（width:100%）
+     就填不滿文件寬度 —— 也就是爆版。
+     用 clip 而不是 hidden：hidden 會把另一軸一起變成 auto，
+     垂直方向的溢出（＝要靠捲動找回來的下半身）就沒了。
+     人像實際只有 342px 寬、置中，夾在容器邊界不會少掉任何內容。 */
+  overflow-x: clip;
+  overflow-y: visible;
 
   picture {
-    position: relative;
+    position: absolute;
+    inset: 0;
+    width: auto;
     z-index: 1;
-    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: flex-end; /* picture 內也置底 */
+    align-items: flex-end;
     opacity: 0; /* 交給 JS 控制浮現 */
-    transform: translateY(40px);
     will-change: transform, opacity;
+    /* 縮放原點＝人像頭頂（DecoImg 用同一個值，兩層才不會脫開）。
+       三張圖共用 4152×1977 畫布、contain + bottom center 貼齊底部，
+       寬度受限時渲染比例 = 100vw / 4152，人像頭頂離畫布底 1162px，
+       所以是 1162/4152 = 27.99vw。手機版更是寬度受限，同一個值成立。 */
+    transform-origin: center calc(100% - 27.99vw);
   }
 
   picture img {
     width: 100%;
     display: block;
     ${bannerLayerFit}
-    @media (max-width: 820px) {
-      padding-top: 6vh;
-    }
-    @media (max-width: 480px) {
-      padding-top: 0;
-    }
-  }
-
-  @media (min-width: 821px) {
-    background-color: #2a96b7; /* 等比縮小後左右的補色 */
-
-    picture {
-      position: absolute;
-      inset: 0;
-      width: auto;
-    }
   }
 `;
+
 const bgFadeIn = keyframes`
   from { opacity: 0; transform: translateY(40px); }
   to   { opacity: 1; transform: translateY(0); }
@@ -658,13 +850,24 @@ const bgFadeIn = keyframes`
 
 const BgWrap = styled.div`
   position: absolute;
-  inset: 0;                  /* 撐滿整個 Banner */
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100vh;             /* 固定一個視窗高，不跟著變高的 Banner 拉長 */
   z-index: 0;                /* 底層 */
   display: flex;
   justify-content: center;   /* 圖片水平置中 */
   align-items: center;       /* 圖片垂直置中 → 過高時上下留白 */
   background-color: #2A96B7; /* 上下（含左右）補色 */
   overflow: hidden;
+
+  /* <picture> 只是切換用的殼，要撐滿才不會壓縮裡面的 <img> */
+  picture {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+
   /* 不等 scroll，載入後直接淡入 */
   animation: ${bgFadeIn} 0.8s ease-out both;
   will-change: transform, opacity;
@@ -677,6 +880,15 @@ const BgImg = styled.img`
   display: block;
   object-fit: contain;
   ${bannerLayerFit}
+
+  @media (max-width: 820px) {
+    /* 手機版換成直立版底圖（585×1266，比例 0.462 ≈ 手機畫面）。
+       用 cover 而非 contain：畫面比例跟圖不完全相同時要填滿，不要出現
+       左右或上下的空條。引言在圖的上三分之一，裁切從底部吃掉空藍的部分，
+       不會動到文字。 */
+    object-fit: cover;
+    object-position: top center;
+  }
 `;
 // const BgImg = styled.img`
 //   position: absolute;
@@ -701,9 +913,9 @@ const DecoImg = styled.img`
   height: auto;
   object-fit: contain;
   ${bannerLayerFit}
-  @media (min-width: 821px) {
-    inset: 0;
-  }
+  inset: 0;
+  /* 與 PortraitLayer 內 picture 的縮放原點一致，兩層才會一起縮放不脫開 */
+  transform-origin: center calc(100% - 27.99vw);
   z-index: 2;
   opacity: 0;
   will-change: transform, opacity;
@@ -726,14 +938,15 @@ const ScrollHint = styled.div`
 
   position: absolute;
   left: 50%;
-  bottom: 18%; /* 壓在人像將要升起的位置下方，不跟引言擠在一起 */
+  /* 用 top 定位而非 bottom —— Banner 比視窗高，靠 bottom 會被推到畫面外 */
+  top: 76vh;
   transform: translateX(-50%);
   z-index: 4; /* 在底圖與人像之上；白框浮現時它早就淡出了 */
   pointer-events: none;
   will-change: opacity, transform;
 
   @media (max-width: 480px) {
-    bottom: 15%; /* 手機版導覽列在畫面下方，留一點餘裕不要疊到 */
+    top: 79vh; /* 手機版導覽列在畫面下方，留一點餘裕不要疊到 */
   }
 `;
 
@@ -763,14 +976,6 @@ const ScrollHintInner = styled.div`
   }
 `;
 
-const typing = keyframes`
-  from { width: 0; }
-`;
-
-const caret = keyframes`
-  50% { border-color: transparent; }
-`;
-
 const Div11 = styled.div`
   font:
     400 20px system-ui,
@@ -786,47 +991,37 @@ const Div11 = styled.div`
     sans-serif;
   color: #2A96B7;
   text-align: left;
-  display: flex;
+  /* inline-block：讓游標接在文字後面同一行 */
+  display: block;
   position: absolute;
+  /* 明確指定 left，不要依賴「靜態位置」。
+     這個元素是絕對定位、又接在「I am Ting-yi, Lin」這段行內文字後面，
+     Chrome 會把水平靜態位置解析成上一行的結尾（left: 673px），
+     整行就飛到右邊去。垂直的靜態位置是對的（在標題下方），所以 top 維持 auto。
+     （原本是 <div> 時沒這問題；換成 <span> 後 Chrome 的算法不同。） */
+  left: 0;
   margin-top: 24px;
   margin-left: 4px;
-  width: 453px; /* 字重改 400 後文字實寬 450px；原本 488 是配 700 粗體的 */
-  height: 24px;
-  overflow: hidden;
-  border-right: 0.1em solid;
-  animation:
-    ${typing} 5s steps(45),
-    ${caret} 1s steps(1) infinite;
+  /* 寬度不再寫死。原本每個斷點都要給一組 px（453/418/378/325）來配合
+     CSS 動畫的 width 0 → 453px，字型稍有差異就會裁字；現在是實際的
+     文字節點在逐字變長，讓它自己撐開就好。 */
+  max-width: 100%;
 
   @media (max-width: 772px) {
-    margin-left: 0px;
+    margin-left: 0;
     font-size: 18px;
-    width: 418px;
-    height: 20px;
-    border-right: 0.1em solid;
     margin-top: 16px;
   }
   @media (max-width: 648px) {
-    margin-left: 0px;
     font-size: 16px;
-    width: 378px;
-    height: 20px;
-    border-right: 0.1em solid;
-    margin-top: 16px;
-    white-space: pre-wrap;
   }
   @media (max-width: 430px) {
-    margin-left: 0px;
     font-size: 16px;
     line-height: 22px;
-    width: 325px;
-    height: 40px;
-    border-right: 0.1em solid;
-    margin-top: 16px;
-    white-space: pre-wrap;
-    border-right: 0em;
+    max-width: 325px;
   }
 `;
+
 
 const OverlapGroupWrapper = styled.div`
   background-color: #f2f2f2;
@@ -837,9 +1032,11 @@ const OverlapGroupWrapper = styled.div`
   // margin-top: 1vh;
   position: relative;
   margin-bottom: 15vh;
-  padding-top: 10vh;
-  border-top: 1.5px solid;
-  border-color: #2A3133;
+  /* 馬賽克下緣＝內容區上緣，這個 padding 就是「馬賽克跑完到標題出現」
+     之間唯一的白色空檔。先從 10vh（90px）收到 5vh（45px），再收到 2vh（18px）。
+     原本這裡還有一條 1.5px 的 #2A3133 分隔線，用來切開 banner 與內容；
+     現在兩者之間是馬賽克轉場，硬線會把漸變截斷，所以已移除。 */
+  padding-top: 2vh;
 
   @media (max-width: 1440px) {
     // max-height: 25vh;

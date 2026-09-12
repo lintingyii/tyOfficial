@@ -185,28 +185,6 @@ const Glide = styled.span`
   }
 `;
 
-const ProgressBar = styled.div`
-  /* 原本 display:none、只在 ≤480px 顯示。改成貼在導覽列下緣，桌機也看得到。
-     用 absolute 依附 Container，列高變動時不用改這裡。 */
-  display: none; /* 電腦版先隱藏；只在手機版顯示 */
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  height: 2px;
-  background-color: #2A96B7;
-  width: ${(props) => props.scroll};
-  transition: width 0.25s ease;
-
-  @media (max-width: 480px) {
-    /* 手機版導覽列在畫面下方，進度條維持固定在頂端 */
-    display: unset;
-    position: fixed;
-    top: 0;
-    bottom: auto;
-    height: 5px;
-    z-index: 999;
-  }
-`;
 
 const Main = styled.div`
   height: 100%;
@@ -278,7 +256,6 @@ function NavigationBar() {
 
   const isWorkActive = location.pathname.startsWith("/work");
 
-  const [scroll, setScroll] = useState("0%");
   const [condensed, setCondensed] = useState(false);
 
   /* 滑動指示器：只在 hover / focus 時出現，指向游標所在的項目。
@@ -308,15 +285,9 @@ function NavigationBar() {
     if (keyboard) moveGlideTo(el);
   };
 
-  // 監聽滾動事件，計算滾動百分比
+  // 監聽滾動事件：離開頂端就收合導覽列
   const handleScroll = () => {
-    const totalScroll = document.documentElement.scrollTop; // 已經滾動的頁面距離
-    const windowHeight =
-      document.documentElement.scrollHeight -
-      document.documentElement.clientHeight; // 整個頁面的高度
-    const scrollProgress = `${(totalScroll / windowHeight) * 100}%`; // 計算比例
-    setScroll(scrollProgress); // 依照比例更新進度條的寬度
-    setCondensed(totalScroll > 40); // 離開頂端就收合導覽列
+    setCondensed(document.documentElement.scrollTop > 40);
   };
 
   /* 換頁後把指示器歸零，避免導覽到新頁面時殘留在舊項目上 */
@@ -374,7 +345,6 @@ function NavigationBar() {
             Contact
           </NavItem>
         </Wrapper>
-        <ProgressBar scroll={scroll} />
       </Container>
     </div>
   );

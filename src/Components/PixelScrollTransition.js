@@ -53,6 +53,12 @@ function directionValue(direction, nx, ny) {
       return nx;
     case "right-left":
       return 1 - nx;
+    /* 垂直的中央往外擴散：中間的門檻最低（最早翻），越靠上下緣越晚翻。
+       用途是讓畫布的上下緣不要出現「整排翻好翻滿」的直線 —— 邊緣的格子
+       拖到最後才動，波前在那裡是稀疏的，看起來就不會被切齊。
+       （center-out 是放射狀的，橫向也會受影響；這個只吃垂直方向。） */
+    case "edges-last-y":
+      return Math.abs(ny * 2 - 1);
     case "center-out":
       return Math.min(1, Math.hypot(nx - 0.5, ny - 0.5) / 0.7071);
     case "center-in":
