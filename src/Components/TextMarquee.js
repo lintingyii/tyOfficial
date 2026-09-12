@@ -82,6 +82,8 @@ const reduceMotion = css`
    字級，1em 直接排會比旁邊的襯線矮一截。1.55em 剛好讓它的上緣對齊襯線的
    大寫高度 —— 比襯線大一點點是靠字體本身的個性，不是靠字級撐出來的。 */
 const Accent = styled.span`
+  /* 維持內文墨色。句子退成灰之後，這個字自然變成一行裡的視線落點。 */
+  color: #2a3133;
   font-family: "Luxurious Script", cursive;
   font-size: 1.55em;
   text-transform: none;
@@ -105,7 +107,12 @@ const Unit = styled.span`
      否則 Viewport 的 overflow: hidden 會把筆畫切掉。 */
   line-height: 1.95;
   letter-spacing: 0.005em;
-  color: #2a3133;
+
+  /* 句子用灰藍而不是內文墨色。跑馬燈是氛圍，下面的「Voice(s) of Trust」
+     才是內容 —— 兩者同色的話，字級兩倍又疊兩行的跑馬燈會壓過它要引導你
+     去看的標題，階層是反的。這支灰偏藍，跟 #2A96B7 同一個溫度。
+     對比 5.36:1，大字的門檻是 3:1。 */
+  color: #59656c;
 
   svg {
     width: 0.52em;
