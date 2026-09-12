@@ -22,6 +22,10 @@ let subscribers = 0;
 const BOOST_PER_PX = 3; // 一次捲動事件每移動 1px 增加的速度
 const BOOST_MAX = 400; // 加成上限：基礎速度 80，所以最快約 6 倍
 const BOOST_HALF_LIFE = 180; // 毫秒：加成衰減到一半所需的時間
+/* 字級只在這裡定義一次：Unit 用它排字，Block 也要用同一個值當 em 基準，
+   SecondRow 的負 margin 才會跟著字級縮放。兩邊寫死同一串很容易改到只剩一邊。 */
+const FLUID_SIZE = "clamp(36px, 4.5vw, 84px)";
+
 const BASE_SPIN = 40; // 火花的基礎轉速（度/秒）＝ 原本 CSS 動畫的 9 秒一圈
 
 /* 用「峰值 + 時間戳」而不是每幀去乘衰減係數：兩行各自跑自己的 rAF，
@@ -92,7 +96,7 @@ const Unit = styled.span`
   /* 與 hero 引言同一支襯線，維持原本的大小寫 —— 句子照常讀，
      被挑出來的那個字靠字體與字級做區分，不靠全大寫。 */
   font-family: serif;
-  font-size: clamp(24px, 4.5vw, 84px);
+  font-size: ${FLUID_SIZE};
 
   /* 行高由 Accent 決定：行框必須裝得下比較高的那個字，
      否則 Viewport 的 overflow: hidden 會把筆畫切掉。 */
@@ -144,7 +148,7 @@ const Block = styled.div`
   width: 100%;
   background-color: #f2f2f2;
   /* em 的基準要跟字一樣，SecondRow 的負 margin 才會跟著字級縮放 */
-  font-size: clamp(24px, 4.5vw, 84px);
+  font-size: ${FLUID_SIZE};
   padding: ${({ $gapTop }) => $gapTop || "6vh"} 0 6vh;
 
   @media (max-width: 820px) {
