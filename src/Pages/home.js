@@ -32,11 +32,11 @@ function MyComponent(props) {
         const w0 = wideMQ.matches;
         const vw0 = window.innerWidth;
         const vh0 = window.innerHeight;
-        const wr = 911 / 5965;
-        const hr = 1640 / 5965;
+        const wr = 911 / 3755;
+        const hr = 1640 / 3755;
         const z0 = (w0 ? 0.246 : 0.78) / wr;
         const h0 = vh0 - hr * vw0;
-        const s0 = w0 ? 0 : vh0 * 0.5 - h0;
+        const s0 = vh0 * (w0 ? 0.56 : 0.5) - h0;
         pin.style.setProperty(
           "--portrait-reveal",
           `${Math.max(0, s0 + hr * vw0 * (z0 - 1))}px`,
@@ -75,16 +75,24 @@ function MyComponent(props) {
 
       /* 人像在畫布裡的比例。基準是「畫布寬度」而不是高度 —— 圖是 contain
          且受寬度限制，用寬度換算，視窗高度改變時構圖才不會跑掉。
-         畫布 5965×2841，人物 911×1640。 */
-      const W_RATIO = 911 / 5965; // 人物寬 ÷ 畫布寬
-      const H_RATIO = 1640 / 5965; // 人物高 ÷ 畫布寬
+         畫布 3755×1788，人物 911×1640。
+
+         畫布刻意壓到「剛好裝得下外框」的最小尺寸：原本是 5965×2841
+         = 16.9 MP，超過 iOS Safari 的 16 MP 解碼上限，手機會自動降採樣
+         （砍一半 → 人物只剩約 456px），比放大還糟。現在 6.7 MP 安全。 */
+      const W_RATIO = 911 / 3755; // 人物寬 ÷ 畫布寬
+      const H_RATIO = 1640 / 3755; // 人物高 ÷ 畫布寬
 
       /* 放大倍率由「人物要佔畫面多寬」反推，不是寫死的倍率 —— 換圖之後
          只要 W_RATIO 對，倍率會自己算出來。 */
       const zoom = (wide ? 0.246 : 0.78) / W_RATIO;
 
+      /* 頭頂位置明確指定，不要依賴畫布幾何算出來的預設值 ——
+         換圖或改畫布尺寸時 H_RATIO 會變，head0 就跟著漂，構圖會整個跑掉
+         （縮小畫布那次就是這樣，桌機的人像直接飛到引言上面）。 */
+      const HEAD_TARGET = wide ? 0.56 : 0.5; // 頭頂佔視窗高度的比例
       const head0 = vh - H_RATIO * vw; // 未位移時的人像頭頂
-      const shift = wide ? 0 : vh * 0.5 - head0; // 桌機不位移
+      const shift = vh * HEAD_TARGET - head0;
       /* 溢出到畫面外的高度＝要靠捲動找回來的距離。手機版的新圖裁得比較緊
          （鞋子那段沒了），算出來可能是負的 —— 代表整個人本來就進得了畫面，
          沒有東西需要露出，夾成 0。 */
@@ -866,8 +874,8 @@ const PortraitLayer = styled.div`
        寬度受限時渲染比例 = 100vw / 4152，人像頭頂離畫布底 1162px，
        所以是 1162/4152 = 27.99vw。手機版更是寬度受限，同一個值成立。 */
     /* 原點＝人像頭頂。人像貼齊畫布底部，所以「頭頂離底部的距離」＝人物高，
-       換算成畫布寬的比例 1640/5965 = 27.49vw。 */
-    transform-origin: center calc(100% - 27.49vw);
+       換算成畫布寬的比例 1640/3755 = 43.68vw。 */
+    transform-origin: center calc(100% - 43.68vw);
   }
 
   picture[data-layer="portrait"] img {
@@ -949,7 +957,7 @@ const DecoImg = styled.img`
   ${bannerLayerFit}
   inset: 0;
   /* 與 PortraitLayer 內 picture 的縮放原點一致，兩層才會一起縮放不脫開 */
-  transform-origin: center calc(100% - 27.49vw);
+  transform-origin: center calc(100% - 43.68vw);
   z-index: 2;
   opacity: 0;
   will-change: opacity; /* 同 picture：transform 是靜態的，不要提前合成 */
