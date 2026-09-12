@@ -16,7 +16,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #2A3133;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -39,3 +39,10 @@
   }
 }
 
+/* 首頁滾動球體的陰影色。custom property 要註冊成 <color> 才能被 @keyframes 動畫，
+   否則 CircleContainer 裡的 cycleColor 不會生效。 */
+@property --color1 {
+  syntax: "<color>";
+  inherits: true;
+  initial-value: #2A96B7;
+}

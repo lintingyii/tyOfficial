@@ -1,10 +1,7 @@
-import react, { useState } from "react";
+import react, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { LargeProjectCard, ProjectCard } from "../Components/ProjectCard";
-import { ShaderGradientCanvas, ShaderGradient } from "shadergradient";
-import * as reactSpring from "@react-spring/three";
-import * as drei from "@react-three/drei";
-import * as fiber from "@react-three/fiber";
+import PixelScrollTransition from "../Components/PixelScrollTransition";
 import Marquee from "react-fast-marquee";
 import ProjectFilter from "../Components/ProjectFilter";
 import IntroductionCard from "../Components/IntroductionCard";
@@ -12,23 +9,21 @@ import SortButton from "../Components/SortButton";
 
 export const Work = () => {
   const initialProjects = [
-    // {
-    //   date: "March, 2024",
-    //   image: "/hivebee/hb demo.png",
-    //   title: "Hive Bee - We made donations enjoyable",
-    //   subtitle: "SaaS product design",
-    //   description:
-    //     "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
-    //   tags: [
-    //     { name: "UI/UX design", color: "#7D8991" },
-    //   ],
-    //   subtags: [
-    //     { name: "SaaS", color: "#7D8991" },
-    //     { name: "RWD", color: "#7D8991" }
-    //   ],
-    //   link: "/work/HiveBee",
-    //   openInNewTab: false,
-    // },
+    {
+      date: "March, 2024",
+      image: "/hivebee/hb demo.png",
+      title: "Hive Bee - We made donations enjoyable",
+      subtitle: "SaaS product design",
+      description:
+        "Created unique event experiences that made interactions between streamers and audiences more lively and engaging.",
+      tags: [{ name: "UI/UX design", color: "#59656C" }],
+      subtags: [
+        { name: "SaaS", color: "#59656C" },
+        { name: "RWD", color: "#59656C" },
+      ],
+      link: "/work/HiveBee",
+      openInNewTab: false,
+    },
     {
       date: "May, 2023",
       image: "/ainsight/ainsight-main.png",
@@ -37,9 +32,9 @@ export const Work = () => {
       description:
         "Tailored for small and medium-sized businesses, our AI-enhanced financial system optimizes operational efficiency, leaving traditional accounting and bookkeeping behind.",
       tags: [
-        { name: "UI/UX design", color: "#7D8991" },
+        { name: "UI/UX design", color: "#59656C" },
       ],
-      subtags: [{ name: "SaaS", color: "#7D8991" }],
+      subtags: [{ name: "SaaS", color: "#59656C" }],
       link: "/work/AInsight",
       openInNewTab: false,
     },
@@ -51,11 +46,11 @@ export const Work = () => {
       description:
         'The key visual poster and event website for Aaron Nieh’s lecture, "Behind the Covers," at NCCU.',
       tags: [
-        { name: "Graphic design", color: "#D58CFE" },
+        { name: "Graphic design", color: "#2A96B7" },
         { name: "Frontend coding", color: "#F7883D" },
       ],
       subtags: [
-        { name: "Poster", color: "#D58CFE" },
+        { name: "Poster", color: "#2A96B7" },
         { name: "RWD", color: "#F7883D" },
       ],
       link: "https://mellifluous-brioche-700f0a.netlify.app/",
@@ -68,8 +63,8 @@ export const Work = () => {
       subtitle: "Branding",
       description:
         "VIS design for a local mango smallholder farmer in Kaohsiung, Taiwan.",
-      tags: [{ name: "Graphic design", color: "#D58CFE" }],
-      subtags: [{ name: "Branding", color: "#D58CFE" }],
+      tags: [{ name: "Graphic design", color: "#2A96B7" }],
+      subtags: [{ name: "Branding", color: "#2A96B7" }],
       link: "/work/MangoOnTree",
       openInNewTab: false,
     },
@@ -92,9 +87,9 @@ export const Work = () => {
       description:
         "A digital creative campaign to encourage people to recycle down jackets.",
       tags: [
-        // { name: "UI/UX design", color: "#7D8991" },
+        // { name: "UI/UX design", color: "#59656C" },
         { name: "Creative Campaign", color: "#86C5CE" },
-        { name: "Graphic design", color: "#D58CFE" },
+        { name: "Graphic design", color: "#2A96B7" },
       ],
       link: "/work/PufferVerse",
       openInNewTab: false,
@@ -106,8 +101,8 @@ export const Work = () => {
       subtitle: "User interface and user experience redesign",
       description:
         "Conduct user testing to refine the exchange process and interface, then finalize with testing.",
-      tags: [{ name: "UI/UX design", color: "#7D8991" }],
-      subtags: [{ name: "APP", color: "#7D8991" }],
+      tags: [{ name: "UI/UX design", color: "#59656C" }],
+      subtags: [{ name: "APP", color: "#59656C" }],
       link: "/work/MegaBank_Redesign",
       openInNewTab: false,
     },
@@ -119,10 +114,10 @@ export const Work = () => {
       description:
         "A microservice for booking Taipei sports venues, incorporating team-building to maximize venue usage.",
       tags: [
-        { name: "UI/UX design", color: "#7D8991" },
+        { name: "UI/UX design", color: "#59656C" },
         { name: "Frontend coding", color: "#F7883D" },
       ],
-      subtags: [{ name: "APP", color: "#7D8991" }],
+      subtags: [{ name: "APP", color: "#59656C" }],
       link: "/work/sports_win",
       openInNewTab: false,
     },
@@ -134,7 +129,7 @@ export const Work = () => {
       description:
         "A minimalist to-do list web-app with task management and fascinating theme switching, keeping you productive in any environment.",
       tags: [
-        // { name: "UI/UX design", color: "#7D8991" },
+        // { name: "UI/UX design", color: "#59656C" },
         { name: "Frontend coding", color: "#F7883D" },
       ],
       subtags: [
@@ -153,7 +148,7 @@ export const Work = () => {
           I'm a
           <span
             style={{
-              color: "#000fff",
+              color: "#2A96B7",
               margin: "0 4px",
               width: "fit-content",
               fontWeight: "500",
@@ -174,23 +169,51 @@ export const Work = () => {
     useState(initialProjects); // SortButton排序後的原始專案資料
   const [isSorted, setIsSorted] = useState(false); // 控制SortButton排序狀態
 
-  const StyledShaderGradientCanvas = styled.div`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    z-index: 1;
+  /* hero 的滑鼠視差：把游標相對中心的位置正規化成 -1~1 寫進 CSS 變數，
+     各元素再依自己的深度乘上不同位移量（見 HeadingIAm / Frame / DivWrapper*）。
+     只更新兩個變數、位移交給 CSS，所以不會每幀觸發 React re-render。 */
+  const heroRef = useRef(null);
+  useEffect(() => {
+    const hero = heroRef.current;
+    if (!hero) return;
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
-    @media (max-width: 1040px) {
-      transform: scale(0.5);
-    }
-  `;
+    let frame = 0;
+    let pending = null;
+
+    const apply = () => {
+      frame = 0;
+      if (!pending) return;
+      hero.style.setProperty("--mx", pending.x.toFixed(4));
+      hero.style.setProperty("--my", pending.y.toFixed(4));
+    };
+
+    const onMove = (e) => {
+      const r = hero.getBoundingClientRect();
+      pending = {
+        x: ((e.clientX - r.left) / r.width) * 2 - 1,
+        y: ((e.clientY - r.top) / r.height) * 2 - 1,
+      };
+      if (!frame) frame = requestAnimationFrame(apply);
+    };
+
+    const onLeave = () => {
+      pending = { x: 0, y: 0 };
+      if (!frame) frame = requestAnimationFrame(apply);
+    };
+
+    hero.addEventListener("mousemove", onMove);
+    hero.addEventListener("mouseleave", onLeave);
+    return () => {
+      hero.removeEventListener("mousemove", onMove);
+      hero.removeEventListener("mouseleave", onLeave);
+      if (frame) cancelAnimationFrame(frame);
+    };
+  }, []);
 
   return (
     <Div>
-      <Header>
+      <Header ref={heroRef}>
         <OverlapGroupWrapper>
           <OverlapGroup>
             <HeadingIAm>
@@ -223,42 +246,32 @@ export const Work = () => {
             </DivWrapper2>
           </OverlapGroup>
         </OverlapGroupWrapper>
-        <ShaderGradientCanvas
-          importedFiber={{ ...fiber, ...drei, ...reactSpring }}
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            width: "100%",
-            height: "100%",
-            overFlow: "hidden",
-            zIndex: 1,
-          }}
-        >
-          <ShaderGradient
-            control="props"
-            type="plane"
-            animate="on"
-            uDensity={1}
-            uFrequency={0.5}
-            uStrength={2}
-            uSpeed={0.4}
-            cameraZoom={1} // 固定缩放比例
-            zoomOut={false}
-            toggleAxis={false}
-            enableTransition={false}
-            cDistance={10}
-            // positionX={0}
-            color1="#809bd6"
-            color2="#F7883D"
-            color3="#D58CFE"
-            grain="on"
-            lightType="3d"
-            grainBlending={0.2}
-            brightness={1.5}
-          />
-        </ShaderGradientCanvas>
+
       </Header>
+
+      {/* 深色 hero 之後留一小段實心深色，讓視覺喘一口氣再進馬賽克 */}
+      <TransitionGap $dark />
+
+      {/* 馬賽克轉場：實體區塊、跟著頁面捲動。上面接深色、下面接淺色，
+          畫布邊走邊由下往上擦成淺色，所以畫面上永遠是
+          「深 → 擦到一半的馬賽克 → 淺」，不會出現硬邊界。 */}
+      <PixelScrollTransition
+        mode="inline"
+        height="70vh"
+        colorA="#2A3133"
+        colorB="#f2f2f2"
+        direction="bottom-top"
+        pattern="random"
+        patternIntensity={0.45}
+        easing="linear"
+        pixelSize={28}
+        endAt={1}
+        accentShare={0.14}
+        accentColors={["#2A96B7", "#F7883D", "#59656C", "#D8984E"]}
+      />
+
+      {/* 馬賽克之後留一小段實心淺色，再進主要內容 */}
+      <TransitionGap />
 
       <CardsContainer>
         <ProjectFilter
@@ -338,17 +351,25 @@ const Header = styled.div`
   //  display: flex;
   //  border-bottom: 1.5px solid;
   //  width: 100%;
-  //  border-color: #333;
+  //  border-color: #2A3133;
   //  padding-top: 18vh;
   //  padding-bottom: 15vh;
   //  overflow: hidden;
   //  position: relative;
   display: flex;
-  // border-bottom: 1.5px solid #333;
   width: 100%;
-  overflow: hidden;
-  position: sticky; /* 使用 sticky */
-  top: 0; /* 固定在顶部 */
+  background-color: #2A3133; /* 深色 hero，靠像素轉場過渡到下方的淺色內容 */
+  min-height: 85vh; /* hero 高度 */
+
+  @media (max-width: 820px) {
+    /* 手機版畫面窄，標題與三顆標籤佔的高度相對小很多，
+       85vh 會在內容下方留一大片空黑。 */
+    min-height: 70vh;
+  }
+  align-items: center;
+  /* 不裁切：像素格最後一列會超出 hero 下緣一點點，讓邊緣是完整方塊
+     而不是被切成薄片。shader 漸層本身已經是 absolute inset:0，不受影響。 */
+  position: relative; /* 原本是 sticky 釘在頂端，改成隨頁面捲走，靠像素轉場銜接下方內容 */
 
   //  @media (max-width: 480px) {
   //    padding-top: 15vh;
@@ -362,7 +383,21 @@ const Header = styled.div`
 `;
 
 const HeadingIAm = styled.div`
-  color: #333333;
+  /* 滑鼠視差：位移量依景深分配 —— 越模糊代表越遠、移動越少。
+     transition 造成的延遲讓各層有不同的跟隨速度，層次感更明顯。 */
+  transform: translate3d(
+    calc(var(--mx, 0) * 8px),
+    calc(var(--my, 0) * 5px),
+    0
+  );
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none;
+    transition: none;
+  }
+
+  color: #f2f2f2; /* 深色 hero 上的標題（對比 11.83:1） */
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 9rem;
@@ -399,6 +434,16 @@ const HeadingIAm = styled.div`
   }
 `;
 
+const TransitionGap = styled.div`
+  width: 100%;
+  height: 12vh;
+  background-color: ${({ $dark }) => ($dark ? "#2A3133" : "#f2f2f2")};
+
+  @media (max-width: 820px) {
+    height: 6vh; /* 手機版 hero 本身已經縮短，這段再對半 */
+  }
+`;
+
 const OverlapGroupWrapper = styled.div`
   // background-color: #f2f2f2;
   // max-width: 1440px; /* 設定最大寬度 */
@@ -407,8 +452,11 @@ const OverlapGroupWrapper = styled.div`
   display: flex;
   z-index: 3;
   max-height: 40vh;
-  padding-top: 28vh;
-  padding-bottom: 24vh;
+  /* 上下留白刻意不對稱：整組內容在 hero 裡是垂直置中的，但頂端 58px 被
+     固定導覽列蓋住，看起來會偏高。上多下少把它往下推，兩者總和維持 52vh，
+     所以 hero 高度與下方的像素轉場銜接都不受影響。 */
+  padding-top: 32vh;
+  padding-bottom: 20vh;
 
   @media (max-width: 1024px) {
     padding-top: 20vh;
@@ -418,19 +466,33 @@ const OverlapGroupWrapper = styled.div`
 
   @media (max-width: 480px) {
     padding-top: 15vh;
-    padding-bottom: 15vh;
+    padding-bottom: 9vh;
     height: auto;
   }
   @media (max-width: 375px) {
     padding-top: 15vh;
-    padding-bottom: 18vh;
+    padding-bottom: 10vh;
     height: auto;
   }
 `;
 
 const Frame = styled.div`
+  /* 滑鼠視差：位移量依景深分配 —— 越模糊代表越遠、移動越少。
+     transition 造成的延遲讓各層有不同的跟隨速度，層次感更明顯。 */
+  transform: translate3d(
+    calc(var(--mx, 0) * 26px),
+    calc(var(--my, 0) * 18px),
+    0
+  );
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none;
+    transition: none;
+  }
+
   align-items: center;
-  background-color: #7d8991;
+  background-color: #59656c;
   border-radius: 80px;
   display: inline-flex;
   justify-content: center;
@@ -465,6 +527,20 @@ const TextWrapper = styled.div`
 `;
 
 const DivWrapper = styled.div`
+  /* 滑鼠視差：位移量依景深分配 —— 越模糊代表越遠、移動越少。
+     transition 造成的延遲讓各層有不同的跟隨速度，層次感更明顯。 */
+  transform: translate3d(
+    calc(var(--mx, 0) * 10px),
+    calc(var(--my, 0) * 7px),
+    0
+  );
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none;
+    transition: none;
+  }
+
   align-items: center;
   background-color: #ff6434;
   border-radius: 80px;
@@ -487,8 +563,22 @@ const DivWrapper = styled.div`
 `;
 
 const DivWrapper2 = styled.div`
+  /* 滑鼠視差：位移量依景深分配 —— 越模糊代表越遠、移動越少。
+     transition 造成的延遲讓各層有不同的跟隨速度，層次感更明顯。 */
+  transform: translate3d(
+    calc(var(--mx, 0) * 16px),
+    calc(var(--my, 0) * 11px),
+    0
+  );
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+
+  @media (prefers-reduced-motion: reduce) {
+    transform: none;
+    transition: none;
+  }
+
   align-items: center;
-  background-color: #d58cfe;
+  background-color: #2A96B7;
   filter: blur(1px);
   border-radius: 80px;
   display: inline-flex;
@@ -524,9 +614,21 @@ const CardsContainer = styled.div`
   z-index: 100;
   background-color: #f2f2f2;
   padding-top: 3rem;
+
+  @media (max-width: 820px) {
+    /* 往上疊進馬賽克畫布的下半段。
+
+       馬賽克是由下往上翻的，下半部很早就整片變成淺色 —— 內容排在畫布
+       後面的話，那片淺色就是使用者看到的一大塊空白。這一區是同色的
+       不透明區塊，疊上去剛好蓋掉，畫面上只會剩馬賽克的波前。
+
+       28vh 是算出來的：讓「篩選列剛進畫面」時，波前正好落在內容上緣。
+       position: relative 才能讓既有的 z-index 生效、蓋過畫布。 */
+    position: relative;
+    margin-top: -28vh;
+  }
   left: 0;
   gap: 3rem;
-  border-top: 1.5px solid #333;
   width: 100%;
   display: flex;
   flex-wrap: wrap;
@@ -582,7 +684,7 @@ const DefaultIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#000fff"
+    fill="#2A96B7"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",
@@ -607,7 +709,7 @@ const Marqueetext = styled.div`
   font-size: 2rem;
   line-height: 1.6;
   padding: 24px;
-  background-color: #333;
+  background-color: #2A3133;
   color: #fff;
   width: 100%;
   display: flex;

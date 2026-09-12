@@ -16,12 +16,12 @@ const ServiceCard = styled.div`
   transition: background-color 0.2s ease-in;
   flex-grow: 1;
   box-sizing: border-box;
-  color: #333;
+  color: #2A3133;
 
   /* hover class style */
   &.hover {
     box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.1);
-    background-color: #333;
+    background-color: #2A3133;
     color: #f2f2f2;
   }
 

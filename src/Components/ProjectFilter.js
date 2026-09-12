@@ -22,14 +22,14 @@ import styled from "styled-components";
 //     <Filter>
 //       <Tag
 //         onClick={() => handleTagClick("")}
-//         bgColor="#000fff"
+//         bgColor="#2A96B7"
 //         isActive={selectedTag === ""}
 //       >
 //         All
 //       </Tag>
 //       <Tag
 //         onClick={() => handleTagClick("Graphic design")}
-//         bgColor="#D58CFE"
+//         bgColor="#2A96B7"
 //         isActive={selectedTag === "Graphic design"}
 //       >
 //         Graphic Design
@@ -43,7 +43,7 @@ import styled from "styled-components";
 //       </Tag>
 //       <Tag
 //         onClick={() => handleTagClick("UI/UX design")}
-//         bgColor="#7D8991"
+//         bgColor="#59656C"
 //         isActive={selectedTag === "UI/UX design"}
 //       >
 //         UI/UX Design
@@ -93,7 +93,7 @@ const ProjectFilter = ({
                 I'm a
                 <span
                   style={{
-                    color: "#000fff",
+                    color: "#2A96B7",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -117,7 +117,7 @@ const ProjectFilter = ({
                 As a graduate in
                 <span
                   style={{
-                    color: "#D58CFE",
+                    color: "#2A96B7",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -128,7 +128,7 @@ const ProjectFilter = ({
                 I enjoy exploring various design styles,
                 <span
                   style={{
-                    color: "#D58CFE",
+                    color: "#2A96B7",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -206,7 +206,7 @@ const ProjectFilter = ({
                 shapes the
                 <span
                   style={{
-                    color: "#7D8991",
+                    color: "#59656C",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "600",
@@ -221,7 +221,7 @@ const ProjectFilter = ({
                 of users, including
                 <span
                   style={{
-                    color: "#7D8991",
+                    color: "#59656C",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "600",
@@ -286,21 +286,21 @@ const ProjectFilter = ({
     <Filter>
       <Tag
         onClick={() => handleTagClick("")}
-        bgColor="#000fff"
+        bgColor="#2A96B7"
         isActive={selectedTag === ""}
       >
         All
       </Tag>
       <Tag
         onClick={() => handleTagClick("Graphic design")}
-        bgColor="#D58CFE"
+        bgColor="#2A96B7"
         isActive={selectedTag === "Graphic design"}
       >
         Graphic Design
       </Tag>
       <Tag
         onClick={() => handleTagClick("UI/UX design")}
-        bgColor="#7D8991"
+        bgColor="#59656C"
         isActive={selectedTag === "UI/UX design"}
       >
         UI/UX Design
@@ -328,8 +328,8 @@ export default ProjectFilter;
 const Tag = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: ${(props) => (props.isActive ? "#fff" : props.bgColor || "#e0e0e0")};
-  background-color: ${(props) => (props.isActive ? "#333" : "#f2f2f2")};
+  color: ${(props) => (props.isActive ? "#fff" : props.bgColor || "#E2E2E2")};
+  background-color: ${(props) => (props.isActive ? "#2A3133" : "#f2f2f2")};
   border-radius: 50px;
   padding: 12px 16px;
   font-size: 1.2rem;
@@ -340,11 +340,11 @@ const Tag = styled.div`
   white-space: nowrap;
 
   &:hover {
-    background-color: ${(props) => (props.isActive ? "#333" : "#e0e0e0")};
+    background-color: ${(props) => (props.isActive ? "#2A3133" : "#E2E2E2")};
   }
 
   @media (max-width: 480px) {
-    background-color: ${(props) => (props.isActive ? "#333" : "#e0e0e0")};
+    background-color: ${(props) => (props.isActive ? "#2A3133" : "#E2E2E2")};
     font-size: 1rem;
   }
 `;
@@ -356,8 +356,26 @@ const Filter = styled.div`
   justify-content: center;
   gap: 8px;
 
-  @media (max-width: 480px) {
+  @media (max-width: 820px) {
+    /* 維持單排橫向捲動，但改成滿版出血。
+
+       原本容器是 width: 90%（左右各留 20px），所以按鈕是在「畫面內側
+       20px 的地方」被切掉 —— 看起來像破版。改成滿版、用 padding 做出
+       同樣的 20px 起始邊距，裁切點就落在畫面邊緣，讀起來是「還有東西，
+       可以滑」而不是被容器切斷。
+
+       捲軸也隱藏：它會在按鈕下方留一條灰槓。 */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0 20px;
     justify-content: flex-start;
+    scroll-padding-inline: 20px;
+    -webkit-overflow-scrolling: touch;
+
+    scrollbar-width: none; /* Firefox */
+    &::-webkit-scrollbar {
+      display: none; /* Chrome / Safari */
+    }
   }
 `;
 
@@ -383,7 +401,7 @@ const DefaultIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#000fff"
+    fill="#2A96B7"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",
@@ -401,7 +419,7 @@ const GraphicIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#D58CFE"
+    fill="#2A96B7"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",
@@ -437,7 +455,7 @@ const UIUXIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#7D8991"
+    fill="#59656C"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",

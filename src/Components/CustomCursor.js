@@ -10,7 +10,12 @@ const ArrowIcon = () => (
 const CustomCursorDiv = styled.div`
   width: ${(props) => (props.isLink ? '60px' : '22px')};  /* 修改圆形大小 */
   height: ${(props) => (props.isLink ? '60px' : '22px')};  /* 修改圆形大小 */
-  background-color: ${(props) => (props.isLink ? '#000fff' : '#F5FF00')};  /* 保持背景颜色一致 */
+  /* 兩個狀態的混合模式不同，所以底色也不同（見下方 mix-blend-mode）：
+     ・連結狀態：blend = none，底色直接顯示 → 用主題藍本身
+     ・一般狀態：blend = difference，實際顯示 = |背景 − 底色|。
+       ⚠️ #D56948 是反算值不是要顯示的顏色：255 − #2A96B7 = #D56948，
+       所以在白底上看起來正好是主題藍（頁面 #f2f2f2 上是 #1D89AA，ΔE 4.9，肉眼同色）。 */
+  background-color: ${(props) => (props.isLink ? '#2A96B7' : '#D56948')};
   border-radius: 50%;  /* 无论是否是链接，都是圆形 */
   position: fixed;
   pointer-events: none;
@@ -32,7 +37,7 @@ const CustomCursorDiv = styled.div`
       position: absolute;
       width: 22px;
       height: 22px;
-      background-color: #F5FF00;
+      background-color: #D56948; /* 拖尾同上，反算值 */
       border-radius: 50%;
       pointer-events: none;
       z-index: -1;

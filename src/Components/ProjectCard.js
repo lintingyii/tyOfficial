@@ -5,7 +5,7 @@ import { useInView } from "react-intersection-observer";
 //ProjectCard
 
 const DateLabel = styled.div`
-  color: #333;
+  color: #2A3133;
   font-size: 14px;
   // margin-bottom: 8px;
   transition: color 0.3s ease-in;
@@ -46,7 +46,7 @@ const Title = styled.h3`
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 24px;
   margin: 16px 0;
-  color: #333333;
+  color: #2A3133;
   transition: color 0.3s ease-in;
 `;
 
@@ -54,7 +54,7 @@ const Subtitle = styled.h4`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   font-size: 14px;
-  color: #333;
+  color: #2A3133;
   margin: 0;
   font-weight: normal;
   transition: color 0.3s ease-in;
@@ -79,8 +79,13 @@ const TagsContainer = styled.div`
 const Tag = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  color: ${(props) => props.bgColor || "#e0e0e0"};
-  background-color: #333;
+  /* 這顆藥丸有兩種底色：預設深色 #2A3133、hover 時翻成白色。
+     同一個分類色不可能兩邊都達標（深底要亮、白底要暗），所以分開處理：
+     預設混入 33% 白提亮，hover 那邊再用 var(--tag-color) 還原成原色。 */
+  --tag-color: ${(props) => props.bgColor || "#E2E2E2"};
+  color: var(--tag-color); /* 不支援 color-mix 時的退路 */
+  color: color-mix(in srgb, var(--tag-color) 67%, white);
+  background-color: #2A3133;
   border-radius: 50px;
   padding: 8px 12px;
   font-size: 12px;
@@ -94,8 +99,11 @@ const Tag = styled.div`
 const SubTag = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  border-color: ${(props) => props.bgColor || "#e0e0e0"};
-  color: ${(props) => props.bgColor || "#e0e0e0"};
+  /* 平常是透明底疊在淺色卡片上（原色即可），但卡片 hover 時底色會翻成 #2A3133，
+     那時要提亮，否則只有 2.2:1。 */
+  --tag-color: ${(props) => props.bgColor || "#E2E2E2"};
+  border-color: var(--tag-color);
+  color: var(--tag-color);
   border-style: solid;
   border-width: 1px;
   background-color: none;
@@ -116,14 +124,14 @@ const CardContainer = styled.a`
   text-align: left;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  border: 1.5px solid #333;
+  border: 1.5px solid #2A3133;
   position: relative;
   transition: background-color 0.3s ease-in;
   background-color: #f2f2f2;
 
   &:hover {
     cursor: pointer;
-    background-color: #333;
+    background-color: #2A3133;
     color: #fff;
 
     ${Title}, ${Subtitle}, ${Description}, ${DateLabel} {
@@ -132,6 +140,15 @@ const CardContainer = styled.a`
 
     ${Tag} {
       background-color: #fff;
+      /* 底色翻白，文字要壓深才讀得到（原色最低只有 1.93:1） */
+      color: var(--tag-color);
+      color: color-mix(in srgb, var(--tag-color) 63%, black);
+    }
+
+    ${SubTag} {
+      /* 卡片底翻成 #2A3133，外框標籤要提亮 */
+      color: color-mix(in srgb, var(--tag-color) 67%, white);
+      border-color: color-mix(in srgb, var(--tag-color) 67%, white);
     }
 
     ${ImageContainer} {
@@ -204,7 +221,7 @@ const LargeTitle = styled.h3`
   font-size: 2rem;
   margin: 0px;
   margin-top: 24px;
-  color: #333333;
+  color: #2A3133;
   transition: color 0.3s ease-in;
   width: 100%;
 
@@ -274,7 +291,7 @@ const LargeCardContainer = styled(CardContainer)`
   }
 
   &:hover {
-    background-color: #333;
+    background-color: #2A3133;
     color: #fff;
 
     ${LargeTitle}, ${Subtitle}, ${Description}, ${DateLabel} {
@@ -283,6 +300,15 @@ const LargeCardContainer = styled(CardContainer)`
 
     ${Tag} {
       background-color: #fff;
+      /* 底色翻白，文字要壓深才讀得到（原色最低只有 1.93:1） */
+      color: var(--tag-color);
+      color: color-mix(in srgb, var(--tag-color) 63%, black);
+    }
+
+    ${SubTag} {
+      /* 卡片底翻成 #2A3133，外框標籤要提亮 */
+      color: color-mix(in srgb, var(--tag-color) 67%, white);
+      border-color: color-mix(in srgb, var(--tag-color) 67%, white);
     }
 
     ${ImageContainer} {

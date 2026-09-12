@@ -3,13 +3,44 @@ import styled from "styled-components";
 import { useInView } from 'react-intersection-observer';
 
 const Button = styled.button`
-  color: ${({ isSorted }) => (isSorted ? "#a8a8a8" : "#e2e2e2")};
-  padding: 10px;
-  border: 1.5px solid #e2e2e2;
-  border-radius: 12px;
-  width: auto;
+  /* 與上方的篩選膠囊同一個家族：一樣的圓角與內距，字級小一階
+     （篩選是 1.2rem），讀起來是同一排控制項裡比較次要的那顆。 */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-radius: 50px;
+  padding: 12px 16px;
+  font-size: 1rem;
+  font-weight: bold;
+  line-height: 1;
   cursor: pointer;
-  background-color: ${({ isSorted }) => (isSorted ? "#e2e2e2" : "#f2f2f2")};
+  white-space: nowrap;
+  transition:
+    background-color 0.3s ease-in,
+    color 0.3s ease-in,
+    border-color 0.3s ease-in;
+
+  /* 未啟用時原本是 #e2e2e2 的字配 #f2f2f2 的底，對比只有 1.1:1，
+     圖示等於隱形。改成 #5F5E5A，對比 5.9:1。 */
+  color: ${({ $sorted }) => ($sorted ? "#fff" : "#5F5E5A")};
+  background-color: ${({ $sorted }) => ($sorted ? "#2A3133" : "#f2f2f2")};
+  border: 1.5px solid ${({ $sorted }) => ($sorted ? "#2A3133" : "#e2e2e2")};
+
+  &:hover {
+    background-color: ${({ $sorted }) => ($sorted ? "#2A3133" : "#e2e2e2")};
+  }
+
+  &:focus-visible {
+    outline: 2px solid #2A96B7;
+    outline-offset: 2px;
+  }
+
+  @media (max-width: 480px) {
+    font-size: 0.95rem;
+    padding: 10px 14px;
+  }
 `;
 
 const Container = styled.div`
@@ -31,15 +62,39 @@ const Container = styled.div`
   }
 `;
 
-const ClockIcon = () => (
+/* 未排序：上下雙箭頭，表示「可以重新排列」 */
+const SortIcon = () => (
   <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 256 256"
-    width="2rem"
-    height="2rem"
-    fill="currentColor"
+    viewBox="0 0 24 24"
+    width="18"
+    height="18"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
   >
-    <path d="M232,136.66A104.12,104.12,0,1,1,119.34,24,8,8,0,0,1,120.66,40,88.12,88.12,0,1,0,216,135.34,8,8,0,0,1,232,136.66ZM160,48a12,12,0,1,0-12-12A12,12,0,0,0,160,48Zm36,24a12,12,0,1,0-12-12A12,12,0,0,0,196,72Zm24,36a12,12,0,1,0-12-12A12,12,0,0,0,220,108ZM128,56a72,72,0,1,1-72,72A72.08,72.08,0,0,1,128,56Zm-8,72a8,8,0,0,0,8,8h48a8,8,0,0,0,0-16H136V80a8,8,0,0,0-16,0Z" />
+    <path d="M7 20V4M4 7l3-3 3 3" />
+    <path d="M17 4v16M20 17l-3 3-3-3" />
+  </svg>
+);
+
+/* 已排序：長度遞減的橫線加向下箭頭，表示「由新到舊」 */
+const SortDescIcon = () => (
+  <svg
+    viewBox="0 0 24 24"
+    width="18"
+    height="18"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden="true"
+  >
+    <path d="M4 6h10M4 12h7M4 18h4" />
+    <path d="M18 8v11M21 16l-3 3-3-3" />
   </svg>
 );
 
@@ -97,8 +152,20 @@ const SortButton = ({ filteredProjects, originalFilteredProjects, setFilteredPro
 
   return (
     <Container ref={ref} className={inView ? "visible" : ""}>
-      <Button isSorted={isSorted} onClick={handleSortToggle} >
-        <ClockIcon />
+      <Button
+        type="button"
+        $sorted={isSorted}
+        onClick={handleSortToggle}
+        aria-pressed={isSorted}
+        aria-label={
+          isSorted
+            ? "已依日期排序，由新到舊。按一下回到原本順序"
+            : "依日期排序，由新到舊"
+        }
+        title={isSorted ? "回到原本順序" : "依日期排序（新到舊）"}
+      >
+        {isSorted ? <SortDescIcon /> : <SortIcon />}
+        Newest first
       </Button>
     </Container>
   );

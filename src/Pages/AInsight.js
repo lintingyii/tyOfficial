@@ -48,7 +48,7 @@ const SubTitle = styled.div`
   // margin: 20px 0;
   font-size: 1rem;
   line-height: 2;
-  color: #444;
+  color: #2A3133;
 `;
 
 const Image = styled.img`
@@ -131,7 +131,7 @@ const Divider = styled.hr`
 const SectionTitle = styled.h1`
   font-size: 2rem;
   margin: 10px 0;
-  color: #444;
+  color: #2A3133;
 `;
 
 const BlockTitle = styled.h3`
@@ -153,7 +153,7 @@ const BlockHeader = styled.h1`
   font-size: 1.8rem;
   margin: 0 auto;
   margin-top: 1rem;
-  color: #444;
+  color: #2A3133;
   width: 70%;
   text-align: left;
 
@@ -187,7 +187,7 @@ const Circle = styled.div`
 const Text = styled.div`
   font-size: 1rem;
   margin: 30px auto;
-  color: #444;
+  color: #2A3133;
   width: 70%;
   text-align: left;
   line-height: 1.5;
@@ -200,7 +200,7 @@ const Text = styled.div`
 const HalfText = styled.div`
   font-size: 1rem;
   margin: 0 auto;
-  color: #444;
+  color: #2A3133;
   width: 100%;
   text-align: justify;
 
@@ -262,7 +262,7 @@ const ContentTextLarge = styled.div`
 const DisText = styled.div`
   font-size: 1rem;
   margin: 0;
-  color: #444;
+  color: #2A3133;
   width: 100%;
   text-align: justify;
   box-sizing: border-box;
@@ -679,7 +679,7 @@ const SpecialText = styled.div`
   font-size: 1rem;
   font-weight: 700;
   margin: 10px auto;
-  color: #333333;
+  color: #2A3133;
   width: fit-content;
   height: fit-content;
   text-align: center;
@@ -856,7 +856,7 @@ const TextWrapperContainer = styled.div`
   width: 100%;
   max-width: 100%;
   align-items: right;
-  background-color: #f8f8f8;
+  background-color: #F9F9F9;
 
   @media (max-width: 880px) {
     box-sizing: border-box;
@@ -913,8 +913,8 @@ const Hr = ({ style }) => (
 );
 
 const BackButton = styled.button`
-  background-color: #e1cdff;
-  color: #0000ff;
+  background-color: #d7f1f6;
+  color: #14607A;
   padding: 8px 24px;
   font-size: 16px;
   border: none;
@@ -1004,14 +1004,14 @@ const AInsight = () => {
             </ContentWrapper>
             <TextWrapperSmall>
               <ContentText>
-                <span style={{ fontWeight: "600", color: "#333" }}>
+                <span style={{ fontWeight: "600", color: "#2A3133" }}>
                   User Experience Research
                 </span>
                 <br /> # User Interview <br /> # Value proposition <br />#
                 Persona <br /># Functional mapping <br /> # User flow
               </ContentText>
               <ContentText>
-                <span style={{ fontWeight: "600", color: "#333" }}>
+                <span style={{ fontWeight: "600", color: "#2A3133" }}>
                   Interface Design Execution
                 </span>
                 <br /># Wireframe and Lo-fi Prototype <br /> # UI Kit <br /> #
@@ -1019,7 +1019,7 @@ const AInsight = () => {
                 <br /> # Hi-fi Prototype
               </ContentText>
               <ContentText style={{ border: "none" }}>
-                <span style={{ fontWeight: "600", color: "#333" }}>
+                <span style={{ fontWeight: "600", color: "#2A3133" }}>
                   Frontend Development
                 </span>
                 <br /># Bootstrap visual-tuning <br /> # AntDesign visual-tuning{" "}
@@ -1028,7 +1028,7 @@ const AInsight = () => {
               </ContentText>
             </TextWrapperSmall>
             <TextWrapperSmall>
-              <span style={{ fontWeight: "600", color: "#333" }}>Tools</span>
+              <span style={{ fontWeight: "600", color: "#2A3133" }}>Tools</span>
 
               <Text
                 style={{
@@ -1381,7 +1381,7 @@ const AInsight = () => {
                 medium="/ainsight/Persona-1.jpg" // 大圖的 URL
                 // alt="description"
                 hideDownload={true} // 隱藏下載按鈕
-                imageBackgroundColor="#000fff" // 背景色
+                imageBackgroundColor="#2A96B7" // 背景色
                 children={
                   <DisImage src="/ainsight/Persona-1.jpg" alt="description" style={{ width: "60%" }}/>
                 } // 使用 DisImage 作為子組件
@@ -1446,7 +1446,7 @@ const AInsight = () => {
                       width: "100%",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1469,7 +1469,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1492,7 +1492,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1526,7 +1526,7 @@ const AInsight = () => {
                       width: "100%",
                       textAlign: "left",
                       lineHeight: "1.8",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     1. 有儀表板顯示基本的財務指標，包括收入、費用和利潤。
@@ -1556,7 +1556,7 @@ const AInsight = () => {
                       width: "100%",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1579,7 +1579,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1602,7 +1602,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1636,7 +1636,7 @@ const AInsight = () => {
                       width: "100%",
                       textAlign: "left",
                       lineHeight: "1.8",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     1. 可以輕鬆記錄和分類所有的業務費用。
@@ -1667,7 +1667,7 @@ const AInsight = () => {
                       width: "100%",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1690,7 +1690,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1713,7 +1713,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1747,7 +1747,7 @@ const AInsight = () => {
                       width: "100%",
                       textAlign: "left",
                       lineHeight: "1.8",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     1. 可以輕鬆地創建和自定義包括客戶詳細信息和明細費用的發票。
@@ -1783,7 +1783,7 @@ const AInsight = () => {
                       width: "100%",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1806,7 +1806,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1829,7 +1829,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1863,7 +1863,7 @@ const AInsight = () => {
                       width: "100%",
                       textAlign: "left",
                       lineHeight: "1.8",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     1. 一個直觀且用戶友善的界面，讓我可以專注於記錄交易。
@@ -1894,7 +1894,7 @@ const AInsight = () => {
                       width: "100%",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1917,7 +1917,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1940,7 +1940,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -1974,7 +1974,7 @@ const AInsight = () => {
                       width: "100%",
                       textAlign: "left",
                       lineHeight: "1.8",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     1. 系統通過將交易與銀行對賬單進行匹配來自動化銀行對賬。
@@ -2004,7 +2004,7 @@ const AInsight = () => {
                       width: "100%",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -2027,7 +2027,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -2050,7 +2050,7 @@ const AInsight = () => {
                       textAlign: "left",
                       alignItems: "flex-start",
                       justifyContent: "left",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     <span
@@ -2084,7 +2084,7 @@ const AInsight = () => {
                       width: "100%",
                       textAlign: "left",
                       lineHeight: "1.8",
-                      color: "#333",
+                      color: "#2A3133",
                     }}
                   >
                     1. 系統提供訪問會計指南、教程和文章的功能。
