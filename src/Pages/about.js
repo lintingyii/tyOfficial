@@ -2,7 +2,7 @@ import React from "react";
 import styled, { keyframes } from "styled-components";
 import Footer from "../Components/footer";
 
-export const Resume = () => {
+export const About = () => {
   return (
     <Div>
       <Div2>
@@ -296,7 +296,7 @@ export const Resume = () => {
     </Div>
   );
 };
-export default Resume;
+export default About;
 
 const DownloadButton = styled.button`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
