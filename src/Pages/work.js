@@ -313,8 +313,8 @@ export const Work = () => {
         </CardsContainerWrapper>
       </CardsContainer>
       <TextMarquee
-        text="Let’s work"
-        accent="together"
+        text="Your project could be"
+        accent="next"
         gapTop="12vh"
         gapTopSm="8vh"
       />
