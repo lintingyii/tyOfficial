@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import styled, { keyframes, css } from "styled-components";
-import Marquee from "react-fast-marquee";
+import TextMarquee from "../Components/TextMarquee";
 import Footer from "../Components/footer";
 import ServiceCardComponent from "../Components/ServiceCard";
 import TestimonialCard from "../Components/TestimonialCard";
@@ -473,16 +473,7 @@ function MyComponent(props) {
         />
       </Div6>
 
-      <Marquee speed={80}>
-        <Marqueetext>
-          Let's make something <MarqueeSpan>cool</MarqueeSpan>· Let's make
-          something <MarqueeSpan>cool</MarqueeSpan> · Let's make something{" "}
-          <MarqueeSpan>cool</MarqueeSpan> · Let's make something{" "}
-          <MarqueeSpan>cool</MarqueeSpan> · Let's make something{" "}
-          <MarqueeSpan>cool</MarqueeSpan> · Let's make something{" "}
-          <MarqueeSpan>cool</MarqueeSpan> ·
-        </Marqueetext>
-      </Marquee>
+      <TextMarquee text="Let’s make something" accent="cool" />
 
       <Section>
         <CardsContainer>
@@ -964,7 +955,9 @@ const ScrollHint = styled.div`
   will-change: opacity, transform;
 
   @media (max-width: 480px) {
-    top: 79vh; /* 手機版導覽列在畫面下方，留一點餘裕不要疊到 */
+    /* 手機版的導覽列浮在畫面下方（844 高時上緣在 784），79vh 只離它 73px，
+       擠在一起像是被推到底。70vh 拉開到 149px，箭頭回到空白藍色區塊的中段。 */
+    top: 70vh;
   }
 `;
 
@@ -1955,32 +1948,6 @@ const ServiceDes = styled.div`
   @media (max-width: 480px) {
     font-size: 1rem;
   }
-`;
-
-const Marqueetext = styled.div`
-  font-family: serif;
-  font-size: 2rem;
-  line-height: 1.6;
-  padding: 24px;
-  background-color: #2A96B7;
-  color: #fff;
-  width: 100vw;
-  display: flex;
-  white-space: nowrap;
-
-  @media (max-width: 480px) {
-    font-size: 1.6rem;
-    line-height: 1.4;
-    padding: 18px;
-  }
-`;
-
-const MarqueeSpan = styled.div`
-  font-family: serif;
-  font-style: italic;
-  display: flex;
-  margin-left: 6px;
-  color: #f7883d;
 `;
 
 const rotate = keyframes`
