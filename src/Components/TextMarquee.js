@@ -79,10 +79,11 @@ const reduceMotion = css`
    字距必須是 0：小寫是連筆的，一拉開字距筆畫就斷了。
 
    字級的倍率是「看起來一樣大」而不是「數字一樣大」：書寫體的墨色高度遠小於
-   字級，1em 直接排會比旁邊的襯線矮一截。 */
+   字級，1em 直接排會比旁邊的襯線矮一截。1.55em 剛好讓它的上緣對齊襯線的
+   大寫高度 —— 比襯線大一點點是靠字體本身的個性，不是靠字級撐出來的。 */
 const Accent = styled.span`
   font-family: "Luxurious Script", cursive;
-  font-size: 1.7em;
+  font-size: 1.55em;
   text-transform: none;
   letter-spacing: 0;
   line-height: 1;
