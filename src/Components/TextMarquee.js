@@ -1,5 +1,5 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
-import styled, { keyframes, css } from "styled-components";
+import styled from "styled-components";
 
 /* 跑馬燈。參考 Motto®（wearemotto.com）的做法：不做成一條彩色橫幅，
    而是讓字直接坐在頁面底色上，兩行反向疊起來，字與字之間夾一個會自轉的記號。
@@ -22,6 +22,7 @@ let subscribers = 0;
 const BOOST_PER_PX = 3; // 一次捲動事件每移動 1px 增加的速度
 const BOOST_MAX = 400; // 加成上限：基礎速度 80，所以最快約 6 倍
 const BOOST_HALF_LIFE = 180; // 毫秒：加成衰減到一半所需的時間
+const BASE_SPIN = 40; // 火花的基礎轉速（度/秒）＝ 原本 CSS 動畫的 9 秒一圈
 
 /* 用「峰值 + 時間戳」而不是每幀去乘衰減係數：兩行各自跑自己的 rAF，
    每幀乘一次的話會被衰減兩次，而且哪一行負責衰減也會變成隱性相依。
@@ -54,10 +55,6 @@ const subscribeScroll = () => {
   };
 };
 
-const spin = keyframes`
-  to { transform: rotate(360deg); }
-`;
-
 /* 四角火花，形狀取自 banner-deco 上的那組裝飾。 */
 const Spark = ({ className }) => (
   <svg className={className} viewBox="0 0 100 100" aria-hidden="true">
@@ -67,12 +64,6 @@ const Spark = ({ className }) => (
     />
   </svg>
 );
-
-const reduceMotion = css`
-  @media (prefers-reduced-motion: reduce) {
-    animation: none;
-  }
-`;
 
 /* 句子裡被挑出來的那個字，換成 Luxurious Script，維持小寫。
 
@@ -120,8 +111,10 @@ const Unit = styled.span`
     margin: 0 0.3em;
     vertical-align: -0.04em;
     color: #d8984e;
-    animation: ${spin} 9s linear infinite;
-    ${reduceMotion}
+    /* 轉動角度由 rAF 寫進 --spark-rot，跟著跑馬燈一起加速、一起翻面。
+       原本是固定 9s 一圈的 CSS 動畫，捲動時整行在衝、只有它慢慢轉，
+       看起來是兩套不相干的動作。 */
+    transform: rotate(var(--spark-rot, 0deg));
   }
 `;
 
@@ -219,6 +212,7 @@ const Row = ({ text, accent, dir, speed }) => {
     let raf = 0;
     let last = 0;
     let offset = 0;
+    let rot = 0;
     let visible = true;
 
     /* 捲出畫面就不要再推 —— 看不到的東西沒必要每幀重算 */
@@ -245,9 +239,16 @@ const Row = ({ text, accent, dir, speed }) => {
       if (!unitW) return;
 
       /* 方向 = 這一行的基礎方向 × 捲動方向。往上捲的時候整組翻面。 */
-      const v = (speed + boostAt(now)) * dir * scrollSign;
+      const dirSign = dir * scrollSign;
+      /* 同一個倍率同時餵給位移與轉動，火花的轉速就永遠等於這一行的速度比例 */
+      const factor = (speed + boostAt(now)) / speed;
+
+      const v = speed * factor * dirSign;
       offset = (((offset + (v * dt) / 1000) % unitW) + unitW) % unitW;
       track.style.transform = `translate3d(${-offset}px,0,0)`;
+
+      rot = (rot + (BASE_SPIN * factor * dirSign * dt) / 1000) % 360;
+      track.style.setProperty("--spark-rot", `${rot}deg`);
     };
 
     raf = requestAnimationFrame(frame);
