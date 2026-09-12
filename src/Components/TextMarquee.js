@@ -34,13 +34,17 @@ const Unit = styled.span`
   align-items: center;
   white-space: nowrap;
 
-  /* 與 hero 引言同一支襯線。全大寫 + 行高 1 是這個做法的重點：
-     字要大到像版面元素而不是一行字，行高留白會讓它散掉。 */
-  font-family: serif;
-  text-transform: uppercase;
+  /* Luxurious Script。連筆的書寫體不能全大寫 —— 它的大寫是設計來當字首的
+     花體，串成一整句會互相打架、也讀不出連筆，所以這裡用原本的大小寫。
+     letter-spacing 也回到 0：字距一拉開，連筆就斷了。
+
+     行高給到 1.35 是必要的，不是留白：這支字的字身框比 em 高，行高 1 的時候
+     跑馬燈容器（overflow-y 只能是 auto，不能單獨設 visible）量到內容比自己高
+     6px，會把筆畫切掉或長出捲軸。 */
+  font-family: "Luxurious Script", cursive;
   font-size: clamp(32px, 6vw, 112px);
-  line-height: 1;
-  letter-spacing: 0.005em;
+  line-height: 1.35;
+  letter-spacing: 0;
   color: #2a3133;
 
   svg {
