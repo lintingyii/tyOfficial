@@ -32,14 +32,11 @@ function MyComponent(props) {
         const w0 = wideMQ.matches;
         const vw0 = window.innerWidth;
         const vh0 = window.innerHeight;
-        const wr = 911 / 3755;
-        const hr = 1640 / 3755;
-        const z0 = (w0 ? 0.246 : 0.78) / wr;
-        const h0 = vh0 - hr * vw0;
-        const s0 = vh0 * (w0 ? 0.56 : 0.5) - h0;
+        const k0 = ((w0 ? 0.246 : 0.78) * vw0) / 911;
+        const t0 = (w0 ? 0.56 : 0.5) * vh0 - 148 * k0;
         pin.style.setProperty(
           "--portrait-reveal",
-          `${Math.max(0, s0 + hr * vw0 * (z0 - 1))}px`,
+          `${Math.max(0, t0 + 1788 * k0 - vh0)}px`,
         );
       }
       const total = pin.offsetHeight - window.innerHeight;
@@ -53,58 +50,49 @@ function MyComponent(props) {
       const phase = (start, end) =>
         Math.min(Math.max((progress - start) / (end - start), 0), 1);
 
-      /* 人像／外框的大小與位置。
+      /* 人像／外框的尺寸與位置，直接算成版面值寫進 style。
 
-         縮放原點在人像頭頂（見 PortraitLayer 的 transform-origin），所以
-         放大時頭頂不動、身體往下長出 100vh 之外 —— 那段溢出就是「視窗造成
-         的裁切」，也是要靠捲動找回來的距離，寫進 --portrait-reveal。
+         原本是「圖片 contain 成視窗寬 + transform: scale()」。問題在於
+         手機的倍率高達 3.2 —— 圖片的版面尺寸只有 390px 寬、人物在裡面
+         只佔 95px，瀏覽器以那個尺寸點陣化之後再把貼圖拉大 3.2 倍，
+         等於把 95px 的細節拉到 304px。桌機倍率只有 1.014 所以看不出來，
+         這就是「同一個檔案，電腦清楚、手機糊」的原因。
 
-         桌機與手機用同一套機制，只是目標值不同：直立手機上，contain 之後
-         人像只有畫面寬的 15.4%（等於 zoom 1），小到看不清楚，所以放大倍率
-         用「人像寬度要佔畫面多少」反推，而不是寫死一個倍率。
-           zoom = 目標寬度比 × 4152 / 639
-         桌機 0.246 → 1.60（維持原本的值），手機 0.78 → 5.07。
+         改成直接給寬度之後，版面尺寸就是最終尺寸：手機的圖會排到 1254px
+         寬（超出的部分由 PortraitLayer 的 overflow-x: clip 裁掉），點陣化
+         也在這個尺寸發生，3× 螢幕拿到的是 3762 實體像素對上原生的 3755。 */
+      const CANVAS_W = 3755; // 畫布寬
+      const FIG_W = 911; // 人物寬
+      const FIG_TOP = 148; // 人物頂端（畫布座標）
+      const FIG_BOTTOM = 1788; // 人物底端＝畫布底（人像貼齊畫布底部）
 
-         手機另外需要垂直位移：人像在未放大時腳底貼齊容器底、整個人只有
-         107px 高，頭頂會落在 87% 的位置，底下幾乎沒東西。HEAD_TARGET 把
-         頭頂拉到畫面高的 50%。桌機的 HEAD_TARGET 就取它原本的位置，
-         位移算出來是 0，行為完全不變。 */
       const vw = window.innerWidth;
       const vh = window.innerHeight;
       const wide = wideMQ.matches;
 
-      /* 人像在畫布裡的比例。基準是「畫布寬度」而不是高度 —— 圖是 contain
-         且受寬度限制，用寬度換算，視窗高度改變時構圖才不會跑掉。
-         畫布 3755×1788，人物 911×1640。
-
-         畫布刻意壓到「剛好裝得下外框」的最小尺寸：原本是 5965×2841
-         = 16.9 MP，超過 iOS Safari 的 16 MP 解碼上限，手機會自動降採樣
-         （砍一半 → 人物只剩約 456px），比放大還糟。現在 6.7 MP 安全。 */
-      const W_RATIO = 911 / 3755; // 人物寬 ÷ 畫布寬
-      const H_RATIO = 1640 / 3755; // 人物高 ÷ 畫布寬
-
-      /* 放大倍率由「人物要佔畫面多寬」反推，不是寫死的倍率 —— 換圖之後
-         只要 W_RATIO 對，倍率會自己算出來。 */
-      const zoom = (wide ? 0.246 : 0.78) / W_RATIO;
-
-      /* 頭頂位置明確指定，不要依賴畫布幾何算出來的預設值 ——
-         換圖或改畫布尺寸時 H_RATIO 會變，head0 就跟著漂，構圖會整個跑掉
-         （縮小畫布那次就是這樣，桌機的人像直接飛到引言上面）。 */
+      /* 頭頂位置明確指定，不要依賴畫布幾何 —— 換圖或改畫布尺寸時構圖才不會漂 */
       const HEAD_TARGET = wide ? 0.56 : 0.5; // 頭頂佔視窗高度的比例
-      const head0 = vh - H_RATIO * vw; // 未位移時的人像頭頂
-      const shift = vh * HEAD_TARGET - head0;
-      /* 溢出到畫面外的高度＝要靠捲動找回來的距離。手機版的新圖裁得比較緊
-         （鞋子那段沒了），算出來可能是負的 —— 代表整個人本來就進得了畫面，
-         沒有東西需要露出，夾成 0。 */
-      const overflow = Math.max(0, shift + H_RATIO * vw * (zoom - 1));
+      const FIG_TARGET = wide ? 0.246 : 0.78; // 人物寬度佔視窗寬度的比例
 
+      const imgW = (FIG_TARGET * vw * CANVAS_W) / FIG_W; // 圖片的版面寬度
+      const k = imgW / CANVAS_W; // 畫布座標 → 畫面像素
+      const imgLeft = (vw - imgW) / 2; // 畫布置中 —— 與原本 contain + center 相同
+      const imgTop = HEAD_TARGET * vh - FIG_TOP * k; // 讓頭頂落在目標高度
+
+      /* 溢出到畫面外的高度＝要靠捲動找回來的距離 */
+      const overflow = Math.max(0, imgTop + FIG_BOTTOM * k - vh);
       pin.style.setProperty("--portrait-reveal", `${overflow}px`);
 
-      /* slide = 進場時額外的位移，兩張都給 0 —— 往下的位移會讓圖沉到
-         banner 底下，跟「不要被裁切」牴觸。所以只淡入。 */
-      const reveal = (el, p, slide) => {
+      const place = (el) => {
+        el.style.width = `${imgW}px`;
+        el.style.left = `${imgLeft}px`;
+        el.style.top = `${imgTop}px`;
+      };
+      place(me);
+      place(deco);
+
+      const reveal = (el, p) => {
         el.style.opacity = p;
-        el.style.transform = `translateY(${(1 - p) * slide + shift}px) scale(${zoom})`;
       };
 
       // 藍底圖不吃 scroll，改成載入後就淡入（見 BgWrap 的 animation）
@@ -112,8 +100,8 @@ function MyComponent(props) {
       // 人像先站定、隔一下白框才進來，兩個動作才分得開。
       // pan / zoom 兩層共用（吃的是 progress 不是各自的 phase），才不會脫開。
       // 兩段都落在「停住」的 320px 內：人像 0~180、deco 202~306
-      reveal(me, phase(0, 0.4), 0);
-      reveal(deco, phase(0.45, 0.68), 0);
+      reveal(me, phase(0, 0.4));
+      reveal(deco, phase(0.45, 0.68));
 
       /* 捲動提示：一動就淡出。用實際捲動距離（px）而不是 progress，
          因為 progress 的分母是 140vh 的釘選長度，40px 只佔 5%，
@@ -855,33 +843,25 @@ const PortraitLayer = styled.div`
   overflow-y: visible;
 
   /* 一定要限定 [data-layer="portrait"]：外框那層也包了一個 <picture>
-     來做 WebP 切換，沒限定的話下面的 opacity: 0 會把外框整個蓋掉。 */
+     來做 WebP 切換，沒限定的話下面的 opacity: 0 會把外框整個蓋掉。
+
+     尺寸與位置全部由 JS 寫成版面值（width / left / top），這裡不給 inset
+     也不給 object-fit。原本是「圖片 contain 成視窗大小 + transform: scale()」，
+     手機的倍率高到 3.2，等於讓瀏覽器以 390px 的版面尺寸點陣化再拉大三倍，
+     人像就糊了。現在版面尺寸就是最終尺寸，點陣化一次到位。 */
   picture[data-layer="portrait"] {
     position: absolute;
-    inset: 0;
-    width: auto;
+    display: block;
+    height: auto;
     z-index: 1;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
     opacity: 0; /* 交給 JS 控制浮現 */
-    /* 只宣告 opacity。transform 在這裡是靜態的（縮放與位移都不隨捲動變），
-       但 will-change: transform 會強制提前合成圖層 —— 瀏覽器可能以「未縮放
-       的版面尺寸」點陣化，再把那張貼圖放大 5 倍，畫質會再掉一層。 */
     will-change: opacity;
-    /* 縮放原點＝人像頭頂（DecoImg 用同一個值，兩層才不會脫開）。
-       三張圖共用 4152×1977 畫布、contain + bottom center 貼齊底部，
-       寬度受限時渲染比例 = 100vw / 4152，人像頭頂離畫布底 1162px，
-       所以是 1162/4152 = 27.99vw。手機版更是寬度受限，同一個值成立。 */
-    /* 原點＝人像頭頂。人像貼齊畫布底部，所以「頭頂離底部的距離」＝人物高，
-       換算成畫布寬的比例 1640/3755 = 43.68vw。 */
-    transform-origin: center calc(100% - 43.68vw);
   }
 
   picture[data-layer="portrait"] img {
     width: 100%;
+    height: auto;
     display: block;
-    ${bannerLayerFit}
   }
 `;
 
@@ -949,18 +929,14 @@ const BgImg = styled.img`
 // `;
 
 const DecoImg = styled.img`
+  /* 跟人像同一套：位置與寬度由 JS 給版面值，兩層用同一組數字算出來，
+     所以永遠對齊。 */
   position: absolute;
-  bottom: 0;
-  width: 100%;
+  display: block;
   height: auto;
-  object-fit: contain;
-  ${bannerLayerFit}
-  inset: 0;
-  /* 與 PortraitLayer 內 picture 的縮放原點一致，兩層才會一起縮放不脫開 */
-  transform-origin: center calc(100% - 43.68vw);
   z-index: 2;
   opacity: 0;
-  will-change: opacity; /* 同 picture：transform 是靜態的，不要提前合成 */
+  will-change: opacity;
   pointer-events: none;
 `;
 
