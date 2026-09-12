@@ -473,7 +473,7 @@ function MyComponent(props) {
         />
       </Div6>
 
-      <TextMarquee text="Let’s make something cool" />
+      <TextMarquee text="Let’s make something" accent="cool" />
 
       <Section>
         <CardsContainer>

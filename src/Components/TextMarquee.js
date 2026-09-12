@@ -29,29 +29,40 @@ const reduceMotion = css`
   }
 `;
 
+/* 句子裡被挑出來的那個字，換成 Luxurious Script。
+
+   它不吃 uppercase —— 這支字的大寫是設計來當字首的花體，串起來會互相打架。
+   字級放大到 1.45em 是為了「看起來一樣大」：書寫體的墨色高度只有字級的
+   六成左右（86px 的字實際只有 52px 高），跟襯線的大寫排在一起會矮一截。 */
+const Accent = styled.span`
+  font-family: "Luxurious Script", cursive;
+  font-size: 1.45em;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1;
+  padding: 0 0.06em; /* 書寫體的起筆與收筆會往外伸，不留一點會黏到前後的字 */
+`;
+
 const Unit = styled.span`
-  display: inline-flex;
-  align-items: center;
+  /* 用 inline-block 而不是 flex：一行裡有兩種字級，inline 佈局才會按基線對齊。
+     flex 只能對齊盒子的上下緣，書寫體會浮起來。 */
+  display: inline-block;
   white-space: nowrap;
 
-  /* Luxurious Script。連筆的書寫體不能全大寫 —— 它的大寫是設計來當字首的
-     花體，串成一整句會互相打架、也讀不出連筆，所以這裡用原本的大小寫。
-     letter-spacing 也回到 0：字距一拉開，連筆就斷了。
-
-     行高給到 1.35 是必要的，不是留白：這支字的字身框比 em 高，行高 1 的時候
-     跑馬燈容器（overflow-y 只能是 auto，不能單獨設 visible）量到內容比自己高
-     6px，會把筆畫切掉或長出捲軸。 */
-  font-family: "Luxurious Script", cursive;
+  /* 與 hero 引言同一支襯線。全大寫 + 緊行高是這個做法的重點：
+     字要大到像版面元素而不是一行字。 */
+  font-family: serif;
+  text-transform: uppercase;
   font-size: clamp(32px, 6vw, 112px);
-  line-height: 1.35;
-  letter-spacing: 0;
+  line-height: 1.9;
+  letter-spacing: 0.005em;
   color: #2a3133;
 
   svg {
     width: 0.52em;
     height: 0.52em;
     margin: 0 0.3em;
-    flex: none;
+    vertical-align: -0.04em;
     color: #d8984e;
     animation: ${spin} 9s linear infinite;
     ${reduceMotion}
@@ -71,11 +82,24 @@ const Block = styled.div`
   }
 `;
 
-const TextMarquee = ({ text, speed = 80, gapTop, gapTopSm, className }) => (
+const TextMarquee = ({
+  text,
+  accent,
+  speed = 80,
+  gapTop,
+  gapTopSm,
+  className,
+}) => (
   <Block className={className} $gapTop={gapTop} $gapTopSm={gapTopSm}>
     <Marquee speed={speed} autoFill gradient={false}>
       <Unit>
         {text}
+        {accent ? (
+          <>
+            {" "}
+            <Accent>{accent}</Accent>
+          </>
+        ) : null}
         <Spark />
       </Unit>
     </Marquee>
