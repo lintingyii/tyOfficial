@@ -1,13 +1,58 @@
-import React from "react";
-import Marquee from "react-fast-marquee";
+import React, { useEffect, useLayoutEffect, useRef, useState } from "react";
 import styled, { keyframes, css } from "styled-components";
 
 /* 跑馬燈。參考 Motto®（wearemotto.com）的做法：不做成一條彩色橫幅，
-   而是讓一行超大的字直接坐在頁面底色上，字與字之間夾一個會自轉的記號當節奏。
+   而是讓字直接坐在頁面底色上，兩行反向疊起來，字與字之間夾一個會自轉的記號。
 
    借的是結構，不是語彙 —— 字體沿用 hero 那句「Creativity is the greatest
-   Rebellion」的襯線，記號用 banner-deco 上那組橘色火花，顏色用內文色，
-   所以它讀起來仍然是這個站自己的東西。 */
+   Rebellion」的襯線，記號用 banner-deco 上那組橘色火花，顏色用內文色。
+
+   捲動時會加速、捲動方向翻轉時跑馬燈也跟著翻 —— 這是 Motto 的招牌手感。
+   react-fast-marquee 做不到（它是固定時長的 CSS 動畫，速度與方向都不能中途改），
+   所以這裡自己用 rAF 推 transform。 */
+
+/* ---- 共用的捲動狀態 ----
+   兩行各自跑自己的 rAF，但捲動速度只需要算一次，所以放在模組層。 */
+let scrollSign = 1; // 最後一次捲動的方向：1 往下、-1 往上
+let boostPeak = 0; // 最近一次捲動當下的加成（px/s）
+let boostTime = 0; // 那一刻的時間戳
+let lastY = 0;
+let subscribers = 0;
+
+const BOOST_PER_PX = 3; // 一次捲動事件每移動 1px 增加的速度
+const BOOST_MAX = 400; // 加成上限：基礎速度 80，所以最快約 6 倍
+const BOOST_HALF_LIFE = 180; // 毫秒：加成衰減到一半所需的時間
+
+/* 用「峰值 + 時間戳」而不是每幀去乘衰減係數：兩行各自跑自己的 rAF，
+   每幀乘一次的話會被衰減兩次，而且哪一行負責衰減也會變成隱性相依。
+   這樣算是無狀態的，誰問都拿到同一個值。 */
+const boostAt = (now) =>
+  boostPeak <= 0
+    ? 0
+    : boostPeak * Math.pow(0.5, (now - boostTime) / BOOST_HALF_LIFE);
+
+const handleScroll = () => {
+  const y = window.scrollY;
+  const dy = y - lastY;
+  lastY = y;
+  if (dy === 0) return;
+  const now = performance.now();
+  scrollSign = dy > 0 ? 1 : -1;
+  boostPeak = Math.min(BOOST_MAX, boostAt(now) + Math.abs(dy) * BOOST_PER_PX);
+  boostTime = now;
+};
+
+const subscribeScroll = () => {
+  if (subscribers === 0) {
+    lastY = window.scrollY;
+    window.addEventListener("scroll", handleScroll, { passive: true });
+  }
+  subscribers += 1;
+  return () => {
+    subscribers -= 1;
+    if (subscribers === 0) window.removeEventListener("scroll", handleScroll);
+  };
+};
 
 const spin = keyframes`
   to { transform: rotate(360deg); }
@@ -34,8 +79,7 @@ const reduceMotion = css`
    字距必須是 0：小寫是連筆的，一拉開字距筆畫就斷了。
 
    字級的倍率是「看起來一樣大」而不是「數字一樣大」：書寫體的墨色高度遠小於
-   字級，1em 直接排會比旁邊的襯線矮一截。小寫的墨色又比大寫更矮，所以這裡的
-   倍率比全大寫版本高。 */
+   字級，1em 直接排會比旁邊的襯線矮一截。 */
 const Accent = styled.span`
   font-family: "Luxurious Script", cursive;
   font-size: 1.7em;
@@ -55,6 +99,9 @@ const Unit = styled.span`
      被挑出來的那個字靠字體與字級做區分，不靠全大寫。 */
   font-family: serif;
   font-size: clamp(24px, 4.5vw, 84px);
+
+  /* 行高由 Accent 決定：行框必須裝得下比較高的那個字，
+     否則 Viewport 的 overflow: hidden 會把筆畫切掉。 */
   line-height: 1.95;
   letter-spacing: 0.005em;
   color: #2a3133;
@@ -70,24 +117,33 @@ const Unit = styled.span`
   }
 `;
 
-/* 色塊拿掉之後，上下留白就是它跟前後區塊的分隔 —— 這段 padding 不是裝飾，
-   是原本那條橫幅在做的事。上緣可以另外加大（work 頁接在作品列表後面，
-   需要比首頁更多的距離），所以用 prop 而不是外層覆寫 padding 簡寫。 */
+const Viewport = styled.div`
+  overflow: hidden;
+`;
+
+const Track = styled.div`
+  display: flex;
+  width: max-content;
+  will-change: transform;
+`;
+
 /* 兩行之間要靠負 margin 拉近，不能只靠行高。
 
-   行高被 Accent 綁死了（行框必須裝得下比較高的那個字，否則跑馬燈容器會把
-   筆畫切掉），所以每一行的盒子上下各多出一截空氣。負 margin 把第二行往上拉，
-   讓「墨色之間」的距離回到正常的行距 —— 兩行的容器各自裁切自己的內容，
-   重疊不會互相切到。 */
+   行高被 Accent 綁死了，所以每一行的盒子上下各多出一截空氣。負 margin 把
+   第二行往上拉，讓「墨色之間」的距離回到正常的行距 —— 兩行各自裁切自己的
+   內容，重疊不會互相切到。 */
 const SecondRow = styled.div`
   margin-top: -0.62em;
 `;
 
+/* 色塊拿掉之後，上下留白就是它跟前後區塊的分隔 —— 這段 padding 不是裝飾，
+   是原本那條橫幅在做的事。上緣可以另外加大（work 頁接在作品列表後面，
+   需要比首頁更多的距離）。 */
 const Block = styled.div`
   width: 100%;
+  background-color: #f2f2f2;
   /* em 的基準要跟字一樣，SecondRow 的負 margin 才會跟著字級縮放 */
   font-size: clamp(24px, 4.5vw, 84px);
-  background-color: #f2f2f2;
   padding: ${({ $gapTop }) => $gapTop || "6vh"} 0 6vh;
 
   @media (max-width: 820px) {
@@ -108,10 +164,107 @@ const Line = ({ text, accent }) => (
   </Unit>
 );
 
+const prefersReduced = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const Row = ({ text, accent, dir, speed }) => {
+  const viewRef = useRef(null);
+  const trackRef = useRef(null);
+  const [copies, setCopies] = useState(2);
+
+  /* 要鋪幾份才填得滿：量完一份的寬度再決定。少一份就會露出接縫。 */
+  useLayoutEffect(() => {
+    const view = viewRef.current;
+    const track = trackRef.current;
+    if (!view || !track) return undefined;
+
+    const measure = () => {
+      const unit = track.firstElementChild;
+      if (!unit) return;
+      const w = unit.getBoundingClientRect().width;
+      if (!w) return;
+      setCopies(Math.max(2, Math.ceil(view.getBoundingClientRect().width / w) + 1));
+    };
+
+    measure();
+    /* 字體載入完寬度會變 —— 沒有這一步，接縫會在 webfont 換上去之後跑出來 */
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+    const ro = new ResizeObserver(measure);
+    ro.observe(view);
+    return () => ro.disconnect();
+  }, [text, accent]);
+
+  useEffect(() => {
+    const view = viewRef.current;
+    const track = trackRef.current;
+    if (!view || !track) return undefined;
+
+    if (prefersReduced()) {
+      track.style.transform = "translate3d(0,0,0)";
+      return undefined;
+    }
+
+    const unsubscribe = subscribeScroll();
+
+    let raf = 0;
+    let last = 0;
+    let offset = 0;
+    let visible = true;
+
+    /* 捲出畫面就不要再推 —— 看不到的東西沒必要每幀重算 */
+    const io =
+      typeof IntersectionObserver === "undefined"
+        ? null
+        : new IntersectionObserver(
+            ([e]) => {
+              visible = e.isIntersecting;
+            },
+            { rootMargin: "120px" },
+          );
+    if (io) io.observe(view);
+
+    const frame = (now) => {
+      raf = requestAnimationFrame(frame);
+      const dt = last ? Math.min(now - last, 50) : 16;
+      last = now;
+
+      if (!visible) return;
+
+      const unit = track.firstElementChild;
+      const unitW = unit ? unit.getBoundingClientRect().width : 0;
+      if (!unitW) return;
+
+      /* 方向 = 這一行的基礎方向 × 捲動方向。往上捲的時候整組翻面。 */
+      const v = (speed + boostAt(now)) * dir * scrollSign;
+      offset = (((offset + (v * dt) / 1000) % unitW) + unitW) % unitW;
+      track.style.transform = `translate3d(${-offset}px,0,0)`;
+    };
+
+    raf = requestAnimationFrame(frame);
+    return () => {
+      cancelAnimationFrame(raf);
+      if (io) io.disconnect();
+      unsubscribe();
+    };
+  }, [dir, speed]);
+
+  return (
+    <Viewport ref={viewRef}>
+      <Track ref={trackRef}>
+        {Array.from({ length: copies }, (_, i) => (
+          <Line key={i} text={text} accent={accent} />
+        ))}
+      </Track>
+    </Viewport>
+  );
+};
+
 /* 兩行反向（上行往右、下行往左），照 Motto 的排法。
 
-   這不只是裝飾：色塊拿掉之後，單獨一行 64.8px 的字沒有足夠的量體去當
-   區塊之間的分隔，讀起來像一行漂在灰底上的孤字。兩行疊起來才重得起來。 */
+   這不只是裝飾：色塊拿掉之後，單獨一行的字沒有足夠的量體去當區塊之間的
+   分隔，讀起來像一行漂在灰底上的孤字。兩行疊起來才重得起來。 */
 const TextMarquee = ({
   text,
   accent,
@@ -121,13 +274,9 @@ const TextMarquee = ({
   className,
 }) => (
   <Block className={className} $gapTop={gapTop} $gapTopSm={gapTopSm}>
-    <Marquee speed={speed} direction="right" autoFill gradient={false}>
-      <Line text={text} accent={accent} />
-    </Marquee>
+    <Row text={text} accent={accent} speed={speed} dir={-1} />
     <SecondRow>
-      <Marquee speed={speed} autoFill gradient={false}>
-        <Line text={text} accent={accent} />
-      </Marquee>
+      <Row text={text} accent={accent} speed={speed} dir={1} />
     </SecondRow>
   </Block>
 );
