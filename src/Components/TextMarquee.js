@@ -29,18 +29,20 @@ const reduceMotion = css`
   }
 `;
 
-/* 句子裡被挑出來的那個字，換成 Luxurious Script。
+/* 句子裡被挑出來的那個字，換成 Luxurious Script 的全大寫。
 
-   它不吃 uppercase —— 這支字的大寫是設計來當字首的花體，串起來會互相打架。
-   字級放大到 1.45em 是為了「看起來一樣大」：書寫體的墨色高度只有字級的
-   六成左右（86px 的字實際只有 52px 高），跟襯線的大寫排在一起會矮一截。 */
+   這支字的大寫是花體，字母之間不連筆但筆畫會互相伸進對方的字身框，
+   所以要給一點字距，不然會疊在一起。
+
+   字級的倍率是「看起來一樣大」而不是「數字一樣大」：書寫體的墨色高度遠小於
+   字級，1em 直接排會比旁邊的襯線矮一截。 */
 const Accent = styled.span`
   font-family: "Luxurious Script", cursive;
-  font-size: 1.45em;
-  text-transform: none;
-  letter-spacing: 0;
+  font-size: 1.5em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
   line-height: 1;
-  padding: 0 0.06em; /* 書寫體的起筆與收筆會往外伸，不留一點會黏到前後的字 */
+  padding: 0 0.08em; /* 花體的起筆與收筆會往外伸，不留一點會黏到前後的字 */
 `;
 
 const Unit = styled.span`
@@ -49,12 +51,11 @@ const Unit = styled.span`
   display: inline-block;
   white-space: nowrap;
 
-  /* 與 hero 引言同一支襯線。全大寫 + 緊行高是這個做法的重點：
-     字要大到像版面元素而不是一行字。 */
+  /* 與 hero 引言同一支襯線，維持原本的大小寫 —— 句子照常讀，
+     被挑出來的那個字靠字體與字級做區分，不靠全大寫。 */
   font-family: serif;
-  text-transform: uppercase;
-  font-size: clamp(32px, 6vw, 112px);
-  line-height: 1.9;
+  font-size: clamp(24px, 4.5vw, 84px);
+  line-height: 1.8;
   letter-spacing: 0.005em;
   color: #2a3133;
 
