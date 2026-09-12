@@ -7,7 +7,7 @@ import {
   Link,
   useLocation,
 } from "react-router-dom";
-import Resume from "./Pages/resume";
+import About from "./Pages/about";
 import MyComponent from "./Pages/home";
 import Work from "./Pages/work";
 import YoungLions from "./Pages/youngLions";
@@ -230,7 +230,10 @@ function App() {
         <Routes>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<MyComponent />} />
-          <Route path="/resume" element={<Resume />} />
+          {/* 舊網址：這一頁本來叫 /resume，可能已經貼在 LinkedIn 或投出去的
+              履歷裡，留一條 redirect 免得變死連結。不會出現在導覽列上。 */}
+          <Route path="/resume" element={<Navigate to="/about" replace />} />
+          <Route path="/about" element={<About />} />
           <Route path="/work" element={<Work />} />
           <Route path="/work/youngLions" element={<YoungLions />} />
           <Route
@@ -318,13 +321,13 @@ function NavigationBar() {
             style={{ left: glide.left, width: glide.width }}
           />
           <NavItem
-            to="/resume"
-            isActive={location.pathname === "/resume"}
+            to="/about"
+            isActive={location.pathname === "/about"}
             onMouseEnter={(e) => moveGlideTo(e.currentTarget)}
             onFocus={(e) => focusGlideTo(e.currentTarget)}
             onBlur={hideGlide}
           >
-            Resume
+            About
           </NavItem>
           <NavItem
             to="/work"
