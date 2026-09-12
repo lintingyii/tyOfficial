@@ -30,14 +30,16 @@ function MyComponent(props) {
          倍率再寫一次，這裡先給一個同量級的值讓首次量測不會差太多。 */
       {
         const w0 = wideMQ.matches;
-        const z0 = (w0 ? 0.246 : 0.78) * (4152 / 639);
-        const s0 = w0
-          ? 0
-          : window.innerHeight * 0.5 -
-            (window.innerHeight - 0.2767 * window.innerWidth);
+        const vw0 = window.innerWidth;
+        const vh0 = window.innerHeight;
+        const wr = 911 / 5965;
+        const hr = 1640 / 5965;
+        const z0 = (w0 ? 0.246 : 0.78) / wr;
+        const h0 = vh0 - hr * vw0;
+        const s0 = w0 ? 0 : vh0 * 0.5 - h0;
         pin.style.setProperty(
           "--portrait-reveal",
-          `${Math.max(0, s0 + 0.2767 * window.innerWidth * (z0 - 1))}px`,
+          `${Math.max(0, s0 + hr * vw0 * (z0 - 1))}px`,
         );
       }
       const total = pin.offsetHeight - window.innerHeight;
@@ -71,12 +73,24 @@ function MyComponent(props) {
       const vh = window.innerHeight;
       const wide = wideMQ.matches;
 
-      const head0 = vh - 0.2767 * vw; // 未放大時的人像頭頂
-      const zoom = (wide ? 0.246 : 0.78) * (4152 / 639);
-      const shift = wide ? 0 : vh * 0.5 - head0; // 桌機不位移
-      const overflow = shift + 0.2767 * vw * (zoom - 1);
+      /* 人像在畫布裡的比例。基準是「畫布寬度」而不是高度 —— 圖是 contain
+         且受寬度限制，用寬度換算，視窗高度改變時構圖才不會跑掉。
+         畫布 5965×2841，人物 911×1640。 */
+      const W_RATIO = 911 / 5965; // 人物寬 ÷ 畫布寬
+      const H_RATIO = 1640 / 5965; // 人物高 ÷ 畫布寬
 
-      pin.style.setProperty("--portrait-reveal", `${Math.max(0, overflow)}px`);
+      /* 放大倍率由「人物要佔畫面多寬」反推，不是寫死的倍率 —— 換圖之後
+         只要 W_RATIO 對，倍率會自己算出來。 */
+      const zoom = (wide ? 0.246 : 0.78) / W_RATIO;
+
+      const head0 = vh - H_RATIO * vw; // 未位移時的人像頭頂
+      const shift = wide ? 0 : vh * 0.5 - head0; // 桌機不位移
+      /* 溢出到畫面外的高度＝要靠捲動找回來的距離。手機版的新圖裁得比較緊
+         （鞋子那段沒了），算出來可能是負的 —— 代表整個人本來就進得了畫面，
+         沒有東西需要露出，夾成 0。 */
+      const overflow = Math.max(0, shift + H_RATIO * vw * (zoom - 1));
+
+      pin.style.setProperty("--portrait-reveal", `${overflow}px`);
 
       /* slide = 進場時額外的位移，兩張都給 0 —— 往下的位移會讓圖沉到
          banner 底下，跟「不要被裁切」牴觸。所以只淡入。 */
@@ -174,8 +188,14 @@ function MyComponent(props) {
             <picture>
               <source
                 media="(max-width: 820px)"
+                srcSet="/banner-bg-mobile.webp"
+                type="image/webp"
+              />
+              <source
+                media="(max-width: 820px)"
                 srcSet="/banner-bg-mobile.png"
               />
+              <source srcSet="/banner-bg.webp" type="image/webp" />
               <BgImg src="/banner-bg.png" alt="" aria-hidden="true" />
             </picture>
           </BgWrap>
@@ -206,17 +226,24 @@ function MyComponent(props) {
           {/* 人像／外框：必須放在 Banner 內，定位參考才是 Banner，
               才會跟著 Banner 的 sticky 一起移動／停住 */}
           <PortraitLayer>
-            {/* 手機版與桌機版共用同一張人像（原本 ≤820px 會換成
-                banner-2-mobile-1.png，那是一整張烤好的舊版手機 hero） */}
-            <picture ref={meRef}>
+            {/* 桌機與手機共用同一張。人物 911px 寬 —— 3× 手機需要約 910px，
+                桌機 2× 需要約 706px，兩邊都是縮小顯示（縮小永遠清楚）。 */}
+            <picture ref={meRef} data-layer="portrait">
+              <source srcSet="/banner-me.webp" type="image/webp" />
               <img src="/banner-me.png" alt="Main Page" />
             </picture>
-            <DecoImg
-              ref={decoRef}
-              src="/banner-deco.png"
-              alt=""
-              aria-hidden="true"
-            />
+            {/* WebP 優先、PNG 後備。人像那張 PNG 有 1.24 MB，WebP 只要
+                185 KB —— 對手機的載入差很多。不支援 WebP 的瀏覽器會自動
+                退回 PNG，不需要另外偵測。 */}
+            <picture>
+              <source srcSet="/banner-deco.webp" type="image/webp" />
+              <DecoImg
+                ref={decoRef}
+                src="/banner-deco.png"
+                alt=""
+                aria-hidden="true"
+              />
+            </picture>
           </PortraitLayer>
         </Banner>
       </BannerPin>
@@ -819,7 +846,9 @@ const PortraitLayer = styled.div`
   overflow-x: clip;
   overflow-y: visible;
 
-  picture {
+  /* 一定要限定 [data-layer="portrait"]：外框那層也包了一個 <picture>
+     來做 WebP 切換，沒限定的話下面的 opacity: 0 會把外框整個蓋掉。 */
+  picture[data-layer="portrait"] {
     position: absolute;
     inset: 0;
     width: auto;
@@ -828,15 +857,20 @@ const PortraitLayer = styled.div`
     justify-content: center;
     align-items: flex-end;
     opacity: 0; /* 交給 JS 控制浮現 */
-    will-change: transform, opacity;
+    /* 只宣告 opacity。transform 在這裡是靜態的（縮放與位移都不隨捲動變），
+       但 will-change: transform 會強制提前合成圖層 —— 瀏覽器可能以「未縮放
+       的版面尺寸」點陣化，再把那張貼圖放大 5 倍，畫質會再掉一層。 */
+    will-change: opacity;
     /* 縮放原點＝人像頭頂（DecoImg 用同一個值，兩層才不會脫開）。
        三張圖共用 4152×1977 畫布、contain + bottom center 貼齊底部，
        寬度受限時渲染比例 = 100vw / 4152，人像頭頂離畫布底 1162px，
        所以是 1162/4152 = 27.99vw。手機版更是寬度受限，同一個值成立。 */
-    transform-origin: center calc(100% - 27.99vw);
+    /* 原點＝人像頭頂。人像貼齊畫布底部，所以「頭頂離底部的距離」＝人物高，
+       換算成畫布寬的比例 1640/5965 = 27.49vw。 */
+    transform-origin: center calc(100% - 27.49vw);
   }
 
-  picture img {
+  picture[data-layer="portrait"] img {
     width: 100%;
     display: block;
     ${bannerLayerFit}
@@ -915,10 +949,10 @@ const DecoImg = styled.img`
   ${bannerLayerFit}
   inset: 0;
   /* 與 PortraitLayer 內 picture 的縮放原點一致，兩層才會一起縮放不脫開 */
-  transform-origin: center calc(100% - 27.99vw);
+  transform-origin: center calc(100% - 27.49vw);
   z-index: 2;
   opacity: 0;
-  will-change: transform, opacity;
+  will-change: opacity; /* 同 picture：transform 是靜態的，不要提前合成 */
   pointer-events: none;
 `;
 

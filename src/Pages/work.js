@@ -622,10 +622,11 @@ const CardsContainer = styled.div`
        後面的話，那片淺色就是使用者看到的一大塊空白。這一區是同色的
        不透明區塊，疊上去剛好蓋掉，畫面上只會剩馬賽克的波前。
 
-       28vh 是算出來的：讓「篩選列剛進畫面」時，波前正好落在內容上緣。
+       28vh 是「波前剛好貼著內容上緣」的算法值，收得最緊；22vh 往回讓
+       約 50px，讓馬賽克結束後有一小段喘息再進篩選列。
        position: relative 才能讓既有的 z-index 生效、蓋過畫布。 */
     position: relative;
-    margin-top: -28vh;
+    margin-top: -22vh;
   }
   left: 0;
   gap: 3rem;
