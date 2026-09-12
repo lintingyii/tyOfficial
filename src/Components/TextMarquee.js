@@ -38,7 +38,7 @@ const Unit = styled.span`
      字要大到像版面元素而不是一行字，行高留白會讓它散掉。 */
   font-family: serif;
   text-transform: uppercase;
-  font-size: clamp(44px, 9vw, 132px);
+  font-size: clamp(32px, 6vw, 112px);
   line-height: 1;
   letter-spacing: 0.005em;
   color: #2a3133;
