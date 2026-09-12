@@ -2,7 +2,7 @@ import react, { useState, useRef, useEffect } from "react";
 import styled, { keyframes } from "styled-components";
 import { LargeProjectCard, ProjectCard } from "../Components/ProjectCard";
 import PixelScrollTransition from "../Components/PixelScrollTransition";
-import Marquee from "react-fast-marquee";
+import TextMarquee from "../Components/TextMarquee";
 import ProjectFilter from "../Components/ProjectFilter";
 import IntroductionCard from "../Components/IntroductionCard";
 import SortButton from "../Components/SortButton";
@@ -312,18 +312,7 @@ export const Work = () => {
           ))}
         </CardsContainerWrapper>
       </CardsContainer>
-      <Marquee speed={80} style={{ backgroundColor: "#f2f2f2" }}>
-        <Marqueetext>
-          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
-          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
-          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
-          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
-          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
-          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
-          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
-          <MarqueeSpan>Let's work together 👀</MarqueeSpan>
-        </Marqueetext>
-      </Marquee>
+      <TextMarquee text="Let’s work together" gapTop="12vh" gapTopSm="8vh" />
     </Div>
   );
 };
@@ -705,28 +694,4 @@ const ProjectDesGroup = styled.div`
   gap: 1.5rem;
 `;
 
-const Marqueetext = styled.div`
-  font-family: serif;
-  font-size: 2rem;
-  line-height: 1.6;
-  padding: 24px;
-  background-color: #2A3133;
-  color: #fff;
-  width: 100%;
-  display: flex;
-  gap: 1rem;
-  margin-top: 12vh;
 
-  @media (max-width: 480px) {
-    font-size: 1.6rem;
-    line-height: 1.4;
-    padding: 12px;
-    margin-top: 4rem;
-  }
-`;
-
-const MarqueeSpan = styled.div`
-  width: 100%;
-  display: flex;
-  margin-left: 6px;
-`;
