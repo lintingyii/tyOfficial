@@ -10,14 +10,16 @@ import SortButton from "../Components/SortButton";
 export const Work = () => {
   const initialProjects = [
     {
-      /* TODO(設計稿還沒輸出)：縮圖、日期、副標、描述與分類都還是暫定值。
-         date 一定要維持 "Month, Year" 的格式 —— SortButton 是靠它排序的。 */
+      /* TODO：date 還是暫定值，等正確的年月。
+         格式一定要維持 "Month, Year" —— SortButton 是靠它排序的。 */
       date: "September, 2026",
-      image: "/placeholder.svg",
+      image: "/be-my-hooman/thumb.jpg",
       title: "Be my hooman",
-      subtitle: "Case study",
-      description: "",
-      tags: [],
+      subtitle: "Brand guidelines",
+      description:
+        "A character-led brand system: brand introduction, personality, logo system, colour and typography, packaged as a downloadable kit.",
+      tags: [{ name: "Visual design", color: "#2A96B7" }],
+      subtags: [{ name: "Branding", color: "#2A96B7" }],
       link: "/be-my-hooman",
       openInNewTab: true,
     },

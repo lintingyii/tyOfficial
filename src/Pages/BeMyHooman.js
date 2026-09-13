@@ -15,19 +15,28 @@ import styled from "styled-components";
    導覽列與 footer（見 App.js 的 BARE_ROUTES）。底色與間距都刻意中性，
    實際的視覺由設計稿的圖自己決定。 */
 
-const SLICES = [
-  // 依序放入輸出的切片，例如：
-  // { src: "/bemyhooman/01.webp", fallback: "/bemyhooman/01.jpg" },
-];
+/* 設計稿 1280×17549.68，從 Figma 以 2x 輸出 —— 實際拿到 2390×32768，
+   因為 Figma 的單邊上限是 32768px，超過就等比縮，所以有效倍率是 1.87x。
+   再切成 8 張 2390×4096（各 9.8 MP）。 */
+/* 每一片的原生尺寸。32768 剛好是 8 × 4096，所以每片都一樣高。 */
+const SLICE_W = 2390;
+const SLICE_H = 4096;
 
-/* 設計稿的畫布寬度。圖片用 max-width 鎖在這個數字，
-   超寬螢幕才不會把切片拉伸到超過原生解析度而糊掉。 */
-const DESIGN_WIDTH = 1280;
+const SLICES = [
+  { src: "/be-my-hooman/01.webp", fallback: "/be-my-hooman/01.jpg" },
+  { src: "/be-my-hooman/02.webp", fallback: "/be-my-hooman/02.jpg" },
+  { src: "/be-my-hooman/03.webp", fallback: "/be-my-hooman/03.jpg" },
+  { src: "/be-my-hooman/04.webp", fallback: "/be-my-hooman/04.jpg" },
+  { src: "/be-my-hooman/05.webp", fallback: "/be-my-hooman/05.jpg" },
+  { src: "/be-my-hooman/06.webp", fallback: "/be-my-hooman/06.jpg" },
+  { src: "/be-my-hooman/07.webp", fallback: "/be-my-hooman/07.jpg" },
+  { src: "/be-my-hooman/08.webp", fallback: "/be-my-hooman/08.jpg" },
+];
 
 const Container = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #ffffff;
+  background-color: #fbfbfb; /* 與設計稿左側側欄同色，接縫看不出來 */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,9 +48,11 @@ const Container = styled.div`
 
 /* 切片之間不能有任何縫：display block 去掉行內元素的基線空隙，
    負 0.5px 的 margin 吃掉小數寬度造成的接縫（縮放後每張的高度不一定是整數）。 */
+/* 滿版鋪滿，不鎖 max-width —— 跟站上其他案例頁一致，寬螢幕上左右也不會
+   出現色帶（設計稿左側是 #FBFBFB 的側欄、右側是薄荷色，鎖寬的話兩邊
+   會露出不同顏色的底，很難挑到一個不突兀的底色）。 */
 const Slices = styled.div`
   width: 100%;
-  max-width: ${DESIGN_WIDTH}px;
 
   img {
     display: block;
@@ -54,16 +65,6 @@ const Slices = styled.div`
   }
 `;
 
-const Pending = styled.div`
-  width: 100%;
-  max-width: ${DESIGN_WIDTH}px;
-  box-sizing: border-box;
-  padding: 18vh 24px;
-  text-align: center;
-  color: #7a8184;
-  font-size: 1rem;
-  line-height: 1.7;
-`;
 
 /* 回到作品集的路。刻意做得很輕 —— 這頁沒有導覽列，需要一個出口，
    但它不該變成頁面的視覺重點。 */
@@ -100,30 +101,32 @@ export const BeMyHooman = () => {
 
   return (
     <Container>
-      {SLICES.length > 0 ? (
-        <Slices>
-          {SLICES.map((slice, i) => (
-            <picture key={slice.src}>
-              {slice.fallback ? (
-                <source srcSet={slice.src} type="image/webp" />
-              ) : null}
-              <img
-                src={slice.fallback || slice.src}
-                alt={
-                  i === 0
-                    ? "Be my hooman — case study"
-                    : "" /* 只有第一張需要描述，其餘是同一份文件的續頁 */
-                }
-                /* 第一張要立刻出現，其餘等捲到再載 */
-                loading={i === 0 ? "eager" : "lazy"}
-                decoding="async"
-              />
-            </picture>
-          ))}
-        </Slices>
-      ) : (
-        <Pending>內容準備中。</Pending>
-      )}
+      <Slices>
+        {SLICES.map((slice, i) => (
+          <picture key={slice.src}>
+            {slice.fallback ? (
+              <source srcSet={slice.src} type="image/webp" />
+            ) : null}
+            <img
+              src={slice.fallback || slice.src}
+              alt={
+                i === 0
+                  ? "Be my hooman — case study"
+                  : "" /* 只有第一張需要描述，其餘是同一份文件的續頁 */
+              }
+              /* 尺寸一定要寫出來：lazy 的圖在載入前沒有內在尺寸，
+                 沒有 width/height 瀏覽器就不會替它保留高度 —— 整份文件會先
+                 塌成只剩第一張的長度，捲到哪裡才長到哪裡，捲軸一路亂跳。
+                 有這兩個屬性，瀏覽器會先用 aspect-ratio 把版位撐好。 */
+              width={SLICE_W}
+              height={SLICE_H}
+              /* 第一張要立刻出現，其餘等捲到再載 */
+              loading={i === 0 ? "eager" : "lazy"}
+              decoding="async"
+            />
+          </picture>
+        ))}
+      </Slices>
 
       <BackLink href="/work">← Back to work</BackLink>
     </Container>

@@ -267,7 +267,10 @@ const BARE_ROUTES = ["/be-my-hooman"];
 
 function SiteChrome() {
   const { pathname } = useLocation();
-  if (BARE_ROUTES.includes(pathname)) return null;
+  /* 尾斜線要先拿掉再比：瀏覽器與部署端都可能把 /be-my-hooman 正規化成
+     /be-my-hooman/，直接 includes 會比不到，外框就會冒出來。 */
+  const path = pathname.length > 1 ? pathname.replace(/\/+$/, "") : pathname;
+  if (BARE_ROUTES.includes(path)) return null;
 
   return (
     <>
