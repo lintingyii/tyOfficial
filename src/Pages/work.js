@@ -46,12 +46,12 @@ export const Work = () => {
       description:
         'The key visual poster and event website for Aaron Nieh’s lecture, "Behind the Covers," at NCCU.',
       tags: [
-        { name: "Graphic design", color: "#2A96B7" },
-        { name: "Frontend coding", color: "#F7883D" },
+        { name: "Visual design", color: "#2A96B7" },
+        { name: "Frontend coding", color: "#D8984E" },
       ],
       subtags: [
         { name: "Poster", color: "#2A96B7" },
-        { name: "RWD", color: "#F7883D" },
+        { name: "RWD", color: "#D8984E" },
       ],
       link: "https://mellifluous-brioche-700f0a.netlify.app/",
       openInNewTab: true,
@@ -63,7 +63,7 @@ export const Work = () => {
       subtitle: "Branding",
       description:
         "VIS design for a local mango smallholder farmer in Kaohsiung, Taiwan.",
-      tags: [{ name: "Graphic design", color: "#2A96B7" }],
+      tags: [{ name: "Visual design", color: "#2A96B7" }],
       subtags: [{ name: "Branding", color: "#2A96B7" }],
       link: "/work/MangoOnTree",
       openInNewTab: false,
@@ -89,7 +89,7 @@ export const Work = () => {
       tags: [
         // { name: "UI/UX design", color: "#59656C" },
         { name: "Creative Campaign", color: "#86C5CE" },
-        { name: "Graphic design", color: "#2A96B7" },
+        { name: "Visual design", color: "#2A96B7" },
       ],
       link: "/work/PufferVerse",
       openInNewTab: false,
@@ -115,7 +115,7 @@ export const Work = () => {
         "A microservice for booking Taipei sports venues, incorporating team-building to maximize venue usage.",
       tags: [
         { name: "UI/UX design", color: "#59656C" },
-        { name: "Frontend coding", color: "#F7883D" },
+        { name: "Frontend coding", color: "#D8984E" },
       ],
       subtags: [{ name: "APP", color: "#59656C" }],
       link: "/work/sports_win",
@@ -130,10 +130,10 @@ export const Work = () => {
         "A minimalist to-do list web-app with task management and fascinating theme switching, keeping you productive in any environment.",
       tags: [
         // { name: "UI/UX design", color: "#59656C" },
-        { name: "Frontend coding", color: "#F7883D" },
+        { name: "Frontend coding", color: "#D8984E" },
       ],
       subtags: [
-        { name: "RWD", color: "#F7883D" }
+        { name: "RWD", color: "#D8984E" }
       ],
       link: "https://simpletodos2024.netlify.app/",
       openInNewTab: true,
@@ -148,7 +148,7 @@ export const Work = () => {
           I'm a
           <span
             style={{
-              color: "#2A96B7",
+              color: "#2A3133",
               margin: "0 4px",
               width: "fit-content",
               fontWeight: "500",
@@ -242,7 +242,7 @@ export const Work = () => {
               <TextWrapper>Frontend</TextWrapper>
             </DivWrapper>
             <DivWrapper2>
-              <TextWrapper>Graphic design</TextWrapper>
+              <TextWrapper>Visual design</TextWrapper>
             </DivWrapper2>
           </OverlapGroup>
         </OverlapGroupWrapper>
@@ -267,7 +267,7 @@ export const Work = () => {
         pixelSize={28}
         endAt={1}
         accentShare={0.14}
-        accentColors={["#2A96B7", "#F7883D", "#59656C", "#D8984E"]}
+        accentColors={["#2A96B7", "#D8984E", "#59656C"]}
       />
 
       {/* 馬賽克之後留一小段實心淺色，再進主要內容 */}
@@ -536,7 +536,7 @@ const DivWrapper = styled.div`
   }
 
   align-items: center;
-  background-color: #ff6434;
+  background-color: #D8984E;
   border-radius: 80px;
   display: inline-flex;
   gap: 10px;
@@ -679,7 +679,7 @@ const DefaultIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#2A96B7"
+    fill="#2A3133"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",

@@ -28,15 +28,15 @@ import styled from "styled-components";
 //         All
 //       </Tag>
 //       <Tag
-//         onClick={() => handleTagClick("Graphic design")}
+//         onClick={() => handleTagClick("Visual design")}
 //         bgColor="#2A96B7"
-//         isActive={selectedTag === "Graphic design"}
+//         isActive={selectedTag === "Visual design"}
 //       >
-//         Graphic Design
+//         Visual Design
 //       </Tag>
 //       <Tag
 //         onClick={() => handleTagClick("Frontend coding")}
-//         bgColor="#F7883D"
+//         bgColor="#D8984E"
 //         isActive={selectedTag === "Frontend coding"}
 //       >
 //         Frontend Coding
@@ -93,7 +93,7 @@ const ProjectFilter = ({
                 I'm a
                 <span
                   style={{
-                    color: "#2A96B7",
+                    color: "#2A3133",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -108,10 +108,10 @@ const ProjectFilter = ({
             </TextWrapper>
           </Content>
         );
-      case "Graphic design":
+      case "Visual design":
         return (
           <Content>
-            <GraphicIcon />
+            <VisualIcon />
             <TextWrapper>
               <p style={{ margin: "0" }}>
                 As a graduate in
@@ -153,7 +153,7 @@ const ProjectFilter = ({
                 I'm
                 <span
                   style={{
-                    color: "#F7883D",
+                    color: "#D8984E",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "400",
@@ -169,7 +169,7 @@ const ProjectFilter = ({
                 , and eventhough
                 <span
                   style={{
-                    color: "#F7883D",
+                    color: "#D8984E",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "400",
@@ -186,7 +186,7 @@ const ProjectFilter = ({
                 “dev-speak” with ease. I designed and built{" "}
                 <a
                   href="https://tingyilin.netlify.app/home"
-                  style={{ color: "#F7883D" }}
+                  style={{ color: "#D8984E" }}
                 >
                   {" "}
                   {"("}this site{")"}
@@ -286,17 +286,17 @@ const ProjectFilter = ({
     <Filter>
       <Tag
         onClick={() => handleTagClick("")}
-        bgColor="#2A96B7"
+        bgColor="#2A3133"
         isActive={selectedTag === ""}
       >
         All
       </Tag>
       <Tag
-        onClick={() => handleTagClick("Graphic design")}
+        onClick={() => handleTagClick("Visual design")}
         bgColor="#2A96B7"
-        isActive={selectedTag === "Graphic design"}
+        isActive={selectedTag === "Visual design"}
       >
-        Graphic Design
+        Visual Design
       </Tag>
       <Tag
         onClick={() => handleTagClick("UI/UX design")}
@@ -307,7 +307,7 @@ const ProjectFilter = ({
       </Tag>
       <Tag
         onClick={() => handleTagClick("Frontend coding")}
-        bgColor="#F7883D"
+        bgColor="#D8984E"
         isActive={selectedTag === "Frontend coding"}
       >
         Frontend Coding
@@ -401,7 +401,7 @@ const DefaultIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#2A96B7"
+    fill="#2A3133"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",
@@ -413,7 +413,7 @@ const DefaultIcon = () => (
   </svg>
 );
 
-const GraphicIcon = () => (
+const VisualIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 256 256"
@@ -437,7 +437,7 @@ const CodeIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#F7883D"
+    fill="#D8984E"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",

@@ -18,7 +18,7 @@ export const About = () => {
                       <NameDivider />
                       <NameEn>Ting Yi, Lin</NameEn>
                     </NameRow>
-                    <RoleLine>UI / UX and Graphic Designer</RoleLine>
+                    <RoleLine>UI / UX and Visual Designer</RoleLine>
                     <LinkRow>
                       <Globe viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" aria-hidden="true">
                         <circle cx="12" cy="12" r="9" />
@@ -141,7 +141,7 @@ export const About = () => {
               <Div19>
                 • Designed visual identity systems.
                 <br />
-                • Created graphic designs.
+                • Created visual designs.
                 <br />
                 • Developed packaging designs.
                 <br />• Produced illustrations.
