@@ -44,7 +44,7 @@ const LoadingSpinner = () => (
   <BallContainer>
     <P>Loading...</P>
     <Ball size={60} color="#2A96B7" duration={2} delay={0} />
-    <Ball size={50} color="#F7883D" duration={1} delay={0.2} />
+    <Ball size={50} color="#D8984E" duration={1} delay={0.2} />
     <Ball size={40} color="#2A96B7" duration={2} delay={0.4} />
     <Ball size={30} color="#59656C" duration={1} delay={0.6} />
     <Ball size={20} color="#A06E29" duration={2} delay={0.8} />

@@ -36,7 +36,7 @@ import styled from "styled-components";
 //       </Tag>
 //       <Tag
 //         onClick={() => handleTagClick("Frontend coding")}
-//         bgColor="#F7883D"
+//         bgColor="#D8984E"
 //         isActive={selectedTag === "Frontend coding"}
 //       >
 //         Frontend Coding
@@ -117,7 +117,7 @@ const ProjectFilter = ({
                 As a graduate in
                 <span
                   style={{
-                    color: "#59656C",
+                    color: "#2A96B7",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -128,7 +128,7 @@ const ProjectFilter = ({
                 I enjoy exploring various design styles,
                 <span
                   style={{
-                    color: "#59656C",
+                    color: "#2A96B7",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -153,7 +153,7 @@ const ProjectFilter = ({
                 I'm
                 <span
                   style={{
-                    color: "#F7883D",
+                    color: "#D8984E",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "400",
@@ -169,7 +169,7 @@ const ProjectFilter = ({
                 , and eventhough
                 <span
                   style={{
-                    color: "#F7883D",
+                    color: "#D8984E",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "400",
@@ -186,7 +186,7 @@ const ProjectFilter = ({
                 “dev-speak” with ease. I designed and built{" "}
                 <a
                   href="https://tingyilin.netlify.app/home"
-                  style={{ color: "#F7883D" }}
+                  style={{ color: "#D8984E" }}
                 >
                   {" "}
                   {"("}this site{")"}
@@ -286,14 +286,14 @@ const ProjectFilter = ({
     <Filter>
       <Tag
         onClick={() => handleTagClick("")}
-        bgColor="#2A96B7"
+        bgColor="#2A3133"
         isActive={selectedTag === ""}
       >
         All
       </Tag>
       <Tag
         onClick={() => handleTagClick("Visual design")}
-        bgColor="#59656C"
+        bgColor="#2A96B7"
         isActive={selectedTag === "Visual design"}
       >
         Visual Design
@@ -307,7 +307,7 @@ const ProjectFilter = ({
       </Tag>
       <Tag
         onClick={() => handleTagClick("Frontend coding")}
-        bgColor="#F7883D"
+        bgColor="#D8984E"
         isActive={selectedTag === "Frontend coding"}
       >
         Frontend Coding
@@ -437,7 +437,7 @@ const CodeIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#F7883D"
+    fill="#D8984E"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",
