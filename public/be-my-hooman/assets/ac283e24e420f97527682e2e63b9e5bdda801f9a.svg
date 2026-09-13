@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="100%" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 190 202" width="100%">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="202" overflow="visible" style="display: block;" viewBox="0 0 190 202" width="190">
 <g id="Vector">
 <path clip-rule="evenodd" d="M105.326 145.072C98.0268 147.42 88.87 146.527 81.0976 140.678L85.2101 136.355C91.2322 140.887 97.9922 141.41 103.161 139.747C108.432 138.051 111.804 134.234 111.804 130.023H118.171C118.171 137.137 112.523 142.756 105.326 145.072Z" fill="var(--fill-0, #A9A151)" fill-rule="evenodd"/>
 <path d="M83.4146 119.575C83.4146 121.498 81.8586 123.057 79.939 123.057C78.0195 123.057 76.4634 121.498 76.4634 119.575C76.4634 117.651 78.0195 116.092 79.939 116.092C81.8586 116.092 83.4146 117.651 83.4146 119.575Z" fill="var(--fill-0, #A9A151)"/>

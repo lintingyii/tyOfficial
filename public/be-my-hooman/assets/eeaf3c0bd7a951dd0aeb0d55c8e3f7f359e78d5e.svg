@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="100%" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 27.3071 26.4262" width="100%">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="26.4262" overflow="visible" style="display: block;" viewBox="0 0 27.3071 26.4262" width="27.3071">
 <path d="M27.3071 13.2131C27.3071 20.8871 21.5703 26.4262 13.6536 26.4262C5.79416 26.4262 0 20.8871 0 13.2131C0 5.53913 5.79416 0 13.6536 0C21.5703 0 27.3071 5.53913 27.3071 13.2131ZM19.7346 13.2131C19.7346 9.11648 17.0956 6.46231 13.6536 6.46231C10.2115 6.46231 7.57257 9.11648 7.57257 13.2131C7.57257 17.3098 10.2115 19.9639 13.6536 19.9639C17.153 19.9639 19.7346 17.3098 19.7346 13.2131Z" fill="var(--fill-0, #8FD7E5)" id="Vector"/>
 </svg>

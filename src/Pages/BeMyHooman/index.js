@@ -27,7 +27,13 @@ const DISPLAY = "'Newsreader', 'Author', Georgia, serif";
 /* 原稿的中文是 Glow Sans TC，這裡用 Noto Sans TC 代替 */
 const HAN = "'Noto Sans TC', 'PingFang TC', 'Microsoft JhengHei', sans-serif";
 
-const SIDEBAR = 232;
+/* 量自 be-my-hooman.figma.site（vw=1440）：
+   側欄 230、主欄 1210、左右內距各 40、兩欄各 549 寬、欄距 32。
+   區塊只有上內距 ~180、沒有下內距 —— 下一個區塊的上內距就是兩者的間隔。 */
+const SIDEBAR = 230;
+const PAD = 40;
+const COL_GAP = 32;
+const SECTION_TOP = 180;
 const DESKTOP = "@media (min-width: 1024px)";
 
 const Page = styled.div`
@@ -167,34 +173,37 @@ const Cover = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 18vh 24px;
+  min-height: 62vh;
+  padding: 40px 24px;
+
+  ${DESKTOP} {
+    min-height: 691px; /* 原稿的封面高度 */
+    padding: 40px;
+  }
 
   img {
-    width: min(420px, 68vw);
+    width: min(420px, 62vw);
     height: auto;
     display: block;
   }
 `;
 
 const Section = styled.section`
-  padding: 84px 20px;
-  border-top: ${({ $rule }) => ($rule ? `1px solid ${LINE}` : "0")};
+  padding: 72px 20px 0;
 
   ${DESKTOP} {
-    padding: 120px 56px;
+    padding: ${SECTION_TOP}px ${PAD}px 0;
   }
 `;
 
 /* 原稿的兩欄：左邊是章節編號／小標，右邊是正文。手機收成單欄。 */
 const Cols = styled.div`
   display: grid;
-  gap: 28px;
-  max-width: 1180px;
-  margin: 0 auto;
+  gap: 24px;
 
   ${DESKTOP} {
-    grid-template-columns: ${({ $left }) => $left || "300px"} minmax(0, 1fr);
-    gap: 48px;
+    grid-template-columns: 1fr 1fr;
+    gap: ${COL_GAP}px;
     align-items: start;
   }
 `;
@@ -202,8 +211,8 @@ const Cols = styled.div`
 const SectionNo = styled.h2`
   font-family: ${DISPLAY};
   font-weight: 500;
-  font-size: clamp(40px, 7vw, 72px);
-  line-height: 1.05;
+  font-size: clamp(38px, 6.4vw, 72px);
+  line-height: 1.1;
   margin: 0;
   letter-spacing: -0.01em;
 
@@ -216,26 +225,28 @@ const SectionNo = styled.h2`
 const Display = styled.h1`
   font-family: ${DISPLAY};
   font-weight: 500;
-  font-size: clamp(40px, 7vw, 72px);
-  line-height: 1.05;
+  font-size: clamp(38px, 6.4vw, 72px);
+  line-height: 1.1;
   margin: 0;
   letter-spacing: -0.01em;
 `;
 
+/* 兩級小標：區塊層級 32px（Contents），段落層級 22px（Primary Lockup 等） */
 const Minor = styled.h3`
   font-family: ${DISPLAY};
   font-weight: 500;
-  font-size: 1.32rem;
+  font-size: ${({ $big }) => ($big ? "clamp(24px, 4vw, 32px)" : "22px")};
+  line-height: 1.2;
   margin: 0 0 20px;
   color: ${({ $muted }) => ($muted ? MUTED : INK)};
 `;
 
 const Zh = styled.p`
   font-family: ${HAN};
-  font-size: 0.97rem;
-  line-height: 1.95;
+  font-size: 16px;
+  line-height: 1.5;
   color: ${({ $ink }) => ($ink ? INK : MUTED)};
-  margin: 0 0 14px;
+  margin: 0 0 24px;
 
   b {
     font-weight: 700;
@@ -244,10 +255,10 @@ const Zh = styled.p`
 `;
 
 const En = styled.p`
-  font-size: 1rem;
-  line-height: 1.72;
+  font-size: 18px;
+  line-height: 1.2;
   color: ${({ $ink }) => ($ink ? INK : MUTED)};
-  margin: 0 0 14px;
+  margin: 0 0 24px;
 
   b {
     font-weight: 600;
@@ -277,10 +288,10 @@ const ContentRow = styled.a`
   align-items: baseline;
   text-decoration: none;
   color: ${INK};
-  padding: 10px 0;
-  border-bottom: 1px solid ${LINE};
+  padding: 5px 0;
   font-family: ${DISPLAY};
   font-size: clamp(20px, 3.4vw, 32px);
+  line-height: 1.2;
 
   em {
     color: ${MUTED};
@@ -312,8 +323,6 @@ const ContentRow = styled.a`
 const Pillars = styled.div`
   display: grid;
   gap: 16px;
-  max-width: 1180px;
-  margin: 0 auto;
 
   ${DESKTOP} {
     grid-template-columns: repeat(3, 1fr);
@@ -363,8 +372,6 @@ const Tiny = styled.p`
 /* ---------- 人格特質 ---------- */
 
 const Traits = styled.div`
-  max-width: 1180px;
-  margin: 0 auto;
   text-align: center;
 `;
 
@@ -465,8 +472,6 @@ const Species = styled.div`
 const Swatches = styled.div`
   display: grid;
   gap: 16px;
-  max-width: 1180px;
-  margin: 0 auto;
 
   @media (min-width: 640px) {
     grid-template-columns: repeat(2, 1fr);
@@ -576,8 +581,6 @@ const ScaleRow = styled.div`
 `;
 
 const Pending = styled.div`
-  max-width: 1180px;
-  margin: 0 auto;
   border: 1px dashed ${LINE};
   border-radius: 14px;
   padding: 28px 24px;
@@ -595,6 +598,7 @@ const Pending = styled.div`
 
 const Foot = styled.footer`
   border-top: 1px solid ${LINE};
+  margin-top: 120px;
   padding: 56px 20px 72px;
   text-align: center;
 
@@ -705,7 +709,7 @@ const BeMyHooman = () => {
       {/* ---- 目錄 ---- */}
       <Section $rule>
         <Cols>
-          <Minor as="h2">Contents</Minor>
+          <Minor as="h2" $big>Contents</Minor>
           <div>
             {CONTENTS.map((c, i) => (
               <ContentRow key={c.num} href={`#${NAV[i].id}`}>
@@ -933,7 +937,7 @@ const BeMyHooman = () => {
 
         <Divider />
 
-        <Minor as="h3" style={{ maxWidth: 1180, margin: "0 auto 22px" }}>
+        <Minor as="h3" style={{ marginBottom: 22 }}>
           Color Variations
         </Minor>
         <Swatches>

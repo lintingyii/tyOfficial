@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="100%" overflow="visible" preserveAspectRatio="none" style="display: block;" viewBox="0 0 8 8" width="100%">
+<svg xmlns="http://www.w3.org/2000/svg" fill="none" height="8" overflow="visible" style="display: block;" viewBox="0 0 8 8" width="8">
 <circle cx="4" cy="4" fill="var(--fill-0, white)" id="Ellipse 41" r="4"/>
 </svg>
