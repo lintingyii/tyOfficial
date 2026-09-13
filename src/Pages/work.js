@@ -10,7 +10,8 @@ import SortButton from "../Components/SortButton";
 export const Work = () => {
   const initialProjects = [
     {
-      /* TODO：date 還是暫定值，等正確的年月。
+      /* 站內的案例頁已移除，卡片改為連到 Figma Sites 上的線上版。
+         TODO：date 還是暫定值，等正確的年月。
          格式一定要維持 "Month, Year" —— SortButton 是靠它排序的。 */
       date: "September, 2026",
       image: "/be-my-hooman/thumb.jpg",
@@ -20,7 +21,7 @@ export const Work = () => {
         "A character-led brand system: brand introduction, personality, logo system, colour and typography, packaged as a downloadable kit.",
       tags: [{ name: "Visual design", color: "#2A96B7" }],
       subtags: [{ name: "Branding", color: "#2A96B7" }],
-      link: "/be-my-hooman",
+      link: "https://be-my-hooman.figma.site/",
       openInNewTab: true,
     },
     {
