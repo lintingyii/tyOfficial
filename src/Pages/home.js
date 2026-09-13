@@ -1070,7 +1070,11 @@ const OverlapGroupWrapper = styled.div`
   @media (max-width: 480px) {
     // height: 12vh;
     // margin-top: 15vh;
-    padding-top: 15vh;
+    /* 原本是 15vh（844 高的螢幕上 127px）。那是內容區還用 -55vh 往上疊的
+       時代留下的值 —— 當時內容起點很高，要靠這段內距把標題推回合理位置。
+       重疊量改成 -30vh 之後內容本來就晚了 200px 才開始，這段內距就變成
+       純粹的空白，讀起來像「馬賽克跑完之後下面什麼都沒有」。 */
+    padding-top: 3vh;
     margin-bottom: 0vh;
     margin-top: 0vh;
   }
