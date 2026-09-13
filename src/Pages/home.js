@@ -757,7 +757,10 @@ const ContentSection = styled.div`
   margin-top: -30vh;
 
   @media (max-width: 820px) {
-    margin-top: -55vh;
+    /* 往上疊進馬賽克畫布的下半段。數字越負，內容越早蓋掉那片已經翻成淺色的
+       畫布，馬賽克結束後的留白就越少。-55vh 收得太緊，讓回 6vh（844 高的
+       螢幕上約 50px）當作結束後的喘息。 */
+    margin-top: -49vh;
   }
 `;
 
