@@ -1245,7 +1245,7 @@ const CircleContainer = styled.div`
     }
     50%,
     83.332% {
-      --color1: #F7883D;
+      --color1: #D8984E;
     }
     83.333%,
     100% {
