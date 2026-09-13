@@ -754,10 +754,15 @@ const ContentSection = styled.div`
   background-color: #f2f2f2;
   position: relative;
   z-index: 2;
+
+  /* 往上疊進馬賽克畫布的下半段。數字越負，內容越早蓋掉那片已經翻成淺色的
+     畫布，標題也越早出現（0 = 完全不疊，內容接在畫布正下方）。 */
   margin-top: -30vh;
 
   @media (max-width: 820px) {
-    margin-top: -55vh;
+    /* 手機版要再多疊一點：畫面短，同樣的 30vh 只有 253px，標題會等太久才進場。
+       （-55vh 是另一個極端，那會讓馬賽克還沒收完就被蓋掉。） */
+    margin-top: -40vh;
   }
 `;
 
@@ -1070,7 +1075,11 @@ const OverlapGroupWrapper = styled.div`
   @media (max-width: 480px) {
     // height: 12vh;
     // margin-top: 15vh;
-    padding-top: 15vh;
+    /* 原本是 15vh（844 高的螢幕上 127px）。那是內容區還用 -55vh 往上疊的
+       時代留下的值 —— 當時內容起點很高，要靠這段內距把標題推回合理位置。
+       重疊量改成 -30vh 之後內容本來就晚了 200px 才開始，這段內距就變成
+       純粹的空白，讀起來像「馬賽克跑完之後下面什麼都沒有」。 */
+    padding-top: 3vh;
     margin-bottom: 0vh;
     margin-top: 0vh;
   }
