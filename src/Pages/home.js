@@ -754,13 +754,11 @@ const ContentSection = styled.div`
   background-color: #f2f2f2;
   position: relative;
   z-index: 2;
-  margin-top: -30vh;
 
-  @media (max-width: 820px) {
-    /* 往上疊進馬賽克畫布的下半段。數字越負，內容越早蓋掉那片已經翻成淺色的
-       畫布，馬賽克結束後的留白就越少。0 = 完全不疊，內容接在畫布正下方。 */
-    margin-top: 0;
-  }
+  /* 往上疊進馬賽克畫布的下半段。數字越負，內容越早蓋掉那片已經翻成淺色的
+     畫布，馬賽克結束後的留白就越少（0 = 完全不疊，內容接在畫布正下方）。
+     手機版曾經另外給 -55vh，現在兩個斷點用同一個值。 */
+  margin-top: -30vh;
 `;
 
 /* 馬賽克的版面容器：只佔 70vh，畫布靠 absolute 往上溢出到 banner 裡。
