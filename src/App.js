@@ -14,6 +14,7 @@ import YoungLions from "./Pages/youngLions";
 import MegaBankRedesign from "./Pages/MegaBankRedesign";
 import SportsWin from "./Pages/sportsWin";
 import HiveBee from "./Pages/HiveBee";
+import BeMyHooman from "./Pages/BeMyHooman";
 import PufferVerse from "./Pages/PufferVerse";
 import MangoOnTree from "./Pages/MangoOnTree";
 import AInsight from "./Pages/AInsight";
@@ -242,6 +243,7 @@ function App() {
           />
           <Route path="/work/sports_win" element={<SportsWin />} />
           <Route path="/work/HiveBee" element={<HiveBee />} />
+          <Route path="/work/BeMyHooman" element={<BeMyHooman />} />
           <Route path="/work/PufferVerse" element={<PufferVerse />} />
           <Route path="/work/MangoOnTree" element={<MangoOnTree />} />
           <Route path="/work/AInsight" element={<AInsight />} />

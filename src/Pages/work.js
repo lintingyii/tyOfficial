@@ -10,6 +10,18 @@ import SortButton from "../Components/SortButton";
 export const Work = () => {
   const initialProjects = [
     {
+      /* TODO(設計稿還沒輸出)：縮圖、日期、副標、描述與分類都還是暫定值。
+         date 一定要維持 "Month, Year" 的格式 —— SortButton 是靠它排序的。 */
+      date: "September, 2026",
+      image: "/placeholder.svg",
+      title: "Be my hooman",
+      subtitle: "Case study",
+      description: "",
+      tags: [],
+      link: "/work/BeMyHooman",
+      openInNewTab: true,
+    },
+    {
       date: "March, 2024",
       image: "/hivebee/hb demo.png",
       title: "Hive Bee - We made donations enjoyable",
