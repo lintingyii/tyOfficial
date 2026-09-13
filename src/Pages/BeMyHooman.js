@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import styled from "styled-components";
 
 /* 案例頁。沿用站上既有案例（MangoOnTree / MegaBank / PufferVerse）的做法：
@@ -9,7 +9,11 @@ import styled from "styled-components";
    舊案例是單張 90 MP / 15 MB 的 JPG（mangoontree 3456×26637、megabank
    2734×32768），遠超過 iOS Safari 約 16 MP 的解碼上限 —— 超過的圖會被自動
    降採樣，在 iPhone 上就是糊的，而且一次要載 15 MB。
-   切片之後每張都在上限以下，也能靠 loading="lazy" 只載看得到的那幾張。 */
+   切片之後每張都在上限以下，也能靠 loading="lazy" 只載看得到的那幾張。
+
+   這頁是獨立頁：網址在 /be-my-hooman、不掛在 /work 底下，也不套官網的
+   導覽列與 footer（見 App.js 的 BARE_ROUTES）。底色與間距都刻意中性，
+   實際的視覺由設計稿的圖自己決定。 */
 
 const SLICES = [
   // 依序放入輸出的切片，例如：
@@ -23,7 +27,7 @@ const DESIGN_WIDTH = 1280;
 const Container = styled.div`
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  background-color: #f2f2f2;
+  background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -61,61 +65,69 @@ const Pending = styled.div`
   line-height: 1.7;
 `;
 
-const BackButton = styled.button`
+/* 回到作品集的路。刻意做得很輕 —— 這頁沒有導覽列，需要一個出口，
+   但它不該變成頁面的視覺重點。 */
+const BackLink = styled.a`
   font-family: inherit;
-  background-color: #d7f1f6;
-  color: #14607a;
-  padding: 12px 28px;
-  font-size: 1rem;
-  font-weight: 600;
-  border: none;
+  font-size: 0.9rem;
+  color: #7a8184;
+  text-decoration: none;
+  padding: 10px 16px;
+  margin: 4rem 0 5rem;
   border-radius: 50px;
-  cursor: pointer;
-  margin: 5rem 0 6rem;
-  transition: background-color 0.4s ease, color 0.4s ease;
+  transition: color 0.3s ease, background-color 0.3s ease;
 
   &:hover {
-    background-color: #2a3133;
-    color: #ffffff;
+    color: #2a3133;
+    background-color: #f2f2f2;
   }
 
   &:focus-visible {
-    outline: 2px solid #2a96b7;
+    outline: 2px solid #2a3133;
     outline-offset: 2px;
   }
 `;
 
-export const BeMyHooman = () => (
-  <Container>
-    {SLICES.length > 0 ? (
-      <Slices>
-        {SLICES.map((slice, i) => (
-          <picture key={slice.src}>
-            {slice.fallback ? (
-              <source srcSet={slice.src} type="image/webp" />
-            ) : null}
-            <img
-              src={slice.fallback || slice.src}
-              alt={
-                i === 0
-                  ? "Be my hooman — case study"
-                  : "" /* 只有第一張需要描述，其餘是同一份文件的續頁 */
-              }
-              /* 第一張要立刻出現，其餘等捲到再載 */
-              loading={i === 0 ? "eager" : "lazy"}
-              decoding="async"
-            />
-          </picture>
-        ))}
-      </Slices>
-    ) : (
-      <Pending>內容準備中。</Pending>
-    )}
+export const BeMyHooman = () => {
+  /* 獨立頁，標題不跟著官網走 */
+  useEffect(() => {
+    const previous = document.title;
+    document.title = "Be my hooman";
+    return () => {
+      document.title = previous;
+    };
+  }, []);
 
-    <a href="/work" rel="noopener noreferrer" style={{ textDecoration: "none" }}>
-      <BackButton type="button">Back to Work</BackButton>
-    </a>
-  </Container>
-);
+  return (
+    <Container>
+      {SLICES.length > 0 ? (
+        <Slices>
+          {SLICES.map((slice, i) => (
+            <picture key={slice.src}>
+              {slice.fallback ? (
+                <source srcSet={slice.src} type="image/webp" />
+              ) : null}
+              <img
+                src={slice.fallback || slice.src}
+                alt={
+                  i === 0
+                    ? "Be my hooman — case study"
+                    : "" /* 只有第一張需要描述，其餘是同一份文件的續頁 */
+                }
+                /* 第一張要立刻出現，其餘等捲到再載 */
+                loading={i === 0 ? "eager" : "lazy"}
+                decoding="async"
+              />
+            </picture>
+          ))}
+        </Slices>
+      ) : (
+        <Pending>內容準備中。</Pending>
+      )}
+
+      <BackLink href="/work">← Back to work</BackLink>
+    </Container>
+  );
+};
 
 export default BeMyHooman;

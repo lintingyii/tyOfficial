@@ -18,7 +18,7 @@ export const Work = () => {
       subtitle: "Case study",
       description: "",
       tags: [],
-      link: "/work/BeMyHooman",
+      link: "/be-my-hooman",
       openInNewTab: true,
     },
     {

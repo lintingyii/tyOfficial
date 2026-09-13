@@ -243,16 +243,37 @@ function App() {
           />
           <Route path="/work/sports_win" element={<SportsWin />} />
           <Route path="/work/HiveBee" element={<HiveBee />} />
-          <Route path="/work/BeMyHooman" element={<BeMyHooman />} />
+          {/* 獨立頁：不套官網的設計，網址也不掛在 /work 底下。
+              舊網址留一條 redirect，卡片曾經指過去。 */}
+          <Route path="/be-my-hooman" element={<BeMyHooman />} />
+          <Route
+            path="/work/BeMyHooman"
+            element={<Navigate to="/be-my-hooman" replace />}
+          />
           <Route path="/work/PufferVerse" element={<PufferVerse />} />
           <Route path="/work/MangoOnTree" element={<MangoOnTree />} />
           <Route path="/work/AInsight" element={<AInsight />} />
         </Routes>
-        <NavigationBar />
-        <Footer />
+        <SiteChrome />
       </Router>
     </Main>
   //  </ReactLenis>
+  );
+}
+
+/* 站台外框（導覽列 + footer）。獨立頁不套 —— 那些頁面有自己的設計語言，
+   共用外框反而會把它們綁回官網的樣子。 */
+const BARE_ROUTES = ["/be-my-hooman"];
+
+function SiteChrome() {
+  const { pathname } = useLocation();
+  if (BARE_ROUTES.includes(pathname)) return null;
+
+  return (
+    <>
+      <NavigationBar />
+      <Footer />
+    </>
   );
 }
 
