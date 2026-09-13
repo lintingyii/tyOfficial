@@ -93,7 +93,7 @@ const ProjectFilter = ({
                 I'm a
                 <span
                   style={{
-                    color: "#2A96B7",
+                    color: "#2A3133",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -401,7 +401,7 @@ const DefaultIcon = () => (
     viewBox="0 0 256 256"
     width="20%"
     height="20%"
-    fill="#2A96B7"
+    fill="#2A3133"
     style={{
       maxWidth: "2rem",
       minWidth: "1.5rem",
