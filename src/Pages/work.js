@@ -46,11 +46,11 @@ export const Work = () => {
       description:
         'The key visual poster and event website for Aaron Nieh’s lecture, "Behind the Covers," at NCCU.',
       tags: [
-        { name: "Visual design", color: "#2A96B7" },
+        { name: "Visual design", color: "#59656C" },
         { name: "Frontend coding", color: "#F7883D" },
       ],
       subtags: [
-        { name: "Poster", color: "#2A96B7" },
+        { name: "Poster", color: "#59656C" },
         { name: "RWD", color: "#F7883D" },
       ],
       link: "https://mellifluous-brioche-700f0a.netlify.app/",
@@ -63,8 +63,8 @@ export const Work = () => {
       subtitle: "Branding",
       description:
         "VIS design for a local mango smallholder farmer in Kaohsiung, Taiwan.",
-      tags: [{ name: "Visual design", color: "#2A96B7" }],
-      subtags: [{ name: "Branding", color: "#2A96B7" }],
+      tags: [{ name: "Visual design", color: "#59656C" }],
+      subtags: [{ name: "Branding", color: "#59656C" }],
       link: "/work/MangoOnTree",
       openInNewTab: false,
     },
@@ -89,7 +89,7 @@ export const Work = () => {
       tags: [
         // { name: "UI/UX design", color: "#59656C" },
         { name: "Creative Campaign", color: "#86C5CE" },
-        { name: "Visual design", color: "#2A96B7" },
+        { name: "Visual design", color: "#59656C" },
       ],
       link: "/work/PufferVerse",
       openInNewTab: false,

@@ -117,7 +117,7 @@ const ProjectFilter = ({
                 As a graduate in
                 <span
                   style={{
-                    color: "#2A96B7",
+                    color: "#59656C",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -128,7 +128,7 @@ const ProjectFilter = ({
                 I enjoy exploring various design styles,
                 <span
                   style={{
-                    color: "#2A96B7",
+                    color: "#59656C",
                     margin: "0 4px",
                     width: "fit-content",
                     fontWeight: "500",
@@ -293,7 +293,7 @@ const ProjectFilter = ({
       </Tag>
       <Tag
         onClick={() => handleTagClick("Visual design")}
-        bgColor="#2A96B7"
+        bgColor="#59656C"
         isActive={selectedTag === "Visual design"}
       >
         Visual Design
