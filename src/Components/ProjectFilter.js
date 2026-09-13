@@ -28,11 +28,11 @@ import styled from "styled-components";
 //         All
 //       </Tag>
 //       <Tag
-//         onClick={() => handleTagClick("Graphic design")}
+//         onClick={() => handleTagClick("Visual design")}
 //         bgColor="#2A96B7"
-//         isActive={selectedTag === "Graphic design"}
+//         isActive={selectedTag === "Visual design"}
 //       >
-//         Graphic Design
+//         Visual Design
 //       </Tag>
 //       <Tag
 //         onClick={() => handleTagClick("Frontend coding")}
@@ -108,10 +108,10 @@ const ProjectFilter = ({
             </TextWrapper>
           </Content>
         );
-      case "Graphic design":
+      case "Visual design":
         return (
           <Content>
-            <GraphicIcon />
+            <VisualIcon />
             <TextWrapper>
               <p style={{ margin: "0" }}>
                 As a graduate in
@@ -292,11 +292,11 @@ const ProjectFilter = ({
         All
       </Tag>
       <Tag
-        onClick={() => handleTagClick("Graphic design")}
+        onClick={() => handleTagClick("Visual design")}
         bgColor="#2A96B7"
-        isActive={selectedTag === "Graphic design"}
+        isActive={selectedTag === "Visual design"}
       >
-        Graphic Design
+        Visual Design
       </Tag>
       <Tag
         onClick={() => handleTagClick("UI/UX design")}
@@ -413,7 +413,7 @@ const DefaultIcon = () => (
   </svg>
 );
 
-const GraphicIcon = () => (
+const VisualIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 256 256"

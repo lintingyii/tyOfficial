@@ -318,7 +318,7 @@ function MyComponent(props) {
               <TextWrapper>Frontend</TextWrapper>
             </DivWrapper>
             <DivWrapper2>
-              <TextWrapper>Graphic design</TextWrapper>
+              <TextWrapper>Visual design</TextWrapper>
             </DivWrapper2>
           </OverlapGroup>
         </OverlapGroupWrapper>
@@ -392,16 +392,16 @@ function MyComponent(props) {
                 top={0}
                 width={446}
               />
-              <GraphicDesign>Graphic Design</GraphicDesign>
-              <GraphicDesign1>
-                My journey in graphic design is driven by the belief that each
+              <VisualDesign>Visual Design</VisualDesign>
+              <VisualDesign1>
+                My journey in visual design is driven by the belief that each
                 pixel matters.
                 <br />
                 From conceptualization to execution, I strive for a harmonious
                 balance between form and function. Every color, typeface, and
                 image is carefully chosen to convey a message, evoke emotions,
                 and create a lasting impression.
-              </GraphicDesign1>
+              </VisualDesign1>
             </HoverableDiv>
 
             <HoverableDiv ink="#D8984E">
@@ -438,9 +438,9 @@ function MyComponent(props) {
               Collaborating with cross-functional teams, I prioritize user-centric design, informed by thorough research, seamlessly integrating experiences into users' lives.
           </ContentMob>
         </Div7>
-        <Div8>Graphic Design
+        <Div8>Visual Design
           <ContentMob>
-              My journey in graphic design is driven by the belief that each pixel matters. 
+              My journey in visual design is driven by the belief that each pixel matters. 
               <br />
               From conceptualization to execution, I strive for a harmonious balance between form and function. Every color, typeface, and image is carefully chosen to convey a message, evoke emotions, and create a lasting impression.
           </ContentMob>
@@ -462,8 +462,8 @@ function MyComponent(props) {
           bgColor="#59656C"
         />
         <FlipCard
-          title="Graphic Design"
-          content="My journey in graphic design is driven by the belief that each pixel matters. From conceptualization to execution, I strive for a harmonious balance between form and function. Every color, typeface, and image is carefully chosen to convey a message, evoke emotions, and create a lasting impression."
+          title="Visual Design"
+          content="My journey in visual design is driven by the belief that each pixel matters. From conceptualization to execution, I strive for a harmonious balance between form and function. Every color, typeface, and image is carefully chosen to convey a message, evoke emotions, and create a lasting impression."
           bgColor="#2A96B7"
         />
         <FlipCard
@@ -1472,7 +1472,7 @@ const TextWrapper2n1 = styled(UIUXProject)`
 const HoverableDiv = styled.div`
   /* 內文色平常等於卡片底色（刻意看不見），hover 時底色變 rgba(0,0,0,.8)
      才浮現。浮現的底實際是 #303030，原色壓上去只有 2.2:1，所以同時提亮。
-     GraphicDesign1 定義在本元件之後，沒辦法用 component selector，改用 CSS 變數傳遞。 */
+     VisualDesign1 定義在本元件之後，沒辦法用 component selector，改用 CSS 變數傳遞。 */
   --text-color: ${(props) => props.ink};
 
   &:hover {
@@ -1484,12 +1484,12 @@ const HoverableDiv = styled.div`
   }
 `;
 
-const GraphicDesign = styled(UIUXProject)`
+const VisualDesign = styled(UIUXProject)`
   left: 550px;
   top: 114px;
 `;
 
-const GraphicDesign1 = styled(UIUXProject)`
+const VisualDesign1 = styled(UIUXProject)`
   font-size: 16px;
   line-height: 24px;
   left: 550px;
