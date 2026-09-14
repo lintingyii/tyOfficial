@@ -11,7 +11,7 @@ export const About = () => {
             <Column>
               <Div5>
                 <HeaderRow>
-                  <Avatar src="/cv/avatar.png" alt="林庭奕 Ting-yi, Lin" />
+                  <Avatar src="/cv/avatar.jpg" alt="林庭奕 Ting-yi, Lin" />
                   <HeaderText>
                     <NameRow>
                       <NameZh>林庭奕</NameZh>

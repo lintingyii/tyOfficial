@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
 
@@ -12,6 +12,10 @@ const DateLabel = styled.div`
 `;
 
 const ImageContainer = styled.div`
+  position: relative; /* 馬賽克疊在圖片上，要有定位基準 */
+  isolation: isolate; /* 把混色關在縮圖裡，不要混到卡片底色 */
+  /* 不支援混色模式的瀏覽器：靜止維持彩色、hover 不做效果，
+     總比讓縮圖永遠卡在灰階好。 */
   margin: 16px 0;
   text-align: center;
   transition: 0.3s ease-in;
@@ -139,10 +143,11 @@ const CardContainer = styled.a`
     }
 
     ${Tag} {
+      /* 只反轉底色，文字維持標籤原本的顏色 —— 壓深會讓相近的色票更難分辨。
+         代價是對比：白底上 Creative Campaign 只有 1.93:1、Frontend coding
+         2.46:1、Visual design 3.42:1，都低於一般文字 4.5:1 的門檻。 */
       background-color: #fff;
-      /* 底色翻白，文字要壓深才讀得到（原色最低只有 1.93:1） */
       color: var(--tag-color);
-      color: color-mix(in srgb, var(--tag-color) 63%, black);
     }
 
     ${SubTag} {
@@ -266,6 +271,91 @@ const LargeContent = styled.div`
   }
 `;
 
+/* 專案卡 hover 的輕量馬賽克 —— 只作用在圖片上。
+
+   整張卡都鋪馬賽克太重（一次要面對十張卡，是用掃的），改成只讓縮圖一格一格
+   轉成灰階：每一格用 backdrop-filter 去掉自己底下那一塊的彩度，依序浮現。
+   卡片底色翻深、文字轉白維持原本的即時切換。
+
+   跟首頁那三張同一個語彙，但分量小很多：格子粗（8×5）、擴散只有 160ms、
+   沒有 accent 閃色。 */
+const HOVER_COLS = 8;
+const HOVER_ROWS = 5;
+/* 讀不讀得出「一格一格」取決於三件事，不是格子大小：
+   ・單格的淡入要短（60ms），長了就糊成一片
+   ・整體延遲要長（460ms），短了每格只差幾毫秒、等於同時發生
+   ・延遲要量化成幾波（WAVES），連續值會讓邊界永遠是漸層、看不出方塊
+   第一版是 160ms 擴散 + 120ms 單格淡入，兩者重疊，結果跟整張淡入一樣。 */
+const HOVER_SPREAD = 460;
+const WAVES = 7;
+
+const hoverPattern = (seed) => {
+  let x = seed;
+  const rand = () => {
+    x = (x * 1664525 + 1013904223) % 4294967296;
+    return x / 4294967296;
+  };
+  return Array.from({ length: HOVER_COLS * HOVER_ROWS }, (_, i) => {
+    const col = i % HOVER_COLS;
+    const row = Math.floor(i / HOVER_COLS);
+    const sweep =
+      (col / (HOVER_COLS - 1)) * 0.6 + (row / (HOVER_ROWS - 1)) * 0.4;
+    /* 量化成 WAVES 波：同一波的格子一起翻，邊界才是方塊而不是漸層 */
+    const t = Math.min(1, sweep * 0.7 + rand() * 0.3);
+    return Math.round(t * (WAVES - 1)) / (WAVES - 1);
+  });
+};
+
+/* 每一格用 saturation 混色模式去掉底下那一塊的彩度。
+
+   先前試過 backdrop-filter，在這個結構下沒有生效（而且當常駐屬性時，
+   10 張卡 × 40 格的 backdrop 圖層會把合成器壓垮，連卡片進場動畫都凍住）。
+   mix-blend-mode 是跟底下的像素直接混色，不需要 backdrop root，
+   灰色 + saturation 的結果就是「這一塊變灰階」。
+   opacity 控制混入的程度，所以淡入就是「這一格慢慢褪色」。 */
+/* 方向是反的：靜止時整張縮圖是灰階，hover 一格一格把顏色放回來。
+   hover 因此變成「給予」而不是「剝奪」，靜止時整頁也安靜得多。
+
+   ⚠️ 只在有 hover 的裝置上這樣做。觸控裝置沒有 hover，預設灰階等於
+   讓手機使用者永遠只看得到黑白的作品集 —— 那些縮圖本身就是作品。
+   在那些裝置上格子完全不啟用，連混色圖層都不會產生。 */
+const HoverCell = styled.span`
+  background-color: #808080;
+  opacity: 0;
+  transition: opacity 0.06s linear;
+
+  @media (hover: hover) and (pointer: fine) {
+    mix-blend-mode: saturation;
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-delay: 0ms !important;
+  }
+`;
+
+const HoverMosaic = styled.span`
+  position: absolute;
+  inset: 0;
+  border-radius: 8px; /* 對齊縮圖自己的圓角 */
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(${HOVER_COLS}, 1fr);
+  grid-template-rows: repeat(${HOVER_ROWS}, 1fr);
+  pointer-events: none;
+`;
+
+const CardMosaic = ({ seed }) => {
+  const cells = useMemo(() => hoverPattern(seed), [seed]);
+  return (
+    <HoverMosaic aria-hidden="true">
+      {cells.map((t, i) => (
+        <HoverCell key={i} style={{ transitionDelay: `${t * HOVER_SPREAD}ms` }} />
+      ))}
+    </HoverMosaic>
+  );
+};
+
 const LargeCardContainer = styled(CardContainer)`
   display: flex;
   flex-direction: row;
@@ -299,10 +389,11 @@ const LargeCardContainer = styled(CardContainer)`
     }
 
     ${Tag} {
+      /* 只反轉底色，文字維持標籤原本的顏色 —— 壓深會讓相近的色票更難分辨。
+         代價是對比：白底上 Creative Campaign 只有 1.93:1、Frontend coding
+         2.46:1、Visual design 3.42:1，都低於一般文字 4.5:1 的門檻。 */
       background-color: #fff;
-      /* 底色翻白，文字要壓深才讀得到（原色最低只有 1.93:1） */
       color: var(--tag-color);
-      color: color-mix(in srgb, var(--tag-color) 63%, black);
     }
 
     ${SubTag} {
@@ -311,9 +402,21 @@ const LargeCardContainer = styled(CardContainer)`
       border-color: color-mix(in srgb, var(--tag-color) 67%, white);
     }
 
+    /* 基底 CardContainer 的 hover 會把整張縮圖濾成灰階（給小卡用的舊行為）。
+       大卡的灰階完全交給格子，這裡必須把繼承來的那條關掉 ——
+       不然格子乖乖變透明了，容器還是把整張圖壓成灰的。 */
     ${ImageContainer} {
-      -webkit-filter: grayscale(100%);
-      filter: grayscale(100%);
+      -webkit-filter: none;
+      filter: none;
+    }
+  }
+
+  /* ⚠️ media 要包在 hover 外面，不能寫成 &:hover 裡面再包 @media ——
+     那樣 stylis 不會產生規則（實測整份 stylesheet 裡一條都沒有），
+     格子只會往 0 跑一下然後彈回 1，看起來就是「閃一下顏色又變灰」。 */
+  @media (hover: hover) and (pointer: fine) {
+    &:hover ${HoverCell} {
+      opacity: 0; /* 顏色回來 */
     }
   }
 `;
@@ -351,6 +454,7 @@ function LargeProjectCard({
     >
       <LargeImageContainer>
         <img src={image} alt={title} />
+        <CardMosaic seed={(title || "").length * 7919 + 13} />
       </LargeImageContainer>
       <LargeContent>
         <div

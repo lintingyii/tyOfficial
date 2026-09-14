@@ -87,7 +87,9 @@ export const Work = () => {
       date: "January, 2023",
       image: "/younglions.png",
       title: "VC Kungfu",
-      subtitle: "Young Lions Competition, 4TH Prize",
+      /* 副標描述作品，不放名次 —— 名次在 about 的 Honors 裡，
+         那一筆本來就連到這個案例頁，兩邊講同一句話沒有意義。 */
+      subtitle: "Gamification design",
       description:
         "The first-ever mobile game to play with your lung, not your thumb.",
       tags: [{ name: "Creative Campaign", color: "#86C5CE" }],
@@ -125,7 +127,8 @@ export const Work = () => {
       date: "September, 2024",
       image: "/有球必In CaseBoard.jpg",
       title: "Sports Win",
-      subtitle: "Taipei CodeFest Hackathon - Honorable Mention",
+      /* 同上：名次留在 about 的 Honors */
+      subtitle: "Venue booking microservice",
       description:
         "A microservice for booking Taipei sports venues, incorporating team-building to maximize venue usage.",
       tags: [
