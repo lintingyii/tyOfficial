@@ -108,8 +108,8 @@ const Unit = styled.span`
   color: #7a8184;
 
   img {
-    /* 28 × 26 的非正方形，寬高照原始比例給，等比才不會被壓扁 */
-    width: 0.56em;
+    /* 這版是 23 × 23 的正方形，寬高給同值 */
+    width: 0.52em;
     height: 0.52em;
     margin: 0 0.3em;
     vertical-align: -0.04em;
