@@ -11,12 +11,11 @@ export const Work = () => {
   const initialProjects = [
     {
       /* 站內的案例頁已移除，卡片改為連到 Figma Sites 上的線上版。
-         TODO：date 還是暫定值，等正確的年月。
-         格式一定要維持 "Month, Year" —— SortButton 是靠它排序的。 */
-      date: "September, 2026",
+         date 的格式要維持 "Month, Year" —— SortButton 是靠它排序的。 */
+      date: "May, 2026",
       image: "/be-my-hooman/thumb.jpg",
       title: "Be my hooman",
-      subtitle: "Brand guidelines",
+      subtitle: "Branding",
       description:
         "A character-led brand system: brand introduction, personality, logo system, colour and typography, packaged as a downloadable kit.",
       tags: [{ name: "Visual design", color: "#2A96B7" }],
