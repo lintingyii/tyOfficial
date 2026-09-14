@@ -17,7 +17,7 @@ export const Work = () => {
       title: "Be my hooman",
       subtitle: "Branding",
       description:
-        "A character-led brand system: brand introduction, personality, logo system, colour and typography, packaged as a downloadable kit.",
+        "A character-led brand system: brand introduction, personality, logo system, colour and typography — built as a website, so the whole guideline can be browsed and shared rather than passed around as a PDF.",
       tags: [{ name: "Visual design", color: "#2A96B7" }],
       subtags: [{ name: "Branding", color: "#2A96B7" }],
       link: "https://be-my-hooman.figma.site/",
