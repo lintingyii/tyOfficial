@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useMemo } from "react";
 import styled, { keyframes, css } from "styled-components";
 import TextMarquee from "../Components/TextMarquee";
 import Footer from "../Components/footer";
@@ -368,7 +368,9 @@ function MyComponent(props) {
                 left={993}
                 top={107}
                 width={447}
-              />
+              >
+                <MosaicFill seed={20260915} base="#59656c" />
+              </ColoredRectangle>
               <UIUXProject>UI / UX Design</UIUXProject>
               <UIUXProject1>
                 As an UI/UX designer, I harmonize form and function to create
@@ -391,7 +393,9 @@ function MyComponent(props) {
                 left={497}
                 top={0}
                 width={446}
-              />
+              >
+                <MosaicFill seed={20260916} base="#2A96B7" />
+              </ColoredRectangle>
               <VisualDesign>Visual Design</VisualDesign>
               <VisualDesign1>
                 My journey in visual design is driven by the belief that each
@@ -411,7 +415,9 @@ function MyComponent(props) {
                 left={0}
                 top={107}
                 width={445}
-              />
+              >
+                <MosaicFill seed={20260917} base="#D8984E" />
+              </ColoredRectangle>
               <TextWrapper2>Frontend Coding</TextWrapper2>
               <TextWrapper2n1>
                 I find joy in translating creative visions into seamless,
@@ -1374,6 +1380,15 @@ const CANVAS_W = 1440;
 const CANVAS_H = 635;
 
 const OverlapGroupWrapper2 = styled.div`
+  /* 上方的呼吸空間。原本離上面那顆旋轉圓圈只有 72px，三張卡的量體很重，
+     貼太近會像被推上去。用 margin 不用 padding —— 這個盒子靠 aspect-ratio
+     定高，padding 會把比例算進去。 */
+  margin-top: 88px;
+
+  @media (max-width: 820px) {
+    margin-top: 48px;
+  }
+
   container-type: inline-size;
   width: 100%;
   aspect-ratio: ${CANVAS_W} / ${CANVAS_H};
@@ -1449,11 +1464,8 @@ const ColoredRectangle = styled.div`
   width: ${({ width }) => width}px;
   background-color: ${({ color }) => color};
 
+  overflow: hidden; /* 方塊要被圓角切齊 */
   transition: background-color 0.2s ease-in;
-
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.8);
-  }
 `;
 
 const TextWrapper2 = styled(UIUXProject)`
@@ -1474,6 +1486,63 @@ const TextWrapper2n1 = styled(UIUXProject)`
   font-weight: 400;
 `;
 
+/* 桌機三張卡的 hover：整塊變深改成一格一格翻過去。
+
+   底色留在 ColoredRectangle 上，上面疊一層深色方塊，hover 時各自依延遲浮現。
+   延遲用 inline style 給（CSS 沒辦法為每一格算不同的值），進出用同一組延遲 ——
+   離開時就是按進來的順序退回去，讀起來仍然是一道波前。 */
+const D_COLS = 10;
+const D_ROWS = 12;
+
+/* accent 格子先以較淺的顏色浮現，再晚一拍收斂成跟其他格一樣的深色 ——
+   跟捲動轉場的 accentShare 是同一個想法：閃一下，然後歸位。
+   不收斂的話那些格子會永遠留著，變成一片洗不掉的斑點。 */
+const MosaicCell = styled.span`
+  /* 用不透明色而不是半透明黑：相鄰格子的邊緣會落在小數像素上，半透明疊出來
+     會在接縫留下一條比較亮的細線，整片看起來像有格線。同色實色就沒有這個問題。 */
+  background-color: ${({ $accent, $base }) =>
+    $accent
+      ? `color-mix(in srgb, ${$base} 58%, #000)`
+      : `color-mix(in srgb, ${$base} 20%, #000)`};
+  opacity: 0;
+  transition:
+    opacity 0.16s linear,
+    background-color 0.3s linear;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-delay: 0ms !important;
+  }
+`;
+
+const MosaicLayer = styled.span`
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(${D_COLS}, 1fr);
+  grid-template-rows: repeat(${D_ROWS}, 1fr);
+  pointer-events: none;
+`;
+
+const MosaicFill = ({ seed, base }) => {
+  const cells = useMemo(() => cellPattern(seed, D_COLS, D_ROWS), [seed]);
+  return (
+    <MosaicLayer aria-hidden="true">
+      {cells.map((c, i) => (
+        <MosaicCell
+          key={i}
+          $accent={c.accent}
+          $base={base}
+          style={{
+            /* 兩個延遲分別對應 opacity 與 background-color：
+               先浮現，140ms 後才收斂成最終色 */
+            transitionDelay: `${c.t * SPREAD}ms, ${c.t * SPREAD + 140}ms`,
+          }}
+        />
+      ))}
+    </MosaicLayer>
+  );
+};
+
 const HoverableDiv = styled.div`
   /* 內文色平常等於卡片底色（刻意看不見），hover 時底色變 rgba(0,0,0,.8)
      才浮現。浮現的底實際是 #303030，原色壓上去只有 2.2:1，所以同時提亮。
@@ -1484,8 +1553,9 @@ const HoverableDiv = styled.div`
     --text-color: color-mix(in srgb, ${(props) => props.ink} 66%, white);
   }
 
-  &:hover ${ColoredRectangle} {
-    background-color: rgba(0, 0, 0, 0.8);
+  &:hover ${MosaicCell} {
+    opacity: 1;
+    background-color: ${({ ink }) => `color-mix(in srgb, ${ink} 20%, #000)`};
   }
 `;
 
@@ -1693,84 +1763,175 @@ const Span = styled.span`
   white-space: nowrap;
 `;
 
+/* 三張卡片的翻面效果：馬賽克溶解，不是 3D 翻轉。
+
+   正面是一整格一整格的方塊疊在背面上，每一格有自己的延遲時間 ——
+   延遲值來自一組固定亂數的門檻圖，跟 PixelScrollTransition 的做法一樣，
+   所以方塊是有機地散開，不是整齊掃過。
+
+   ⚠️ 正反面原本是同一個底色，那樣溶解會看不見（透出來的跟蓋著的一樣）。
+   所以背面壓深一階，方塊掉下去才讀得出「這一格翻過去了」。
+
+   桌機 hover 觸發、手機點擊 —— 觸控裝置沒有 hover，兩種輸入各給一種。
+   背面文字維持真正的 DOM 文字，可選取、可報讀。 */
+
+const COLS = 12;
+const ROWS = 8;
+const SPREAD = 420; // 最早與最晚的格子相差多久（ms）
+const ACCENT_SHARE = 0.14; // 有多少比例的格子會先閃一下再消失
+
+/* 固定種子的亂數：每張卡片的圖樣不同，但重新 render 不會變 */
+const cellPattern = (seed, cols = COLS, rows = ROWS) => {
+  let x = seed;
+  const rand = () => {
+    x = (x * 1664525 + 1013904223) % 4294967296;
+    return x / 4294967296;
+  };
+  return Array.from({ length: cols * rows }, (_, i) => {
+    const col = i % cols;
+    const row = Math.floor(i / cols);
+    /* 由左上往右下擴散，再加一點亂數讓邊界不是一條直線 */
+    const sweep = (col / (cols - 1)) * 0.5 + (row / (rows - 1)) * 0.5;
+    return { t: Math.min(1, sweep * 0.65 + rand() * 0.35), accent: rand() < ACCENT_SHARE };
+  });
+};
+
 const DivFlipCard = styled.div`
   background-color: #f2f2f2;
-  perspective: 1000px;
-  align-items: center;
   max-width: 100%;
-  // margin: 20px;
 
   @media (min-width: 821px) and (max-width: 1199px) {
     flex: 1;
-    min-width: 0; /* 讓 flex 子項可以縮到比內容窄 */
+    min-width: 0;
   }
 `;
 
-const FlipCardInner = styled.div`
-  // position: relative;
+const Card = styled.div`
+  position: relative;
   height: 200px;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  text-align: left;
 
-  /* 三欄時每張只剩約 1/3 寬，背面的說明文字需要更多高度 */
   @media (min-width: 821px) and (max-width: 1199px) {
     height: 380px;
   }
-
-  text-align: left;
-  transition: transform 0.8s;
-  transform-style: preserve-3d;
-  ${(props) => props.flipped && "transform: rotateY(180deg);"}
 `;
 
-const FlipCardFront = styled.div`
+/* 背面：壓深一階，讓方塊掉下去之後看得出差別 */
+const Back = styled.div`
   position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
+  inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${(props) => props.bgColor};
-  color: white;
+  background-color: ${({ $bg }) => `color-mix(in srgb, ${$bg} 82%, #2a3133)`};
+  color: #fff;
+  font-size: 24px;
+`;
+
+const Cells = styled.div`
+  position: absolute;
+  inset: 0;
+  display: grid;
+  grid-template-columns: repeat(${COLS}, 1fr);
+  grid-template-rows: repeat(${ROWS}, 1fr);
+  pointer-events: none;
+`;
+
+const Cell = styled.span`
+  background-color: ${({ $accent, $bg }) =>
+    $accent ? `color-mix(in srgb, ${$bg} 55%, #ffffff)` : $bg};
+  opacity: ${({ $open }) => ($open ? 0 : 1)};
+  transition: opacity 0.16s linear;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-delay: 0ms !important;
+    transition-duration: 0.25s;
+  }
+`;
+
+/* 正面的標題：疊在方塊之上，開場就先退掉，不要跟著方塊一格一格消失 */
+const FrontFace = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
   font-size: 24px;
   font-weight: bold;
-  border-radius: 16px;
+  pointer-events: none;
+  opacity: ${({ $open }) => ($open ? 0 : 1)};
+  transition: opacity ${({ $open }) => ($open ? "0.14s" : "0.3s")} ease
+    ${({ $open }) => ($open ? "0s" : "0.18s")};
 `;
 
-const FlipCardBack = styled(FlipCardFront)`
-  background-color: ${(props) => props.bgColor};
-  color: #fff;
-  transform: rotateY(180deg);
-  font-weight: normal;
-  max-width: 100%;
-  text-align: left;
-`;
-
-const TapToFlip = styled.div`
+const Hint = styled.div`
   position: absolute;
   bottom: 10px;
-  left: auto;
   font-size: 14px;
   color: #fff;
   font-weight: 400;
   opacity: 0.8;
+
+  /* 有 hover 的裝置講 hover，觸控裝置講 tap */
+  &::after {
+    content: "Tap to reveal ⍝";
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    &::after {
+      content: "Hover to reveal ⍝";
+    }
+  }
 `;
 
+let cardSeed = 0;
+
 function FlipCard({ title, content, bgColor }) {
-  const [flipped, setFlipped] = useState(false);
+  const [open, setOpen] = useState(false);
+  const pattern = useMemo(() => cellPattern(20260915 + (cardSeed++ % 7) * 977), []);
+
+  /* 滑鼠用 hover、觸控用點擊。判斷放在事件當下，不要在 render 時算一次就寫死 ——
+     那樣裝置能力一旦判斷錯（或使用者中途換輸入方式），點擊就永遠沒反應。
+     pointerType 直接來自事件本身，是當下真正在操作的那個裝置。 */
+  const hoverCapable = () =>
+    typeof window !== "undefined" &&
+    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 
   return (
-    <DivFlipCard onClick={() => setFlipped(!flipped)}>
-      <FlipCardInner flipped={flipped}>
-        <FlipCardFront bgColor={bgColor}>
-          {title}
-          <TapToFlip>
-            Tap to flip <span style={{ fontSize: "22px" }}>⍝</span>
-          </TapToFlip>
-        </FlipCardFront>
-        <FlipCardBack bgColor={bgColor}>
+    <DivFlipCard>
+      <Card
+        onPointerEnter={(e) => e.pointerType === "mouse" && setOpen(true)}
+        onPointerLeave={(e) => e.pointerType === "mouse" && setOpen(false)}
+        onClick={() => {
+          if (!hoverCapable()) setOpen((v) => !v);
+        }}
+      >
+        <Back $bg={bgColor}>
           <ContentMob>{content}</ContentMob>
-        </FlipCardBack>
-      </FlipCardInner>
+        </Back>
+
+        <Cells aria-hidden="true">
+          {pattern.map((c, i) => (
+            <Cell
+              key={i}
+              $bg={bgColor}
+              $accent={c.accent}
+              $open={open}
+              /* 收回來時延遲要反過來，才會是「從剛剛結束的那一端長回去」 */
+              style={{ transitionDelay: `${(open ? c.t : 1 - c.t) * SPREAD}ms` }}
+            />
+          ))}
+        </Cells>
+
+        <FrontFace $open={open}>
+          {title}
+          <Hint />
+        </FrontFace>
+      </Card>
     </DivFlipCard>
   );
 }
