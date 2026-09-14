@@ -93,7 +93,7 @@ const Unit = styled.span`
 
   /* 與 hero 引言同一支襯線，維持原本的大小寫 —— 句子照常讀，
      被挑出來的那個字靠字體與字級做區分，不靠全大寫。 */
-  font-family: serif;
+  font-family: 'Kaisei Decol', serif;
   font-size: ${FLUID_SIZE};
 
   /* 行高由 Accent 決定：行框必須裝得下比較高的那個字，

@@ -237,7 +237,7 @@ export const Work = () => {
             <HeadingIAm>
               <span
                 style={{
-                  fontFamily: "serif",
+                  fontFamily: "'Kaisei Decol', serif",
                   fontStyle: "italic",
                   fontSize: "24px",
                   lineHeight: "1",
@@ -247,7 +247,7 @@ export const Work = () => {
               </span>
               <div>
                 Work
-                <span style={{ fontFamily: "serif", fontStyle: "italic" }}>
+                <span style={{ fontFamily: "'Kaisei Decol', serif", fontStyle: "italic" }}>
                   (s)
                 </span>
               </div>
@@ -523,7 +523,8 @@ const Frame = styled.div`
 
 const TextWrapper = styled.div`
   color: #ffffff;
-  font-family: "Roboto", Helvetica;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", sans-serif;
   font-size: 32px;
   font-weight: 700;
   letter-spacing: 0;
@@ -676,7 +677,7 @@ const CardsContainerWrapper = styled.div`
 `;
 
 const Content = styled.div`
-  font-family: serif;
+  font-family: 'Kaisei Decol', serif;
   display: flex;
   align-items: center;
   gap: 1rem;

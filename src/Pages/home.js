@@ -373,16 +373,11 @@ function MyComponent(props) {
               </ColoredRectangle>
               <UIUXProject>UI / UX Design</UIUXProject>
               <UIUXProject1>
-                As an UI/UX designer, I harmonize form and function to create
-                visually captivating interfaces that guide users through
-                purposeful journeys.
+                I design interfaces where form and function hold together,
+                grounded in research across very different industries.
                 <br />
-                With extensive cross-industry research, I tailor solutions to
-                diverse user needs.
-                <br />
-                Collaborating with cross-functional teams, I prioritize
-                user-centric design, informed by thorough research, seamlessly
-                integrating experiences into users' lives.
+                Working alongside engineers keeps the decisions honest about
+                what can actually ship.
               </UIUXProject1>
             </HoverableDiv>
 
@@ -464,7 +459,7 @@ function MyComponent(props) {
       <Div6>
         <FlipCard
           title="UI / UX Design"
-          content="As a UI/UX designer, I harmonize form and function to create visually captivating interfaces that guide users through purposeful journeys. With extensive cross-industry research, I tailor solutions to diverse user needs. Collaborating with cross-functional teams, I prioritize user-centric design, informed by thorough research, seamlessly integrating experiences into users' lives."
+          content="I design interfaces where form and function hold together, grounded in research across very different industries. Working alongside engineers keeps the decisions honest about what can actually ship."
           bgColor="#59656C"
         />
         <FlipCard
@@ -488,7 +483,7 @@ function MyComponent(props) {
               Voice
               <span
                 style={{
-                  fontFamily: "serif",
+                  fontFamily: "'Kaisei Decol', serif",
                   fontStyle: "italic",
                 }}
               >
@@ -528,7 +523,7 @@ function MyComponent(props) {
             Service
             <span
               style={{
-                fontFamily: "serif",
+                fontFamily: "'Kaisei Decol', serif",
                 fontStyle: "italic",
               }}
             >
@@ -539,7 +534,7 @@ function MyComponent(props) {
             at
             <span
               style={{
-                fontFamily: "serif",
+                fontFamily: "'Kaisei Decol', serif",
                 fontStyle: "italic",
               }}
             >
@@ -641,7 +636,7 @@ function MyComponent(props) {
           Feature
           <span
             style={{
-              fontFamily: "serif",
+              fontFamily: "'Kaisei Decol', serif",
               fontStyle: "italic",
             }}
           >
@@ -1169,7 +1164,8 @@ const Frame = styled.div`
 
 const TextWrapper = styled.div`
   color: #ffffff;
-  font-family: "Roboto", Helvetica;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", sans-serif;
   font-size: 32px;
   font-weight: 700;
   letter-spacing: 0;
@@ -2093,7 +2089,7 @@ const ServiceContent = styled.div`
 const ServiceDes = styled.div`
   margin-top: 0.6rem;
   // color: #fff;
-  font-family: serif;
+  font-family: 'Kaisei Decol', serif;
   font-size: 1.2rem;
   text-align: center;
   display: flex;

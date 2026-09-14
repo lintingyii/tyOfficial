@@ -165,7 +165,7 @@ const Ending = styled.div`
 `;
 
 const Text = styled.div`
-  font-family: serif;
+  font-family: 'Kaisei Decol', serif;
   font-size: 1.2rem;
   display: flex;
   flex-direction: column;
