@@ -14,6 +14,8 @@ const DateLabel = styled.div`
 const ImageContainer = styled.div`
   position: relative; /* 馬賽克疊在圖片上，要有定位基準 */
   isolation: isolate; /* 把混色關在縮圖裡，不要混到卡片底色 */
+  /* 不支援混色模式的瀏覽器：靜止維持彩色、hover 不做效果，
+     總比讓縮圖永遠卡在灰階好。 */
   margin: 16px 0;
   text-align: center;
   transition: 0.3s ease-in;
@@ -310,11 +312,21 @@ const hoverPattern = (seed) => {
    mix-blend-mode 是跟底下的像素直接混色，不需要 backdrop root，
    灰色 + saturation 的結果就是「這一塊變灰階」。
    opacity 控制混入的程度，所以淡入就是「這一格慢慢褪色」。 */
+/* 方向是反的：靜止時整張縮圖是灰階，hover 一格一格把顏色放回來。
+   hover 因此變成「給予」而不是「剝奪」，靜止時整頁也安靜得多。
+
+   ⚠️ 只在有 hover 的裝置上這樣做。觸控裝置沒有 hover，預設灰階等於
+   讓手機使用者永遠只看得到黑白的作品集 —— 那些縮圖本身就是作品。
+   在那些裝置上格子完全不啟用，連混色圖層都不會產生。 */
 const HoverCell = styled.span`
   background-color: #808080;
-  mix-blend-mode: saturation;
   opacity: 0;
   transition: opacity 0.06s linear;
+
+  @media (hover: hover) and (pointer: fine) {
+    mix-blend-mode: saturation;
+    opacity: 1;
+  }
 
   @media (prefers-reduced-motion: reduce) {
     transition-delay: 0ms !important;
@@ -371,10 +383,6 @@ const LargeCardContainer = styled(CardContainer)`
     background-color: #2A3133;
     color: #fff;
 
-    ${HoverCell} {
-      opacity: 1;
-    }
-
     ${LargeTitle}, ${Subtitle}, ${Description}, ${DateLabel} {
       color: #fff;
     }
@@ -391,13 +399,14 @@ const LargeCardContainer = styled(CardContainer)`
       color: color-mix(in srgb, var(--tag-color) 67%, white);
       border-color: color-mix(in srgb, var(--tag-color) 67%, white);
     }
+  }
 
-    /* 不支援混色模式的瀏覽器退回整張轉灰 */
-    @supports not (mix-blend-mode: saturation) {
-      ${ImageContainer} {
-        -webkit-filter: grayscale(100%);
-        filter: grayscale(100%);
-      }
+  /* ⚠️ media 要包在 hover 外面，不能寫成 &:hover 裡面再包 @media ——
+     那樣 stylis 不會產生規則（實測整份 stylesheet 裡一條都沒有），
+     格子只會往 0 跑一下然後彈回 1，看起來就是「閃一下顏色又變灰」。 */
+  @media (hover: hover) and (pointer: fine) {
+    &:hover ${HoverCell} {
+      opacity: 0; /* 顏色回來 */
     }
   }
 `;
