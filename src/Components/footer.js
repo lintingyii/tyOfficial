@@ -166,7 +166,7 @@ const Ending = styled.div`
 
 const Text = styled.div`
   font-family: 'Kaisei Decol', serif;
-  font-size: 1.2rem;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   color: #2A3133;
