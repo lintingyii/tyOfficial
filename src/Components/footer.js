@@ -58,7 +58,7 @@ export const Footer = ({ color }) => {
               </Span>
             </Link>
             <Link
-              href="https://www.instagram.com/mglty.19/"
+              href="https://www.instagram.com/tingyiiilin/"
               target="_blank"
               rel="noopener noreferrer"
             >
