@@ -399,6 +399,14 @@ const LargeCardContainer = styled(CardContainer)`
       color: color-mix(in srgb, var(--tag-color) 67%, white);
       border-color: color-mix(in srgb, var(--tag-color) 67%, white);
     }
+
+    /* 基底 CardContainer 的 hover 會把整張縮圖濾成灰階（給小卡用的舊行為）。
+       大卡的灰階完全交給格子，這裡必須把繼承來的那條關掉 ——
+       不然格子乖乖變透明了，容器還是把整張圖壓成灰的。 */
+    ${ImageContainer} {
+      -webkit-filter: none;
+      filter: none;
+    }
   }
 
   /* ⚠️ media 要包在 hover 外面，不能寫成 &:hover 裡面再包 @media ——
