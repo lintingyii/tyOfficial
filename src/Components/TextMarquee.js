@@ -76,7 +76,7 @@ const Spark = ({ className }) => (
    字距必須是 0：小寫是連筆的，一拉開字距筆畫就斷了。
 
    ⚠️ 這個倍率跟 FLUID_SIZE 綁在一起：縮小前面那串字時，這裡要反向補回來，
-   才能讓重點字的絕對尺寸不變（1.71 × 3.4vw = 1.55 × 3.75vw）。
+   才能讓重點字的絕對尺寸不變（放大這個值時，下面的 line-height 也要跟著加，否則行框裝不下會被裁掉）。
 
    字級的倍率是「看起來一樣大」而不是「數字一樣大」：書寫體的墨色高度遠小於
    字級，1em 直接排會比旁邊的襯線矮一截。1.55em 剛好讓它的上緣對齊襯線的
@@ -85,7 +85,7 @@ const Spark = ({ className }) => (
    再加一個顏色是第三個訊號，重複標記反而像沒決定好。 */
 const Accent = styled.span`
   font-family: "Luxurious Script", cursive;
-  font-size: 1.71em;
+  font-size: 1.9em;
   text-transform: none;
   letter-spacing: 0;
   line-height: 1;
@@ -105,8 +105,8 @@ const Unit = styled.span`
 
   /* 行高由 Accent 決定：行框必須裝得下比較高的那個字，
      否則 Viewport 的 overflow: hidden 會把筆畫切掉。 */
-  /* 行框要裝得下比較高的重點字（1.8em 的書寫體），否則會被 overflow 切掉 */
-  line-height: 2.1;
+  /* 行框要裝得下比較高的重點字（1.9em 的書寫體），否則會被 overflow 切掉 */
+  line-height: 2.25;
   /* 字距放開一點，讓這行讀起來鬆一些。重點字自己是 letter-spacing: 0，
      不受影響 —— 書寫體一拉開字距連筆就斷了。 */
   letter-spacing: 0.03em;
@@ -150,8 +150,8 @@ const SecondRow = styled.div`
      ascent／descent 比拉丁字型高很多 —— 同樣的 em 比例，字自己佔掉的
      垂直空間變大，兩行就擠在一起。這個值要跟著 line-height 一起看：
      基線距離 = line-height − |margin|。base 縮小 9% 之後要補回來，
-     才能讓兩行的「絕對」距離維持原本調好的樣子：2.1 − 1.84 = 0.26。 */
-  margin-top: -0.26em;
+     才能讓兩行的「絕對」距離維持原本調好的樣子：2.25 − 1.84 = 0.41。 */
+  margin-top: -0.41em;
 `;
 
 /* 色塊拿掉之後，上下留白就是它跟前後區塊的分隔 —— 這段 padding 不是裝飾，
