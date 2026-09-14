@@ -13,6 +13,7 @@ const DateLabel = styled.div`
 
 const ImageContainer = styled.div`
   position: relative; /* 馬賽克疊在圖片上，要有定位基準 */
+  isolation: isolate; /* 把混色關在縮圖裡，不要混到卡片底色 */
   margin: 16px 0;
   text-align: center;
   transition: 0.3s ease-in;
@@ -294,13 +295,16 @@ const hoverPattern = (seed) => {
   });
 };
 
-/* ⚠️ backdrop-filter 只在 hover 時才掛上。
+/* 每一格用 saturation 混色模式去掉底下那一塊的彩度。
 
-   一開始我把它寫在這裡當常駐屬性，結果 10 張卡 × 40 格 = 400 個永遠開著的
-   backdrop 圖層，合成器被壓垮 —— 症狀是卡片進場的 opacity / transform 過場
-   整個凍在起始值不動（把 transition 關掉，數值就立刻跳到正確位置）。
-   只有被 hover 的那張卡需要這個效果，其餘 360 格不該付這個成本。 */
+   先前試過 backdrop-filter，在這個結構下沒有生效（而且當常駐屬性時，
+   10 張卡 × 40 格的 backdrop 圖層會把合成器壓垮，連卡片進場動畫都凍住）。
+   mix-blend-mode 是跟底下的像素直接混色，不需要 backdrop root，
+   灰色 + saturation 的結果就是「這一塊變灰階」。
+   opacity 控制混入的程度，所以淡入就是「這一格慢慢褪色」。 */
 const HoverCell = styled.span`
+  background-color: #808080;
+  mix-blend-mode: saturation;
   opacity: 0;
   transition: opacity 0.12s linear;
 
@@ -361,9 +365,6 @@ const LargeCardContainer = styled(CardContainer)`
 
     ${HoverCell} {
       opacity: 1;
-      /* 不上色，只去彩度 —— 灰階本身就是「這一格翻過去了」的訊號 */
-      backdrop-filter: grayscale(1);
-      -webkit-backdrop-filter: grayscale(1);
     }
 
     ${LargeTitle}, ${Subtitle}, ${Description}, ${DateLabel} {
@@ -383,9 +384,8 @@ const LargeCardContainer = styled(CardContainer)`
       border-color: color-mix(in srgb, var(--tag-color) 67%, white);
     }
 
-    /* backdrop-filter 撐不住的瀏覽器（舊 Firefox）退回整張轉灰 */
-    @supports not ((backdrop-filter: grayscale(1)) or
-      (-webkit-backdrop-filter: grayscale(1))) {
+    /* 不支援混色模式的瀏覽器退回整張轉灰 */
+    @supports not (mix-blend-mode: saturation) {
       ${ImageContainer} {
         -webkit-filter: grayscale(100%);
         filter: grayscale(100%);
