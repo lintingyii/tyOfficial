@@ -140,7 +140,11 @@ const Track = styled.div`
    第二行往上拉，讓「墨色之間」的距離回到正常的行距 —— 兩行各自裁切自己的
    內容，重疊不會互相切到。 */
 const SecondRow = styled.div`
-  margin-top: -0.62em;
+  /* -0.62em 是給 Times 調的。Kaisei Decol 是 CJK 字型，字身框的
+     ascent／descent 比拉丁字型高很多 —— 同樣的 em 比例，字自己佔掉的
+     垂直空間變大，兩行就擠在一起。放鬆到 -0.28em，基線距離從 1.33em
+     拉到 1.67em。 */
+  margin-top: -0.28em;
 `;
 
 /* 色塊拿掉之後，上下留白就是它跟前後區塊的分隔 —— 這段 padding 不是裝飾，

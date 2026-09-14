@@ -479,7 +479,7 @@ function MyComponent(props) {
       <Section>
         <CardsContainer>
           <SectionTitleSticky>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", alignItems: "baseline" }}>
               Voice
               <span
                 style={{
@@ -490,7 +490,7 @@ function MyComponent(props) {
                 (s)
               </span>
             </div>
-            <div style={{ display: "flex", gap: "16px" }}>of Trust</div>
+            <div style={{ display: "flex", gap: "16px", alignItems: "baseline" }}>of Trust</div>
           </SectionTitleSticky>
           <TestimonialCard
             zIndex={1}
@@ -519,7 +519,7 @@ function MyComponent(props) {
       </Section>
       {/* <Section>
         <SectionTitle>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", alignItems: "baseline" }}>
             Service
             <span
               style={{
@@ -530,7 +530,7 @@ function MyComponent(props) {
               (s)
             </span>
           </div>
-          <div style={{ display: "flex", gap: "16px" }}>
+          <div style={{ display: "flex", gap: "16px", alignItems: "baseline" }}>
             at
             <span
               style={{
