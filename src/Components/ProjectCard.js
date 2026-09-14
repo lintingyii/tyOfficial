@@ -278,7 +278,13 @@ const LargeContent = styled.div`
    沒有 accent 閃色。 */
 const HOVER_COLS = 8;
 const HOVER_ROWS = 5;
-const HOVER_SPREAD = 160;
+/* 讀不讀得出「一格一格」取決於三件事，不是格子大小：
+   ・單格的淡入要短（60ms），長了就糊成一片
+   ・整體延遲要長（460ms），短了每格只差幾毫秒、等於同時發生
+   ・延遲要量化成幾波（WAVES），連續值會讓邊界永遠是漸層、看不出方塊
+   第一版是 160ms 擴散 + 120ms 單格淡入，兩者重疊，結果跟整張淡入一樣。 */
+const HOVER_SPREAD = 460;
+const WAVES = 7;
 
 const hoverPattern = (seed) => {
   let x = seed;
@@ -291,7 +297,9 @@ const hoverPattern = (seed) => {
     const row = Math.floor(i / HOVER_COLS);
     const sweep =
       (col / (HOVER_COLS - 1)) * 0.6 + (row / (HOVER_ROWS - 1)) * 0.4;
-    return Math.min(1, sweep * 0.7 + rand() * 0.3);
+    /* 量化成 WAVES 波：同一波的格子一起翻，邊界才是方塊而不是漸層 */
+    const t = Math.min(1, sweep * 0.7 + rand() * 0.3);
+    return Math.round(t * (WAVES - 1)) / (WAVES - 1);
   });
 };
 
@@ -306,7 +314,7 @@ const HoverCell = styled.span`
   background-color: #808080;
   mix-blend-mode: saturation;
   opacity: 0;
-  transition: opacity 0.12s linear;
+  transition: opacity 0.06s linear;
 
   @media (prefers-reduced-motion: reduce) {
     transition-delay: 0ms !important;
