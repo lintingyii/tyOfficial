@@ -59,14 +59,12 @@ const subscribeScroll = () => {
   };
 };
 
-/* 四角火花，形狀取自 banner-deco 上的那組裝飾。 */
+/* 跑馬燈的星星。用 <img> 而不是內嵌 SVG：這個圖形的路徑資料有 10.8 KB，
+   而它在兩行跑馬燈裡會出現十幾份、還每一幀都在轉 —— 內嵌等於讓瀏覽器
+   每幀重畫十幾條複雜路徑。當成圖片只會光柵化一次，旋轉交給合成器。
+   顏色（#D8984E）已經畫在檔案裡。 */
 const Spark = ({ className }) => (
-  <svg className={className} viewBox="0 0 100 100" aria-hidden="true">
-    <path
-      fill="currentColor"
-      d="M50 0c3 26.5 23.5 47 50 50-26.5 3-47 23.5-50 50-3-26.5-23.5-47-50-50C26.5 47 47 26.5 50 0z"
-    />
-  </svg>
+  <img className={className} src="/marquee-star.svg" alt="" aria-hidden="true" />
 );
 
 /* 句子裡被挑出來的那個字，換成 Luxurious Script，維持小寫。
@@ -109,12 +107,12 @@ const Unit = styled.span`
      對比 3.54:1 —— 大字的門檻是 3:1，再淡下去就不合格了，這裡已經是底線。 */
   color: #7a8184;
 
-  svg {
-    width: 0.52em;
+  img {
+    /* 28 × 26 的非正方形，寬高照原始比例給，等比才不會被壓扁 */
+    width: 0.56em;
     height: 0.52em;
     margin: 0 0.3em;
     vertical-align: -0.04em;
-    color: #d8984e;
     /* 轉動角度由 rAF 寫進 --spark-rot，跟著跑馬燈一起加速、一起翻面。
        原本是固定 9s 一圈的 CSS 動畫，捲動時整行在衝、只有它慢慢轉，
        看起來是兩套不相干的動作。 */
