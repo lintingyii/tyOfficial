@@ -107,7 +107,9 @@ const Unit = styled.span`
      否則 Viewport 的 overflow: hidden 會把筆畫切掉。 */
   /* 行框要裝得下比較高的重點字（1.8em 的書寫體），否則會被 overflow 切掉 */
   line-height: 2.1;
-  letter-spacing: 0.005em;
+  /* 字距放開一點，讓這行讀起來鬆一些。重點字自己是 letter-spacing: 0，
+     不受影響 —— 書寫體一拉開字距連筆就斷了。 */
+  letter-spacing: 0.03em;
 
   /* 句子用灰藍而不是內文墨色。跑馬燈是氛圍，下面的「Voice(s) of Trust」
      才是內容 —— 兩者同色的話，字級兩倍又疊兩行的跑馬燈會壓過它要引導你
