@@ -121,7 +121,7 @@ const Unit = styled.span`
     /* 這版是 23 × 23 的正方形，寬高給同值 */
     width: 0.52em;
     height: 0.52em;
-    margin: 0 0.3em;
+    margin: 0 0.5em;
     vertical-align: -0.04em;
     /* 轉動角度由 rAF 寫進 --spark-rot，跟著跑馬燈一起加速、一起翻面。
        原本是固定 9s 一圈的 CSS 動畫，捲動時整行在衝、只有它慢慢轉，
