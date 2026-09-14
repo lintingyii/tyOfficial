@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useMemo, useRef } from "react";
 import styled from "styled-components";
 import { useInView } from "react-intersection-observer";
 
@@ -12,6 +12,7 @@ const DateLabel = styled.div`
 `;
 
 const ImageContainer = styled.div`
+  position: relative; /* 馬賽克疊在圖片上，要有定位基準 */
   margin: 16px 0;
   text-align: center;
   transition: 0.3s ease-in;
@@ -266,6 +267,70 @@ const LargeContent = styled.div`
   }
 `;
 
+/* 專案卡 hover 的輕量馬賽克 —— 只作用在圖片上。
+
+   整張卡都鋪馬賽克太重（一次要面對十張卡，是用掃的），改成只讓縮圖一格一格
+   轉成灰階：每一格用 backdrop-filter 去掉自己底下那一塊的彩度，依序浮現。
+   卡片底色翻深、文字轉白維持原本的即時切換。
+
+   跟首頁那三張同一個語彙，但分量小很多：格子粗（8×5）、擴散只有 160ms、
+   沒有 accent 閃色。 */
+const HOVER_COLS = 8;
+const HOVER_ROWS = 5;
+const HOVER_SPREAD = 160;
+
+const hoverPattern = (seed) => {
+  let x = seed;
+  const rand = () => {
+    x = (x * 1664525 + 1013904223) % 4294967296;
+    return x / 4294967296;
+  };
+  return Array.from({ length: HOVER_COLS * HOVER_ROWS }, (_, i) => {
+    const col = i % HOVER_COLS;
+    const row = Math.floor(i / HOVER_COLS);
+    const sweep =
+      (col / (HOVER_COLS - 1)) * 0.6 + (row / (HOVER_ROWS - 1)) * 0.4;
+    return Math.min(1, sweep * 0.7 + rand() * 0.3);
+  });
+};
+
+/* ⚠️ backdrop-filter 只在 hover 時才掛上。
+
+   一開始我把它寫在這裡當常駐屬性，結果 10 張卡 × 40 格 = 400 個永遠開著的
+   backdrop 圖層，合成器被壓垮 —— 症狀是卡片進場的 opacity / transform 過場
+   整個凍在起始值不動（把 transition 關掉，數值就立刻跳到正確位置）。
+   只有被 hover 的那張卡需要這個效果，其餘 360 格不該付這個成本。 */
+const HoverCell = styled.span`
+  opacity: 0;
+  transition: opacity 0.12s linear;
+
+  @media (prefers-reduced-motion: reduce) {
+    transition-delay: 0ms !important;
+  }
+`;
+
+const HoverMosaic = styled.span`
+  position: absolute;
+  inset: 0;
+  border-radius: 8px; /* 對齊縮圖自己的圓角 */
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: repeat(${HOVER_COLS}, 1fr);
+  grid-template-rows: repeat(${HOVER_ROWS}, 1fr);
+  pointer-events: none;
+`;
+
+const CardMosaic = ({ seed }) => {
+  const cells = useMemo(() => hoverPattern(seed), [seed]);
+  return (
+    <HoverMosaic aria-hidden="true">
+      {cells.map((t, i) => (
+        <HoverCell key={i} style={{ transitionDelay: `${t * HOVER_SPREAD}ms` }} />
+      ))}
+    </HoverMosaic>
+  );
+};
+
 const LargeCardContainer = styled(CardContainer)`
   display: flex;
   flex-direction: row;
@@ -294,6 +359,13 @@ const LargeCardContainer = styled(CardContainer)`
     background-color: #2A3133;
     color: #fff;
 
+    ${HoverCell} {
+      opacity: 1;
+      /* 不上色，只去彩度 —— 灰階本身就是「這一格翻過去了」的訊號 */
+      backdrop-filter: grayscale(1);
+      -webkit-backdrop-filter: grayscale(1);
+    }
+
     ${LargeTitle}, ${Subtitle}, ${Description}, ${DateLabel} {
       color: #fff;
     }
@@ -311,9 +383,13 @@ const LargeCardContainer = styled(CardContainer)`
       border-color: color-mix(in srgb, var(--tag-color) 67%, white);
     }
 
-    ${ImageContainer} {
-      -webkit-filter: grayscale(100%);
-      filter: grayscale(100%);
+    /* backdrop-filter 撐不住的瀏覽器（舊 Firefox）退回整張轉灰 */
+    @supports not ((backdrop-filter: grayscale(1)) or
+      (-webkit-backdrop-filter: grayscale(1))) {
+      ${ImageContainer} {
+        -webkit-filter: grayscale(100%);
+        filter: grayscale(100%);
+      }
     }
   }
 `;
@@ -351,6 +427,7 @@ function LargeProjectCard({
     >
       <LargeImageContainer>
         <img src={image} alt={title} />
+        <CardMosaic seed={(title || "").length * 7919 + 13} />
       </LargeImageContainer>
       <LargeContent>
         <div
