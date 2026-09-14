@@ -28,7 +28,7 @@ const BOOST_HALF_LIFE = 180; // 毫秒：加成衰減到一半所需的時間
    換成 Kaisei Decol 之後同一個 px 值會大 1.195 倍（實測同一串字 686px vs
    Times 的 574px），所以字級要除以那個倍率，視覺大小才回到原本調好的樣子：
    4.5vw ÷ 1.195 ≈ 3.75vw。 */
-const FLUID_SIZE = "clamp(30px, 3.75vw, 70px)";
+const FLUID_SIZE = "clamp(27px, 3.4vw, 64px)";
 
 const BASE_SPIN = 40; // 火花的基礎轉速（度/秒）＝ 原本 CSS 動畫的 9 秒一圈
 
@@ -75,6 +75,9 @@ const Spark = ({ className }) => (
 
    字距必須是 0：小寫是連筆的，一拉開字距筆畫就斷了。
 
+   ⚠️ 這個倍率跟 FLUID_SIZE 綁在一起：縮小前面那串字時，這裡要反向補回來，
+   才能讓重點字的絕對尺寸不變（1.71 × 3.4vw = 1.55 × 3.75vw）。
+
    字級的倍率是「看起來一樣大」而不是「數字一樣大」：書寫體的墨色高度遠小於
    字級，1em 直接排會比旁邊的襯線矮一截。1.55em 剛好讓它的上緣對齊襯線的
    大寫高度 —— 比襯線大一點點是靠字體本身的個性，不是靠字級撐出來的。 */
@@ -82,7 +85,7 @@ const Spark = ({ className }) => (
    再加一個顏色是第三個訊號，重複標記反而像沒決定好。 */
 const Accent = styled.span`
   font-family: "Luxurious Script", cursive;
-  font-size: 1.55em;
+  font-size: 1.71em;
   text-transform: none;
   letter-spacing: 0;
   line-height: 1;
@@ -102,7 +105,8 @@ const Unit = styled.span`
 
   /* 行高由 Accent 決定：行框必須裝得下比較高的那個字，
      否則 Viewport 的 overflow: hidden 會把筆畫切掉。 */
-  line-height: 1.95;
+  /* 行框要裝得下比較高的重點字（1.8em 的書寫體），否則會被 overflow 切掉 */
+  line-height: 2.1;
   letter-spacing: 0.005em;
 
   /* 句子用灰藍而不是內文墨色。跑馬燈是氛圍，下面的「Voice(s) of Trust」
@@ -142,9 +146,10 @@ const Track = styled.div`
 const SecondRow = styled.div`
   /* -0.62em 是給 Times 調的。Kaisei Decol 是 CJK 字型，字身框的
      ascent／descent 比拉丁字型高很多 —— 同樣的 em 比例，字自己佔掉的
-     垂直空間變大，兩行就擠在一起。放鬆到 -0.28em，基線距離從 1.33em
-     拉到 1.67em。 */
-  margin-top: -0.28em;
+     垂直空間變大，兩行就擠在一起。這個值要跟著 line-height 一起看：
+     基線距離 = line-height − |margin|。base 縮小 9% 之後要補回來，
+     才能讓兩行的「絕對」距離維持原本調好的樣子：2.1 − 1.84 = 0.26。 */
+  margin-top: -0.26em;
 `;
 
 /* 色塊拿掉之後，上下留白就是它跟前後區塊的分隔 —— 這段 padding 不是裝飾，
