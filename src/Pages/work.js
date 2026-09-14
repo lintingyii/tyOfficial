@@ -10,6 +10,21 @@ import SortButton from "../Components/SortButton";
 export const Work = () => {
   const initialProjects = [
     {
+      /* 站內的案例頁已移除，卡片連到 Figma Sites 上的線上版；
+         網域是掛在 tingyilin.com 底下的子網域，不是 figma.site。
+         date 的格式要維持 "Month, Year" —— SortButton 是靠它排序的。 */
+      date: "May, 2026",
+      image: "/be-my-hooman/thumb.jpg",
+      title: "Be my hooman",
+      subtitle: "Branding",
+      description:
+        "A character-led brand system: brand introduction, personality, logo system, colour and typography — built as a website, so the whole guideline can be browsed and shared rather than passed around as a PDF.",
+      tags: [{ name: "Visual design", color: "#2A96B7" }],
+      subtags: [{ name: "Branding", color: "#2A96B7" }],
+      link: "https://be-my-hooman.tingyilin.com/",
+      openInNewTab: true,
+    },
+    {
       date: "March, 2024",
       image: "/hivebee/hb demo.png",
       title: "Hive Bee - We made donations enjoyable",
