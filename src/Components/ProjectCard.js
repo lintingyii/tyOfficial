@@ -143,10 +143,11 @@ const CardContainer = styled.a`
     }
 
     ${Tag} {
+      /* 只反轉底色，文字維持標籤原本的顏色 —— 壓深會讓相近的色票更難分辨。
+         代價是對比：白底上 Creative Campaign 只有 1.93:1、Frontend coding
+         2.46:1、Visual design 3.42:1，都低於一般文字 4.5:1 的門檻。 */
       background-color: #fff;
-      /* 底色翻白，文字要壓深才讀得到（原色最低只有 1.93:1） */
       color: var(--tag-color);
-      color: color-mix(in srgb, var(--tag-color) 63%, black);
     }
 
     ${SubTag} {
@@ -388,10 +389,11 @@ const LargeCardContainer = styled(CardContainer)`
     }
 
     ${Tag} {
+      /* 只反轉底色，文字維持標籤原本的顏色 —— 壓深會讓相近的色票更難分辨。
+         代價是對比：白底上 Creative Campaign 只有 1.93:1、Frontend coding
+         2.46:1、Visual design 3.42:1，都低於一般文字 4.5:1 的門檻。 */
       background-color: #fff;
-      /* 底色翻白，文字要壓深才讀得到（原色最低只有 1.93:1） */
       color: var(--tag-color);
-      color: color-mix(in srgb, var(--tag-color) 63%, black);
     }
 
     ${SubTag} {
