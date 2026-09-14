@@ -89,7 +89,7 @@ export const Work = () => {
       title: "VC Kungfu",
       /* 副標描述作品，不放名次 —— 名次在 about 的 Honors 裡，
          那一筆本來就連到這個案例頁，兩邊講同一句話沒有意義。 */
-      subtitle: "Mobile game concept",
+      subtitle: "Gamification",
       description:
         "The first-ever mobile game to play with your lung, not your thumb.",
       tags: [{ name: "Creative Campaign", color: "#86C5CE" }],
