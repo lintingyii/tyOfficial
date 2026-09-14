@@ -658,16 +658,12 @@ function MyComponent(props) {
             />
           ))}
         </CardsContainerWrapper>
-        <a
-          href="/work"
-          rel="noopener noreferrer"
-          style={{ textDecoration: "none" }}
-        >
+        <ViewMoreLink href="/work" rel="noopener noreferrer">
           <ViewMoreButton>
             View More Works
             <EyeIcon />
           </ViewMoreButton>
-        </a>
+        </ViewMoreLink>
       </Section>
     </Div>
   );
@@ -1996,6 +1992,19 @@ const CardsContainerWrapper = styled.div`
     /* For mobile screens */
     width: 90%;
     align-items: center;
+  }
+`;
+
+/* 按鈕的呼吸空間。原本上方只有 Section 的 gap（32px）、下方靠 footer 的
+   margin（72px）撐著，按鈕自己沒有任何間距，所以上緊下鬆、整顆看起來被夾住。
+   這裡把上下距離寫明：上方 32+72=104、下方 72+56=128。
+   下方留得比上方多一點 —— footer 的底色是一條硬邊，貼太近會像黏在上面。 */
+const ViewMoreLink = styled.a`
+  text-decoration: none;
+  margin: 72px 0 56px;
+
+  @media (max-width: 480px) {
+    margin: 48px 0 32px;
   }
 `;
 
