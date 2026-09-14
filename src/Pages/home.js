@@ -373,16 +373,11 @@ function MyComponent(props) {
               </ColoredRectangle>
               <UIUXProject>UI / UX Design</UIUXProject>
               <UIUXProject1>
-                As an UI/UX designer, I harmonize form and function to create
-                visually captivating interfaces that guide users through
-                purposeful journeys.
+                I design interfaces where form and function hold together,
+                grounded in research across very different industries.
                 <br />
-                With extensive cross-industry research, I tailor solutions to
-                diverse user needs.
-                <br />
-                Collaborating with cross-functional teams, I prioritize
-                user-centric design, informed by thorough research, seamlessly
-                integrating experiences into users' lives.
+                Working alongside engineers keeps the decisions honest about
+                what can actually ship.
               </UIUXProject1>
             </HoverableDiv>
 
@@ -464,7 +459,7 @@ function MyComponent(props) {
       <Div6>
         <FlipCard
           title="UI / UX Design"
-          content="As a UI/UX designer, I harmonize form and function to create visually captivating interfaces that guide users through purposeful journeys. With extensive cross-industry research, I tailor solutions to diverse user needs. Collaborating with cross-functional teams, I prioritize user-centric design, informed by thorough research, seamlessly integrating experiences into users' lives."
+          content="I design interfaces where form and function hold together, grounded in research across very different industries. Working alongside engineers keeps the decisions honest about what can actually ship."
           bgColor="#59656C"
         />
         <FlipCard
@@ -484,18 +479,18 @@ function MyComponent(props) {
       <Section>
         <CardsContainer>
           <SectionTitleSticky>
-            <div style={{ display: "flex" }}>
+            <div style={{ display: "flex", alignItems: "baseline" }}>
               Voice
               <span
                 style={{
-                  fontFamily: "serif",
+                  fontFamily: "'Kaisei Decol', serif",
                   fontStyle: "italic",
                 }}
               >
                 (s)
               </span>
             </div>
-            <div style={{ display: "flex", gap: "16px" }}>of Trust</div>
+            <div style={{ display: "flex", gap: "16px", alignItems: "baseline" }}>of Trust</div>
           </SectionTitleSticky>
           <TestimonialCard
             zIndex={1}
@@ -524,22 +519,22 @@ function MyComponent(props) {
       </Section>
       {/* <Section>
         <SectionTitle>
-          <div style={{ display: "flex" }}>
+          <div style={{ display: "flex", alignItems: "baseline" }}>
             Service
             <span
               style={{
-                fontFamily: "serif",
+                fontFamily: "'Kaisei Decol', serif",
                 fontStyle: "italic",
               }}
             >
               (s)
             </span>
           </div>
-          <div style={{ display: "flex", gap: "16px" }}>
+          <div style={{ display: "flex", gap: "16px", alignItems: "baseline" }}>
             at
             <span
               style={{
-                fontFamily: "serif",
+                fontFamily: "'Kaisei Decol', serif",
                 fontStyle: "italic",
               }}
             >
@@ -641,7 +636,7 @@ function MyComponent(props) {
           Feature
           <span
             style={{
-              fontFamily: "serif",
+              fontFamily: "'Kaisei Decol', serif",
               fontStyle: "italic",
             }}
           >
@@ -1169,7 +1164,8 @@ const Frame = styled.div`
 
 const TextWrapper = styled.div`
   color: #ffffff;
-  font-family: "Roboto", Helvetica;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Helvetica Neue", sans-serif;
   font-size: 32px;
   font-weight: 700;
   letter-spacing: 0;
@@ -1808,7 +1804,7 @@ const DivFlipCard = styled.div`
 
 const Card = styled.div`
   position: relative;
-  height: 200px;
+  height: 240px;
   border-radius: 16px;
   overflow: hidden;
   cursor: pointer;
@@ -1819,16 +1815,18 @@ const Card = styled.div`
   }
 `;
 
-/* 背面：壓深一階，讓方塊掉下去之後看得出差別 */
+/* 背面用跟桌機那三張 hover 後同一個深色（卡片色混 20% 黑），
+   兩個斷點的「翻過去之後」才是同一個樣子。 */
 const Back = styled.div`
   position: absolute;
   inset: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: ${({ $bg }) => `color-mix(in srgb, ${$bg} 82%, #2a3133)`};
+  background-color: ${({ $bg }) => `color-mix(in srgb, ${$bg} 20%, #000)`};
   color: #fff;
   font-size: 24px;
+  font-weight: 400; /* Div6 帶著 font-weight: 700，內容會繼承到，要壓回來 */
 `;
 
 const Cells = styled.div`
@@ -1840,9 +1838,14 @@ const Cells = styled.div`
   pointer-events: none;
 `;
 
+/* 不做 accent 閃色：這裡的格子在「未展開」時是常駐可見的，
+   比較亮的那些會變成停在卡片上的亮塊，看起來像瑕疵而不是效果。 */
 const Cell = styled.span`
-  background-color: ${({ $accent, $bg }) =>
-    $accent ? `color-mix(in srgb, ${$bg} 55%, #ffffff)` : $bg};
+  background-color: ${({ $bg }) => $bg};
+  /* 相鄰格子的邊界會落在小數像素上，抗鋸齒之後會透出底下較深的背面、
+     整片看起來像畫了格線。往外描 1px 同色把接縫蓋掉（超出的部分由
+     Card 的 overflow: hidden 裁掉）。 */
+  box-shadow: 0 0 0 1px ${({ $bg }) => $bg};
   opacity: ${({ $open }) => ($open ? 0 : 1)};
   transition: opacity 0.16s linear;
 
@@ -1868,48 +1871,35 @@ const FrontFace = styled.div`
     ${({ $open }) => ($open ? "0s" : "0.18s")};
 `;
 
-const Hint = styled.div`
-  position: absolute;
-  bottom: 10px;
-  font-size: 14px;
-  color: #fff;
-  font-weight: 400;
-  opacity: 0.8;
-
-  /* 有 hover 的裝置講 hover，觸控裝置講 tap */
-  &::after {
-    content: "Tap to reveal ⍝";
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    &::after {
-      content: "Hover to reveal ⍝";
-    }
-  }
-`;
 
 let cardSeed = 0;
 
 function FlipCard({ title, content, bgColor }) {
   const [open, setOpen] = useState(false);
+  const cardRef = useRef(null);
   const pattern = useMemo(() => cellPattern(20260915 + (cardSeed++ % 7) * 977), []);
 
-  /* 滑鼠用 hover、觸控用點擊。判斷放在事件當下，不要在 render 時算一次就寫死 ——
-     那樣裝置能力一旦判斷錯（或使用者中途換輸入方式），點擊就永遠沒反應。
-     pointerType 直接來自事件本身，是當下真正在操作的那個裝置。 */
-  const hoverCapable = () =>
-    typeof window !== "undefined" &&
-    window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+  /* 捲到視窗中央就展開，捲過去就收回 —— 不用點也不用 hover。
+
+     rootMargin 上下各切掉 45%，等於把「可視區域」縮成畫面正中間那一條
+     10% 的帶狀區。卡片碰到那條帶子才算 isIntersecting。
+     這個做法在觸控裝置上才成立：手機沒有 hover，而點擊會多一個
+     使用者不一定知道要做的動作。 */
+  useEffect(() => {
+    const el = cardRef.current;
+    if (!el || typeof IntersectionObserver === "undefined") return undefined;
+
+    const io = new IntersectionObserver(
+      ([entry]) => setOpen(entry.isIntersecting),
+      { rootMargin: "-45% 0px -45% 0px", threshold: 0 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
 
   return (
     <DivFlipCard>
-      <Card
-        onPointerEnter={(e) => e.pointerType === "mouse" && setOpen(true)}
-        onPointerLeave={(e) => e.pointerType === "mouse" && setOpen(false)}
-        onClick={() => {
-          if (!hoverCapable()) setOpen((v) => !v);
-        }}
-      >
+      <Card ref={cardRef}>
         <Back $bg={bgColor}>
           <ContentMob>{content}</ContentMob>
         </Back>
@@ -1919,18 +1909,13 @@ function FlipCard({ title, content, bgColor }) {
             <Cell
               key={i}
               $bg={bgColor}
-              $accent={c.accent}
               $open={open}
-              /* 收回來時延遲要反過來，才會是「從剛剛結束的那一端長回去」 */
               style={{ transitionDelay: `${(open ? c.t : 1 - c.t) * SPREAD}ms` }}
             />
           ))}
         </Cells>
 
-        <FrontFace $open={open}>
-          {title}
-          <Hint />
-        </FrontFace>
+        <FrontFace $open={open}>{title}</FrontFace>
       </Card>
     </DivFlipCard>
   );
@@ -2104,7 +2089,7 @@ const ServiceContent = styled.div`
 const ServiceDes = styled.div`
   margin-top: 0.6rem;
   // color: #fff;
-  font-family: serif;
+  font-family: 'Kaisei Decol', serif;
   font-size: 1.2rem;
   text-align: center;
   display: flex;

@@ -23,8 +23,12 @@ const BOOST_PER_PX = 3; // 一次捲動事件每移動 1px 增加的速度
 const BOOST_MAX = 400; // 加成上限：基礎速度 80，所以最快約 6 倍
 const BOOST_HALF_LIFE = 180; // 毫秒：加成衰減到一半所需的時間
 /* 字級只在這裡定義一次：Unit 用它排字，Block 也要用同一個值當 em 基準，
-   SecondRow 的負 margin 才會跟著字級縮放。兩邊寫死同一串很容易改到只剩一邊。 */
-const FLUID_SIZE = "clamp(36px, 4.5vw, 84px)";
+   SecondRow 的負 margin 才會跟著字級縮放。兩邊寫死同一串很容易改到只剩一邊。
+
+   換成 Kaisei Decol 之後同一個 px 值會大 1.195 倍（實測同一串字 686px vs
+   Times 的 574px），所以字級要除以那個倍率，視覺大小才回到原本調好的樣子：
+   4.5vw ÷ 1.195 ≈ 3.75vw。 */
+const FLUID_SIZE = "clamp(27px, 3.4vw, 64px)";
 
 const BASE_SPIN = 40; // 火花的基礎轉速（度/秒）＝ 原本 CSS 動畫的 9 秒一圈
 
@@ -59,19 +63,20 @@ const subscribeScroll = () => {
   };
 };
 
-/* 四角火花，形狀取自 banner-deco 上的那組裝飾。 */
+/* 跑馬燈的星星。用 <img> 而不是內嵌 SVG：這個圖形的路徑資料有 10.8 KB，
+   而它在兩行跑馬燈裡會出現十幾份、還每一幀都在轉 —— 內嵌等於讓瀏覽器
+   每幀重畫十幾條複雜路徑。當成圖片只會光柵化一次，旋轉交給合成器。
+   顏色（#D8984E）已經畫在檔案裡。 */
 const Spark = ({ className }) => (
-  <svg className={className} viewBox="0 0 100 100" aria-hidden="true">
-    <path
-      fill="currentColor"
-      d="M50 0c3 26.5 23.5 47 50 50-26.5 3-47 23.5-50 50-3-26.5-23.5-47-50-50C26.5 47 47 26.5 50 0z"
-    />
-  </svg>
+  <img className={className} src="/marquee-star.svg" alt="" aria-hidden="true" />
 );
 
 /* 句子裡被挑出來的那個字，換成 Luxurious Script，維持小寫。
 
    字距必須是 0：小寫是連筆的，一拉開字距筆畫就斷了。
+
+   ⚠️ 這個倍率跟 FLUID_SIZE 綁在一起：縮小前面那串字時，這裡要反向補回來，
+   才能讓重點字的絕對尺寸不變（放大這個值時，下面的 line-height 也要跟著加，否則行框裝不下會被裁掉）。
 
    字級的倍率是「看起來一樣大」而不是「數字一樣大」：書寫體的墨色高度遠小於
    字級，1em 直接排會比旁邊的襯線矮一截。1.55em 剛好讓它的上緣對齊襯線的
@@ -80,7 +85,7 @@ const Spark = ({ className }) => (
    再加一個顏色是第三個訊號，重複標記反而像沒決定好。 */
 const Accent = styled.span`
   font-family: "Luxurious Script", cursive;
-  font-size: 1.55em;
+  font-size: 1.9em;
   text-transform: none;
   letter-spacing: 0;
   line-height: 1;
@@ -95,13 +100,16 @@ const Unit = styled.span`
 
   /* 與 hero 引言同一支襯線，維持原本的大小寫 —— 句子照常讀，
      被挑出來的那個字靠字體與字級做區分，不靠全大寫。 */
-  font-family: serif;
+  font-family: 'Kaisei Decol', serif;
   font-size: ${FLUID_SIZE};
 
   /* 行高由 Accent 決定：行框必須裝得下比較高的那個字，
      否則 Viewport 的 overflow: hidden 會把筆畫切掉。 */
-  line-height: 1.95;
-  letter-spacing: 0.005em;
+  /* 行框要裝得下比較高的重點字（1.9em 的書寫體），否則會被 overflow 切掉 */
+  line-height: 2.25;
+  /* 字距放開一點，讓這行讀起來鬆一些。重點字自己是 letter-spacing: 0，
+     不受影響 —— 書寫體一拉開字距連筆就斷了。 */
+  letter-spacing: 0.03em;
 
   /* 句子用灰藍而不是內文墨色。跑馬燈是氛圍，下面的「Voice(s) of Trust」
      才是內容 —— 兩者同色的話，字級兩倍又疊兩行的跑馬燈會壓過它要引導你
@@ -109,12 +117,12 @@ const Unit = styled.span`
      對比 3.54:1 —— 大字的門檻是 3:1，再淡下去就不合格了，這裡已經是底線。 */
   color: #7a8184;
 
-  svg {
+  img {
+    /* 這版是 23 × 23 的正方形，寬高給同值 */
     width: 0.52em;
     height: 0.52em;
-    margin: 0 0.3em;
+    margin: 0 0.5em;
     vertical-align: -0.04em;
-    color: #d8984e;
     /* 轉動角度由 rAF 寫進 --spark-rot，跟著跑馬燈一起加速、一起翻面。
        原本是固定 9s 一圈的 CSS 動畫，捲動時整行在衝、只有它慢慢轉，
        看起來是兩套不相干的動作。 */
@@ -138,7 +146,12 @@ const Track = styled.div`
    第二行往上拉，讓「墨色之間」的距離回到正常的行距 —— 兩行各自裁切自己的
    內容，重疊不會互相切到。 */
 const SecondRow = styled.div`
-  margin-top: -0.62em;
+  /* -0.62em 是給 Times 調的。Kaisei Decol 是 CJK 字型，字身框的
+     ascent／descent 比拉丁字型高很多 —— 同樣的 em 比例，字自己佔掉的
+     垂直空間變大，兩行就擠在一起。這個值要跟著 line-height 一起看：
+     基線距離 = line-height − |margin|。base 縮小 9% 之後要補回來，
+     才能讓兩行的「絕對」距離維持原本調好的樣子：2.25 − 1.84 = 0.41。 */
+  margin-top: -0.41em;
 `;
 
 /* 色塊拿掉之後，上下留白就是它跟前後區塊的分隔 —— 這段 padding 不是裝飾，

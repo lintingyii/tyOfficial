@@ -380,7 +380,7 @@ const Filter = styled.div`
 `;
 
 const Content = styled.div`
-  font-family: serif;
+  font-family: 'Kaisei Decol', serif;
   display: flex;
   align-items: center;
   gap: 1rem;

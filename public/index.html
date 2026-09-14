@@ -12,9 +12,18 @@
       content="A multidisciplinary designer based in Taipei, Taiwan."
     />
     <link rel="apple-touch-icon" sizes="180x180" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    <!-- 字體分三層，各有明確職責：
+         1. 閱讀層 —— system-ui（不載入）。介面、內文、卡片。跟著使用者的系統走，
+            「像原生」在這裡是優點，個性交給下面兩層表達。
+         2. 調性層 —— Kaisei Decol。hero 引言、跑馬燈、推薦語這類展示性文字。
+            ⚠️ 只用在英文。它是日文字型，漢字有但會是日文字形與標點位置
+            （「，。」靠左下而非置中），中文仍走 system-ui 的 CJK 後備。
+            也因為只用到拉丁子集，瀏覽器不會去抓那幾百 KB 的漢字。
+         3. 重音層 —— Luxurious Script。一個情境最多一個詞，
+            它的作用來自稀有，散開就只是另一種字體。 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Luxurious+Script&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&family=Kaisei+Decol:wght@400;700&family=Luxurious+Script&display=swap" rel="stylesheet">
 
     <!--
       manifest.json provides metadata used when your web app is installed on a

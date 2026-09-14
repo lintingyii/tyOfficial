@@ -51,7 +51,7 @@ const ContentContainer = styled.div`
 const Content = styled.div`
   margin-top: 0.6rem;
   // color: #fff;
-  font-family: serif;
+  font-family: 'Kaisei Decol', serif;
   font-size: 1.2rem;
   text-align: center;
   display: flex;

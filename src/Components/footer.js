@@ -165,8 +165,8 @@ const Ending = styled.div`
 `;
 
 const Text = styled.div`
-  font-family: serif;
-  font-size: 1.2rem;
+  font-family: 'Kaisei Decol', serif;
+  font-size: 16px;
   display: flex;
   flex-direction: column;
   color: #2A3133;
@@ -235,17 +235,19 @@ const Hr = () => (
   </div>
 );
 
-const BgIconContainer = styled.svg`
+/* footer 右下的裝飾圖。放成獨立檔案而不是內嵌 SVG：這份有 72 條路徑、
+   50 KB（gzip 後 21 KB），內嵌等於每次載入都要連著 JS 一起解析，
+   而它只是一張裝飾。顏色 #DBDBDB 已經畫在檔案裡，不需要用 fill 控制。 */
+const BgIconContainer = styled.img`
   position: absolute;
   right: 0px;
   bottom: 0px;
   z-index: 0;
-  aspect-ratio: 1 / 1;
-  /* 這個浮水印圖示疊在 Footerwraper 的 #E2E2E2 底色上，兩者是圖與底的關係，
-     不能併成同一個灰（併掉就等於整個圖示消失）。 */
-  fill: #dbdbdb;
-
   width: 30%;
+  height: auto;
+  display: block;
+  pointer-events: none;
+  user-select: none;
 
   @media (max-width: 480px) {
     width: 100%;
@@ -253,9 +255,14 @@ const BgIconContainer = styled.svg`
 `;
 
 const BgIcon = () => (
-  <BgIconContainer xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
-    <path d="M120,80A40,40,0,1,1,80,40,40,40,0,0,1,120,80Zm56,40a40,40,0,1,0-40-40A40,40,0,0,0,176,120ZM80,136a40,40,0,1,0,40,40A40,40,0,0,0,80,136Zm128,32H184V144a8,8,0,0,0-16,0v24H144a8,8,0,0,0,0,16h24v24a8,8,0,0,0,16,0V184h24a8,8,0,0,0,0-16Z" />
-  </BgIconContainer>
+  <BgIconContainer
+    src="/footer-deco.svg"
+    alt=""
+    aria-hidden="true"
+    loading="lazy"
+    width="831"
+    height="871"
+  />
 );
 
 const MailIcon = () => (
