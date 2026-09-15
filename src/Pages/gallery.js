@@ -7,6 +7,9 @@ import styled from "styled-components";
    ⚠️ 要新增作品就只改下面這個陣列：檔案放進 public/gallery/，src 寫
    "/gallery/檔名"。順序就是畫面上的順序（新的放前面）。
 
+   bg 是選填：作品本身是透明背景的線稿時給它一個底色，否則淺灰的圖畫在
+   淺灰的佔位底上會看不見。
+
    ratio（寬 ÷ 高）是必填，不是可有可無的最佳化 —— 版面就是靠它排的：
    同一列的每張卡片等高，寬度按各自的 ratio 分配。填錯會讓那一列的高度跟
    實際內容對不上。1 是正方形。
@@ -17,6 +20,13 @@ const ITEMS = [
     title: "Tulip",
     ratio: 1, // 原始尺寸 2160 × 2160
     video: true,
+  },
+  {
+    src: "/gallery/skill.png",
+    title: "Skill sprue",
+    ratio: 1296 / 950,
+    /* 線稿是 #DBDBDB 的透明去背，配淺灰佔位底幾乎看不見 —— 給白底 */
+    bg: "#fff",
   },
 ];
 
@@ -76,7 +86,7 @@ const Gallery = () => {
             aria-label={`Open ${item.title}`}
             /* --r 同時餵給 flex-grow、flex-basis 與 aspect-ratio，
                一個值決定這張卡片在列裡佔多寬 */
-            style={{ "--r": item.ratio }}
+            style={{ "--r": item.ratio, "--bg": item.bg || "#e6e6e6" }}
           >
             <Frame>
               {item.video ? (
@@ -244,7 +254,7 @@ const Frame = styled.span`
   aspect-ratio: var(--r);
   overflow: hidden;
   border-radius: 8px;
-  background-color: #e6e6e6; /* 媒體載入前的底色，免得整片空白 */
+  background-color: var(--bg); /* 媒體載入前的底色，免得整片空白 */
 
   img,
   video {
