@@ -53,12 +53,10 @@ const Gallery = () => {
             >
               Selected
             </span>
-            <div>
-              Graphic
-              <span style={{ fontFamily: "'Kaisei Decol', serif", fontStyle: "italic" }}>
-                (s)
-              </span>
-            </div>
+            {/* 標題跟導覽列同字：這一頁跟 Work 的差別要靠下面那句 lede 講清楚，
+                標題再換一個詞只會讓訪客多猜一次。站上的 (s) 慣例這裡不適用 ——
+                Gallery 的複數是 Galleries。 */}
+            <div>Gallery</div>
             </Heading>
             <Lede>
               Posters, key visuals and type studies — the visual work that lives
