@@ -1,6 +1,5 @@
 import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
-import PixelScrollTransition from "../Components/PixelScrollTransition";
 
 /* 視覺作品的陳列頁。跟 Work 的差別是這裡不談流程、不談結果 —— 一張圖就是
    一件作品，所以版面上只有圖，說明退到 hover 與燈箱裡。
@@ -39,52 +38,18 @@ const Gallery = () => {
 
   return (
     <Div>
-      <Header>
-        <HeaderInner>
-          <HeadingBlock>
-            <Heading>
-            <span
-              style={{
-                fontFamily: "'Kaisei Decol', serif",
-                fontStyle: "italic",
-                fontSize: "24px",
-                lineHeight: "1",
-              }}
-            >
-              Selected
-            </span>
-            {/* 標題跟導覽列同字：這一頁跟 Work 的差別要靠下面那句 lede 講清楚，
-                標題再換一個詞只會讓訪客多猜一次。站上的 (s) 慣例這裡不適用 ——
-                Gallery 的複數是 Galleries。 */}
-            <div>Gallery</div>
-            </Heading>
-            <Lede>
-              Posters, key visuals and type studies — the visual work that lives
-              outside a case study.
-            </Lede>
-          </HeadingBlock>
-        </HeaderInner>
-      </Header>
-
-      <TransitionGap $dark />
-
-      {/* 跟 Work 頁同一組轉場參數，深色 hero 擦成淺色內容 */}
-      <PixelScrollTransition
-        mode="inline"
-        height="70vh"
-        colorA="#2A3133"
-        colorB="#f2f2f2"
-        direction="bottom-top"
-        pattern="random"
-        patternIntensity={0.45}
-        easing="linear"
-        pixelSize={28}
-        endAt={1}
-        accentShare={0.14}
-        accentColors={["#2A96B7", "#D8984E", "#59656C"]}
-      />
-
-      <TransitionGap />
+      {/* 開場刻意不跟 Work 一樣。深色 hero ＋ 像素轉場是首頁與 Work 的規格，
+          那是「這是一個大段落」的訊號；Gallery 是看圖的地方，同一套開場會讓
+          兩者在階層上變成平輩，而且要捲過將近兩個畫面才看得到第一張圖。
+          這裡跟 About 同一個層級：淺底直接進內容，標題靠左對齊網格的左邊界 ——
+          是一份索引的樣子，不是一張海報。 */}
+      <Masthead>
+        <Title>Gallery</Title>
+        <Lede>
+          Posters, key visuals and type studies — the visual work that lives
+          outside a case study.
+        </Lede>
+      </Masthead>
 
       <Grid>
         {ITEMS.map((item, i) => (
@@ -133,87 +98,51 @@ const Div = styled.div`
   width: 100%;
 `;
 
-const Header = styled.div`
-  display: flex;
-  align-items: center;
+/* 跟 About 同一組上留白 —— 這兩頁是同一個層級，開場的節奏要一致。
+   480px 以下不留：導覽列在手機上是浮在畫面底部的，頂端沒有東西要閃。 */
+const Masthead = styled.header`
   width: 100%;
-  min-height: 85vh;
-  background-color: #2a3133;
-  position: relative;
+  max-width: 1280px;
+  box-sizing: border-box;
+  /* vh 要有下限：導覽列高 58px，捲動收合後還會再往下讓出 16px，
+     螢幕矮的時候純 vh 會讓標題鑽到膠囊底下。 */
+  padding: max(13vh, 122px) 40px 0;
 
-  @media (max-width: 820px) {
-    min-height: 70vh;
+  @media (max-width: 1024px) {
+    padding-top: max(8vh, 114px);
+  }
+  @media (max-width: 912px) {
+    padding-top: max(6vh, 106px);
+  }
+  @media (max-width: 620px) {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  /* 手機的導覽列浮在畫面底部，頂端不必讓位 */
+  @media (max-width: 480px) {
+    padding-top: 32px;
   }
 `;
 
-/* 跟 Work 的 hero 一樣：上下留白刻意不對稱，把整組內容往下推，
-   免得被頂端的固定導覽列蓋住之後看起來偏高。 */
-const HeaderInner = styled.div`
-  width: 100%;
-  padding: 32vh 0 20vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 3;
-
-  @media (max-width: 648px) {
-    align-items: flex-start;
-    padding: 26vh 24px 16vh;
-  }
-`;
-
-/* 標題與說明要對同一條左邊界 —— 兩個各自置中的話，說明會因為比較短
-   而往右縮，看起來像沒對齊。整組置中，組內靠左。 */
-const HeadingBlock = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-`;
-
-const Heading = styled.div`
-  color: #f2f2f2;
+/* Work 的標題是 9rem 置中，像一張海報。這裡刻意小一截又靠左，
+   讓它讀起來是網格的抬頭而不是另一個開場。 */
+const Title = styled.h1`
+  margin: 0;
+  color: #2a3133;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: 9rem;
-  line-height: 1;
+  font-size: clamp(40px, 4.4vw, 68px);
   font-weight: 700;
-  display: flex;
-  flex-direction: column;
-
-  @media (max-width: 1440px) {
-    font-size: 8rem;
-  }
-  @media (max-width: 772px) {
-    font-size: 7rem;
-  }
-  @media (max-width: 648px) {
-    font-size: 5rem;
-  }
-  @media (max-width: 480px) {
-    font-size: 64px;
-  }
+  line-height: 1.05;
+  letter-spacing: -0.01em;
 `;
 
 const Lede = styled.p`
-  color: #a9b1b4;
+  color: #59656c;
   font-size: 16px;
   line-height: 1.7;
   max-width: 34em;
-  margin: 24px 0 0;
-
-  @media (max-width: 648px) {
-    margin-top: 16px;
-  }
-`;
-
-const TransitionGap = styled.div`
-  width: 100%;
-  height: 12vh;
-  background-color: ${({ $dark }) => ($dark ? "#2a3133" : "#f2f2f2")};
-
-  @media (max-width: 820px) {
-    height: 6vh;
-  }
+  margin: 16px 0 0;
 `;
 
 /* 直排瀑布流：作品的比例不一致，固定的方格會把直式的圖裁掉或留一堆空白。
@@ -223,7 +152,7 @@ const Grid = styled.div`
   max-width: 1280px;
   /* 沒有全站的 border-box reset，左右 padding 會加在 max-width 之外 */
   box-sizing: border-box;
-  padding: 0 40px 120px;
+  padding: 56px 40px 120px;
   columns: 3;
   column-gap: 24px;
 
@@ -232,7 +161,7 @@ const Grid = styled.div`
   }
   @media (max-width: 620px) {
     columns: 1;
-    padding: 0 24px 80px;
+    padding: 40px 24px 80px;
   }
 `;
 
