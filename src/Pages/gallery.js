@@ -48,10 +48,6 @@ const Gallery = () => {
           <Star aria-hidden="true" />
           Gallery
         </Title>
-        <Lede>
-          Posters, key visuals and type studies — the visual work that lives
-          outside a case study.
-        </Lede>
       </Masthead>
 
       <Grid>
@@ -135,8 +131,8 @@ const Masthead = styled.header`
    比例 657:616 幾乎是正方形，所以寬高給同值不會變形。 */
 const Star = styled.span`
   flex: none;
-  width: 1.15em;
-  height: 1.08em;
+  width: 1em;
+  height: 0.94em;
   background-color: #2a96b7;
   -webkit-mask: url("/title-stars.svg") no-repeat center / contain;
   mask: url("/title-stars.svg") no-repeat center / contain;
@@ -152,18 +148,10 @@ const Title = styled.h1`
   color: #2a3133;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-  font-size: clamp(40px, 4.4vw, 68px);
+  font-size: clamp(36px, 3.6vw, 56px);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -0.01em;
-`;
-
-const Lede = styled.p`
-  color: #59656c;
-  font-size: 16px;
-  line-height: 1.7;
-  max-width: 34em;
-  margin: 16px 0 0;
 `;
 
 /* 直排瀑布流：作品的比例不一致，固定的方格會把直式的圖裁掉或留一堆空白。
