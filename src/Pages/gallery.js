@@ -101,12 +101,13 @@ const Div = styled.div`
 /* 跟 About 同一組上留白 —— 這兩頁是同一個層級，開場的節奏要一致。
    480px 以下不留：導覽列在手機上是浮在畫面底部的，頂端沒有東西要閃。 */
 const Masthead = styled.header`
-  width: 100%;
-  max-width: 1280px;
+  /* 左右邊界跟 Work 同一條規則：內容欄固定佔視窗 80%（800px 以下 90%），
+     不設 max-width —— 留白跟著視窗縮放，而不是在寬螢幕上定住。 */
+  width: 80%;
   box-sizing: border-box;
   /* vh 要有下限：導覽列高 58px，捲動收合後還會再往下讓出 16px，
      螢幕矮的時候純 vh 會讓標題鑽到膠囊底下。 */
-  padding: max(13vh, 122px) 40px 0;
+  padding: max(13vh, 122px) 0 0;
 
   @media (max-width: 1024px) {
     padding-top: max(8vh, 114px);
@@ -114,9 +115,8 @@ const Masthead = styled.header`
   @media (max-width: 912px) {
     padding-top: max(6vh, 106px);
   }
-  @media (max-width: 620px) {
-    padding-left: 24px;
-    padding-right: 24px;
+  @media (max-width: 800px) {
+    width: 90%;
   }
   /* 手機的導覽列浮在畫面底部，頂端不必讓位 */
   @media (max-width: 480px) {
@@ -148,20 +148,21 @@ const Lede = styled.p`
 /* 直排瀑布流：作品的比例不一致，固定的方格會把直式的圖裁掉或留一堆空白。
    columns 讓每一欄各自堆疊，圖片維持原比例。 */
 const Grid = styled.div`
-  width: 100%;
-  max-width: 1280px;
-  /* 沒有全站的 border-box reset，左右 padding 會加在 max-width 之外 */
+  width: 80%; /* 與 Masthead、Work 的內容欄同寬，三者左右邊界對齊 */
   box-sizing: border-box;
-  padding: 56px 40px 120px;
+  padding: 56px 0 120px;
   columns: 3;
   column-gap: 24px;
 
   @media (max-width: 1024px) {
     columns: 2;
   }
+  @media (max-width: 800px) {
+    width: 90%;
+  }
   @media (max-width: 620px) {
     columns: 1;
-    padding: 40px 24px 80px;
+    padding: 40px 0 80px;
   }
 `;
 
