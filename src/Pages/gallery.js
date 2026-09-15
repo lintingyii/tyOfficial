@@ -2,13 +2,13 @@ import React, { useCallback, useEffect, useState } from "react";
 import styled from "styled-components";
 
 /* 視覺作品的陳列頁。跟 Work 的差別是這裡不談流程、不談結果 —— 一張圖就是
-   一件作品，所以版面上只有圖，說明退到 hover 與燈箱裡。
+   一件作品，所以版面上只有圖：沒有標題、沒有 hover 狀態，點下去就是看大圖。
 
    ⚠️ 要新增作品就只改下面這個陣列：檔案放進 public/gallery/，src 寫
    "/gallery/檔名"。順序就是畫面上的順序（新的放前面）。
 
-   bg 是選填：作品本身是透明背景的線稿時給它一個底色，否則淺灰的圖畫在
-   淺灰的佔位底上會看不見。
+   title 不會顯示在畫面上，它是給 alt 與 aria-label 用的 —— 讀螢幕的人要靠
+   它才知道這是什麼，所以還是要填。
 
    ratio（寬 ÷ 高）是必填，不是可有可無的最佳化 —— 版面就是靠它排的：
    同一列的每張卡片等高，寬度按各自的 ratio 分配。填錯會讓那一列的高度跟
@@ -20,13 +20,6 @@ const ITEMS = [
     title: "Tulip",
     ratio: 1, // 原始尺寸 2160 × 2160
     video: true,
-  },
-  {
-    src: "/gallery/skill.png",
-    title: "Skill sprue",
-    ratio: 1296 / 950,
-    /* 線稿是 #DBDBDB 的透明去背，配淺灰佔位底幾乎看不見 —— 給白底 */
-    bg: "#fff",
   },
 ];
 
@@ -86,7 +79,7 @@ const Gallery = () => {
             aria-label={`Open ${item.title}`}
             /* --r 同時餵給 flex-grow、flex-basis 與 aspect-ratio，
                一個值決定這張卡片在列裡佔多寬 */
-            style={{ "--r": item.ratio, "--bg": item.bg || "#e6e6e6" }}
+            style={{ "--r": item.ratio }}
           >
             <Frame>
               {item.video ? (
@@ -103,10 +96,6 @@ const Gallery = () => {
                 <img src={item.src} alt={item.title} loading="lazy" />
               )}
             </Frame>
-            <Caption>
-              <strong>{item.title}</strong>
-              {item.year ? <span>{item.year}</span> : null}
-            </Caption>
           </Tile>
         ))}
       </Grid>
@@ -131,10 +120,6 @@ const Gallery = () => {
               onClick={(e) => e.stopPropagation()}
             />
           )}
-          <LightboxCaption>
-            {ITEMS[lightbox].title}
-            {ITEMS[lightbox].year ? ` — ${ITEMS[lightbox].year}` : ""}
-          </LightboxCaption>
           <Close type="button" onClick={close} aria-label="Close">
             ×
           </Close>
@@ -254,7 +239,7 @@ const Frame = styled.span`
   aspect-ratio: var(--r);
   overflow: hidden;
   border-radius: 8px;
-  background-color: var(--bg); /* 媒體載入前的底色，免得整片空白 */
+  background-color: #e6e6e6; /* 媒體載入前的底色，免得整片空白 */
 
   img,
   video {
@@ -262,30 +247,6 @@ const Frame = styled.span`
     height: 100%;
     object-fit: cover;
     display: block;
-    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-`;
-
-const Caption = styled.span`
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  margin-top: 10px;
-  font-size: 14px;
-  color: #59656c;
-  opacity: 0;
-  transform: translateY(-4px);
-  transition: opacity 0.25s ease, transform 0.25s ease;
-
-  strong {
-    font-weight: 600;
-    color: #2a3133;
-  }
-
-  /* 沒有 hover 的裝置看不到滑過的狀態，說明就直接留著 */
-  @media (hover: none), (pointer: coarse) {
-    opacity: 1;
-    transform: none;
   }
 `;
 
@@ -301,28 +262,11 @@ const Tile = styled.button`
   text-align: left;
   cursor: pointer;
 
-  @media (hover: hover) and (pointer: fine) {
-    &:hover ${Frame} img,
-    &:hover ${Frame} video {
-      transform: scale(1.03);
-    }
-    &:hover ${Caption} {
-      opacity: 1;
-      transform: none;
-    }
-  }
-
+  /* 刻意沒有 hover 狀態：這一頁只有圖，任何滑過的變化都是在圖上面再加一層
+     訊息。鍵盤焦點還是要看得見 —— 那是可及性，不是裝飾。 */
   &:focus-visible {
     outline: 2px solid #2a96b7;
     outline-offset: 4px;
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    ${Frame} img,
-    ${Frame} video,
-    ${Caption} {
-      transition: none;
-    }
   }
 `;
 
@@ -346,11 +290,6 @@ const LightboxMedia = styled.img`
   border-radius: 4px;
 `;
 
-const LightboxCaption = styled.p`
-  margin: 0;
-  color: #d9dedf;
-  font-size: 14px;
-`;
 
 const Close = styled.button`
   position: absolute;
