@@ -10,6 +10,7 @@ import {
 import About from "./Pages/about";
 import MyComponent from "./Pages/home";
 import Work from "./Pages/work";
+import Gallery from "./Pages/gallery";
 import YoungLions from "./Pages/youngLions";
 import MegaBankRedesign from "./Pages/MegaBankRedesign";
 import SportsWin from "./Pages/sportsWin";
@@ -235,6 +236,7 @@ function App() {
           <Route path="/resume" element={<Navigate to="/about" replace />} />
           <Route path="/about" element={<About />} />
           <Route path="/work" element={<Work />} />
+          <Route path="/gallery" element={<Gallery />} />
           <Route path="/work/youngLions" element={<YoungLions />} />
           <Route
             path="/work/MegaBank_Redesign"
@@ -338,14 +340,16 @@ function NavigationBar() {
           >
             Work
           </NavItem>
+          {/* 這一格本來是 Contact（mailto:）。信箱在 footer 每頁都有，
+              導覽列那一格留給真正的目的地。 */}
           <NavItem
-            as="a"
-            href="mailto:910620morgan@gmail.com"
+            to="/gallery"
+            isActive={location.pathname === "/gallery"}
             onMouseEnter={(e) => moveGlideTo(e.currentTarget)}
             onFocus={(e) => focusGlideTo(e.currentTarget)}
             onBlur={hideGlide}
           >
-            Contact
+            Gallery
           </NavItem>
         </Wrapper>
       </Container>
