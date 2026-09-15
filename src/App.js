@@ -259,7 +259,11 @@ function App() {
 function NavigationBar() {
   const location = useLocation();
 
-  const isWorkActive = location.pathname.startsWith("/work");
+  /* 尾斜線要先削掉再比對。同一個頁面的 pathname 不一定長得一樣 ——
+     點導覽列進來是 "/gallery"，直接輸入網址或被伺服器導過來是 "/gallery/" ——
+     嚴格比對 === 會在後者漏掉，active 狀態就不會亮。 */
+  const path = location.pathname.replace(/\/+$/, "") || "/home";
+  const isWorkActive = path.startsWith("/work");
 
   const [condensed, setCondensed] = useState(false);
 
@@ -312,9 +316,9 @@ function NavigationBar() {
   return (
     <div>
       <Container $condensed={condensed}>
-        <Logo isActive={location.pathname === "/home"}>
-          <SpecialNavItem to="/home" isActive={location.pathname === "/home"}>
-            {location.pathname === "/home" ? "Hello 👋🏻" : "Ting-yi"}
+        <Logo isActive={path === "/home"}>
+          <SpecialNavItem to="/home" isActive={path === "/home"}>
+            {path === "/home" ? "Hello 👋🏻" : "Ting-yi"}
           </SpecialNavItem>
         </Logo>
         <Wrapper onMouseLeave={hideGlide}>
@@ -324,7 +328,7 @@ function NavigationBar() {
           />
           <NavItem
             to="/about"
-            isActive={location.pathname === "/about"}
+            isActive={path === "/about"}
             onMouseEnter={(e) => moveGlideTo(e.currentTarget)}
             onFocus={(e) => focusGlideTo(e.currentTarget)}
             onBlur={hideGlide}
@@ -344,7 +348,7 @@ function NavigationBar() {
               導覽列那一格留給真正的目的地。 */}
           <NavItem
             to="/gallery"
-            isActive={location.pathname === "/gallery"}
+            isActive={path === "/gallery"}
             onMouseEnter={(e) => moveGlideTo(e.currentTarget)}
             onFocus={(e) => focusGlideTo(e.currentTarget)}
             onBlur={hideGlide}

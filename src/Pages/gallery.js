@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 
 /* 視覺作品的陳列頁。跟 Work 的差別是這裡不談流程、不談結果 —— 一張圖就是
@@ -29,32 +29,8 @@ const prefersReduced = () =>
   window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const Gallery = () => {
-  const [lightbox, setLightbox] = useState(-1);
   /* 在 render 當下讀，不是在模組載入時 —— 使用者中途改系統設定也會跟上 */
   const reduce = prefersReduced();
-
-  const close = useCallback(() => setLightbox(-1), []);
-  const step = useCallback(
-    (d) => setLightbox((i) => (i < 0 ? i : (i + d + ITEMS.length) % ITEMS.length)),
-    [],
-  );
-
-  /* 燈箱開著的時候鎖住背景捲動，並接管方向鍵與 Esc */
-  useEffect(() => {
-    if (lightbox < 0) return undefined;
-    const onKey = (e) => {
-      if (e.key === "Escape") close();
-      if (e.key === "ArrowRight") step(1);
-      if (e.key === "ArrowLeft") step(-1);
-    };
-    const prev = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-    window.addEventListener("keydown", onKey);
-    return () => {
-      document.body.style.overflow = prev;
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [lightbox, close, step]);
 
   return (
     <Div>
@@ -71,12 +47,9 @@ const Gallery = () => {
       </Masthead>
 
       <Grid>
-        {ITEMS.map((item, i) => (
+        {ITEMS.map((item) => (
           <Tile
             key={item.src}
-            type="button"
-            onClick={() => setLightbox(i)}
-            aria-label={`Open ${item.title}`}
             /* --r 同時餵給 flex-grow、flex-basis 與 aspect-ratio，
                一個值決定這張卡片在列裡佔多寬 */
             style={{ "--r": item.ratio }}
@@ -85,6 +58,7 @@ const Gallery = () => {
               {item.video ? (
                 <video
                   src={item.src}
+                  aria-label={item.title}
                   muted
                   loop
                   playsInline
@@ -100,31 +74,6 @@ const Gallery = () => {
         ))}
       </Grid>
 
-      {lightbox >= 0 ? (
-        <Lightbox onClick={close} role="dialog" aria-modal="true">
-          {ITEMS[lightbox].video ? (
-            <LightboxMedia
-              as="video"
-              src={ITEMS[lightbox].src}
-              muted
-              loop
-              playsInline
-              autoPlay
-              controls
-              onClick={(e) => e.stopPropagation()}
-            />
-          ) : (
-            <LightboxMedia
-              src={ITEMS[lightbox].src}
-              alt={ITEMS[lightbox].title}
-              onClick={(e) => e.stopPropagation()}
-            />
-          )}
-          <Close type="button" onClick={close} aria-label="Close">
-            ×
-          </Close>
-        </Lightbox>
-      ) : null}
     </Div>
   );
 };
@@ -250,64 +199,13 @@ const Frame = styled.span`
   }
 `;
 
-const Tile = styled.button`
+const Tile = styled.div`
   /* 寬度由 ratio 決定：基準寬 = 基準高 × ratio，再讓同一列一起長到填滿。
      min-width: 0 讓很窄的卡片可以被壓縮，不會把列撐出容器。 */
   flex: var(--r) 1 calc(var(--row-h) * var(--r));
   min-width: 0;
-  display: block;
-  padding: 0;
-  border: 0;
-  background: none;
-  text-align: left;
-  cursor: pointer;
-
-  /* 刻意沒有 hover 狀態：這一頁只有圖，任何滑過的變化都是在圖上面再加一層
-     訊息。鍵盤焦點還是要看得見 —— 那是可及性，不是裝飾。 */
-  &:focus-visible {
-    outline: 2px solid #2a96b7;
-    outline-offset: 4px;
-  }
-`;
-
-const Lightbox = styled.div`
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  background-color: rgba(42, 49, 51, 0.94);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 16px;
-  padding: 6vh 5vw;
-`;
-
-const LightboxMedia = styled.img`
-  max-width: 100%;
-  max-height: 80vh;
-  object-fit: contain;
-  border-radius: 4px;
-`;
-
-
-const Close = styled.button`
-  position: absolute;
-  top: 24px;
-  right: 28px;
-  width: 44px;
-  height: 44px;
-  border: 0;
-  border-radius: 50%;
-  background: none;
-  color: #f2f2f2;
-  font-size: 28px;
-  line-height: 1;
-  cursor: pointer;
-
-  &:hover {
-    background-color: rgba(242, 242, 242, 0.12);
-  }
+  /* 這一頁只有圖：不能點、沒有 hover 狀態、沒有標題。任何互動或滑過的變化
+     都是在作品上面再加一層訊息，而這裡的內容就是作品本身。 */
 `;
 
 export default Gallery;
