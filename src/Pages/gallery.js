@@ -6,12 +6,29 @@ import styled from "styled-components";
 
    ⚠️ 要新增作品就只改下面這個陣列：檔案放進 public/gallery/，src 寫
    "/gallery/檔名"。順序就是畫面上的順序（新的放前面）。
-   ratio 是「寬 / 高」，用來在圖片載入前先把格子撐開，避免捲動時整排跳動 ——
-   照著原圖的比例填，1 就是正方形。 */
-const ITEMS = [];
+
+   ratio（寬 ÷ 高）是必填，不是可有可無的最佳化 —— 版面就是靠它排的：
+   同一列的每張卡片等高，寬度按各自的 ratio 分配。填錯會讓那一列的高度跟
+   實際內容對不上。1 是正方形。
+   video: true 的項目會用 <video> 靜音循環播放。 */
+const ITEMS = [
+  {
+    src: "/gallery/tulip.mp4",
+    title: "Tulip",
+    ratio: 1, // 原始尺寸 2160 × 2160
+    video: true,
+  },
+];
+
+const prefersReduced = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 const Gallery = () => {
   const [lightbox, setLightbox] = useState(-1);
+  /* 在 render 當下讀，不是在模組載入時 —— 使用者中途改系統設定也會跟上 */
+  const reduce = prefersReduced();
 
   const close = useCallback(() => setLightbox(-1), []);
   const step = useCallback(
@@ -57,9 +74,24 @@ const Gallery = () => {
             type="button"
             onClick={() => setLightbox(i)}
             aria-label={`Open ${item.title}`}
+            /* --r 同時餵給 flex-grow、flex-basis 與 aspect-ratio，
+               一個值決定這張卡片在列裡佔多寬 */
+            style={{ "--r": item.ratio }}
           >
-            <Frame style={{ aspectRatio: item.ratio || 1 }}>
-              <img src={item.src} alt={item.title} loading="lazy" />
+            <Frame>
+              {item.video ? (
+                <video
+                  src={item.src}
+                  muted
+                  loop
+                  playsInline
+                  autoPlay={!reduce}
+                  controls={reduce}
+                  preload="metadata"
+                />
+              ) : (
+                <img src={item.src} alt={item.title} loading="lazy" />
+              )}
             </Frame>
             <Caption>
               <strong>{item.title}</strong>
@@ -71,11 +103,24 @@ const Gallery = () => {
 
       {lightbox >= 0 ? (
         <Lightbox onClick={close} role="dialog" aria-modal="true">
-          <LightboxImage
-            src={ITEMS[lightbox].src}
-            alt={ITEMS[lightbox].title}
-            onClick={(e) => e.stopPropagation()}
-          />
+          {ITEMS[lightbox].video ? (
+            <LightboxMedia
+              as="video"
+              src={ITEMS[lightbox].src}
+              muted
+              loop
+              playsInline
+              autoPlay
+              controls
+              onClick={(e) => e.stopPropagation()}
+            />
+          ) : (
+            <LightboxMedia
+              src={ITEMS[lightbox].src}
+              alt={ITEMS[lightbox].title}
+              onClick={(e) => e.stopPropagation()}
+            />
+          )}
           <LightboxCaption>
             {ITEMS[lightbox].title}
             {ITEMS[lightbox].year ? ` — ${ITEMS[lightbox].year}` : ""}
@@ -154,23 +199,41 @@ const Title = styled.h1`
   letter-spacing: -0.01em;
 `;
 
-/* 直排瀑布流：作品的比例不一致，固定的方格會把直式的圖裁掉或留一堆空白。
-   columns 讓每一欄各自堆疊，圖片維持原比例。 */
+/* 齊行版面（每一列固定高度、卡片等比縮放）。
+
+   做法是把 aspect ratio 同時餵給 flex-grow 和 flex-basis：一列裡的每張卡片
+   都以同一個係數 k 被撐大，寬度變成 ratio × 基準高 × k，而高度 = 寬 ÷ ratio
+   = 基準高 × k —— 對每張都一樣。所以同一列自動等高、整列剛好填滿寬度，
+   列與列之間的高度則隨內容微幅浮動。
+
+   ::after 是必要的：沒有它的話，最後一列剩下的空間會被那幾張卡片吸收，
+   一兩張圖就被拉成整個版面寬。給它一個大到不合理的 flex-grow，
+   剩餘空間全部進到這個看不見的元素裡，最後一列就維持基準高。 */
 const Grid = styled.div`
   width: 80%; /* 與 Masthead、Work 的內容欄同寬，三者左右邊界對齊 */
   box-sizing: border-box;
   padding: 56px 0 120px;
-  columns: 3;
-  column-gap: 24px;
+
+  --row-h: 320px;
+  --gap: 24px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+
+  &::after {
+    content: "";
+    flex-grow: 1000000;
+  }
 
   @media (max-width: 1024px) {
-    columns: 2;
+    --row-h: 260px;
   }
   @media (max-width: 800px) {
     width: 90%;
   }
   @media (max-width: 620px) {
-    columns: 1;
+    --row-h: 200px;
+    --gap: 16px;
     padding: 40px 0 80px;
   }
 `;
@@ -178,11 +241,13 @@ const Grid = styled.div`
 const Frame = styled.span`
   display: block;
   width: 100%;
+  aspect-ratio: var(--r);
   overflow: hidden;
   border-radius: 8px;
-  background-color: #e6e6e6; /* 圖片載入前的底色，免得整片空白 */
+  background-color: #e6e6e6; /* 媒體載入前的底色，免得整片空白 */
 
-  img {
+  img,
+  video {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -215,19 +280,20 @@ const Caption = styled.span`
 `;
 
 const Tile = styled.button`
+  /* 寬度由 ratio 決定：基準寬 = 基準高 × ratio，再讓同一列一起長到填滿。
+     min-width: 0 讓很窄的卡片可以被壓縮，不會把列撐出容器。 */
+  flex: var(--r) 1 calc(var(--row-h) * var(--r));
+  min-width: 0;
   display: block;
-  width: 100%;
   padding: 0;
   border: 0;
   background: none;
   text-align: left;
   cursor: pointer;
-  /* break-inside 是 columns 版面的必要條件，少了它一張圖會被拆到兩欄 */
-  break-inside: avoid;
-  margin-bottom: 24px;
 
   @media (hover: hover) and (pointer: fine) {
-    &:hover ${Frame} img {
+    &:hover ${Frame} img,
+    &:hover ${Frame} video {
       transform: scale(1.03);
     }
     &:hover ${Caption} {
@@ -243,6 +309,7 @@ const Tile = styled.button`
 
   @media (prefers-reduced-motion: reduce) {
     ${Frame} img,
+    ${Frame} video,
     ${Caption} {
       transition: none;
     }
@@ -262,7 +329,7 @@ const Lightbox = styled.div`
   padding: 6vh 5vw;
 `;
 
-const LightboxImage = styled.img`
+const LightboxMedia = styled.img`
   max-width: 100%;
   max-height: 80vh;
   object-fit: contain;
