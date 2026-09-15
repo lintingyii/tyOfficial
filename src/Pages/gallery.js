@@ -44,7 +44,10 @@ const Gallery = () => {
           這裡跟 About 同一個層級：淺底直接進內容，標題靠左對齊網格的左邊界 ——
           是一份索引的樣子，不是一張海報。 */}
       <Masthead>
-        <Title>Gallery</Title>
+        <Title>
+          Gallery
+          <Star aria-hidden="true" />
+        </Title>
         <Lede>
           Posters, key visuals and type studies — the visual work that lives
           outside a case study.
@@ -126,6 +129,20 @@ const Masthead = styled.header`
 
 /* Work 的標題是 9rem 置中，像一張海報。這裡刻意小一截又靠左，
    讓它讀起來是網格的抬頭而不是另一個開場。 */
+/* 跟跑馬燈同一顆星，但這裡要藍的。marquee-star.svg 把橘色畫死在檔案裡，
+   所以取它的形狀當遮罩、顏色交給 background-color —— 一支檔案兩種顏色。
+   vertical-align 讓它落在大寫高度附近，像個標記而不是句子裡的一個字。 */
+const Star = styled.span`
+  display: inline-block;
+  width: 0.3em;
+  height: 0.3em;
+  margin-left: 0.16em;
+  vertical-align: 0.62em;
+  background-color: #2a96b7;
+  -webkit-mask: url("/marquee-star.svg") no-repeat center / contain;
+  mask: url("/marquee-star.svg") no-repeat center / contain;
+`;
+
 const Title = styled.h1`
   margin: 0;
   color: #2a3133;
