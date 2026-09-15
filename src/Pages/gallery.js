@@ -45,8 +45,8 @@ const Gallery = () => {
           是一份索引的樣子，不是一張海報。 */}
       <Masthead>
         <Title>
-          Gallery
           <Star aria-hidden="true" />
+          Gallery
         </Title>
         <Lede>
           Posters, key visuals and type studies — the visual work that lives
@@ -129,21 +129,25 @@ const Masthead = styled.header`
 
 /* Work 的標題是 9rem 置中，像一張海報。這裡刻意小一截又靠左，
    讓它讀起來是網格的抬頭而不是另一個開場。 */
-/* 跟跑馬燈同一顆星，但這裡要藍的。marquee-star.svg 把橘色畫死在檔案裡，
-   所以取它的形狀當遮罩、顏色交給 background-color —— 一支檔案兩種顏色。
-   vertical-align 讓它落在大寫高度附近，像個標記而不是句子裡的一個字。 */
+/* footer 的裝飾是三顆手繪星星，不是一顆 —— 跑馬燈用的那顆只是其中之一。
+   title-stars.svg 就是從 footer-deco.svg 裁出那三顆、收成緊邊界的版本。
+   顏色一樣用遮罩處理：原檔把 #DBDBDB 畫死在裡面，取形狀、顏色交給 CSS。
+   比例 657:616 幾乎是正方形，所以寬高給同值不會變形。 */
 const Star = styled.span`
-  display: inline-block;
-  width: 0.3em;
-  height: 0.3em;
-  margin-left: 0.16em;
-  vertical-align: 0.62em;
+  flex: none;
+  width: 1.15em;
+  height: 1.08em;
   background-color: #2a96b7;
-  -webkit-mask: url("/marquee-star.svg") no-repeat center / contain;
-  mask: url("/marquee-star.svg") no-repeat center / contain;
+  -webkit-mask: url("/title-stars.svg") no-repeat center / contain;
+  mask: url("/title-stars.svg") no-repeat center / contain;
 `;
 
 const Title = styled.h1`
+  /* 星星在字的左邊、與字垂直置中 —— flex 才對得準，inline 的 vertical-align
+     是對基線，字有降部（y）的時候會看起來偏低。 */
+  display: flex;
+  align-items: center;
+  gap: 0.28em;
   margin: 0;
   color: #2a3133;
   font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
