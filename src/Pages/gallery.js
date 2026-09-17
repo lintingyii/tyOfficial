@@ -56,8 +56,12 @@ const ITEMS = [
     ratio: 1, // 原始尺寸 1120 × 1120
   },
   {
+    /* title 只餵給 alt，不會顯示，所以這裡寫的是「看到的是什麼」而不是檔名。
+       原本填的是 "Snack" —— 那是檔名的玩笑（蛇→snake→snack），讀螢幕的人
+       聽到只會以為是零食。 */
     src: "/gallery/snack.gif",
-    title: "Snack",
+    title:
+      "Animated Year of the Snake greeting, cycling through 蛇全蛇美, 蛇願都好 and 蛇蛇如意",
     ratio: 1, // 原始尺寸 560 × 560
   },
   /* 下面兩張排在最後，沒有照上面「新的放前面」那條 —— 放到最前面會把前六張
