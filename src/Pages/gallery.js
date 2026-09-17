@@ -325,20 +325,27 @@ const OutroText = styled.p`
 `;
 
 /* 連結用標題星星的藍，跟導覽列的 active 同一支 —— 這一頁唯一可以點的東西，
-   顏色要跟周圍的灰字分得開，底線則是不靠顏色也看得出是連結。 */
+   顏色要跟周圍的灰字分得開。
+
+   靜止時不畫底線，滑過或鍵盤聚焦才出現：這句話是收尾的補充，一條常駐的
+   底線會讓它比實際份量重。代價是靜止時只剩顏色在表示它可以點，而藍與灰
+   的明度接近，色覺辨識有困難的人不一定分得出來 —— 所以焦點狀態也一起
+   加底線，用鍵盤的人才不會只能靠顏色找到它。 */
 const OutroLink = styled(Link)`
   color: #2a96b7;
   /* 站上其他地方的 serif 都是這一支（footer、Work、首頁），沿用同一個
-     字體家族，不要為了一個連結多引一種字。serif 在同樣的 px 下看起來比
-     無襯線小一點，所以字級往上補一階，跟前面那句話視覺上才等重。 */
+     字體家族，不要為了一個連結多引一種字。字級刻意比前面那句話小一階：
+     serif 的筆畫對比本來就讓它比同尺寸的無襯線搶眼，補到等大反而會蓋過
+     前面那句，這裡要的是收尾不是標題。 */
   font-family: "Kaisei Decol", serif;
-  font-size: 1.08em;
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  font-size: 0.94em;
+  text-decoration: none;
 
   &:hover,
   &:focus-visible {
     color: #1f7691;
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 `;
 
