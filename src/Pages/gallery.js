@@ -19,7 +19,8 @@ import WaveDivider from "../Components/WaveDivider";
    指定：圖是 object-fit: cover，所以填窄了就從左右裁、填寬了就從上下裁，
    都以中心為準。同一排的 ratio 總和越小，那一排就越高 —— 想調整排與排的
    高度差時就是動這個值。
-   video: true 的項目會用 <video> 靜音循環播放。 */
+   video: true 的項目會用 <video> 靜音循環播放。
+   startsRow: true 會讓這張從新的一排開始，給 ratio 併不進任何一排的圖用。 */
 const ITEMS = [
   {
     src: "/gallery/tulip.mp4",
@@ -93,6 +94,49 @@ const ITEMS = [
     title: "Year of the Snake new year series",
     ratio: 2.91, // 原始 2180 × 846（比例 2.58），上下各裁 48px 到 2.91
   },
+  {
+    /* Insight Nest 登入畫面的筆電 mockup。
+
+       這張自己佔一排，沒有併進第三排 —— 九張要排成三排等高在算術上做不到。
+       等高的條件是每排 ratio 總和 3.62，三排就是 10.86，而前八張加起來已經
+       是 10.94（1+0.6+2.02 / 1.62+1+1 / 0.79+2.91），再加任何一張都只會更多。
+       硬塞進第三排的話那排會是 5.12，高度掉到別排的七成。要維持等高就只能
+       回頭重裁已經定案的那幾張，那代價比多一排大。
+
+       另起一排則是前三排一個值都不用動。這張開的第四排現在有三張（它、掌機、
+       四張分類卡），總和 1.50 + 1 + 1.12 = 3.62，跟上面每一排一樣，所以四排
+       等高、而且整排寬度也分完了。 */
+    src: "/gallery/insight.jpg",
+    title:
+      "Insight Nest login screen on a laptop, photographed on a wooden shelf",
+    ratio: 1.5, // 1100 × 731（原圖 1224 × 814），照原比例不裁
+    startsRow: true,
+  },
+  {
+    /* All I Can Eat：吃豆人風格的掌機介面。跟在 insight 後面併成最後一排，
+       沒有另外標 startsRow —— 它接得上那一排，而那排也還沒滿三張。 */
+    src: "/gallery/all-i-can-eat.jpg",
+    title: "All I Can Eat, a Pac-Man style game on a handheld console interface",
+    ratio: 1, // 800 × 800（原圖 1200 × 1200）
+  },
+  {
+    /* 四張分類卡輪流播動畫。這張補滿第四排的第三格。
+
+       ratio 填 1.12 而不是原圖的 1（600 × 600）：這一排前兩張是 1.50 + 1，
+       第三張要填 1.12 那一排才湊得到 3.62、跟上面三排等高。1 的話這排會是
+       3.50，高度多出 3%，四張圖擺在一起看得出來。
+
+       裁掉的 0.12 全在上下的留白裡：卡片內容落在 400px 版本的 y 45~355，
+       裁完上下各還留 24px 背景，四張卡一點都沒被切到。另一個作法是把旁邊
+       那張筆電照片放寬到 1.62，但那要裁的是實拍內容，這裡有純留白可以割。
+
+       背景是接近頁面底色的淺灰（#f7f7f7 對頁面 #f2f2f2），所以這格不會讀成
+       一塊卡片，四張分類卡看起來像直接浮在頁面上 —— 跟其他七件一致。 */
+    src: "/gallery/heaven.gif",
+    title:
+      "Category cards for Forest & Land, Humanity, Ocean and Animals, animating in turn",
+    ratio: 1.12, // 400 × 400（原圖 600 × 600），上下各裁 21px 到 1.12
+  },
 ];
 
 /* 一排固定三張。交給 flex-wrap 自己決定一排放幾張的話，排法會隨每張圖的
@@ -126,10 +170,14 @@ const fillsRow = (row) =>
     row.reduce((sum, item) => sum + item.ratio, 0) - rowBudget(row.length)
   ) < 0.02;
 
-const chunk = (arr, size) =>
-  arr.reduce((rows, item, i) => {
-    if (i % size === 0) rows.push([]);
-    rows[rows.length - 1].push(item);
+/* 換行的兩個條件：這排已經三張了，或下一張標了 startsRow 要自己起一排。
+   原本只有前者 —— 但固定每三個切一組會把「這張不要跟前面併排」的指定壓掉，
+   而那正是 ratio 湊不進任何一排的圖唯一的去處。順序仍然只由陣列決定。 */
+const chunkRows = (items) =>
+  items.reduce((rows, item) => {
+    const row = rows[rows.length - 1];
+    if (!row || row.length === ROW_SIZE || item.startsRow) rows.push([item]);
+    else row.push(item);
     return rows;
   }, []);
 
@@ -156,7 +204,7 @@ const Gallery = () => {
       </Masthead>
 
       <Grid>
-        {chunk(ITEMS, ROW_SIZE).map((row) => (
+        {chunkRows(ITEMS).map((row) => (
           <Row key={row[0].src}>
             {row.map((item) => (
               <Tile
@@ -292,8 +340,16 @@ const Grid = styled.div`
      的比例，所以常見桌機寬度的長相跟原本一致。min() 讓它在更寬的螢幕上
      停在原尺寸，不會無限放大。
      --col-w 在斷點裡跟著 width 一起改，比例才不會在斷點上跳掉。 */
-  --row-h: min(320px, calc(var(--col-w) * 0.2778));
   --gap: min(24px, calc(var(--col-w) * 0.0208));
+  /* 未滿排那排的基準高。滿排的高度是「可用寬度 ÷ 該排 ratio 總和」，未滿排
+     沒有這條式子可用（它的寬度不是分配來的），所以這裡照滿排的條件算一次：
+     可用寬度扣掉兩條 gap 再除以 ROW_RATIO，未滿的那排就跟上面每一排等高。
+     3.62 是 JS 那邊的 ROW_RATIO，兩邊要一起改。
+
+     原本寫的是 min(320px, --col-w * 0.2778)，那組數字比這條式子高約 5%。
+     以前每一排都是滿的、這個值沒被用到，所以看不出來；最後一排改成單張
+     之後就會露出來，變成收尾那張比上面三排高一截。 */
+  --row-h: calc((var(--col-w) - 2 * var(--gap)) / 3.62);
   display: flex;
   flex-direction: column;
   gap: var(--gap);
