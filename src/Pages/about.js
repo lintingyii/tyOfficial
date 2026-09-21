@@ -83,6 +83,21 @@ export const About = () => {
                 </a>
               </ExpTitle>
               <ExpOrg>@ Pathors</ExpOrg>
+              <Div19>
+                • Extended the brand identity across exhibition materials,
+                presentation templates, business cards, and the website.
+                <br />
+                • Built a cohesive design system for the product interface,
+                tying the brand together from marketing through to the product.
+                <br />
+                • Ran user interviews and usability testing, then restructured
+                the product’s information architecture, feature map, and
+                navigation logic.
+                <br />
+                • Brought AI into the design-to-development workflow, including
+                AI-assisted front-end development and direct PR submissions, and
+                tripled design delivery speed.
+              </Div19>
             </div>
           </ExpRow>
           <ExpRow>
@@ -95,6 +110,19 @@ export const About = () => {
                 </a>
               </ExpTitle>
               <ExpOrg>@ Fontech</ExpOrg>
+              <Div19>
+                • Ran contextual interviews and usability testing, turned the
+                findings into design changes, and validated them with A/B
+                testing.
+                <br />
+                • Worked as both designer and PM on SMB digital transformation,
+                turning client needs into AI-enabled workflows that replaced
+                manual daily operations.
+                <br />
+                • Rebuilt the brand’s visual language from its positioning and
+                tone, and defined the information architecture for its new
+                official website.
+              </Div19>
             </div>
           </ExpRow>
           <ExpRow>
