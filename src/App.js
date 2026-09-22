@@ -24,6 +24,7 @@ import Footer from "./Components/footer";
 import { createGlobalStyle } from "styled-components";
 import "./App.css";
 import LoadingSpinner from "./Components/LoadingSpinner";
+import TitleStars from "./Components/TitleStars";
 // import { ReactLenis, useLenis } from 'lenis/react';
 // import LocomotiveScroll from 'locomotive-scroll';
 
@@ -123,6 +124,14 @@ const Wrapper = styled.div`
     width: 100%;
     padding: 4px 10px;
   }
+`;
+
+/* 目前所在的項目，文字右邊帶一顆星星 —— 跟首頁那顆同一個形狀，顏色分開：
+   首頁是黃的、其他頁是藍的，所以「我在哪一頁」不只靠文字顏色，形狀旁邊
+   還多一個訊號。margin 給在這裡而不是寫成 JSX 裡的空白，避免換行時
+   文字跟星星被拆到兩行。 */
+const ActiveStar = styled(TitleStars).attrs({ $color: "#2A96B7" })`
+  margin-left: 0.35em;
 `;
 
 const NavItem = styled(Link)`
@@ -318,7 +327,13 @@ function NavigationBar() {
       <Container $condensed={condensed}>
         <Logo isActive={path === "/home"}>
           <SpecialNavItem to="/home" isActive={path === "/home"}>
-            {path === "/home" ? "Hello 👋🏻" : "Ting-yi"}
+            {path === "/home" ? (
+              <>
+                Hello <TitleStars aria-hidden="true" />
+              </>
+            ) : (
+              "Ting-yi"
+            )}
           </SpecialNavItem>
         </Logo>
         <Wrapper onMouseLeave={hideGlide}>
@@ -334,6 +349,7 @@ function NavigationBar() {
             onBlur={hideGlide}
           >
             About
+            {path === "/about" && <ActiveStar aria-hidden="true" />}
           </NavItem>
           <NavItem
             to="/work"
@@ -343,6 +359,7 @@ function NavigationBar() {
             onBlur={hideGlide}
           >
             Work
+            {isWorkActive && <ActiveStar aria-hidden="true" />}
           </NavItem>
           {/* 這一格本來是 Contact（mailto:）。信箱在 footer 每頁都有，
               導覽列那一格留給真正的目的地。 */}
@@ -354,6 +371,7 @@ function NavigationBar() {
             onBlur={hideGlide}
           >
             Gallery
+            {path === "/gallery" && <ActiveStar aria-hidden="true" />}
           </NavItem>
         </Wrapper>
       </Container>

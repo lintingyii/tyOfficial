@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect, useMemo } from "react";
+import React, { useState, useRef, useEffect, useMemo, useCallback } from "react";
 import styled, { keyframes, css } from "styled-components";
 import TextMarquee from "../Components/TextMarquee";
 import Footer from "../Components/footer";
@@ -7,6 +7,44 @@ import TestimonialCard from "../Components/TestimonialCard";
 import { LargeProjectCard } from "../Components/ProjectCard";
 import PixelScrollTransition from "../Components/PixelScrollTransition";
 import Typewriter from "../Components/Typewriter";
+import FlowerDivider from "../Components/FlowerDivider";
+import MosaicReveal, {
+  cellPattern,
+  SPREAD,
+} from "../Components/MosaicReveal";
+import {
+  rowMetrics,
+  Row as GalleryRow,
+  Tile as GalleryTile,
+  Frame as GalleryFrame,
+  Media as GalleryMedia,
+} from "../Components/GalleryRow";
+
+/* 首頁的 Gallery 入口。這裡刻意不跟 gallery.js 的清單同步 —— 首頁是引路的，
+   放兩件代表作就夠；那邊新增作品不該連動改到首頁的版面。
+
+   兩件的排，ratio 總和要湊 rowBudget(2) = 3.70 而不是 3.62：可用寬度只扣
+   一條 gap（三張的排扣兩條），寬了一條，總和也得按比例加上去，這一排才會
+   跟 gallery 頁的每一排等高。0.79 + 2.91 = 3.70。
+
+   鬱金香原始是 2160 × 2160 的正方形，這裡收窄到 0.79 去湊那個總和 ——
+   左右各裁 10.5%，裁掉的全是漸層背景：標題文字橫跨 25%~74%、左邊的
+   01 SPRING 在 24%，右邊那朵小花在 71%，離裁切線都還有十幾個百分點。
+   另一個作法是改裁旁邊的三連作，但那要從左右切進三張面板，這裡有純背景
+   可以割，先割背景。 */
+const GALLERY_STRIP = [
+  {
+    src: "/gallery/tulip.mp4",
+    title: "Tulip",
+    ratio: 0.79, // 原始 2160 × 2160（1），左右各裁 10.5% 到 0.79
+    video: true,
+  },
+  {
+    src: "/gallery/snack-series.jpg",
+    title: "Year of the Snake new year series",
+    ratio: 2.91, // 與 gallery 頁同一個裁切
+  },
+];
 
 function MyComponent(props) {
   const pinRef = useRef(null);
@@ -607,27 +645,7 @@ function MyComponent(props) {
         </CardsContainer>
       </Section> */}
 
-      <div
-        style={{
-          width: "100%",
-          display: "flex",
-          backgroundColor: "#f2f2f2",
-          zIndex: "999",
-          justifyContent: "center",
-          padding: "4rem",
-          boxSizing: "border-box",
-        }}
-      >
-        <Flower stroke="#2A96B7" viewBox="0 0 24 24">
-          <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
-        </Flower>
-        <Flower fill="#2A96B7" stroke="#2A96B7" viewBox="0 0 24 24">
-          <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
-        </Flower>
-        <Flower stroke="#2A96B7" viewBox="0 0 24 24">
-          <path d=" M12 2.5c4 0 1.7 6.2 1.7 6.2s3.7-5.4 6-2.5-3.7 5.3-3.7 5.3 6.5-.6 5.6 3c-.8 3.7-6.5.4-6.5.4s4.7 4.7 1.2 6.4c-3.6 1.6-4.3-4.9-4.3-4.9s-.8 6.5-4.3 4.9c-3.4-1.7 1.2-6.4 1.2-6.4s-5.7 3.7-6.5-.4c-1-4 5.6-3 5.6-3s-6-2-3.7-5.3c2.2-3.3 5.9 2.5 5.9 2.5S8 2.5 12 2.5Z" />
-        </Flower>
-      </div>
+      <FlowerDivider />
 
       <Section style={{ paddingTop: "2rem" }}>
         <SectionTitle
@@ -662,6 +680,30 @@ function MyComponent(props) {
         <ViewMoreLink href="/work" rel="noopener noreferrer">
           <ViewMoreButton>
             View More Works
+            <EyeIcon />
+          </ViewMoreButton>
+        </ViewMoreLink>
+      </Section>
+
+      <FlowerDivider />
+
+      {/* Gallery 的入口。Feature(s) 是商業作品，這一段是個人創作，接在它後面
+          整頁就是承諾度由高到低；放在 footer 前也不會插進主要動線中間。
+
+          這裡不做輪播：一次只看得到一件，剛好把「有一整批」這件事藏起來，
+          而那正是 Gallery 唯一要說的話；而且捲過去就看完的一排，不需要再
+          多一組使用者得操作的控制項。兩件並排就是全部，沒有第二頁。 */}
+      <Section style={{ paddingTop: "2rem" }}>
+        <SectionTitle style={{ flexDirection: "row", justifyContent: "center" }}>
+          Gallery
+        </SectionTitle>
+        {/* 整條可點，所以是 a 不是 div —— 這裡是導覽元件，跟 gallery 頁
+            「圖不可點、沒有 hover 狀態」的規矩不衝突：那頁的內容就是作品
+            本身，這裡的內容是一個入口。圖沒有文字，label 給讀螢幕的人。 */}
+        <GalleryStrip />
+        <ViewMoreLink href="/gallery" rel="noopener noreferrer">
+          <ViewMoreButton>
+            View Gallery
             <EyeIcon />
           </ViewMoreButton>
         </ViewMoreLink>
@@ -1771,27 +1813,6 @@ const Span = styled.span`
    桌機 hover 觸發、手機點擊 —— 觸控裝置沒有 hover，兩種輸入各給一種。
    背面文字維持真正的 DOM 文字，可選取、可報讀。 */
 
-const COLS = 12;
-const ROWS = 8;
-const SPREAD = 420; // 最早與最晚的格子相差多久（ms）
-const ACCENT_SHARE = 0.14; // 有多少比例的格子會先閃一下再消失
-
-/* 固定種子的亂數：每張卡片的圖樣不同，但重新 render 不會變 */
-const cellPattern = (seed, cols = COLS, rows = ROWS) => {
-  let x = seed;
-  const rand = () => {
-    x = (x * 1664525 + 1013904223) % 4294967296;
-    return x / 4294967296;
-  };
-  return Array.from({ length: cols * rows }, (_, i) => {
-    const col = i % cols;
-    const row = Math.floor(i / cols);
-    /* 由左上往右下擴散，再加一點亂數讓邊界不是一條直線 */
-    const sweep = (col / (cols - 1)) * 0.5 + (row / (rows - 1)) * 0.5;
-    return { t: Math.min(1, sweep * 0.65 + rand() * 0.35), accent: rand() < ACCENT_SHARE };
-  });
-};
-
 const DivFlipCard = styled.div`
   background-color: #f2f2f2;
   max-width: 100%;
@@ -1828,6 +1849,10 @@ const Back = styled.div`
   font-size: 24px;
   font-weight: 400; /* Div6 帶著 font-weight: 700，內容會繼承到，要壓回來 */
 `;
+
+/* 跟 MosaicReveal 的門檻圖同尺寸 —— cellPattern 的預設值就是這一組 */
+const COLS = 12;
+const ROWS = 8;
 
 const Cells = styled.div`
   position: absolute;
@@ -1871,6 +1896,70 @@ const FrontFace = styled.div`
     ${({ $open }) => ($open ? "0s" : "0.18s")};
 `;
 
+
+/* Gallery strip：捲進視窗時，蓋在圖上的方格一格一格退掉。
+
+   兩個條件都要成立才開始溶解 —— 進視窗、而且圖真的載好了。只綁「載好」的話
+   動畫會在沒人看的時候播完（strip 在八千多像素的頁面底部，圖早就到了）；
+   只綁「進視窗」的話慢網路會先溶解出一塊空白。兩個都收，正常情況是捲到就播，
+   慢網路則是方格停在那裡當 placeholder，圖到了才退。
+
+   只揭開一次，捲走不會再蓋回去：作品被重新馬賽克一遍沒有道理。 */
+function GalleryStrip() {
+  const ref = useRef(null);
+  const [inView, setInView] = useState(false);
+  const [ready, setReady] = useState({});
+
+  const markReady = useCallback(
+    (src) => setReady((r) => (r[src] ? r : { ...r, [src]: true })),
+    []
+  );
+
+  useEffect(() => {
+    const el = ref.current;
+    /* 沒有 IntersectionObserver 就直接視為已進場 —— 蓋著的那層不能因為
+       偵測不到而永遠留在圖上。 */
+    if (!el || typeof IntersectionObserver === "undefined") {
+      setInView(true);
+      return undefined;
+    }
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry.isIntersecting) return;
+        setInView(true);
+        io.disconnect(); // 一次性
+      },
+      /* 底部切掉 15%：整排真的進到畫面裡才開始，不是剛冒出一條邊就播完 */
+      { rootMargin: "0px 0px -15% 0px", threshold: 0 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <StripLink
+      ref={ref}
+      href="/gallery"
+      aria-label="View the gallery"
+      rel="noopener noreferrer"
+    >
+      <GalleryRow>
+        {GALLERY_STRIP.map((item, i) => (
+          <GalleryTile key={item.src} style={{ "--r": item.ratio }} $full>
+            <GalleryFrame>
+              <GalleryMedia item={item} onReady={markReady} />
+              <MosaicReveal
+                seed={20260922 + i * 977}
+                open={inView && !!ready[item.src]}
+              />
+            </GalleryFrame>
+          </GalleryTile>
+        ))}
+      </GalleryRow>
+    </StripLink>
+  );
+}
 
 let cardSeed = 0;
 
@@ -2101,23 +2190,7 @@ const ServiceDes = styled.div`
   }
 `;
 
-const rotate = keyframes`
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-`;
 
-const Flower = styled.svg`
-  width: 60px;
-  height: 60px;
-  fill: ${(props) => props.fill || "none"};
-  stroke: ${(props) => props.stroke || "#2A3133"};
-  stroke-width: 0.6;
-  animation: ${rotate} 8s linear infinite;
-`;
 
 const CardsContainerWrapper = styled.div`
   width: 80%;
@@ -2145,6 +2218,21 @@ const CardsContainerWrapper = styled.div`
    margin（72px）撐著，按鈕自己沒有任何間距，所以上緊下鬆、整顆看起來被夾住。
    這裡把上下距離寫明：上方 32+72=104、下方 72+56=128。
    下方留得比上方多一點 —— footer 的底色是一條硬邊，貼太近會像黏在上面。 */
+/* 內容欄跟 gallery 頁的 Grid 同一組寬度與斷點，兩頁的左右邊界才對得上。
+   --col-w 要跟 width 同值再給一次：CSS 沒辦法用百分比寬去換算高度。 */
+const StripLink = styled.a`
+  width: 80%;
+  --col-w: 80vw;
+  box-sizing: border-box;
+  ${rowMetrics}
+  display: block;
+  text-decoration: none;
+
+  @media (max-width: 800px) {
+    width: 90%;
+    --col-w: 90vw;
+  }
+`;
 const ViewMoreLink = styled.a`
   text-decoration: none;
   margin: 72px 0 56px;

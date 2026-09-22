@@ -2,6 +2,16 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 import WaveDivider from "../Components/WaveDivider";
+import TitleStars from "../Components/TitleStars";
+import {
+  chunkRows,
+  fillsRow,
+  rowMetrics,
+  Row,
+  Tile,
+  Frame,
+  Media,
+} from "../Components/GalleryRow";
 
 /* 視覺作品的陳列頁。跟 Work 的差別是這裡不談流程、不談結果 —— 一張圖就是
    一件作品，所以版面上只有圖：沒有標題、沒有 hover 狀態，點下去就是看大圖。
@@ -139,57 +149,7 @@ const ITEMS = [
   },
 ];
 
-/* 一排固定三張。交給 flex-wrap 自己決定一排放幾張的話，排法會隨每張圖的
-   比例和視窗寬度浮動；這裡要的是穩定的三欄節奏，所以在 render 前就先把
-   清單切成每三個一組，由標記決定換行，不是由寬度決定。 */
-const ROW_SIZE = 3;
-
-/* 一排的 ratio 預算。上面每一排的總和都是 3.62，那不是巧合而是等高的條件：
-   滿排的高度是「可用寬度 ÷ 該排 ratio 總和」，總和一致排與排才等高。
-
-   張數不同的排不能共用同一個數。可用寬度要扣掉 gap，三張的排扣兩條、兩張
-   的排只扣一條 —— 兩張的排因此寬了一條 gap，ratio 總和也得按比例加上去，
-   高度才會跟三張的排對齊（3.62 → 3.70）。GAP_RATIO 是 Grid 裡 --gap 對
-   --col-w 的係數，那邊改這裡要一起改。
-
-   視窗寬超過 1440px 後 --gap 會定在 24px 不再跟著長，這個補償就會有誤差，
-   不過 2560px 下也只差 1% 左右，看不出來。 */
-const ROW_RATIO = 3.62;
-const GAP_RATIO = 0.0208;
-const rowBudget = (n) =>
-  (ROW_RATIO * (1 - GAP_RATIO * (n - 1))) / (1 - GAP_RATIO * 2);
-
-/* 一排要不要把整排寬度分完，看的是 ratio 有沒有湊滿預算，不是湊滿三張：
-   張數不足但 ratio 剛好湊滿的排（例如最後一排的 0.79 + 2.91）也要分完，
-   它的高度才會跟上面兩排一樣。三張的排照舊一律分完，就算總和不是 3.62 ——
-   那種排只是高度跟別排不同，不該因此變成靠左排。
-   浮點數相加有尾差（1 + 0.6 + 2.02 不會剛好是 3.62），所以比容差不比相等。 */
-const fillsRow = (row) =>
-  row.length === ROW_SIZE ||
-  Math.abs(
-    row.reduce((sum, item) => sum + item.ratio, 0) - rowBudget(row.length)
-  ) < 0.02;
-
-/* 換行的兩個條件：這排已經三張了，或下一張標了 startsRow 要自己起一排。
-   原本只有前者 —— 但固定每三個切一組會把「這張不要跟前面併排」的指定壓掉，
-   而那正是 ratio 湊不進任何一排的圖唯一的去處。順序仍然只由陣列決定。 */
-const chunkRows = (items) =>
-  items.reduce((rows, item) => {
-    const row = rows[rows.length - 1];
-    if (!row || row.length === ROW_SIZE || item.startsRow) rows.push([item]);
-    else row.push(item);
-    return rows;
-  }, []);
-
-const prefersReduced = () =>
-  typeof window !== "undefined" &&
-  window.matchMedia &&
-  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-
 const Gallery = () => {
-  /* 在 render 當下讀，不是在模組載入時 —— 使用者中途改系統設定也會跟上 */
-  const reduce = prefersReduced();
-
   return (
     <Div>
       {/* 開場刻意不跟 Work 一樣。深色 hero ＋ 像素轉場是首頁與 Work 的規格，
@@ -198,7 +158,9 @@ const Gallery = () => {
           這裡跟 About 同一個層級：淺底直接進內容，標題置中。 */}
       <Masthead>
         <Title>
-          <Star aria-hidden="true" />
+          {/* 導覽列的星星有兩種顏色（首頁黃、其他頁藍），共用元件的預設值
+              跟著首頁走，所以這裡把標題原本的藍指定回來。 */}
+          <TitleStars $color="#2a96b7" aria-hidden="true" />
           Gallery
         </Title>
       </Masthead>
@@ -216,20 +178,7 @@ const Gallery = () => {
                 $full={fillsRow(row)}
               >
                 <Frame>
-                  {item.video ? (
-                    <video
-                      src={item.src}
-                      aria-label={item.title}
-                      muted
-                      loop
-                      playsInline
-                      autoPlay={!reduce}
-                      controls={reduce}
-                      preload="metadata"
-                    />
-                  ) : (
-                    <img src={item.src} alt={item.title} loading="lazy" />
-                  )}
+                  <Media item={item} />
                 </Frame>
               </Tile>
             ))}
@@ -291,14 +240,6 @@ const Masthead = styled.header`
    title-stars.svg 就是從 footer-deco.svg 裁出那三顆、收成緊邊界的版本。
    顏色一樣用遮罩處理：原檔把 #DBDBDB 畫死在裡面，取形狀、顏色交給 CSS。
    比例 657:616 幾乎是正方形，所以寬高給同值不會變形。 */
-const Star = styled.span`
-  flex: none;
-  width: 1em;
-  height: 0.94em;
-  background-color: #2a96b7;
-  -webkit-mask: url("/title-stars.svg") no-repeat center / contain;
-  mask: url("/title-stars.svg") no-repeat center / contain;
-`;
 
 const Title = styled.h1`
   /* 星星在字的左邊、與字垂直置中 —— flex 才對得準，inline 的 vertical-align
@@ -331,25 +272,8 @@ const Grid = styled.div`
      只剩空白能把它跟作品分開，距離太近會讀成第一排的說明文字。 */
   padding: 112px 0 0;
 
-  /* 窄畫面是整個版面等比縮小。滿排的三張靠 flex 分配整排寬度、本來就跟著
-     容器縮；gap 與 row-h 如果留成固定 px，就只有它們不縮，手機上會變成
-     縫隙和最後一排的圖相對過大。改成容器寬度的固定比例後，整個版面是同一
-     個倍率的縮放。
-
-     0.2778 與 0.0208 是原本桌機值（1440px 視窗下的 320px 與 24px）換算出
-     的比例，所以常見桌機寬度的長相跟原本一致。min() 讓它在更寬的螢幕上
-     停在原尺寸，不會無限放大。
-     --col-w 在斷點裡跟著 width 一起改，比例才不會在斷點上跳掉。 */
-  --gap: min(24px, calc(var(--col-w) * 0.0208));
-  /* 未滿排那排的基準高。滿排的高度是「可用寬度 ÷ 該排 ratio 總和」，未滿排
-     沒有這條式子可用（它的寬度不是分配來的），所以這裡照滿排的條件算一次：
-     可用寬度扣掉兩條 gap 再除以 ROW_RATIO，未滿的那排就跟上面每一排等高。
-     3.62 是 JS 那邊的 ROW_RATIO，兩邊要一起改。
-
-     原本寫的是 min(320px, --col-w * 0.2778)，那組數字比這條式子高約 5%。
-     以前每一排都是滿的、這個值沒被用到，所以看不出來；最後一排改成單張
-     之後就會露出來，變成收尾那張比上面三排高一截。 */
-  --row-h: calc((var(--col-w) - 2 * var(--gap)) / 3.62);
+  /* 版面的兩個尺寸（--gap 與 --row-h）跟分排的數學同源，見 GalleryRow */
+  ${rowMetrics}
   display: flex;
   flex-direction: column;
   gap: var(--gap);
@@ -361,47 +285,6 @@ const Grid = styled.div`
   @media (max-width: 620px) {
     padding: 72px 0 0;
   }
-`;
-
-const Frame = styled.span`
-  display: block;
-  width: 100%;
-  aspect-ratio: var(--r);
-  overflow: hidden;
-  border-radius: 8px;
-  /* 跟頁面同色，不是更深一階的灰 —— 透明背景的作品（例如去背的 PNG）
-     透出來的就是這一層，色差一階就會讓那張圖看起來是一塊獨立的灰卡。
-     代價是圖載入前那格跟頁面同色、看不出有東西要出現；縮圖夠小，划算。 */
-  background-color: #f2f2f2;
-
-  img,
-  video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-  }
-`;
-
-const Row = styled.div`
-  display: flex;
-  gap: var(--gap);
-`;
-
-const Tile = styled.div`
-  /* 湊滿預算的排：basis 給 0、grow 給 ratio，整排的可用寬度就按 ratio 分配。
-     寬 ∝ ratio 而高 = 寬 ÷ ratio，所以同排自動等高，且剛好填滿整排。
-
-     沒湊滿的最後一排：不能用同一招 —— basis 0 ＋ grow 會把剩下的一兩張拉成
-     整排寬。改回用基準高換算寬度（寬 = 基準高 × ratio）並關掉 grow，
-     這排就維持基準高、靠左排，不會被撐開。
-
-     min-width: 0 讓很窄的卡片可以被壓縮，不會把排撐出容器。 */
-  flex: ${({ $full }) =>
-    $full ? "var(--r) 1 0" : "0 0 calc(var(--row-h) * var(--r))"};
-  min-width: 0;
-  /* 這一頁只有圖：不能點、沒有 hover 狀態、沒有標題。任何互動或滑過的變化
-     都是在作品上面再加一層訊息，而這裡的內容就是作品本身。 */
 `;
 
 /* 波浪與底下那句話是同一組，所以一起置中、一起控制上下距離。
