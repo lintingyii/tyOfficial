@@ -183,7 +183,7 @@ export const About = () => {
           <Div26>Education</Div26>
           <ExpList>
           <ExpRow>
-            <ExpYear>2006 — 2010</ExpYear>
+            <ExpYear>2020 — 2024</ExpYear>
             <div>
               <ExpTitle>Bachelor of Arts - BA, Advertising</ExpTitle>
               <ExpOrg>National Chengchi University</ExpOrg>
